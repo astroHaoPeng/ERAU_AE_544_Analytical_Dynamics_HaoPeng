@@ -1,6 +1,6 @@
 ---
 date created: 2025-01-12T15:56:32-05:00
-date modified: 2025-02-04T00:28:35-05:00
+date modified: 2025-02-06T22:17:43-05:00
 ---
 
 # AE_544_LecNote01\__Particle_Kinematics__Ch01
@@ -536,7 +536,7 @@ The logics are:
 > Through this example, it is expected to understand:
 > > Although the result in Eq. (1.35) can be quite useful at times, when more than two frames are present, it is typically easier to derive the acceleration terms by differentiating the position vector twice, as in this example.
 
-## Textbook problem 1.8: Rotating disk on train
+## Textbook problem 1.8 (Rotating disk on train)
 ![[fig-p1-8_rotating_disk_on_train.png|600]]
 
 The rail is straight.
@@ -577,7 +577,7 @@ $$
 $$
 
 
-## Textbook problem 1.9: Rotating disk on train variant
+## Textbook problem 1.9 (Rotating disk on train variant)
 ![[fig-p1-8_rotating_disk_on_train.png|600]]
 Repeat problem 1.8, but this time assume that the particle P is free to move radially on the disk. Again find the corresponding inertial velocity and acceleration.
 
@@ -629,7 +629,7 @@ $$
 
 
 
-## Textbook problem 1.14: Grinding disk as seen from a missile
+## Textbook problem 1.14 (Grinding disk and missile)
 ![[fig-p1-14_grinding_disk.png|600]]
 
 Inertial frame $\calN:\{\nht1,\nht2,\nht3\}$
@@ -699,7 +699,7 @@ $$
 Alternatively, noticing that $\calM$ is non-rotating and non-accelerating, we can directly calculate the relative velocity and acceleration without taking derivatives using $\ddtM$.
 
 
-## Textbook problem 1.10: Two rotating disks
+## Textbook problem 1.10 (Two rotating disks)
 ![[fig-p1-10_two_rotating_disks.png|600]]
 ### (a) inertial relative between B and A
 Relative position $\bmr = r_B\bht{r} - r_A\aht{r}$.
@@ -726,7 +726,7 @@ $$
 $$
 
 
-## Textbook problem 1.12: rotating disk on a telescoping rod
+## Textbook problem 1.12 (rotating disk on a telescoping rod)
 ![[fig-p1-12_rotating_disk_telescoping_rod.png|600]]
 
 Inertial Cartesian frame $\calN$

@@ -1,6 +1,6 @@
 ---
 date created: 2025-01-26T13:00:00-05:00
-date modified: 2025-02-04T00:37:46-05:00
+date modified: 2025-02-11T10:44:57-05:00
 ---
 
 # AE_544_LecNote03\__Rigid_Body_Kinematics__Ch03.pdf
@@ -240,7 +240,6 @@ $$
 $$
 
 
-
 ## Euler Angles $(\theta_1, \theta_2, \theta_3)$
 > [!info] The popularity of Euler angles stems from the fact that the relative attitude is easy to visualize for small angles.
 
@@ -331,6 +330,11 @@ $$
 \{\bht{}\} = \dcm{BN} \{\nht{}\} = \dcm{C}_\text{3-2-1} \{\nht{}\}
 $$
 
+Similar for the coordinate transformation:
+$$
+\cdB{\bmv} = \dcm{BN} \cdot \cdN{\bmv} = \dcm{C}_\text{3-2-1} \cdot \cdN{\bmv}
+$$
+
 
 ### Symmetric (3-1-3) Euler angles
 
@@ -355,7 +359,8 @@ $$
 \tag{Find through observations of elements.}
 $$
 
-![[fig-3-4_orbital_elements_313.png|300]] The ascending node-$\Omega$, inclination-$i$, and argument of the periapsis $\omega$ is a (3-1-3) Euler angle set. 
+![[fig-3-4_orbital_elements_313.png|300]] \
+The ascending node-$\Omega$, inclination-$i$, and argument of the periapsis $\omega$ is a (3-1-3) Euler angle set. 
 Similarly, $(\Omega, i, \omega)$ transforms $\calN$ to $\calB$, i.e., it gives the attitude of $\calN$ relative to $\calB$:
 $$
 \{\bht{}\} = \dcm{BN} \{\nht{}\} = \dcm{M_3(\omega)} \dcm{M_1(i)} \dcm{M_3(\Omega)} \{\nht{}\}
@@ -381,7 +386,7 @@ $$
 Note that each of the 12 possible sets of Euler angles has a **geometric singularity** where two angles are not uniquely defined.
 
 
->[!question]- What is the **singularity** of Euler angles? (Explain without touching kinematics yet)
+>[!question] The **singularity** of Euler angles: an explanation without touching kinematics yet
 > "Singularity" usually means something doesn't work, abnormal, ill-defined, unexpected, or giving infinity.
 > DCM has no singularity, if one cannot resolve a set of Euler angles from DCM, then it's a singularity of that particular set of Euler angles.
 > 
@@ -389,19 +394,63 @@ Note that each of the 12 possible sets of Euler angles has a **geometric singula
 
 
 
+## Textbook problem 3.7
+
+![[Pasted image 20250206191842.png|500]]
+
+>[!warning] Notice the order of basis for $\calB$.
+
+(Similar to the grind in [[AE_544_LecNote01__Particle_Kinematics__Ch01#Textbook problem 1.14 (Grinding disk and missile)|the problem 1.14 in lecture note 01]]).
+
+### (a) DCM transforms $\calN$ to $\calB$
+Assumed no slip between the disk and the ground, leading to a constraint between $\theta$ and $\phi$: the speed of the contact point should be the same
+$$
+\dot{\phi} \cdot L = \dot{\theta} \cdot r
+$$
+Given $\theta_0$ and $\phi_0$, a simple definite integration gives
+$$
+\phi \cdot L + \phi_0 \cdot L = \theta \cdot r + \theta_0 \cdot r
+$$
+
+Get DCM from two consecutive rotations:
+$$
+\newcommand{\vtrix}[1]{\Bmt{#1}}
+\newcommand{\vtrixOne}[1]{\vtrix{#1_1 \\#1_2 \\#1_3}}
+\newcommand{\vtrixFour}[4]{\vtrix{#1{#2} \\ #1{#3} \\ #1{#4}}}
+\begin{aligned}
+\Bmt{\bht{L}\\ \bht{\theta}\\ \bht{r}} &= \dcm{M_1(-\theta)} \left( \dcm{M_3(\phi)} \Bmt{\nht1 \\ \nht2 \\ \nht3} \right) \\
+%
+&= \bmt{1&0&0 \\ 0&\cos(-\theta)&\sin(-\theta) \\ 0&-\sin(-\theta)&\cos(-\theta)} 
+\bmt{\cos \phi&\sin \phi&0 \\ -\sin \phi&\cos \phi&0 \\ 0&0&1} \Bmt{\nht1 \\ \nht2 \\ \nht3} \\
+&= \bmt{1&0&0 \\ 0&\cos\theta&-\sin\theta \\ 0&\sin\theta&\cos\theta} \bmt{\cos \phi&\sin \phi&0 \\ -\sin \phi&\cos \phi&0 \\ 0&0&1} \Bmt{\nht1 \\ \nht2 \\ \nht3} \\
+&= \dcm{BN} \Bmt{\nht1 \\ \nht2 \\ \nht3}
+\end{aligned}
+$$
+
+### (b) coordinate transformation
+The given vector $\bmv$ (not necessarily to be a velocity vector)
+$$
+\cdB{\bmv} = \bmt{2\\1\\1}  \tag{notice the order}
+$$
+Apply DCM
+$$
+\cdN{\bmv} = \dcm{NB} \cdot \cdB{\bmv}   \implies   \cdN{\bmv} = [BN]\trans \cdot \cdB{\bmv}
+$$
+
+
 ## Kinematics using Euler angles
 
 To avoid having to integrate the direction cosine matrix directly given an $\bmo$ time history, the Euler angle kinematic differential equations are needed.
 
->[!check] The following derivation is the same to any set of Euler angles.
+>[!check] The following derivation is the same for any set of Euler angles.
 
 Starting from the expression of the angular velocity $\bmo$ in the body frame $\calB$:
 $$
 \bmo = \omega_1 \bht{1} + \omega_2 \bht{2} + \omega_3 \bht{3}
 $$
 
-Here the (3-2-1) Euler angle set (yaw-$\theta_1$-$\psi$, pitch-$\theta_2$-$\theta$, roll-$\theta_3$-$\phi$ ) is used as an example. 
-![[fig-3-3_yaw_pitch_roll_steps_321.png|400]]
+Here the (3-2-1) Euler angle set (yaw-$\theta_1$-$\psi$, pitch-$\theta_2$-$\theta$, roll-$\theta_3$-$\phi$ ) is used as an example. \
+![[fig-3-3_yaw_pitch_roll_steps_321.png|400]] \
 Another expression of $\bmo$ using Fig. 3.3 can be obtained as:
 $$
 \bmo = \dot{\psi} \nht{3} + \dot{\theta} \bht{2}' + \dot{\phi} \bht{1}
@@ -428,179 +477,36 @@ $$
 $$
 or
 $$
-\coordin{\calB}{\bmt{\omega_1 \\ \omega_2 \\ \omega_3}} = 
+\cdFrame{\calB}{\bmt{\omega_1 \\ \omega_2 \\ \omega_3}} = 
 \bmt{-\sin \theta & 0 & 1 \\ \sin \phi \cos \theta & \cos \phi & 0 \\ \cos \phi \cos \theta & -\sin \phi & 0}
 \bmt{\dot{\psi} \\ \dot{\theta} \\ \dot{\phi}}
 $$
 
-Finally, the kinematic ODE of (3-2-1) Euler angle set  (yaw-$\theta_1$-$\psi$, pitch-$\theta_2$-$\theta$, roll-$\theta_3$-$\phi$ )  is obtained by inversing the above equation, which gives:
+Finally, <u>the kinematic ODE of (3-2-1) Euler angle set</u>  (yaw-$\theta_1$-$\psi$, pitch-$\theta_2$-$\theta$, roll-$\theta_3$-$\phi$ )  is obtained by inversing the above equation, which gives:
 $$
 \bmt{\dot{\psi} \\ \dot{\theta} \\ \dot{\phi}} 
-= \frac{1}{\cos \theta} \bmt{0 & \sin \phi & \cos \phi \\ 0 & \cos \phi \cos \theta & -\sin \phi \cos \theta \\ \cos \theta & \sin \phi \sin \theta & \cos \phi \sin \theta} \cdot \coordin{\calB}{\bmt{\omega_1 \\ \omega_2 \\ \omega_3}}
+= \frac{1}{\cos \theta} \bmt{0 & \sin \phi & \cos \phi \\ 0 & \cos \phi \cos \theta & -\sin \phi \cos \theta \\ \cos \theta & \sin \phi \sin \theta & \cos \phi \sin \theta} \cdot \cdFrame{\calB}{\bmt{\omega_1 \\ \omega_2 \\ \omega_3}}
 \tag{3.57}
 $$
 
 ---
 
-Similarly, the ODE for (3-1-3) Euler angle set can be obtained as
+Similarly, <u>the ODE of (3-1-3) Euler angle set</u> can be obtained as
 
 $$
 \bmt{\dot{\theta_1} \\ \dot{\theta_2} \\ \dot{\theta_3}} 
-= \frac{1}{\sin \theta_2} \bmt{\sin \theta_3 & \cos \theta_3 & 0 \\ \cos \theta_3 \sin \theta_2 & -\sin \theta_3 \sin \theta_2 & 0 \\ -\sin \theta_3\cos \theta_2 & -\cos \theta_3\cos \theta_2 & \sin \theta_2} \cdot \coordin{\calB}{\bmt{\omega_1 \\ \omega_2 \\ \omega_3}}
+= \frac{1}{\sin \theta_2} \bmt{\sin \theta_3 & \cos \theta_3 & 0 \\ \cos \theta_3 \sin \theta_2 & -\sin \theta_3 \sin \theta_2 & 0 \\ -\sin \theta_3\cos \theta_2 & -\cos \theta_3\cos \theta_2 & \sin \theta_2} \cdot \cdFrame{\calB}{\bmt{\omega_1 \\ \omega_2 \\ \omega_3}}
 \tag{3.59}
 $$
 
->[!question] Revisit singularity of Euler angle sets from the perspective of kinematics equations above.
+>[!question] Revisit **singularity** of Euler angle sets from the perspective of kinematics equations above.
 > - For (3-2-1), or general asymmetric sets, $\cos \theta = 0$ (2nd angle) gives a singularity in Eq. (3.57).
 > - For (3-1-3), or general symmetric sets, $\sin \theta_2 = 0$ (2nd angle) gives a singularity in Eq. (3.59). 
 
->[!info] Drawbacks of Euler angle set:
-> - A rigid body or reference frame is <u>never further than a 90-deg rotation away from a singular orientation</u>. 
-> - Their kinematic differential equations are fairly nonlinear, containing computationally <u>intensive trigonometric functions</u>.
-> - The linearized Euler angle kinematic differential equations are valid only for a relatively small domain of rotations.
-
-
-
-## Principal Rotation Vector $(\eht{}, \Phi)$
-
->[!info] Theorem 3.1 (Euler’s Principal Rotation) 
->A rigid body or coordinate reference frame can be brought from an arbitrary initial orientation to an arbitrary final orientation by a single rigid rotation through a principal angle $\Phi$ about the principal axis $\eht{}$; the principal axis is a judicious axis fixed in both the initial and final orientation.
-
-Let the principal axis unit vector $\eht{}$ be written in $\calB$ and $\calN$ frame components as
-$$
-\begin{aligned}
-\eht{} &= e_{b_1} \bht1 + e_{b_2} \bht2 + e_{b_3} \bht3 \\
-\eht{} &= b_{n_1} \nht1 + e_{n_2} \nht2 + e_{n_3} \nht3 \\
-\end{aligned}
-$$
-so, they will have the same vector components in the two frames, which leads to
-$$
-\col{e_1 \\ e_2 \\ e_3} = \dcm{C} \col{e_1 \\ e_2 \\ e_3}
-$$
-the principal axis unit vector $\bht{}$ is the unit eigenvector of $\Phi$ corresponding to the eigenvalue $+1$.
-Thus the proof of the principal rotation theorem reduces to proving the $\Phi$  has an eigenvalue of $+1$.
-
->[!info]- Logic to prove $\dcm{C}$ has only one eigenvalue $+1$. 
->Because $\det(\dcm{C}) = \lambda_1 \lambda_2 \lambda_3 = 1$ and all $\lambda_i$ are on the unit circle:
->- if two of them are $+1$ (let's say $\lambda_1=\lambda_2=1$), there must be $\lambda_3=1$, which leads to a zero rotation.
->- if none of them are $+1$, let's say $\lambda_1 = \bar{\lambda}_2$ are conjugate to each other, then $\lambda_3$ must be real and thus $\pm1$. Since we also assumed a right-handled frame, $\lambda_3=+1$, which is contradicting.
-
-The eigenvector corresponding to $+1$ is unique to within a sign of $\eht{}$ and $\Phi$, except for the case of a zero rotation.
-The sets $(\eht{}, \Phi)$ and $(-\eht{}, -\Phi)$ both describe the same orientation, so the lack of sign uniqueness will not cause any practical problems.
-
-![[fig-3-8_two_principle_rotation_angles.png|300]]
-
-
-**Conversions between principal axis and DCM**
-
-The direction cosine matrix can be directly extracted from Eq. (3.70) to be
-$$
-[\bm{C}] =
-\begin{bmatrix}
-e_1^2 \Sigma + c\Phi & e_1 e_2 \Sigma + e_3 s\Phi & e_1 e_3 \Sigma - e_2 s\Phi \\
-e_2 e_1 \Sigma - e_3 s\Phi & e_2^2 \Sigma + c\Phi & e_2 e_3 \Sigma + e_1 s\Phi \\
-e_3 e_1 \Sigma + e_2 s\Phi & e_3 e_2 \Sigma - e_1 s\Phi & e_3^2 \Sigma + c\Phi
-\end{bmatrix}
-\tag{3.72}
-$$
-where $\Sigma = 1 - c\Phi$.
-
-The inverse transformation from the direction cosine matrix 1⁄2C to the principal rotation elements is found to be
-$$
-\cos \Phi = \frac{1}{2} \left( C_{11} + C_{22} + C_{33} - 1 \right)
-\tag{3.73}
-$$
-$$
-\eht{} = \col{e_1\\e_2\\e_3} = \frac{1}{2\sin \Phi} \col{C_{23}-C_{32}\\C_{31}-C_{13}\\C_{12}-C_{21}}
-\tag{3.74}
-$$
-
->[!note] Verifying textbook derivation.
-> ![[fig-3-9_rotate_ni_to_ei.png|300]]
-> To find the direction cosine matrix $\dcm{C}$ in terms of the principal rotation components $\eht{}$ and $\Phi$, the fact is used that each reference frame base vector $\nht{i}$ is related to $\bht{i}$ through a single axis rotation about $\eht{}$
-> $$
-> \bm{\hat{b}}_i = \cos \xi_i \bm{\hat{e}} + \sin \xi_i \bm{\hat{u}}' = e_i \bm{\hat{e}} + \sin \xi_i \bm{\hat{u}}'
-> \tag{3.64}
-> $$
-> 
-> $$
-> \bm{\hat{u}}' = \cos \Phi \bm{\hat{u}} + \sin \Phi \bm{\hat{v}}
-> \tag{3.65}
-> $$
-> 
-> $$
-> \bm{\hat{v}} = \frac{\bm{\hat{e}} \times \bm{\hat{n}}_i}{|\bm{\hat{e}} \times \bm{\hat{n}}_i|} = \frac{1}{\sin \xi_i} (\bm{\hat{e}} \times \bm{\hat{n}}_i)
-> \tag{3.66}
-> $$
-> $$
-> \bm{\hat{u}} = \bm{\hat{v}} \times \bm{\hat{e}} = \frac{1}{\sin \xi_i} (\bm{\hat{e}} \times \bm{\hat{n}}_i) \times \bm{\hat{e}} = \frac{1}{\sin \xi_i} \left( \bm{\hat{n}}_i - e_i \bm{\hat{e}} \right)
-> \tag{3.67 and 3.69}
-> $$
-> 
-> Plug in (3.65), (3.66), and (3.69) into Eq. (3.64)
-> $$
-> \begin{aligned}
-> \bm{\hat{b}}_i &= e_i \bm{\hat{e}} + \sin \xi_i \bm{\hat{u}}' \\
-> &= e_i \eht{} + \sin \xi_i (\cos \Phi \bm{\hat{u}} + \sin \Phi \bm{\hat{v}})  \\
-> &= e_i \eht{} + \sin \xi_i (\cos \Phi (\frac{1}{\sin \xi_i} \left( \bm{\hat{n}}_i - e_i \bm{\hat{e}} \right)) + \sin \Phi (\frac{1}{\sin \xi_i} (\bm{\hat{e}} \times \bm{\hat{n}}_i)))  \\
-> &= e_i \eht{} + \cos \Phi \left( \bm{\hat{n}}_i - e_i \bm{\hat{e}} \right) + \sin \Phi (\bm{\hat{e}} \times \bm{\hat{n}}_i)  \\
-> &= \cos \Phi \bm{\hat{n}}_i + ( 1 - \cos \Phi ) e_i \eht{} - \sin \Phi [\tilde{\bm{e}}] \bm{\hat{n}}_i) \\
-> &= \cos \Phi \bm{\hat{n}}_i + ( 1 - \cos \Phi ) \eht{} (\eht{} \cdot \nht{i}) - \sin \Phi [\tilde{\bm{e}}] \bm{\hat{n}}_i) \\
-> &= \cos \Phi \bm{\hat{n}}_i + ( 1 - \cos \Phi ) \eht{} (\eht{}\trans \nht{i}) - \sin \Phi [\tilde{\bm{e}}] \bm{\hat{n}}_i) \\
-> &= \cos \Phi \bm{\hat{n}}_i + ( 1 - \cos \Phi ) (\eht{} \eht{}\trans) \nht{i} - \sin \Phi [\tilde{\bm{e}}] \bm{\hat{n}}_i) \\
-> \end{aligned}
-> $$
-> $$
-> \begin{aligned}
-> \bm{\hat{b}}_1 = \cos \Phi \bm{\hat{n}}_1 + ( 1 - \cos \Phi ) (\eht{} \eht{}\trans) \nht{1} - \sin \Phi [\tilde{\bm{e}}] \bm{\hat{n}}_1) \\
-> \bm{\hat{b}}_2 = \cos \Phi \bm{\hat{n}}_2 + ( 1 - \cos \Phi ) (\eht{} \eht{}\trans) \nht{2} - \sin \Phi [\tilde{\bm{e}}] \bm{\hat{n}}_2) \\
-> \bm{\hat{b}}_3 = \cos \Phi \bm{\hat{n}}_3 + ( 1 - \cos \Phi ) (\eht{} \eht{}\trans) \nht{3} - \sin \Phi [\tilde{\bm{e}}] \bm{\hat{n}}_3) \\
-> \end{aligned}
-> $$
-> $$
-> \{\bht{}\} = \cos \Phi [I_{3 \times 3}] \{\nht{}\} + (1 - \cos \Phi) \bm{\hat{e}} \bm{\hat{e}}^T \{\nht{}\} - \sin \Phi [\bm{\tilde{e}}] \{\bm{\hat{n}}\}
-> $$
-> 
-> $$
-> \bm{\hat{b}}_i = \cos \Phi \bm{\hat{n}}_i + (1 - \cos \Phi) \bm{\hat{e}} \bm{\hat{e}}^T \bm{\hat{n}}_i + \sin \Phi (\bm{\hat{e}} \times \bm{\hat{n}}_i)
-> \tag{3.70}
-> $$
-> 
-> $$
-> \{\bm{\hat{b}}\} = \left( \cos \Phi [I_{3 \times 3}] + (1 - \cos \Phi) \bm{\hat{e}} \bm{\hat{e}}^T - \sin \Phi [\bm{\tilde{e}}] \right) \{\bm{\hat{n}}\}
-> \tag{3.71}
-> $$
-
-The principal rotation vector $\bm{\gamma}$ is defined as
-$$
-\bm{\gamma} = \Phi \eht{}
-\tag{3.77}
-$$
-then
-$$
-\bmt{\tilde{\bm{\omega}}} = \dot{\Phi} \bmt{\tilde{\bm{e}}}
-\tag{3.79}
-$$
-
----
-
-## Euler Parameters $\bmbet$ (Quaternions $\bm{q}$)
-
-
-
-
-
-## Classical Rodrigues Parameters
-
-
-
-
-## Modified Rodrigues Parameters
-
-
-
-
-## Homogeneous Transformations
+**Drawbacks of Euler angle set:**
+- A rigid body or reference frame is <u>never further than a 90-deg rotation away from a singular orientation</u>. 
+- Their kinematic differential equations are fairly nonlinear, containing computationally <u>intensive trigonometric functions</u>.
+- The <u>linearized</u> Euler angle kinematic differential equations are valid only for a relatively <u>small domain of rotations</u>.
 
 
 

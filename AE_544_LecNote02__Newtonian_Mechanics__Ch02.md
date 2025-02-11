@@ -1,6 +1,6 @@
 ---
 date created: 2025-01-12T16:04:10-05:00
-date modified: 2025-02-05T00:45:06-05:00
+date modified: 2025-02-11T10:36:39-05:00
 ---
 # AE_544_LecNote02\__Newtonian_Mechanics__Ch02
 
@@ -89,7 +89,7 @@ $$
 \ddot{\theta} = \frac{-g \sin \theta}{L}
 $$
 
-## Textbook problem 2.10
+## Textbook problem 2.10 (rolling cylinder on slope)
 ![[fig-p2-10_rolling_cylinder_with_offset_mass.png|600]]
 
 ### (a) EOM
@@ -437,7 +437,7 @@ $$
 $$
 
 
-## Textbook problem 2.11
+## Textbook problem 2.11 (rolling ball inside a sphere)
 ![[fig-p2-11_rolling_vall_inside_sphere.png|600]] 
 >[!warning] Be careful about that which of $\sht \phi$ and $\sht\theta$ is the second basis and why.
 
