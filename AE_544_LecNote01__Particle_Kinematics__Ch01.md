@@ -1,6 +1,6 @@
 ---
 date created: 2025-01-12T15:56:32-05:00
-date modified: 2025-02-06T22:17:43-05:00
+date modified: 2025-02-11T10:43:34-05:00
 ---
 
 # AE_544_LecNote01\__Particle_Kinematics__Ch01
@@ -308,6 +308,12 @@ $$
 >It can be confusing by not specifying the underlying frame or coordinate system used to express vectors. 
 
 
+>[!note] Transport theorem doesn't depend on the handedness of the coordinate system. 
+>But switching from right-handed system to a left-handed system will change all the coordinates, and also change the cross-product rules, meaning that $\iht{}\times\hat{\bm{j}}=\hat{{\bm{k}}}$ will be changed to $\iht{}\times\hat{\bm{j}}=-\hat{{\bm{k}}}$.
+>So, no only does the definition of the direction of the angular velocity vector is changed, but also how it is calculated in a cross-product.
+>If all the coordinates are handled carefully and correctly, the transport theorem will be proved to be correct for this transformation.
+>
+>One trick during this change is to consider just a flip of one basis. If additional rotations are needed, they can be decomposed as a regular rotational transformation in right-handed frames.
 
 
 ## Example 1.3 Satellite relative motion
