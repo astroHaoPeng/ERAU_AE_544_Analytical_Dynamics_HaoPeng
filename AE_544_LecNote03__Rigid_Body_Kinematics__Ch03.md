@@ -714,7 +714,11 @@ Because any point on the unit constraint sphere surface represents a specific or
 > \end{bmatrix}.
 > \tag{3.72 copied}
 > $$
- 
+> 
+> $$
+> \Sigma = 1 - c\Phi
+> $$
+
 Using Eq. (3.72) and half-angle identities,
 $$
 \begin{aligned}
@@ -744,10 +748,10 @@ $$
 Initially one simply picks an initial condition on one Euler parameter trajectory and then remains with it.
 
 
-A very important composite rotation property of the Euler parameters is the manner in which they allow two sequential rotations to be combined into one overall composite rotation.
+**A very important composite rotation property** of the Euler parameters is the manner in which they allow two sequential rotations to be combined into one overall composite rotation.
 
 $$
-\dcm{FN(\bmbet)} = \dcm{FB(\bmbet'')} \cdot \dcm{FB(\bmbet')}
+\dcm{FN(\bmbet)} = \dcm{FB(\bmbet'')} \cdot \dcm{BN(\bmbet')}
 $$
 $$
 \bmt{\beta_0 \\ \beta_1 \\ \beta_2 \\ \beta_3}
@@ -770,7 +774,7 @@ $$
 \tag{3.101}
 $$
 > $$
-> \dot{\dcm{C}} = - \bmt{\tilde{\bmo}} \dcm{C}
+> \dot{\dcm{C}} = - \bmt{\tilde{\bmo}} \dcm{C} = - \skewmt{\omega} \dcm{C}
 > \tag{3.27 copied}
 > $$
 
