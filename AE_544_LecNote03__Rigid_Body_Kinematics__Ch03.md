@@ -1,6 +1,6 @@
 ---
 date created: 2025-01-26T13:00:00-05:00
-date modified: 2025-02-11T10:44:57-05:00
+date modified: 2025-02-14T00:37:14-05:00
 ---
 
 # AE_544_LecNote03\__Rigid_Body_Kinematics__Ch03.pdf
@@ -100,7 +100,7 @@ $$
 $$
 a matrix $\bmt{\tilde{\bmx}}$ is defined as following,
 $$
-\bmt{\tilde{\bmx}} = \bmt{\skewmt{x_1}{x_2}{x_3}}
+\bmt{\tilde{\bmx}} = \skewmt{x}
 $$
 such that $\bmt{\tilde{\bmx}} = - \bmt{\tilde{\bmx}}\trans$.
 
@@ -115,7 +115,7 @@ $$
 \omega_1 & \omega_2 & \omega_3 \\
 1 & 0 & 0
 \end{vmatrix} = \omega_3 \bht2 - \omega_2 \bht3 
-= - \bmt{1 & 0 & 0} \bmt{\skewmt{\omega_1}{\omega_2}{\omega_3}} \Bmt{\bht1 \\ \bht2 \\ \bht3}
+= - \bmt{1 & 0 & 0} \skewmt{\omega} \Bmt{\bht1 \\ \bht2 \\ \bht3}
 \end{aligned}
 $$
 
@@ -447,6 +447,7 @@ To avoid having to integrate the direction cosine matrix directly given an $\bmo
 Starting from the expression of the angular velocity $\bmo$ in the body frame $\calB$:
 $$
 \bmo = \omega_1 \bht{1} + \omega_2 \bht{2} + \omega_3 \bht{3}
+\tag{3.52}
 $$
 
 Here the (3-2-1) Euler angle set (yaw-$\theta_1$-$\psi$, pitch-$\theta_2$-$\theta$, roll-$\theta_3$-$\phi$ ) is used as an example. \
@@ -457,6 +458,13 @@ $$
 \tag{3.53}
 $$
 where $\bht{2}'$ above is the $\bht{2}$ (after pitch, before roll) on the third subplot in the order given by gigantic arrows, and $\nht{3}$ is apparent.
+
+>[!info]- The reason Eq. (3.53) is "apparent" in the textbook.
+>This equation is rigorous and we are not using any approximation here. 
+>Why it's apparent is because this is simply a composition, or an integration, of different sources of angular velocities. We have three sources of angular velocity (try think of three motors along each axis), each of them is along a well-defined axis. So, this is not about decomposition of a vector into a frame (like what Eq. 3.52 does), but to physically integrate all angular velocity vectors into a total velocity vector.
+>
+>If you treat it as a decomposition, then you will suffer from the dependencies among $\nht3$, $\bht2'$, and $\bht1$ because they are non-orthogonal. But if you think of them as physical source of angular rotations, they are independent sources.
+
 Next is to find expressions for $\bht{2}'$ and $\nht{3}$ in the body frame $\calB$.
 $$
 \bht{2}' = \cos \phi \bht{2} - \sin \phi \bht{3}
@@ -509,4 +517,386 @@ $$
 - The <u>linearized</u> Euler angle kinematic differential equations are valid only for a relatively <u>small domain of rotations</u>.
 
 
+
+## Principal Rotation Vector $(\eht{}, \Phi)$
+
+![[fig-3-8_two_principle_rotation_angles.png|300]]
+
+>[!info] Theorem 3.1 (Euler’s Principal Rotation) 
+>A rigid body or coordinate reference frame can be brought from an arbitrary initial orientation to an arbitrary final orientation by a single rigid rotation through a principal angle $\Phi$ about the principal axis $\eht{}$; the principal axis is a judicious axis fixed in both the initial and final orientation.
+
+>[!hint] Before proving it mathematically, just think of one 2D plane rotating in the 3D space: at two difference moments, two planes have a unique intersecting line, and the dihedral angle can be calculated.
+
+Let the principal axis unit vector $\eht{}$ be written in $\calB$ and $\calN$ frame components as
+$$
+\begin{aligned}
+\eht{} &= e_{1} \bht1 + e_{2} \bht2 + e_{3} \bht3 \\
+\eht{} &= e_{1} \nht1 + e_{2} \nht2 + e_{3} \nht3 \\
+\end{aligned}
+$$
+so, they will have the same vector components in the two frames, which leads to
+$$
+\cdB{\bmt{e_{1} \\ e_{2} \\ e_{3}}} = \dcm{C} \cdot \cdN{\bmt{e_{1} \\ e_{2} \\ e_{3}}}
+$$
+the principal axis unit vector $\bht{}$ is the unit eigenvector of $\Phi$ corresponding to the eigenvalue $+1$.
+Thus the proof of the principal rotation theorem reduces to proving the $\Phi$  has an eigenvalue of $+1$.
+
+>[!info]- Logic to prove $\dcm{C}$ has only one eigenvalue $+1$. 
+>Because $\det(\dcm{C}) = \lambda_1 \lambda_2 \lambda_3 = 1$ and all $\lambda_i$ are on the unit circle:
+>- if two of them are $+1$ (let's say $\lambda_1=\lambda_2=1$), there must be $\lambda_3=1$, which leads to a zero rotation.
+>- if none of them are $+1$, let's say $\lambda_1 = \bar{\lambda}_2$ are conjugate to each other, then $\lambda_3$ must be real and thus $\pm1$. Since we also assumed a right-handled frame, $\lambda_3=+1$, which is contradicting.
+
+The eigenvector corresponding to $+1$ is unique to within a sign of $\eht{}$ and $\Phi$, except for the case of a zero rotation.
+The sets $(\eht{}, \Phi)$ and $(-\eht{}, -\Phi)$ both describe the same orientation, so the lack of sign uniqueness will not cause any practical problems.
+
+In most cases the magnitude of $\Phi$ is simply chosen to be less than or equal to 180 deg.
+
+**Conversions between principal axis and DCM**
+
+![[fig-3-9_principle_and_angle_to_DCM.png|300]] \
+Our goal for the following discussion is: **Rotate $\{\nht{}\}$ to $\{\bht{}\}$, in other words, to find basis vector $\bht{i}$ in terms of $(\eht{}, \Phi)$ and $(\nht1, \nht2, \nht3)$.**
+
+Define the intermediate frame $\{\uht{}, \uht{}', \eht{}\}$ using geometric relationship in the figure:
+$$
+\vht{} = \frac{\eht{}\times\nht{i}}{\|\eht{}\times\nht{i}\|} = \frac{1}{\sin \xi_i} (\eht{}\times\nht{i})
+\tag{3.66}
+$$
+$$
+\begin{align}
+\uht{} &= \vht{} \times \eht{} = \frac{1}{\sin \xi_i} (\eht{}\times\nht{i})\times\eht{}    \tag{3.67} \\
+&= \frac{-1}{\sin \xi_i} \eht{}\times (\eht{}\times\nht{i}) \\
+&= \frac{-1}{\sin \xi_i} (\eht{}(\eht{}\cdot\nht{i}) - \sin\xi_i\nht{i}(\eht{}\cdot\eht{}))   \tag{bac-cab rule} \\
+&= \frac{-1}{\sin \xi_i} (\cos \xi_i \eht{}-\nht{i}) \\
+&= \frac{1}{\sin\xi_i}(\nht{i}-e_i\eht{})  \tag{3.69}
+\end{align}
+$$
+where we have used the following identity to simplify notations
+$$
+e_i = \cos \xi_i = \eht{} \cdot \nht{i}.
+$$
+
+After a rotation of $\Phi$, $\uht{}$ is rotated to a new direction,
+$$
+\uht{}' = \cos \Phi \uht{} + \sin \Phi \vht{}.
+$$
+
+In this intermediate frame, $\nht{i}$ is expressed as
+$$
+\nht{i} = \cos \xi_i \eht{} + \sin \xi_i \uht{}.
+$$
+After the rotation, since $\bht{i}$ and $\nht{i}$ are in the same plane that is normal to $\eht{}$, only the transversal component of $\nht{i}$ gets changed:
+$$
+\begin{align}
+\bht{i} &= \cos \xi_i \eht{} + \sin \xi_i \uht{}' \\
+&= \cos \xi_i \eht{} + \sin \xi_i (\cos \Phi \uht{} + \sin \Phi \vht{}) \\
+&= e_i \eht{} + \sin \xi_i \cos \Phi \left( \frac{1}{\sin\xi_i}(\nht{i}-e_i\eht{}) + \sin \Phi \frac{1}{\sin \xi_i} (\eht{}\times\nht{i}) \right) \\
+&= e_i \eht{} + \cos \Phi (\nht{i}-e_i\eht{}) + \sin \Phi (\eht{}\times\nht{i})   \\
+&= \cos \Phi\nht{i} + (1-\cos \Phi) e_i \eht{} + \sin \Phi (\eht{}\times\nht{i})  \\
+&= \cos \Phi\nht{i} + (1-\cos \Phi) (\cdN{\nht{i}})\eht{}\eht{}\trans \{\nht{}\} + \sin \Phi (\eht{}\times\nht{i})\tag{3.70 altered}  \\
+\end{align}
+$$
+
+>[!info] Derive $e_i \eht{}$ explicitly.
+> $$
+> e_i\eht{} = e_i (e_1 \nht1 + e_2 \nht2 + e_3\nht3) 
+> = (\cdN{\nht{i}})\trans \cdot \bmt{e_1 e_1 &e_1 e_2 & e_1 e_3 \\ e_2e_1 & e_2e_2 & e_2 e_3 \\ e_3e_1 & e_3e_2 & e_3e_3} \Bmt{\nht1\\ \nht2\\ \nht3}
+> = (\cdN{\nht{i}}) \eht{} \eht{}\trans \Bmt{\nht1\\ \nht2\\ \nht3} 
+> $$
+
+Write all three equations in the vectrix format:
+$$
+\{\bht{}\} = (\cos \Phi [I_{3\times3}] + (1-\cos \Phi) \eht{}\eht{}\trans - \sin \Phi \bmt{\tilde{\bm{e}}} )  \{\nht{}\}
+\tag{3.71}
+$$
+
+Finally, the <u>transformation to DCM</u> can be directly extracted from Eq. (3.71) as, notating $\Sigma = 1 - c\Phi$,
+$$
+[\bm{C}] =
+\begin{bmatrix}
+e_1^2 \Sigma + c\Phi & e_1 e_2 \Sigma + e_3 s\Phi & e_1 e_3 \Sigma - e_2 s\Phi \\
+e_2 e_1 \Sigma - e_3 s\Phi & e_2^2 \Sigma + c\Phi & e_2 e_3 \Sigma + e_1 s\Phi \\
+e_3 e_1 \Sigma + e_2 s\Phi & e_3 e_2 \Sigma - e_1 s\Phi & e_3^2 \Sigma + c\Phi
+\end{bmatrix}.
+\tag{3.72}
+$$
+
+The <u>inverse transformation</u> from the direction cosine matrix $\dcm{C}$ to the **principal rotation elements** $(\eht{},\Phi)$ is found to be
+$$
+\cos \Phi = \frac{1}{2} \left( C_{11} + C_{22} + C_{33} - 1 \right)
+\tag{3.73}
+$$
+$$
+\eht{} = \col{e_1\\e_2\\e_3} = \frac{1}{2\sin \Phi} \col{C_{23}-C_{32}\\C_{31}-C_{13}\\C_{12}-C_{21}}
+\tag{3.74}
+$$
+
+---
+
+The **principal rotation vector** $\bm{\gamma}$ is defined as
+$$
+\bm{\gamma} = \Phi \eht{}
+\tag{3.77}
+$$
+then
+$$
+\bm{\omega} = \dot{\Phi}\eht{}   \qquad \text{and}  \qquad
+\bmt{\tilde{\bmo}} = \dot{\Phi} \bmt{\tilde{\bm{e}}}
+\tag{3.78 and 3.79}
+$$
+
+
+$$
+\dot{\dcm{C}} = - \bmt{\tilde{\bmo}} \dcm{C}
+\tag{3.27 copied}
+$$
+
+$$
+\begin{align}
+\frac{{\rm d}{\dcm{C}}}{\dt} &= - \dot{\Phi} \bmt{\tilde{\bme}} \dcm{C} \\
+\frac{{\rm d}{\dcm{C}}}{\dt} &= - \frac{d\Phi}{\dt} \bmt{\tilde{\bme}} \dcm{C} \\
+\frac{{\rm d}{\dcm{C}}}{d\Phi} &= - \bmt{\tilde{\bme}} \dcm{C} \\
+\dcm{C} &= e^{-\Phi\bmt{\tilde{\bme}}} = e^{-\bmt{\tilde{\bm{\gamma}}}}  \tag{3.81}
+\end{align}
+$$
+
+Express the matrix power using infinite time series definition,
+$$
+\dcm{C} = e^{-\bmt{\tilde{\bm{\gamma}}}} = \sum_{n=0}^\infty \frac{1}{n!} (-\bmt{\tilde{\bm{\gamma}}})^n
+$$
+and we will get the same results to Eqs. (3.71) and (3.72):
+$$
+\dcm{C} = \cos \Phi [I_{3\times3}] + (1-\cos \Phi) \eht{}\eht{}\trans - \sin \Phi \bmt{\tilde{\bm{e}}}
+\tag{3.71 copied}
+$$
+
+The inverse transformation from $\dcm{C}$ to $\bm{\gamma}$ is also given my matrix logarithm as
+$$
+\bmt{\tilde{\bm{\gamma}}} = - \ln\dcm{C} = \sum_{n=0}^\infty \frac{1}{n} (1-\dcm{C})^n
+\tag{3.83}
+$$
+
+This derivation of using principle rotation vector to find DCM also holds for higher dimension rotations.
+
+
+
+
+
+## Euler Parameters $\bmbet$ (aka. Quaternions sometimes)
+
+The Euler parameter vector $\bmbet$ is defined in terms of the principal rotation elements as
+$$
+\begin{aligned}
+\beta_0 &= \cos(\Phi/2) \\
+\beta_1 &= e_1 \sin(\Phi/2) \\
+\beta_2 &= e_2 \sin(\Phi/2) \\
+\beta_3 &= e_3 \sin (\Phi/2) 
+\end{aligned}
+$$
+
+There is one holonomic constraint
+$$
+\beta_0^2 + \beta_1^2 + \beta_2^2 + \beta_3^2 = 1
+$$
+which describes a 4D unit sphere.
+Any rotation described through the Euler parameters has a trajectory on the surface of this constraint sphere.
+
+Given a certain attitude, there are actually two sets of Euler parameters that will describe the same orientation. This is due to the non-uniqueness of the principal rotation elements themselves. 
+Try flip the sign of $\eht{}$ and $\Phi$ in the above definition.
+
+Because any point on the unit constraint sphere surface represents a specific orientation, the anti-pole to that point represents the exact same orientation.
+
+> $$
+> [\bm{C}] =
+> \begin{bmatrix}
+> e_1^2 \Sigma + c\Phi & e_1 e_2 \Sigma + e_3 s\Phi & e_1 e_3 \Sigma - e_2 s\Phi \\
+> e_2 e_1 \Sigma - e_3 s\Phi & e_2^2 \Sigma + c\Phi & e_2 e_3 \Sigma + e_1 s\Phi \\
+> e_3 e_1 \Sigma + e_2 s\Phi & e_3 e_2 \Sigma - e_1 s\Phi & e_3^2 \Sigma + c\Phi
+> \end{bmatrix}.
+> \tag{3.72 copied}
+> $$
+ 
+Using Eq. (3.72) and half-angle identities,
+$$
+\begin{aligned}
+\cos \Phi &= 2 \cos^2(\Phi/2) - 1 = 1- 2 \sin^2(\Phi/2) \\
+\sin \Phi &= 2 \sin(\Phi/2) \cos(\Phi/2) \\
+\end{aligned}
+$$
+the DCM converted from principle rotation parameters, we can find the DCM converted from Euler parameters as
+$$
+\dcm{C} = 
+\begin{bmatrix}
+\beta_0^2 + \beta_1^2 - \beta_2^2 - \beta_3^2 & 2(\beta_1 \beta_2 + \beta_0 \beta_3) & 2(\beta_1 \beta_3 - \beta_0 \beta_2) \\
+2(\beta_1 \beta_2 - \beta_0 \beta_3) & \beta_0^2 - \beta_1^2 + \beta_2^2 - \beta_3^2 & 2(\beta_2 \beta_3 + \beta_0 \beta_1) \\
+2(\beta_1 \beta_3 + \beta_0 \beta_2) & 2(\beta_2 \beta_3 - \beta_0 \beta_1) & \beta_0^2 - \beta_1^2 - \beta_2^2 + \beta_3^2
+\end{bmatrix}
+\tag{3.93}
+$$
+The inverse transformation can be found as:
+$$
+\begin{aligned}
+\beta_0 &= \pm \frac{1}{2} \sqrt{C_{11} + C_{22} + C_{33} + 1} \\
+\beta_1 &= \frac{C_{23} - C_{32}}{4\beta_0} \\
+\beta_2 &= \frac{C_{31} - C_{13}}{4\beta_0} \\ 
+\beta_3 &= \frac{C_{12} - C_{21}}{4\beta_0} \\
+\end{aligned}
+$$
+Initially one simply picks an initial condition on one Euler parameter trajectory and then remains with it.
+
+
+A very important composite rotation property of the Euler parameters is the manner in which they allow two sequential rotations to be combined into one overall composite rotation.
+
+$$
+\dcm{FN(\bmbet)} = \dcm{FB(\bmbet'')} \cdot \dcm{FB(\bmbet')}
+$$
+$$
+\bmt{\beta_0 \\ \beta_1 \\ \beta_2 \\ \beta_3}
+= \begin{bmatrix}
+\beta_0'' & -\beta_1'' & -\beta_2'' & -\beta_3'' \\
+\beta_1'' & \beta_0'' & \beta_3'' & -\beta_2'' \\
+\beta_2'' & -\beta_3'' & \beta_0'' & \beta_1'' \\
+\beta_3'' & \beta_2'' & -\beta_1'' & \beta_0''
+\end{bmatrix}
+\bmt{\beta_0' \\ \beta_1' \\ \beta_2' \\ \beta_3'}
+$$
+
+>[!note] The composition only involved matrix multiplication.
+>These transformations provide a simple, nonsingular, and bilinear method to combine two successive rotations described through Euler parameters. For other attitude parameters such as the Euler angles, this same composite transformation would yield a very complicated, transcendental expression. (refer to textbook for those equations)
+
+Next, discuss the kinematics using Euler parameters.
+Take time derivative directly:
+$$
+\dot{\beta}_0 = \frac{\dot{C}_{11} + \dot{C}_{22} + \dot{C}_{33}}{8\beta_0}
+\tag{3.101}
+$$
+> $$
+> \dot{\dcm{C}} = - \bmt{\tilde{\bmo}} \dcm{C}
+> \tag{3.27 copied}
+> $$
+
+Using Eq. 3.27 to find derivatives of $C_{ij}$, then plugging in to Eq. 3.101,
+$$
+\dot{\beta}_0 = \frac{1}{2} \left( 
+-\frac{C_{23} - C_{32}}{4\beta_0} \omega_1
+- \frac{C_{31} - C_{13}}{4\beta_0} \omega_2
+- \frac{C_{12} - C_{21}}{4\beta_0} \omega_3
+\right)
+\tag{3.102}
+$$
+Then replacing all $C_{ij}$ using the Euler parameters $\beta_i$ in DCM, we get
+$$
+\dot{\beta}_0 = \frac{1}{2} (-\beta_1 \omega_1 - \beta_2 \omega_2 - \beta_3 \omega_3)
+\tag{3.103}
+$$
+
+Similarly, we can get
+$$
+\begin{aligned}
+\dot{\beta}_1 &= \frac{1}{2} (\beta_0 \omega_1 - \beta_3 \omega_2 + \beta_2 \omega_3) \\
+\dot{\beta}_2 &= \frac{1}{2} (\beta_3 \omega_2 + \beta_0 \omega_2 - \beta_1 \omega_3) \\
+\dot{\beta}_3 &= \frac{1}{2} (-\beta_2 \omega_1 + \beta_1 \omega_2 + \beta_0 \omega_3) \\
+\end{aligned}
+$$
+
+Wrap up everything in matrix format, and we have
+$$
+\dot{\bmbet} = \frac{1}{2} \bmt{B(\bmbet)} \cdot \cdB{\bmo}
+\tag{3.106}
+$$
+where
+$$
+\bmt{B(\bmbet)} = \begin{bmatrix}
+-\beta_1 & -\beta_2 & -\beta_3 \\
+\beta_0 & -\beta_3 & \beta_2 \\
+\beta_3 & \beta_0 & -\beta_1 \\
+-\beta_2 & \beta_1 & \beta_0
+\end{bmatrix}_{4\times 3}
+\tag{3.107}
+$$
+
+>[!note] Other detailed discussions are omitted here. The essentials are that Euler parameters have very good matrix expressions without relying on trigonometric functions or the original DCM. It is kind of "self-contained".
+
+>[!warning] **Quaternion** is usually another equivalent way to express Euler parameters. But quaternion also has its own ambiguities in definition in different context. Relatively speaking, Euler parameters are more consistently defined throughout different textbooks.
+
+## Classical Rodrigues Parameters
+
+![[fig-3-10_CRP.png|400]]
+
+This rigid body attitude coordinate set reduces the redundant Euler parameters to a minimal three-parameter set through the transformation
+$$
+q_i = \frac{\beta_i}{\beta_0}  \qquad i = 1,2,3
+\tag{3.114}
+$$
+
+The inverse transformation
+$$
+\begin{aligned}
+\beta_0 = \frac{1}{\sqrt{1 + \bm{q}^T \bm{q}}} \\
+\beta_i = \frac{q_i}{\sqrt{1 + \bm{q}^T \bm{q}}}
+\end{aligned}
+$$
+
+Classical Rodrigues parameters can also be defined using principal rotation parameters as
+$$
+\bmq = \tan\frac{\Phi}{2} \eht{} 
+$$
+
+
+> $$
+> \dcm{C} = 
+> \begin{bmatrix}
+> \beta_0^2 + \beta_1^2 - \beta_2^2 - \beta_3^2 & 2(\beta_1 \beta_2 + \beta_0 \beta_3) & 2(\beta_1 \beta_3 - \beta_0 \beta_2) \\
+> 2(\beta_1 \beta_2 - \beta_0 \beta_3) & \beta_0^2 - \beta_1^2 + \beta_2^2 - \beta_3^2 & 2(\beta_2 \beta_3 + \beta_0 \beta_1) \\
+> 2(\beta_1 \beta_3 + \beta_0 \beta_2) & 2(\beta_2 \beta_3 - \beta_0 \beta_1) & \beta_0^2 - \beta_1^2 - \beta_2^2 + \beta_3^2
+> \end{bmatrix}
+> \tag{3.93 copied}
+> $$
+
+DCM can be get from DCM of Euler parameters (Eq. 3.93) above,
+$$
+\dcm{C} = \frac{1}{1 + \bm{q}^T \bm{q}}
+\begin{bmatrix}
+1 + q_1^2 - q_2^2 - q_3^2 & 2(q_1 q_2 + q_3) & 2(q_1 q_3 - q_2) \\
+2(q_2 q_1 - q_3) & 1 - q_1^2 + q_2^2 - q_3^2 & 2(q_2 q_3 + q_1) \\
+2(q_3 q_1 + q_2) & 2(q_3 q_2 - q_1) & 1 - q_1^2 - q_2^2 + q_3^2
+\end{bmatrix}
+$$
+
+The equation of motion is found by taking derivatives to the definition and simply the results using relations to $\beta_i$ and also the EOM expressed in Euler parameters,
+$$
+\dot{\bm{q}} = \frac{1}{2}
+\begin{bmatrix}
+1 + q_1^2 & q_1 q_2 - q_3 & q_1 q_3 + q_2 \\
+q_2 q_1 + q_3 & 1 + q_2^2 & q_2 q_3 - q_1 \\
+q_3 q_1 - q_2 & q_3 q_2 + q_1 & 1 + q_3^2
+\end{bmatrix} \cdot 
+\cdB{\begin{bmatrix}
+\omega_1 \\
+\omega_2 \\
+\omega_3
+\end{bmatrix}}
+$$
+
+## Modified Rodrigues Parameters
+
+![[fig-3-11_MRP.png|400]]
+
+The MRP vector s is defined in terms of the Euler parameters as the transformation
+$$
+\sigma_i = \frac{\beta_i}{1 + \beta_0}  \qquad i = 1,2,3
+\tag{3.137}
+$$
+The inversion is given by
+$$
+\beta_0 = \frac{1 - \sigma^2}{1 + \sigma^2}
+\quad
+\beta_i = \frac{2\sigma_i}{1 + \sigma^2}
+\quad
+i = 1,2,3
+$$
+
+---
+>[!done] End of Lecture Note 04.
+>More useful and interesting contents are available in the textbook, but are omitted here.
+> Understanding DCM, Euler angles, quaternions, and Rodrigues parameters are adequate in many cases.
 
