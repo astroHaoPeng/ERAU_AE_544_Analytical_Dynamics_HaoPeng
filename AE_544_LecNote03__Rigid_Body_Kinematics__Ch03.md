@@ -1,6 +1,6 @@
 ---
 date created: 2025-01-26T13:00:00-05:00
-date modified: 2025-02-14T17:13:34-05:00
+date modified: 2025-02-21T02:43:37-05:00
 ---
 
 # AE_544_LecNote03\__Rigid_Body_Kinematics__Ch03
@@ -170,6 +170,7 @@ $$
 \ddtN \{ \bht{} \} = - \bmt{\tilde{\bmo}} \{ \bht{} \}
 \tag{3.24}
 $$
+>[!warning] Eq. (3.22) to Eq. (3.24) is how skew-symmetric matrix is applied on a **vectrix**. For vectors, the rule is different!
 
 Take time derivate to Eq. (3.5)
 $$

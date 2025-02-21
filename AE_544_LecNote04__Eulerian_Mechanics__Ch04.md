@@ -1,6 +1,6 @@
 ---
 date created: 2025-01-26T13:42:36-05:00
-date modified: 2025-02-19T22:21:02-05:00
+date modified: 2025-02-21T02:38:08-05:00
 ---
 # AE_544_LecNote04\__Eulerian_Mechanics__Ch04
 
@@ -143,9 +143,9 @@ $$
 \bmL_c &= \dot{\bmH}_c = \ddtB \bmH_c + \textcolor{red}{ \bmo_{\calB/\calN} \times \bmH_c } \\
 &= \cancelto{\bm{0}}{\left(\ddtB \bmt{I}\right) \bmo} + \bmt{I} \ddtB \bmo + \textcolor{red}{ \bmo_{\calB/\calN} \times(\bmt{I}\bmo) }     \tag{used $\bmH_c=\bmt{I}\bmo$ in body frame} \\
 &= \bmt{I} \ddtB \bmo + \textcolor{red}{ \bmo\times (\bmt{I}~\bmo) }      \tag{$\cdB{\bmt{I}}$ is constant} \\
-&= \bmt{I} \ddtB \bmo \textcolor{red}{ - \bmt{\tilde{\bmo}}\bmt{I}~\bmo }      \tag{$\cdB{\bmt{I}}$ is constant} \\
-&= \bmt{I} \left( \ddtN\bmo + \bmo_{\calN/\calB} \times \bmo \right) - \bmt{\tilde{\bmo}}\bmt{I}~\bmo \\
-&= \bmt{I} ~ \dot{\bmo} - \bmt{\tilde{\bmo}}\bmt{I}~\bmo    \tag{4.32} \\
+&= \bmt{I} \ddtB \bmo \textcolor{red}{ + \bmt{\tilde{\bmo}}\bmt{I}~\bmo }      \tag{$\cdB{\bmt{I}}$ is constant} \\
+&= \bmt{I} \left( \ddtN\bmo + \bmo_{\calN/\calB} \times \bmo \right) + \bmt{\tilde{\bmo}}\bmt{I}~\bmo \\
+&= \bmt{I} ~ \dot{\bmo} + \bmt{\tilde{\bmo}}\bmt{I}~\bmo    \tag{4.32} \\
 &= \bmt{I} ~ \dot{\bmo} + \bmo\times(\bmt{I}~\bmo)  \tag{4.32 alternative}
 \end{align}
 $$
