@@ -1,6 +1,6 @@
 ---
 date created: 2025-01-26T13:42:36-05:00
-date modified: 2025-02-24T12:34:27-05:00
+date modified: 2025-02-24T12:41:00-05:00
 ---
 # AE_544_LecNote04\__Eulerian_Mechanics__Ch04
 
@@ -448,9 +448,9 @@ $$
 then substituting into Eq. (4.86) and dropping higher-order (nonlinear) terms to get
 $$
 \begin{align}
-\dot{\delta \omega}_1 &= 0   \tag{4.89a} \\
-\dot{\delta \omega}_2 &= \left( \frac{I_3-I_1}{I_2} \omega_{e_1} - \frac{I_{W_s}}{I_2} \Omega \right) \delta\omega_3  \tag{4.89b} \\
-\dot{\delta \omega}_3 &= \left( \frac{I_1-I_2}{I_3} \omega_{e_1} + \frac{I_{W_s}}{I_3} \Omega \right) \delta\omega_2 \\
+\dot{\delta \omega_1} &= 0   \tag{4.89a} \\
+\dot{\delta \omega_2} &= \left( \frac{I_3-I_1}{I_2} \omega_{e_1} - \frac{I_{W_s}}{I_2} \Omega \right) \delta\omega_3  \tag{4.89b} \\
+\dot{\delta \omega_3} &= \left( \frac{I_1-I_2}{I_3} \omega_{e_1} + \frac{I_{W_s}}{I_3} \Omega \right) \delta\omega_2 \\
 \end{align}
 $$
 
@@ -459,7 +459,7 @@ Eq. (4.89a) tells $\delta\omega_1$ is constant, and thus $\omega_{e_1} + \delta\
 Rewrite the two coupled first-order differential equations into two uncoupled second-order differential equations, by taking derivative of Eq. (4.89b):
 $$
 \begin{aligned}
-\delta \ddot{\omega}_2 &= \left( \frac{\textcolor{red}{ I_3-I_1 }}{I_2}R \omega_{e_1} - \frac{I_{W_s}}{I_2} \Omega \right) \textcolor{blue}{ \delta\dot{\omega}_3 }  \\
+\ddot{\delta \omega_2} &= \left( \frac{\textcolor{red}{ I_3-I_1 }}{I_2}R \omega_{e_1} - \frac{I_{W_s}}{I_2} \Omega \right) \textcolor{blue}{ \dot{\delta \omega_3} }  \\
 &= \textcolor{red}{ - } \left( \frac{\textcolor{red}{ I_1 - I_3 }}R{I_2} \omega_{e_1} \textcolor{red}{ + } \frac{I_{W_s}}{I_2} \Omega \right) \textcolor{blue}{ \left( \frac{I_1 - I_2}{I_3} \omega_{e_1} + \frac{I_{W_s}}{I_3} \Omega \right) \delta \omega_2 } \\
 &= - \frac{\omega_{e_1}^2}{I_2 I_3}   \left( I_1 - I_3 + I_{W_s} \frac{\Omega}{\omega_{e_1}} \right)   \left( I_1 - I_2 + I_{W_s} \frac{\Omega}{\omega_{e_1}} \right)    \delta\omega_2 \\
 &= - \frac{\omega_{e_1}^2}{I_2 I_3}   \left( I_1 - I_3 + I_{W_s} \hat{\Omega} \right)   \left( I_1 - I_2 + I_{W_s} \hat{\Omega} \right)    \delta\omega_2 \\
