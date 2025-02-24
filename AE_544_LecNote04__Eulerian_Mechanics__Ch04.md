@@ -1,6 +1,6 @@
 ---
 date created: 2025-01-26T13:42:36-05:00
-date modified: 2025-02-21T02:38:08-05:00
+date modified: 2025-02-24T12:34:27-05:00
 ---
 # AE_544_LecNote04\__Eulerian_Mechanics__Ch04
 
@@ -257,4 +257,250 @@ L_3 &= I_3( \dot{\omega}_s + \dot{\omega}_p\cos\theta-\omega_p \omega_n\sin\thet
 $$
 
 Next, solve first-order ODEs numerically.
+
+## Rotational Kinetic Energy
+
+The rigid body rotational kinetic energy expression as
+$$
+T_\text{rot} = \frac{1}{2} \bmo \cdot \bmH_c = \frac{1}{2} \bmo\trans \bmt{I}~\bmo
+\tag{4.52}
+$$
+
+%% The total kinetic energy of a rigid body B is the sum of translational and rotational energy
+$$
+T = \frac{1}{2}M \dot{\bmR}_c \cdot \dot{\bmR}_c + \frac{1}{2} \bmo \cdot \bmH_c = \frac{1}{2} \bmo\trans \bmt{I}~\bmo
+\tag{4.53}
+$$ %%
+
+The work done by the torque $\bmL_c$ onto a rigid body $\calB$
+%% $$
+\dot{T}_\text{rot} = \frac{1}{2} \dot{\bmo} \cdot \bmH_c + \frac{1}{2} \bmo \cdot \dot{\bmH}_c
+= \frac{1}{2} \dot{\bmo} \cdot \bmH_c + \frac{1}{2} \bmo \cdot \bmL_c
+\tag{4.54 and 4.55}
+$$ %%
+$$
+\dot{T}_\text{rot} = \dot{\bmo}\trans[I]\bmo = \bmo \cdot \bmL_c
+$$
+where $\bmL_c = \bmt{I} ~ \dot{\bmo} + \bmo\times(\bmt{I}~\bmo)$, as given in Eq. (4.32 alternative).
+
+
+
+## Torque-Free Rigid Body Rotation (a geometric approach)
+
+If no external torques are acting on a system,  the total angular momentum vector $\bmH$ is constant in the inertial frame, and the total rotational kinetic energy is also a constant.
+
+When expressed in body frame $\calB$, the angular momentum vector $\bmH$ will generally not appear to be constant but rotating. However, the angular momentum magnitude $H$ is still a constant.
+
+**Principal axes assumption**: We always assume that the body-fixed coordinate axes are all aligned with principal inertia axes.
+
+Using coordinates of the angular momentum $\bmH$ and angular velocity $\bmo$ in body frame $\calB$, we have the angular momentum ellipsoid as
+$$
+H^2 = H_1^2 + H_2^2 + H_3^2 = I_1^2\omega_1^2 + I_2^2\omega_2^2 + I_3^2\omega_3^2
+\tag{4.64 and 4.62}
+$$
+and the energy ellipsoid as
+$$
+T = \frac{1}{2} (I_1\omega_1^2 + I_2\omega_2^2 + I_3\omega_3^2)
+\tag{4.63}
+$$
+The geometric interpretation of this is that $\bmo(t)$ must lie on the intersection of the momentum and energy ellipsoid surfaces.
+
+To simplify one ellipsoid to a sphere, using $H_i$ as independent coordinates, so we have the momentum sphere 
+$$
+H^2 = H_1^2 + H_2^2 + H_3^2
+\tag{4.64}
+$$
+and the energy ellipsoid (substituting $\omega_i$ with $H_i/I_i$)
+$$
+T = \frac{H_1^2}{2I_1} + \frac{H_2^2}{2I_2} + \frac{H_3^2}{2I_3}
+\tag{4.65 altered}
+$$
+![[fig-4-8_intersection_of_ellipsoids.png|400]]
+Further requiring
+$$
+I_1 \ge I_2 \ge I_3
+$$
+the largest ellipsoid semi-axis occurs along $\bht1$ and the smallest along $\bht3$. 
+The overall shape and aspect ratio of the ellipsoid will remain the same for each choice in the energy $T$, and varying $T$ will only uniformly scale the ellipsoid.
+
+For a general rigid body motion as shown in Fig. 4.8, once the initial kinetic energy $T$ and angular momentum vector $\bmH$ are established, the angular velocity vector x will theoretically trace out a particular intersection curve forever.
+
+
+![[fig-4-9_intersection_of_ellipsoids.png|400]]
+
+
+- For this minimum kinetic energy case, the rigid body B is spinning purely about its axis of maximum inertia $\bm{b}_1$, and the corresponding kinetic energy is
+$$
+T_\text{min} = \frac{H^2}{2I_1}
+$$
+
+- For the intermediate kinetic energy case, the kinetic energy along the separatrix is
+$$
+T_\text{intermediate} = \frac{H^2}{2I_2}
+$$
+
+- For the maximum kinetic energy case, the rotation is along $\bht3$, and
+$$
+T_\text{max} = \frac{H^2}{2I_3}
+$$
+
+
+![[fig-4-10_family_of_intersections.png|400]]
+All feasible $\bmo(t)$ paths form closed trajectories.
+The energy is not conserved in reality, so the motion will wobble along $\bht3$ when the energy is higher than that on the separatrix, then wobble along $\bht2$ after crossing the separatrix, and eventually stabilized and slows down along $\bht1$.
+
+
+## Special Discussions on Axisymmetric Rigid Body
+
+Without loss of generality, assume that $I_2 = I_3$. Then the yaw, pitch, and roll angle rates are given as
+$$
+\begin{aligned}
+\dot{\psi} &= - \frac{H}{I_2} \\
+\dot{\theta} &= 0 \\
+\dot{\phi} &= H \left( \frac{I_2 - I_1}{I_1 I_2} \right) \sin \theta \\
+\end{aligned}
+\tag{4.77}
+$$
+
+![[fig-4-12_angular_velocity_mometum_vectors.png|400]]
+![[fig-4-13_space_and_body_cones.png|500]]
+Using a (3-2-1) Euler angle set, i.e. yaw-pitch-roll set, the precession motion of oblate (disk) or prolate (stick) bodies.
+![[fig-oblate_vs_prolate.png]]
+
+Details omitted, please refer to the textbook section 4.3.3.
+
+
+## Dynamics of Dual-Spin Spacecraft (or Reaction Wheels)
+
+The dual-spin spacecraft is a simple system where passive attitude stability is achieved by adding a single fly-wheel to the rigid spacecraft.
+
+![[fig-4-15_dual_spin_sc.png|400]]
+To develop the dual-spin system equations of motion, assume that the rotating fly-wheel is aligned with the first principal axis $\bht1$ of the main spacecraft component as illustrated in Fig. 4.15. 
+
+Let $\bmo = \bmo_{\calB/\calN}$ be the body angular velocity of the main craft, while $\bmo_{\calW/\calB}= \Omega \bht1$ is the angular velocity of the fly-wheel relative to the spacecraft. 
+
+The total angular momentum is then given by
+$$
+\bmH = \bmt{I_s} \bmo + \bmt{I_W} (\Omega \bht1 + \bmo)
+\tag{4.82}
+$$
+where $\bmt{I_s}$ is <u>the inertia matrix of the main spacecraft system</u>, while $\bmt{I_W}$ is the inertia of the fly-wheel component.
+
+>[!warning] $\bmt{I_s}$ doesn't include $\bmt{I_W}$ in Eq. (4.82).
+
+Using Euler's equation $\dot{\bmH} = \bmL$, we have
+$$
+\dot{\bm{H}} = \bm{L} = (\bmt{I_s} + \bmt{I_W})\dot{\bm{\omega}} + [\bm{\tilde{\omega}}](\bmt{I_s} + \bmt{I_W})\bm{\omega} + \bmt{I_W}(\dot{{\Omega}}\bm{\hat{b}}_1) + [\bm{\tilde{\omega}}]\bmt{I_W}({\Omega}\bm{\hat{b}}_1)
+\tag{4.83}
+$$
+
+> Skew-symmetric tilde operator:
+> $$
+> \bmt{\tilde{\bmx}} = \skewmt{x}
+> $$
+
+Assuming no external torque is present, and the body frame is principal,
+$$
+\newcommand{\colo}{\bmt{\omega_1\\ \omega_2\\ \omega_3}}
+\newcommand{\Ithree}{\bmt{I_1 & 0 & 0 \\ 0 & I_2 & 0 \\ 0 & 0 & I_3}}
+\bm{0} = \Ithree \bmt{\dot{\omega}_1\\ \dot{\omega}_2\\ \dot{\omega}_3} + \skewmt{\omega} \Ithree \colo + \diagmt{I_{W_s}}{I_{W_t}}{I_{W_t}} \dot{\Omega} \bmt{1\\0\\0} + \skewmt{\omega} \diagmt{I_{W_s}}{I_{W_t}}{I_{W_t}} \Omega \bmt{1\\0\\0}
+$$
+Inspect each components and we have
+$$
+\begin{aligned}
+& I_1 \dot{\omega}_1 - \omega_3 \omega_2 I_2 + \omega_2 \omega_3 I_3 + I_{W_s} \dot{\Omega} = 0  \\
+& I_2 \dot{\omega}_2 + \omega_3 \omega_1 I_1 - \omega_1 \omega_3 I_3 + I_{W_s} \omega_3 \Omega = 0 \\
+& I_3 \dot{\omega}_3 - \omega_2 \omega_1 I_1 + \omega_1 \omega_2 I_2 - I_{W_s} \omega_2 \Omega = 0
+\end{aligned}
+$$
+Move all the derivatives to the LHS and we have
+$$
+\begin{aligned}
+I_1 \dot{\omega}_1 &= (I_2 - I_3) \omega_2 \omega_3 - I_{W_s} \dot{\Omega}   \\
+I_2 \dot{\omega}_2 &= (I_3 - I_1) \omega_1 \omega_3 - I_{W_s} \omega_3 \Omega  \\
+I_3 \dot{\omega}_3 &= (I_1 - I_2) \omega_1 \omega_2 + I_{W_s} \omega_2 \Omega 
+\end{aligned}
+\tag{4.85}
+$$
+For the dual-spin spacecraft concept, the spin rate $\Omega$ is typically held at a constant value, so we can eliminate $\dot{\Omega}$ and get
+$$
+\begin{aligned}
+I_1 \dot{\omega}_1 &= (I_2 - I_3) \omega_2 \omega_3  \\
+I_2 \dot{\omega}_2 &= (I_3 - I_1) \omega_1 \omega_3 - I_{W_s} \omega_3 \Omega  \\
+I_3 \dot{\omega}_3 &= (I_1 - I_2) \omega_1 \omega_2 + I_{W_s} \omega_2 \Omega 
+\end{aligned}
+\tag{4.86 dual-spin S/C}
+$$
+
+It is apparent that the only equilibrium spin configuration (meaning $\bmo$ is time-invariant) is when both $\omega_2$ and $\omega_3$ are zero
+$$
+\bmo_e = \omega_{e_1} \bht1
+\tag{4.87}
+$$
+
+
+<u>Linear stability analysis</u> around the equilibrium point for a dual-spin S/C.
+Let the actual angular velocity be given by
+$$
+\bmo = \bmo_e + \delta\bmo = \cdB{\bmt{\omega_{e_1}+\delta\omega_1 \\ \delta\omega_2 \\ \delta\omega_3}}
+\tag{4.88 expanded}
+$$
+then substituting into Eq. (4.86) and dropping higher-order (nonlinear) terms to get
+$$
+\begin{align}
+\dot{\delta \omega}_1 &= 0   \tag{4.89a} \\
+\dot{\delta \omega}_2 &= \left( \frac{I_3-I_1}{I_2} \omega_{e_1} - \frac{I_{W_s}}{I_2} \Omega \right) \delta\omega_3  \tag{4.89b} \\
+\dot{\delta \omega}_3 &= \left( \frac{I_1-I_2}{I_3} \omega_{e_1} + \frac{I_{W_s}}{I_3} \Omega \right) \delta\omega_2 \\
+\end{align}
+$$
+
+Eq. (4.89a) tells $\delta\omega_1$ is constant, and thus $\omega_{e_1} + \delta\omega_1$ along $\bht1$ is also constant.
+
+Rewrite the two coupled first-order differential equations into two uncoupled second-order differential equations, by taking derivative of Eq. (4.89b):
+$$
+\begin{aligned}
+\delta \ddot{\omega}_2 &= \left( \frac{\textcolor{red}{ I_3-I_1 }}{I_2}R \omega_{e_1} - \frac{I_{W_s}}{I_2} \Omega \right) \textcolor{blue}{ \delta\dot{\omega}_3 }  \\
+&= \textcolor{red}{ - } \left( \frac{\textcolor{red}{ I_1 - I_3 }}R{I_2} \omega_{e_1} \textcolor{red}{ + } \frac{I_{W_s}}{I_2} \Omega \right) \textcolor{blue}{ \left( \frac{I_1 - I_2}{I_3} \omega_{e_1} + \frac{I_{W_s}}{I_3} \Omega \right) \delta \omega_2 } \\
+&= - \frac{\omega_{e_1}^2}{I_2 I_3}   \left( I_1 - I_3 + I_{W_s} \frac{\Omega}{\omega_{e_1}} \right)   \left( I_1 - I_2 + I_{W_s} \frac{\Omega}{\omega_{e_1}} \right)    \delta\omega_2 \\
+&= - \frac{\omega_{e_1}^2}{I_2 I_3}   \left( I_1 - I_3 + I_{W_s} \hat{\Omega} \right)   \left( I_1 - I_2 + I_{W_s} \hat{\Omega} \right)    \delta\omega_2 \\
+\end{aligned}
+\tag{4.92--95 combined}
+$$
+If and only if the factor is negative, the system is linearly stable (when the solution is trigonometric function, otherwise it's exponential function).
+Two critical wheel speeds are:
+$$
+\begin{align}
+\hat{\Omega}_1 = \frac{I_3 - I_1}{I_{W_s}}  \tag{leads 1st term to 0}  \\
+\hat{\Omega}_2 = \frac{I_2 - I_1}{I_{W_s}}  \tag{leads 2nd term to 0}  \\ 
+\end{align}
+$$
+
+![[fig-4-16_stability_ranges_in_shades.png|400]]
+A lot of interesting discussions can be conducted about this results. 
+Basically, when the wheel is spinning fast enough and governs the ratio of $H_1, H_2, H_3$, it can change the intersection curve of the energy ellipsoid and momentum sphere. 
+(Omitted here and refer to the textbook)
+
+>[!info]- Revisit Fig. 4.9 
+> 
+> ![[fig-4-9_intersection_of_ellipsoids.png|400]]
+> For a rigid body, its distribution of $\bmH$ along three principal axes is determined by the inertia $I_1, I_2, I_3$.
+> But for a dual-spin S/C, it can increase a particular $H_i$ without affecting the other two components much. 
+> Therefore, even for the intermediate energy case in (b), the wheel can spin up fast enough to blow up the ellipsoid along $\bht2$ or $H_2$ direction until it becomes the minimum energy case in (a). 
+> Note that when the ellipsoid is being blown up, the energy sphere is also increasing.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
