@@ -1,6 +1,6 @@
 ---
 date created: 2025-01-26T13:42:36-05:00
-date modified: 2025-02-26T12:33:21-05:00
+date modified: 2025-02-28T07:57:44-05:00
 ---
 # AE_544_LecNote04\__Eulerian_Mechanics__Ch04
 
@@ -592,11 +592,11 @@ features of both the single-gimbal CMGs and the RWs.</u>
 
 The reference frame is the spacecraft body frame $\calB$ (usually the principal inertia frame).
 
-Gimbal frame $\calG: \{\bht{s},\bht{t},\ght{g}\}$, where the <u>gimbal axis</u> $\ght{g}$ is fixed in $\calB$, and the spin axis $\ght{s}$ and the transverse axis $\ght{t}$ are time varying in $\calB$ described by the gimbal angle angle $\gamma(t)$. $\calG$ is aligned with the gimbal principal inertia axes.
+Gimbal frame $\calG: \{\ght{s},\ght{t},\ght{g}\}$, where the <u>gimbal axis</u> $\ght{g}$ is fixed in $\calB$, and the spin axis $\ght{s}$ and the transverse axis $\ght{t}$ are time varying in $\calB$ described by the gimbal angle angle $\gamma(t)$. $\calG$ is aligned with the gimbal principal inertia axes.
 
 The wheel frame $\calW: \{\wht{1},\wht2,\ght{s}\}$, where the 3rd axis is aligned with $\calG$.
 
-The spinning angular velocity vector of the wheel is $\bmo_{\calW/\calG}=\Omega\ght{g}$.
+The spinning angular velocity vector of the wheel is $\bmo_{\calW/\calG}=\Omega\ght{s}$.
 
 The angular velocity vector of the gimbal frame $\calG$ is $\bmo_{\calG/\calB}=\dot{\gamma}\ght{g}$.
 
@@ -633,7 +633,7 @@ $$
 \tag{4.105 and 4.106}
 $$
 
->[!tip] Now, find the total angular momentum as a summation of three parts: S/C with a static VSCMG (body), the gimbal frame of VSCMG (gimbal), and the wheel of VSCMG (wheel).
+>[!tip] (Part-1) Now, find the total angular momentum as a summation of three parts: S/C with a static VSCMG (body), the gimbal frame of VSCMG (gimbal), and the wheel of VSCMG (wheel).
 
 The total angular momentum $\bmH$ of the spacecraft and the VSCMG (frame and wheel) about the spacecraft center of mass is given by
 $$
@@ -676,7 +676,7 @@ $$
 \tag{4.115}
 $$
 
->[!tip] Now, find inertial derivatives in order to apply Euler's equation of rigid body rotation.
+>[!tip] (Part-2) Now, find inertial derivatives in order to apply Euler's equation of rigid body rotation.
 
 The equations of motion of a system of rigid bodies follow from Euler’s equation
 $$
@@ -724,7 +724,7 @@ $$
 
 Other derivatives are considered known or given, such as $\dot{\Omega}, \dot{\gamma}, \ddot{\gamma}$ etc.
 
->[!tip] Now, isolating the dynamics of the RW.
+>[!tip] (Part-3) Now, isolating the dynamics of the RW.
 
 Let $\bmL_W$ be the torque the gimbal frame exerts on the RW, Euler’s equation states that
 $$
@@ -750,7 +750,7 @@ u_s = I_{W_s}(\dot{\Omega} + \hat{\bm{g}}_s^T \bm{\dot{\bm{\omega}}} + \dot{\gam
 $$
 while the other two torques are the reaction torque produced by the gimbal frame.
 
->[!tip] Now, isolating the RW and the gimbal frame as a whole
+>[!tip] (Part-4) Now, isolating the RW and the gimbal frame as a whole
 
 Let $\bmL_G$ be the torque vector that spacecraft exerts on the VSCMG system, then Euler's equation states again that 
 $$
@@ -775,7 +775,7 @@ $$
 \cdG{\bmt{J}} = \cdG{\bmt{I_G}} + \cdG{\bmt{I_W}} = \cdG{\diagmt{I_s+I_s}{I_t+I_t}{I_g+I_g}} = \cdG{\diagmt{J_s}{J_t}{J_g}}.
 $$
 
->[!tip] Now, combine everything as a whole.
+>[!tip] (Part-5) Now, combine everything into Euler's equation.
 
 To further simplify the equations of motion, the total spacecraft inertia matrix $\bmt{I}$ is defined as
 $$
@@ -794,7 +794,7 @@ $$
 \tag{4.129}
 $$
 
->[!tip] A common assumption that the gimbal frame inertial $I_{G_s}$ about the spin axis is negligible. 
+>[!info] A common assumption that the gimbal frame inertial $I_{G_s}$ about the spin axis is negligible. 
 > $\hspace{5em}$ ![[fig-4-17_VSCMG.png|400]]
 >Because the frame is usually designed as lightweight as possible to avoid interfering with the spinning wheel.
 >The magnitude of difference can be 2 to 3 magnitudes.
@@ -848,7 +848,7 @@ $$
 
 
 
->[!tip] Now, extend to multiple VSCMGs.
+>[!tip] (Part-6) Now, extend to multiple VSCMGs.
 
 The essential is to notice that all the above derivations are the same and will be repeated for each VSCMG introduced to the spacecraft, but the only difference is how the DCM $\dcm{BG}_i$ is defined for the $i$-th VSCMG.
 
