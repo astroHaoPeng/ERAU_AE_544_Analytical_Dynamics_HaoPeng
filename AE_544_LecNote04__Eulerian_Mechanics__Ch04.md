@@ -1,6 +1,6 @@
 ---
 date created: 2025-01-26T13:42:36-05:00
-date modified: 2025-02-28T07:57:44-05:00
+date modified: 2025-03-01T23:51:15-05:00
 ---
 # AE_544_LecNote04\__Eulerian_Mechanics__Ch04
 
@@ -30,6 +30,7 @@ $$
 \dot{\bmH} = \bmL
 \tag{4.1}
 $$
+^Euler-equation-general-vector-format
 
 
 ![[fig-4-1_rigid_body_angular_momentum.png|300]]
@@ -161,8 +162,7 @@ I_{33} \dot{\omega}_3 &= -(I_{22} - I_{11}) \omega_1 \omega_2 + L_3
 \end{aligned}
 \tag{4.33}
 $$
-
-^ed558f
+^Euler-equation-principal-frame
 
 For an axially symmetric body with transverse inertia $I_T = I_{11} = I_{22}$, this can be further simplified to
 $$
@@ -285,7 +285,7 @@ $$
 $$
 
 Using the Euler equation derived before
-![[#^ed558f]]
+![[#^Euler-equation-principal-frame]]
 we have,
 $$
 I_t \dot{\omega}_3 = - (I_a - I_t) \omega_1 \omega_2 + 0
@@ -632,6 +632,7 @@ $$
 \end{aligned}
 \tag{4.105 and 4.106}
 $$
+^VSCMG-I-body-frame
 
 >[!tip] (Part-1) Now, find the total angular momentum as a summation of three parts: S/C with a static VSCMG (body), the gimbal frame of VSCMG (gimbal), and the wheel of VSCMG (wheel).
 
@@ -641,7 +642,7 @@ $$
 \tag{4.107}
 $$
 
-^c4e61e
+^total-H-VSCMG
 
 where the angular momentum component of spacecraft is
 $$
@@ -682,7 +683,7 @@ The equations of motion of a system of rigid bodies follow from Euler’s equati
 $$
 \dot{\bmH} = \bmL
 $$
-![[#^c4e61e]]
+![[#^total-H-VSCMG]]
 
 From Eq. 4.107 we know that in order to find $\dot{\bmH}$, we need to find the time derivatives of the basis vectors of $\calG$ first, and then the derivatives of $\omega_s,\omega_t,\omega_g$. 
 
@@ -726,11 +727,7 @@ Other derivatives are considered known or given, such as $\dot{\Omega}, \dot{\ga
 
 >[!tip] (Part-3) Now, isolating the dynamics of the RW.
 
-Let $\bmL_W$ be the torque the gimbal frame exerts on the RW, Euler’s equation states that
-$$
-\dot{\bmH}_W = \bmL_W
-$$
-where, using the auxiliary results derived above, the inertial derivative of $\bmH_W$ is
+The inertial derivative of $\bmH_W$ is
 $$
 \begin{aligned}
 \dot{\bm{H}}_W
@@ -744,19 +741,21 @@ $$
 \end{aligned}
 \tag{4.122}
 $$
-In Eq. (4.122), the spin torque $u_s$ is provided by the RW torque motor,
+
+Let $\bmL_W$ be the torque the gimbal frame exerts on the RW, <u>applying Euler’s equation only to the RW itself</u> gives:
+$$
+\dot{\bmH}_W = \bmL_W
+$$
+Use the auxiliary results derived above in Eq. (4.122), only the spin torque $u_s$ is provided by the RW torque motor which is expressed as
 $$
 u_s = I_{W_s}(\dot{\Omega} + \hat{\bm{g}}_s^T \bm{\dot{\bm{\omega}}} + \dot{\gamma} \omega_t)
 $$
-while the other two torques are the reaction torque produced by the gimbal frame.
+and the other two torques $u_t$ and $u_g$ are produced by the gimbal frame.
+
 
 >[!tip] (Part-4) Now, isolating the RW and the gimbal frame as a whole
 
-Let $\bmL_G$ be the torque vector that spacecraft exerts on the VSCMG system, then Euler's equation states again that 
-$$
-\dot{\bmH}_G + \dot{\bmH}_W = \bmL_{G}
-$$
-where $\dot{\bmH}_W$ is given in Eq. (4.122) and $\dot{\bmH}_W$ is calculated as
+The inertial derivative $\dot{\bmH}_G$ is calculated as
 $$
 \begin{aligned}
 \newcommand{\ig}[1]{I_{G_#1}}
@@ -766,20 +765,51 @@ $$
 \end{aligned}
 \tag{4.124}
 $$
-The torque component of $\bmL_G$ along $\ght{g}$ is produced by the gimbal torque motor, so, adding Eqs. (4.122) and (4.124) and equating the components along $\ght{g}$ gives
+
+Let $\bmL_G$ be the torque vector that spacecraft exerts on the VSCMG system, <u>applying Euler's equation to the gimble frame and RW as a whole</u> gives:
+$$
+\dot{\bmH}_G + \dot{\bmH}_W = \bmL_{G}
+$$
+where $\dot{\bmH}_W$ is given in Eq. (4.122) and $\dot{\bmH}_G$ is given in Eq. (4.124). The torque component of $\bmL_G$ along $\ght{g}$ is produced by the gimbal torque motor, so, adding Eqs. (4.122) and (4.124) and equating the components along $\ght{g}$ gives
 $$
 u_g = J_g \left( \ght{g}\trans \dot{\bmo} + \ddot{\gamma} \right) - (J_s-J_t) \omega_s \omega_t - I_{W_s} \Omega \omega_t
 $$
-where we have combined the inertia matrices of RW and the gimbal frame into a single matrix $\bmt{J}$
+where we have <u>combined the inertia matrices of RW and the gimbal frame</u> into a single matrix $\bmt{J}$
 $$
-\cdG{\bmt{J}} = \cdG{\bmt{I_G}} + \cdG{\bmt{I_W}} = \cdG{\diagmt{I_s+I_s}{I_t+I_t}{I_g+I_g}} = \cdG{\diagmt{J_s}{J_t}{J_g}}.
+\cdG{\bmt{J}} = \cdG{\bmt{I_G}} + \cdG{\bmt{I_W}} = \cdG{\diagmt{I_{G_s}+I_{W_s}}{I_{G_t}+I_{W_s}}{I_{G_g}+I_{G_g}}} = \cdG{\diagmt{J_s}{J_t}{J_g}}.
 $$
 
 >[!tip] (Part-5) Now, combine everything into Euler's equation.
 
-To further simplify the equations of motion, the total spacecraft inertia matrix $\bmt{I}$ is defined as
+The inertial derivative $\dot{\bmH}_B$ of the spacecraft without the VSCMG is calculated easily as
 $$
-\cdB{\bmt{I}} = \cdB{I_s} + \cdB{\bmt{J}} = \cdB{I_s} + \dcm{BG} \cdot \cdG{\bmt{J}} \cdot \dcm{BG}\trans
+\dot{\bmH}_B = \bmt{I_s} \dot{\bmo} + \bmo \times \bmt{I_s} \bmo
+\tag{4.127}
+$$
+
+![[#^total-H-VSCMG]]
+![[#^Euler-equation-general-vector-format]]
+
+Now, we can plugin all the derivates to the derivative of total angular momentum (spacecraft, gimble, and RW), apply the general Euler's equation, and get the full express as
+$$
+\begin{align}
+& \bmt{I_s} \dot{\bmo} + \bmo \times \bmt{I_s} \bmo   \tag{from $\dot{\bmH}_B$} \\
+%
+&+ \ght{s} \left[ (\ig{s}-\ig{t}+\ig{g})\dot{\gamma}\omega_t + \ig{s}\ght{s}\trans\dot{\bmo} + (\ig{g}-\ig{t})\omega_t\omega_g \right] \\
+& + \ght{t} \left[ (\ig{s}-\ig{t}-\ig{g})\dot{\gamma}\omega_s + \ig{t}\ght{t}\trans\dot{\bmo} + (\ig{s}-\ig{g}\omega_s\omega_g) \right] \\
+& + \ght{g} \left[ \ig{g}(\ght{g}\trans \dot{\bmo} + \ddot{\gamma}) + (\ig{t}-\ig{s})\omega_s\omega_t \right]       \tag{from $\dot{\bmH}_G$} \\
+%
+&+ \hat{\bm{g}}_s \left[ I_{W_s}(\dot{\Omega} + \hat{\bm{g}}_s^T \bm{\dot{\bm{\omega}}} + \dot{\gamma} \omega_t) \right] \\
+&+ \hat{\bm{g}}_t \left[ I_{W_s}(\dot{\gamma}(\bm{\omega}_s + \bm{\Omega}) + \bm{\Omega} \bm{\omega}_g) + I_W \hat{\bm{g}}_t^T \bm{\dot{\bm{\omega}}} + (I_{W_s} - I_{W_t}){\omega}_s {\omega}_g - 2 I_W \omega_s \dot{\gamma} \right] \\
+&+ \hat{\bm{g}}_g \left[I_{W_s}(\hat{\bm{g}}_g^T \bm{\dot{\bm{\omega}}} + \ddot{\gamma})] + (I_{W_t} - I_{W_s})\omega_s{\omega}_t - I_{W_s} {\Omega} {\omega}_t \right]G    \tag{from $\dot{\bmH}_W$} \\
+%
+&= \bmL   \tag{External torque}
+\end{align}
+$$
+
+To simplify the equations of motion, the total spacecraft inertia matrix $\bmt{I}$ is defined as
+$$
+\cdB{\bmt{I}} = \cdB[{I_s}] + \cdB{\bmt{J}} = \cdB{I_s} + \dcm{BG} \cdot \cdG{\bmt{J}} \cdot \dcm{BG}\trans
 \tag{4.128 altered}
 $$
 
@@ -794,12 +824,13 @@ $$
 \tag{4.129}
 $$
 
->[!info] A common assumption that the gimbal frame inertial $I_{G_s}$ about the spin axis is negligible. 
-> $\hspace{5em}$ ![[fig-4-17_VSCMG.png|400]]
->Because the frame is usually designed as lightweight as possible to avoid interfering with the spinning wheel.
->The magnitude of difference can be 2 to 3 magnitudes.
+A common assumption/fact that the gimbal frame inertial $I_{G_s}$ about the spin axis is negligible. 
+Because the frame is usually designed as lightweight as possible to avoid interfering with the spinning wheel.
+The magnitude of difference can be 2 to 3 magnitudes.
+$\hspace{5em}$ ![[fig-4-17_VSCMG.png|200]]
 
-With this assumption, $J_s = I_{G_s} + I_{W_s} \approx I_{W_s}$ and we have the more common equations of motion as follows,
+
+With this assumption that $J_s = I_{G_s} + I_{W_s} \approx I_{W_s}$ and we have the common equations of motion of a spacecraft equipped with one VSCMG as follows,
 $$
 \begin{aligned}
 \bmt{I} \dot{\bmo} 
@@ -813,7 +844,10 @@ $$
 \end{aligned}
 \tag{4.131}
 $$
+>[!notice] $\bmt{I}$ is a time-varying quantity in Eq. 4.131 because there is relative motion between the gimbal, RW, and spacecraft.
+>
 
+(Reduce to CMG only) 
 If we set $\dot{\Omega}=0$, it means the RW spin speed is constant, thus<u> the equations of motion becomes those of a single-gimbal CMG (not varying-speed)</u>, which is
 $$
 \begin{aligned}
@@ -829,6 +863,7 @@ $$
 \tag{Example 4.8}
 $$
 
+(Reduce to RW only) 
 If we set the gimbal to be fixed, thus $\dot{\gamma}=\ddot{\gamma}=0$, we get <u>the equations of motion for RW</u> as
 $$
 \begin{aligned}
@@ -847,10 +882,11 @@ $$
 $$
 
 
-
 >[!tip] (Part-6) Now, extend to multiple VSCMGs.
 
 The essential is to notice that all the above derivations are the same and will be repeated for each VSCMG introduced to the spacecraft, but the only difference is how the DCM $\dcm{BG}_i$ is defined for the $i$-th VSCMG.
+
+![[#^VSCMG-I-body-frame]]
 
 (Refer to Sec. 4.5.2 for details.)
 
