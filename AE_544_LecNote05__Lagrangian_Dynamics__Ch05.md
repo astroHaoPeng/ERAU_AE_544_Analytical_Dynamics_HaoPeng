@@ -1,6 +1,6 @@
 ---
 date created: 2025-02-09T16:24:50-05:00
-date modified: 2025-03-05T15:56:32-05:00
+date modified: 2025-03-07T10:37:34-05:00
 ---
 # AE_544_LecNote05\__Lagrangian_Dynamics__Ch05
 ![[README#Disclaimers]]
@@ -206,3 +206,384 @@ where
 > 
 > where $Q_j = \sum_{i=1}^N \bmf_{i}\cdot\pp{\bmR_i}{q_j} = \sum_{i=1}^N \bmf_i \cdot \bmv_{ij}$ and $\bmv_{ij} = \pp{\dot{\bmR}_i}{\dot{q}_k} = \pp{\bmR_i}{q_k}$.
 ^dalemberts-principle-different-forms
+
+### Example 5.3: Cart + Pendulum + Spring (Newtonian vs. d'Alembert's principle)
+
+![[fig-5-6_cart_pendulum_spring.png|400]] The free body diagram is only needed for direct application of Newton's law.
+
+Kinematics of the two bodies are:
+$$
+\bmR_1 = x \nht1   \qquad    
+\dot{\bmR}_1 = \dot{x}\nht1   \qquad
+\ddot{\bmR}_1 = \ddot{x}\nht1
+\tag{5.31}
+$$
+$$
+\begin{aligned}
+\bmR_2 &= x\nht1 + r\eht{r} = (x+r\sin\theta)\nht1 + (-r\cos\theta)\nht2 \\
+%
+\dot{\bm{R}}_2 &= \dot{x} \hat{n}_1 + r \dot{\theta} \hat{e}_{\theta} = (\dot{x} + r \dot{\theta} \cos \theta) \hat{n}_1 + (r \dot{\theta} \sin \theta) \hat{n}_2 \\
+%
+\ddot{\bm{R}}_2 &= \ddot{x} \nht1 - r \dot{\theta}^2 \eht{r} + r \ddot{\theta} \eht{\theta} \\
+&= (\ddot{x} - r \dot{\theta}^2 \sin \theta + r \ddot{\theta} \cos \theta) \nht1 + (r \dot{\theta}^2 \cos \theta + r \ddot{\theta} \sin \theta) \nht2 \\
+%
+&= (\ddot{x} \sin \theta - r \dot{\theta}^2) \eht{r} + (\ddot{x} \cos \theta + r \ddot{\theta}) \eht{\theta}
+\end{aligned}
+\tag{5.32}
+$$
+
+External forces on the two bodies $m_1$ and $m_2$ are
+$$
+\bmf_1 = -kx\nht1 - m_1g\nht2    \qquad     \bmf_2 = - m_2 g \nht2
+\tag{5.35}
+$$
+
+**Differential equations derived via Newton’s laws.** 
+We need to first introduce the constraint forces $N, F_r$ and then eliminate them.
+(Refer to textbook page 219).
+
+**Differential equations derived via d’Alembert’s principle.** 
+The chosen generalized coordinates are $(x, \theta)$.
+
+The partial derivatives are
+$$
+\begin{aligned}
+\pp{\bmR_1}{x} &= \nht1     &     \pp{\bmR_1}{\theta} &= \bm{0} \\
+\pp{\bmR_2}{x} &= \nht1     &      \pp{\bmR_2}{\theta} &= r\cos\theta\nht1 + r\sin\theta\nht2
+\end{aligned}
+\tag{5.41}
+$$
+
+![[#^generalized-force-Qi]]
+
+Using the definition in Eq. (5.22), we can obtain the generalized forces as
+$$
+\begin{aligned}
+Q_x &= \bmf_1 \cdot \pp{\bmR_1}{x} + \bmf_2 \cdot \pp{\bmR_2}{x} \\
+&= (-kx\nht1-m_1g\nht2) \cdot \nht1 + (-m_2g\nht2) \cdot \nht1 = -kx \\
+%
+Q_y &= \bmf_1 \cdot \pp{\bmR_1}{\theta} + \bmf_2 \cdot \pp{\bmR_2}{\theta} \\
+&= (-kx\nht1-m_1g\nht2) \cdot 0 + (-m_2g\nht2) \cdot (r\cos\theta\nht1 + r\sin\theta\nht2) \\
+&= -m_2gr\sin\theta
+\end{aligned}
+\tag{5.42}
+$$
+
+![[#^dalemberts-principle-different-forms]]
+
+We are now prepared to develop the differential equations of motion using d’Alembert’s principle (particularly, from-1):
+$$
+\begin{aligned}
+m_1 \ddot{\bmR}_1 \cdot \pp{\bmR_1}{x} + m_2 \ddot{\bmR}_2 \cdot \pp{\bmR_2}{x} = Q_x \\
+m_1 \ddot{\bmR}_1 \cdot \pp{\bmR_1}{\theta} + m_2 \ddot{\bmR}_2 \cdot \pp{\bmR_2}{\theta} = Q_\theta \\
+\end{aligned}
+$$
+After substituting everything we prepared, the first equation is
+$$
+\begin{aligned}
+& m_1 \ddot{x} \nht1 \cdot \nht1 + m_2 ((\ddot{x} - r \dot{\theta}^2 \sin \theta + r \ddot{\theta} \cos \theta) \nht1 + (r \dot{\theta}^2 \cos \theta + r \ddot{\theta} \sin \theta) \nht2) \cdot \nht1 = - kx \\
+& m_1 \ddot{x} + m_2 (\ddot{x} - r \dot{\theta}^2 \sin \theta + r \ddot{\theta} \cos \theta) = - kx \\
+& \textcolor{red}{ (m_1 + m_2) \ddot{x} + m_2 r \ddot{\theta} \cos \theta - m_2 r \dot{\theta}^2 \sin \theta = - kx }
+\end{aligned}
+$$
+and the second equation is
+$$
+\begin{aligned}
+& m_1 \ddot{x} \nht1 \cdot \bm{0} + m_2 ((\ddot{x} - r \dot{\theta}^2 \sin \theta + r \ddot{\theta} \cos \theta) \nht1 + (r \dot{\theta}^2 \cos \theta + r \ddot{\theta} \sin \theta) \nht2) \cdot (r\cos\theta\nht1 + r\sin\theta\nht2) = -m_2 gr \sin\theta \\
+& m_2 (\ddot{x} - r \dot{\theta}^2 \sin \theta + r \ddot{\theta} \cos \theta) r\cos\theta + m_2 (r \dot{\theta}^2 \cos \theta + r \ddot{\theta} \sin \theta) r\sin\theta = -m_2 gr \sin\theta \\
+& m_2 r \cos\theta \ddot{x} + m_2 r^2 \ddot{\theta} = -m_2 gr \sin\theta \\
+& \textcolor{red}{ \cos\theta \ddot{x} + r \ddot{\theta} = - g \sin\theta }
+\end{aligned}
+$$
+
+
+
+
+### Newtonian Dynamics with Constraints
+
+The preceding developments implicitly assume that the generalized coordinates are independent. It often occurs that the coordinates are not independent. 
+In the simplest case, the redundancy of the coordinates arises because of constraining <u>algebraic relationships</u> of the form
+$$
+\psi_k(t,q_1,q_2,\dots,q_n) = 0     \qquad k=1,2,\cdots,m
+\tag{5.54}
+$$
+which is referred to as **holonomic constraints**.
+If time does not explicitly appear in the constraint in Eq. (5.54), then this special case of holonomic constraints are said to be scleronomic.
+
+Some examples of **nonholonomic constraints**:
+- Inequality constraints
+- Velocity-dependent constraint that cannot be integrated to obtain this form
+
+
+There are usually two obvious approaches to **dealing with the holonomic constraint**: 
+1. Solve the constraint equation for any one of the coordinates as a function of the other coordinates $q_i$ that may be considered independent. <u>Then, the d'Alembert's principle can be directly applied.</u>
+2. Replace the constraint surface by an equivalent constraint force that effectively causes the motion to remain on the constraint surface. <u>Then, the constraint force has to be taken into consideration when applying the d'Alembert's principle, because the admissible virtual work is not confined on the constraint surface anymore.</u>
+
+>[!note] Under constraints, the d'Alembert's principle requires admissible/consistent virtual displacement to get rid of constraint forces explicitly. When the constraint forces need to be handled explicitly, Newtonian mechanics or Lagrange multipliers are the fallbacks.
+
+
+![[fig-5-9_particle__on_holonomic_constraint_surface.png|400]]
+
+For the case of introducing the constraint force $\bmf_c$ that is normal to the smooth holonomic constraint surface $\psi=0$, as shown in Fig. 5.9, 
+$$
+\bmf_c = \lambda \pp{\psi}{x}\nht1 + \lambda \pp{\psi}{y}\nht2 + \lambda \pp{\psi}{z}\nht3
+\tag{5.68}
+$$
+Adding this constraint force into Newton's second law, we are able to get differential equations with additionally constraints. 
+
+Newton’s second law provides the equation of motion
+$$
+\bmf + \bmf_c = m \ddot{\bmR}
+\tag{5.63}
+$$
+which can be explicitly expressed as 
+$$
+\begin{aligned}
+m \ddot{x} &= f_x + \lambda\pp{\psi}{x} \\
+m \ddot{y} &= f_x + \lambda\pp{\psi}{y} \\
+m \ddot{z} &= f_x + \lambda\pp{\psi}{z} \\
+\end{aligned}
+\tag{5.69}
+$$
+Together with a algebraic equation (the constraint function)
+$$
+\psi(x,y,z,t) = 0
+\tag{5.70}
+$$
+From Eqs. (5.69) and (5.70), we observe that the constraint force $\bmf_c$ is not necessarily to be written out explicitly but what we need is just the function $\psi$ and its partial derivatives.
+
+<u>Next, we observe another feature that enables an extension from holonomic constraints to a more general type of constraints. </u>
+Differential change $dx,dy,dz$ along the trajectory satisfies the following constraint:
+$$
+\frac{d\psi}{dt} = \frac{\partial \psi}{\partial x} \dot{x} + \frac{\partial \psi}{\partial y} \dot{y} + \frac{\partial \psi}{\partial z} \dot{z} + \frac{\partial \psi}{\partial t} = 0
+$$
+which is equivalent to
+$$
+d\psi = \frac{\partial \psi}{\partial x} dx + \frac{\partial \psi}{\partial y} dy + \frac{\partial \psi}{\partial z} dz + \frac{\partial \psi}{\partial t} dt = 0.
+\tag{5.66}
+$$
+
+Admissible virtual change $\delta x, \delta y, \delta z$ are along the constraint surface at a fixed moment without an increment in time $t$, which can be expressed as
+$$
+\delta \psi = \frac{\partial \psi}{\partial x} \delta x + \frac{\partial \psi}{\partial y} \delta y + \frac{\partial \psi}{\partial z} \delta z = 0
+\tag{5.67}
+$$
+So, the essential of the constraint $\psi$ is actually its differential form in Eq. (5.66).
+
+Now, we introduce **Pfaffian Nonholonomic Constraints** which are a special generalization of holonomic constraints and can be expressed commonly as
+$$
+B(x,y,z,t) + A_1(x,y,z,t) \dot{x} + A_2(x,y,z,t) \dot{y} + A_3(x,y,z,t) \dot{z} = 0
+\tag{5.84}
+$$
+or the differential format
+$$
+Bdt + A_1 d{x} + A_2 d{y} + A_3 d{z} = 0
+$$
+Notice that it will degenerate to holonomic constraint if there is a function $\psi$ whose partial derivatives are the coefficients $B,A_1,A_2,A_3$ above.
+
+For the case of $m$ constraints and $n$ generalized coordinates, consider $N$ particles with $m$ Pfaffian nonholonomic constraints:
+$$
+\sum_{j=1}^{n} A_{kj} \dot{q}_j + B_k = 0 \qquad k = 1, 2, \dots, m
+\tag{5.99}
+$$
+where $A_{kj} = A_{kj}(\qOneToEnd,t)$ and $B_{k}=B_k(\qOneToEnd,t)$ are functions of generalized coordinates $q_j$ and time.
+This can also be expressed as
+$$
+\sum_{j=1}^{n} A_{kj} d{q}_j + B_k dt = 0 \qquad k = 1, 2, \dots, m
+\tag{5.100}
+$$
+For the case that $\bmq$ is the set of $n=3N$ Cartesian inertial coordinates, the equations of motion for the $N$ particles are $n$ second-order ODEs
+$$
+M_j \ddot{q_j} = f_j + f_{c_j} = f_j + \sum_{k=1}^m A_{kj} \lambda_k  \qquad j = 1,2, \dots, n
+\tag{5.102}
+$$
+and $m$ first-order ODEs
+$$
+\sum_{j=1}^n A_{kj} \dot{q}_j + B_k = 0   \qquad k = 1,2,\dots,m
+\tag{5.103}
+$$
+The Eqs. (5.102) and (5.103) constitute a set of **differential-algebraic equations (DAEs)**.
+
+
+
+
+### Example 5.6: classical pendulum (two approaches to embed constraints in Derivations)
+
+![[fig-5-8_pendulum.png|250]]
+
+**Algebraic constraint elimination:**
+$$
+\bm{R} = r \hat{e}_r, \quad \dot{\bm{R}} = \dot{r} \hat{e}_r + r \dot{\theta} \hat{e}_{\theta}, \quad \ddot{\bm{R}} = (\ddot{r} - r \dot{\theta}^2) \hat{e}_r + (r \ddot{\theta} + 2r \dot{\theta}^2) \hat{e}_{\theta}
+$$
+and there is a holonomic constraint
+$$
+\psi(r,\theta) = r-R = 0
+$$
+so that we are only let with a single independent coordinate $\theta$:
+$$
+\bm{R} = R \eht{r}, \quad \dot{\bm{R}} = R \dot{\theta} \eht{\theta}, \quad \ddot{\bm{R}} = -(R \dot{\theta}^2) \eht{r} + (R \ddot{\theta}) \eht{\theta}
+$$
+
+![[#^dalemberts-principle-different-forms]]
+
+Recall the d'Alembert's principle above and apply the classical form here:
+$$
+\begin{aligned}
+m \ddot{\bm{R}} \cdot \frac{\partial \bm{R}}{\partial \theta} &= Q_{\theta} \\
+m \left(-(R \dot{\theta}^2) \eht{r} + (R \ddot{\theta}) \eht{\theta}\right) \cdot \pp{}{\theta}\left(R \eht{r}\right) &= \bmf_\theta \cdot \pp{\bmR}{\theta} \\
+m \left(-(R \dot{\theta}^2) \eht{r} + (R \ddot{\theta}) \eht{\theta}\right) \cdot (R\eht{\theta}) &= mg(\cos\theta\eht{r}-\sin\theta\eht{\theta}) \cdot (R\eht{\theta}) \\
+m R^2 \ddot{\theta} &= -mgR \sin \theta \\
+\ddot{\theta} &= -\frac{g}{R} \sin \theta
+\end{aligned}
+$$
+
+**Constraint force via Lagrange multipliers:**
+Thus the constraint force associated with $\psi(r,\theta)=r-R=0$ is written as a centripetal force $\bmF_c$
+$$
+\bmF_c = \lambda \nabla \psi(r,\theta) = \lambda \eht{r}
+$$
+The total force acting on mass $m$ is 
+$$
+\bmF=-mg\nht2+\lambda\eht{r}
+$$
+and the d'Alemberts' principle gives two equations this time
+![[#^dalemberts-principle-different-forms]]
+$$
+\begin{aligned}
+m \ddot{\bm{R}} \cdot \frac{\partial \bm{R}}{\partial r} &= Q_{r} \\
+m \ddot{\bm{R}} \cdot \frac{\partial \bm{R}}{\partial \theta} &= Q_{\theta}
+\end{aligned}
+$$
+which leads to
+$$
+\begin{aligned}
+m \left[ (\ddot{r} - r \dot{\theta}^2) \eht{r} + (r \ddot{\theta} + 2r \dot{\theta}) \eht{\theta} \right] \cdot \eht{r} &= [-mg\nht2+\lambda\eht{r}] \cdot \eht{r} = mg\cos\theta+\lambda  \\
+m \left[ (\ddot{r} - r \dot{\theta}^2) \hat{e}_r + (r \ddot{\theta} + 2r \dot{\theta}) \hat{e}_{\theta} \right] \cdot r\eht\theta &= [-mg\nht2+\lambda\eht{r}] \cdot (r\eht\theta) = -mgr\sin\theta
+\end{aligned}
+$$
+Because $r=R$ is a constant, $\dot{r}=\ddot{r}=0$ and we have
+$$
+\begin{aligned}
+\lambda = -mg\cos\theta - mR \dot{\theta} \\
+\ddot{\theta} = - \frac{g}{R} \sin\theta
+\end{aligned}
+$$
+which is the same to the previous approach.
+
+>[!info]- Partial derivatives in polar coordinates $\pp{\eht{r}}{\theta}=\eht{\theta}$, $\pp{\eht{\theta}}{\theta}=-\eht{r}$.
+>Proof #1: resolving to $\nht1,\nht2$ to show $\theta$ explicitly, then taking partial derivatives directly.
+>
+>Proof #2:
+> $$
+> d\eht{r} = \pp{\eht{r}}{t} dt + \pp{\eht{r}}{r} d{r} + \pp{\eht{r}}{\theta} d{\theta}  \tag{total derivative}
+> $$
+> $$
+> \ddtN\eht{r} = \ddtE\eht{r} + \dot{\theta} \eht3 \times \eht{r} = \dot{\theta} \eht{\theta}   \tag{transport theorem}
+> $$
+> and
+> $$
+> d\eht{\theta} = \pp{\eht{\theta}}{t} dt + \pp{\eht{\theta}}{r} dr + \pp{\eht{\theta}}{\theta} d{\theta}   \tag{total derivative}
+> $$
+> $$
+> \ddtN\eht{\theta} = \ddtE\eht{\theta} + \dot{\theta} \eht3 \times \eht{\theta} = -\dot{\theta}\eht{r}   \tag{transport theorem}
+> $$
+> Compare the coefficients and we get the results.
+
+
+### D’Alembert’s principle vs. Newton's second law
+- A fundamental advantage over Newton’s second law in that the internal forces and all other virtually nonworking constraint forces can be simply ignored in developing the equations of motion.
+- The vector kinematic algebraic overhead associated with Newton’s second law and d’Alembert’s principle is essentially identical, because both require vector kinematics to be taken through the acceleration level.
+
+## Lagrangian Dynamics
+
+- Lagrange’s equations require only velocity-level vector kinematics.
+
+### Minimal Coordinate Systems and Unconstrained Motion
+
+An assumption for the following derivation is that, if constraints are present, they are simple algebraic holonomic constraints that have been kinematically eliminated to establish a minimal coordinate description of the system, so the generalized coordinates must be independent.
+
+![[AE_544_LecNote05__Lagrangian_Dynamics__Ch05#^dalemberts-principle-different-forms]]
+
+Rewrite Eq. (5.24) explicitly as
+$$
+\sum_{i=1}^{N} m_i \ddot{\bm{R}}_i \cdot \frac{\partial {\bm{R}}_i}{\partial q_j} = \sum_{i=1}^{N} \bm{f}_i \cdot \frac{\partial \bm{R}_i}{\partial q_j} \quad \text{for} \quad j = 1, 2, \dots, n
+$$
+and by plugging in the cancellation of dots identity, we have
+$$
+\sum_{i=1}^{N} m_i \ddot{\bm{R}}_i \cdot \frac{\partial \dot{\bm{R}}}{\partial \dot{q}_j} = \sum_{i=1}^{N} \bm{f}_i \cdot \frac{\partial \dot{\bm{R}}}{\partial \dot{q}_j} \quad \text{for} \quad j = 1, 2, \dots, n
+\tag{5.135}
+$$
+
+The kinetic energy $T(t,\qOneToEnd;\qDotOneToEnd)$ is generally a function of both $q_i$ and $\dot{q}_i$,
+$$
+T = \frac{1}{2} \sum_{i=1}^{N} m_i \dot{\bm{R}}_i \cdot \dot{\bm{R}}_i
+\tag{5.136}
+$$
+so the partial derivatives with respect to $(q_j,\dot{q}_j)$ are
+$$
+\begin{aligned}
+\frac{\partial T}{\partial q_j} &= \sum_{i=1}^{N} m_i \dot{\bm{R}}_i \cdot \frac{\partial \dot{\bm{R}}_i}{\partial q_j} \\
+\quad \frac{\partial T}{\partial \dot{q}_j} &= \sum_{i=1}^{N} m_i \dot{\bm{R}}_i \cdot \frac{\partial \dot{\bm{R}}_i}{\partial \dot{q}_j}
+\end{aligned}
+\tag{5.137}
+$$
+Now we can do
+$$
+\begin{align}
+\ddt \left( \frac{\partial T}{\partial \dot{q}_j} \right) &= \ddt \left( \sum_{i=1}^{N} m_i \dot{\bm{R}}_i \cdot \frac{\partial \dot{\bm{R}}_i}{\partial \dot{q}_j} \right)   \tag{used 5.137} \\
+%
+&= \sum_{i=1}^{N} m_i \ddot{\bm{R}}_i \cdot \frac{\partial \dot{\bm{R}}_i}{\partial \dot{q}_j} + \sum_{i=1}^{N} m_i \dot{\bm{R}}_i \cdot \ddt \left( \frac{\partial \dot{\bm{R}}_i}{\partial \dot{q}_j} \right) \\
+%
+&= \sum_{i=1}^{N} \left( \bm{f}_i + \bm{f}_{ci} \right) \cdot \frac{\partial \dot{\bm{R}}_i}{\partial \dot{q}_j} + \sum_{i=1}^{N} m_i \dot{\bm{R}}_i \cdot \ddt \left( \frac{\partial \dot{\bm{R}}_i}{\partial \dot{q}_j} \right) \\
+%
+&=  \sum_{i=1}^{N} \bm{f}_i \cdot \frac{\partial \dot{\bm{R}}_i}{\partial \dot{q}_j}  +  \ccancelto{0}{\sum_{i=1}^{N}\bm{f}_{ci}  \cdot \frac{\partial {\bm{R}}_i}{\partial {q}_j}} +  \sum_{i=1}^{N} m_i \dot{\bm{R}}_i \cdot \ddt \left( \frac{\partial \dot{\bm{R}}_i}{\partial \dot{q}_j} \right) \tag{admissible $\delta\bmR$} \\
+%
+&= \sum_{i=1}^{N} \bm{f}_i \cdot \frac{\partial \dot{\bm{R}}_i}{\partial \dot{q}_j} + \sum_{i=1}^{N} m_i \dot{\bm{R}}_i \cdot \frac{\partial \dot{\bm{R}}_i}{\partial \dot{q}_j}       \tag{smooth $\bmR$} \\
+%
+&= \sum_{i=1}^{N} \bm{f}_i \cdot \frac{\partial \dot{\bm{R}}_i}{\partial \dot{q}_j} + \frac{\partial T}{\partial {q}_j}     \tag{used 5.137} \\
+%
+&= Q_j + \pp{T}{q_j}
+\end{align}
+$$
+Therefore, we have the **most fundamental version of Lagrange’s equations**,
+$$
+\ddt \left(\pp{T}{\dot{q}_j}\right) - \pp{T}{q_j} = \sum_{i=1}^N \bmf_i \cdot \pp{\dot{\bmR}_i}{\dot{q}_j} \equiv Q_j     \qquad \text{for } j = 1,2,\dots,n
+\tag{5.139}
+$$
+^Lagranges-equation-fundamental
+
+An appropriate definition of kinetic energy results in these equations applying to systems of rigid bodies and particles.
+
+Again, the assumption is that the the generalized coordinates $\{\qOneToEnd\}$ must be independent in Eq. (5.139).
+
+### Example 5.10: particles with decreasing radius (Applying Lagrange's equations)
+
+![[fig-5-12_particle_decreasing_radius.png|400]]
+A particle moves on a table. A string attached to the particle is being drawn through a hole such that the radius is decreasing at a constant rate; <u>determine angular velocity as a function of time.</u> 
+
+A reference frame $\{\nht{}\}$ and a polar frame $\{\eht{r},\eht{\theta}\}$. 
+
+The radial speed is a constant $v_r = \dot{r} = -c$.
+
+The only generalized coordinate is $\theta$.
+
+The position vector is $\bmR = r\eht{r}$.
+
+The velocity vector is $\dot{\bmR} = {\dot{r}\eht{r}} + r \dot{\theta}\eht{\theta} = -c\eht{r}+r \dot{\theta}\eht{\theta}$
+
+The kinetic energy is $T = \frac{1}{2} m \left( c^2 + r^2 \dot{\theta}^2 \right)$
+
+Apply the Lagrange's equation:
+![[#^Lagranges-equation-fundamental]]
+and we have
+$$
+\begin{aligned}
+\ddt \left( mr^2\dot{\theta} \right) - 0 &= -F_r \eht{r} \cdot (r\eht{\theta}) \\
+\ddt \left( mr^2\dot{\theta} \right) &= 0
+\end{aligned}
+$$
+Since $r = r_0 - ct$ is time-varying, we have 
+$$
+(r_0 - ct)^2 \dot{\theta} = r_0^2 \dot{\theta}_0 \quad \Longrightarrow \quad \dot{\theta} = \frac{r_0^2}{(r_0 - ct)^2} \dot{\theta}_0
+$$
+
