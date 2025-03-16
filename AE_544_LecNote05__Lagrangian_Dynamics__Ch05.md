@@ -1,6 +1,6 @@
 ---
 date created: 2025-02-09T16:24:50-05:00
-date modified: 2025-03-07T10:37:34-05:00
+date modified: 2025-03-16T14:32:20-04:00
 ---
 # AE_544_LecNote05\__Lagrangian_Dynamics__Ch05
 ![[README#Disclaimers]]
@@ -200,7 +200,7 @@ where
 
 
 >[!check] Different forms of <u>d'Alembert's principle</u>:
-> 1. (classical form, Eq. 5.24) $\sum_{i=1}^N m_i \ddot{\bmR}_i \cdot \frac{\partial \bmR_i}{\partial q_i} = Q_j$
+> 1. (classical form, Eq. 5.24) $\sum_{i=1}^N m_i \ddot{\bmR}_i \cdot \frac{\partial \bmR_i}{\partial q_j} = Q_j$
 > 2. $\sum_{i=1}^N m_i \ddot{\bmR}_i \cdot \bmv_{ij} = Q_j$
 > 3. (virtual power form, Eq. 5.30) $\sum_{i=1}^N [\bmf_i - m_i \dot{\bmV}_i] \cdot \bmv_{ij} = 0$
 > 
@@ -430,7 +430,7 @@ Recall the d'Alembert's principle above and apply the classical form here:
 $$
 \begin{aligned}
 m \ddot{\bm{R}} \cdot \frac{\partial \bm{R}}{\partial \theta} &= Q_{\theta} \\
-m \left(-(R \dot{\theta}^2) \eht{r} + (R \ddot{\theta}) \eht{\theta}\right) \cdot \pp{}{\theta}\left(R \eht{r}\right) &= \bmf_\theta \cdot \pp{\bmR}{\theta} \\
+m \left(-(R \dot{\theta}^2) \eht{r} + (R \ddot{\theta}) \eht{\theta}\right) \cdot \pp{}{\theta}\left(R \eht{r}\right) &= \bmf \cdot \pp{\bmR}{\theta} \\
 m \left(-(R \dot{\theta}^2) \eht{r} + (R \ddot{\theta}) \eht{\theta}\right) \cdot (R\eht{\theta}) &= mg(\cos\theta\eht{r}-\sin\theta\eht{\theta}) \cdot (R\eht{\theta}) \\
 m R^2 \ddot{\theta} &= -mgR \sin \theta \\
 \ddot{\theta} &= -\frac{g}{R} \sin \theta
@@ -442,11 +442,11 @@ Thus the constraint force associated with $\psi(r,\theta)=r-R=0$ is written as a
 $$
 \bmF_c = \lambda \nabla \psi(r,\theta) = \lambda \eht{r}
 $$
-The total force acting on mass $m$ is 
+The <u>total force</u> acting on mass $m$ is 
 $$
 \bmF=-mg\nht2+\lambda\eht{r}
 $$
-and the d'Alemberts' principle gives two equations this time
+and the d'Alembert's principle (the classical form) gives two equations this time
 ![[#^dalemberts-principle-different-forms]]
 $$
 \begin{aligned}
