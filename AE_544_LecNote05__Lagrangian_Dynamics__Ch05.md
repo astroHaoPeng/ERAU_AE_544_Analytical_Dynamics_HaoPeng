@@ -1,6 +1,6 @@
 ---
 date created: 2025-02-09T16:24:50-05:00
-date modified: 2025-03-16T14:32:20-04:00
+date modified: 2025-03-17T11:46:04-04:00
 ---
 # AE_544_LecNote05\__Lagrangian_Dynamics__Ch05
 ![[README#Disclaimers]]
@@ -536,9 +536,11 @@ $$
 %
 &= \sum_{i=1}^{N} \left( \bm{f}_i + \bm{f}_{ci} \right) \cdot \frac{\partial \dot{\bm{R}}_i}{\partial \dot{q}_j} + \sum_{i=1}^{N} m_i \dot{\bm{R}}_i \cdot \ddt \left( \frac{\partial \dot{\bm{R}}_i}{\partial \dot{q}_j} \right) \\
 %
-&=  \sum_{i=1}^{N} \bm{f}_i \cdot \frac{\partial \dot{\bm{R}}_i}{\partial \dot{q}_j}  +  \ccancelto{0}{\sum_{i=1}^{N}\bm{f}_{ci}  \cdot \frac{\partial {\bm{R}}_i}{\partial {q}_j}} +  \sum_{i=1}^{N} m_i \dot{\bm{R}}_i \cdot \ddt \left( \frac{\partial \dot{\bm{R}}_i}{\partial \dot{q}_j} \right) \tag{admissible $\delta\bmR$} \\
+&=  \sum_{i=1}^{N} \bm{f}_i \cdot \frac{\partial \dot{\bm{R}}_i}{\partial \dot{q}_j}  +  {\sum_{i=1}^{N}\bm{f}_{ci}  \cdot \frac{\partial {\bm{R}}_i}{\partial {q}_j}} +  \sum_{i=1}^{N} m_i \dot{\bm{R}}_i \cdot \ddt \left( \frac{\partial \dot{\bm{R}}_i}{\partial \dot{q}_j} \right) \tag{cancel dots for last two terms} \\
 %
-&= \sum_{i=1}^{N} \bm{f}_i \cdot \frac{\partial \dot{\bm{R}}_i}{\partial \dot{q}_j} + \sum_{i=1}^{N} m_i \dot{\bm{R}}_i \cdot \frac{\partial \dot{\bm{R}}_i}{\partial \dot{q}_j}       \tag{smooth $\bmR$} \\
+&=  \sum_{i=1}^{N} \bm{f}_i \cdot \frac{\partial \dot{\bm{R}}_i}{\partial \dot{q}_j}  +  \ccancelto{0}{\sum_{i=1}^{N}\bm{f}_{ci}  \cdot \sum_{j=1}^n\frac{\partial {\bm{R}}_i}{\partial {q}_j}\delta q_j} +  \sum_{i=1}^{N} m_i \dot{\bm{R}}_i \cdot \ddt \left( \frac{\partial {\bm{R}}_i}{\partial {q}_j} \right) \tag{special admissible $\delta\bmR_i$ with only $\delta q_j\neq0$} \\
+%
+&= \sum_{i=1}^{N} \bm{f}_i \cdot \frac{\partial \dot{\bm{R}}_i}{\partial \dot{q}_j} + \sum_{i=1}^{N} m_i \dot{\bm{R}}_i \cdot \frac{\partial }{\partial {q}_j}\left(\ddt{\bm{R}}_i\right)       \tag{smooth $\bmR_i$, switch $\pp{}{q_j}$ and $\ddt$} \\
 %
 &= \sum_{i=1}^{N} \bm{f}_i \cdot \frac{\partial \dot{\bm{R}}_i}{\partial \dot{q}_j} + \frac{\partial T}{\partial {q}_j}     \tag{used 5.137} \\
 %
@@ -563,7 +565,7 @@ A particle moves on a table. A string attached to the particle is being drawn th
 
 A reference frame $\{\nht{}\}$ and a polar frame $\{\eht{r},\eht{\theta}\}$. 
 
-The radial speed is a constant $v_r = \dot{r} = -c$.
+The radial speed is a constant $v_r = \dot{r} = -c$, where $c>0$ is a constant.
 
 The only generalized coordinate is $\theta$.
 
