@@ -1,6 +1,6 @@
 ---
 date created: 2025-02-09T16:24:50-05:00
-date modified: 2025-03-17T11:46:04-04:00
+date modified: 2025-03-20T21:35:23-04:00
 ---
 # AE_544_LecNote05\__Lagrangian_Dynamics__Ch05
 ![[README#Disclaimers]]
@@ -588,4 +588,197 @@ Since $r = r_0 - ct$ is time-varying, we have
 $$
 (r_0 - ct)^2 \dot{\theta} = r_0^2 \dot{\theta}_0 \quad \Longrightarrow \quad \dot{\theta} = \frac{r_0^2}{(r_0 - ct)^2} \dot{\theta}_0
 $$
+
+
+### Lagrange’s Equations for Conservative Forces
+
+For the conservative force $\bmf_i$ determined by the potential function $V(t,\qOneToEnd)$, we have
+$$
+\bmf_i = - \pp{V}{\bmR_i}
+$$
+Then the generalized force is given by
+$$
+Q_j = \sum_{i=1}^N \bmf_i \cdot \pp{\bmR_i}{q_j} = - \sum_{i=1}^N \pp{V}{\bmR_i} \cdot \pp{\bmR_i}{q_j} = - \pp{V}{q_j}
+\tag{5.151}
+$$
+Define the **Lagrangian function $\calL$** as
+$$
+\calL = \calL(t,\qOneToEnd;\qDotOneToEnd) \equiv T - V
+\tag{5.152}
+$$
+so that we have 
+$$
+\begin{aligned}
+\pp{\calL}{\dot{q}_j} &= \pp{T}{\dot{q}_j} \\
+\pp{\calL}{{q}} &= \pp{T}{{q}_j} - \pp{V}{\dot{q}_j}
+\end{aligned}
+$$
+If all forces are conservative, for the fundamental format of Lagrange's equstions
+![[#^Lagranges-equation-fundamental]]
+we can move all $Q_j$ to LHS and plugin Eq. (5.151) to get
+$$
+\ddt \left(\pp{T}{\dot{q}_j}\right) - \pp{T}{q_j} + \pp{V}{q_j} = 0
+$$
+Then, plug in the definition of $\calL$ and its partial derivatives, we get the <u>most famous form of Lagrange's equations</u>, in the case when all forces are conservative,
+$$
+\ddt \left( \pp{\calL}{\dot{q}_j} \right) - \pp{\calL}{q_j} = 0
+\tag{5.153}
+$$
+^Lagranges-equation-conservative-forces
+
+>[!info] For many elementary conservative systems, the potential and kinetic energy can be simply written with a minimum of derivations; for these cases, Eqs. (5.153) do not require derivation of any generalized forces and are therefore especially attractive.
+
+For more general cases with both conservative and nonconservative forces, we just need to retain the generalized forces at the RHS, resulting,
+$$
+\ddt \left( \pp{\calL}{\dot{q}_j} \right) - \pp{\calL}{q_j} = Q_{nc_j}
+\tag{5.154}
+$$
+^Lagranges-equation-conservative-and-nonconservative-forces
+
+where the nonconservative generalized force $Q_{nc_j} = \sum_{i=1}^N \bmf_{nc_j} \cdot \pp{\dot{\bmR}_i}{\dot{q}_j}$.
+
+### Example 5.12: linear spring pendulum (Applying Lagrange's equations)
+
+![[fig-5-14_spring_pendulum.png|300]] the linear spring pendulum is considered: nominal unstretched spring length $r_0$, linear spring constant $k$. Develop the equations of motion. 
+
+The only virtually working forces are the spring force and gravity, and that there are two generalized coordinates $\{r,\theta\}$.
+
+The position vector is $\bmR = r \eht{r}$ \
+The velocity vector is $\bmV = \dot{\bmR} = \dot{r}\eht{r} + r\dot{\theta}\eht{\theta}$
+
+The kinetic energy is $T=\frac{1}{2}m \bmV \cdot \bmV = \frac{1}{2}m ( \dot{r}^2+r^2\dot{\theta}^2 )$
+
+Both the gravity and the spring force are conservative, so the total potential function is $V=-mgr\cos\theta+\frac{1}{2}k(r-r_0)^2$
+
+So the Lagrangian function is $\calL = T-V = \frac{1}{2}m \bmV \cdot \bmV = \frac{1}{2}m ( \dot{r}^2+r^2\dot{\theta}^2)  + mgr\cos\theta - \frac{1}{2}k(r-r_0)^2$
+
+![[#^Lagranges-equation-conservative-forces]]
+Applying the Lagrange's equations for conservative forces, we have
+$$
+\begin{aligned}
+&\ddt \left( \pp{\calL}{\dot{r}} \right) - \pp{\calL}{r} = 0 \\
+&\ddt \left( \pp{\calL}{\dot{\theta}} \right) - \pp{\calL}{\theta} = 0 \\
+\end{aligned}
+$$
+which gives
+$$
+\begin{aligned}
+&\ddt \left( m \dot{r} \right) - mr \dot{\theta}^2 - mg\cos\theta + k(r-r_0) = 0 \\
+&\ddt \left( mr^2 \dot{\theta} \right) - mgr\sin\theta = 0 \\
+\end{aligned}
+$$
+then
+$$
+\begin{aligned}
+& m \ddot{r} - mr \dot{\theta}^2 - mg\cos\theta + k(r-r_0) = 0 \\
+& 2mr \dot{r} \dot{\theta} + mr^2 \ddot{\theta} + mgr\sin\theta = 0 \\
+\end{aligned}
+$$
+
+Alternatively, if we want to apply the other format of Lagrange's equations
+![[#^Lagranges-equation-fundamental]]
+we need to first calculate the two generalized forces as
+$$
+\begin{aligned}
+Q_r &= \Big(-k(r-r_0) \eht{r} + mg \cos\theta\eht{r} - mg\sin\theta\eht{\theta} \Big) \cdot \pp{ (\dot{r}\eht{r} + r\dot{\theta}\eht{\theta})}{\dot{r}} \\
+Q_\theta &= \Big(-k(r-r_0) \eht{r} + mg \cos\theta\eht{r} - mg\sin\theta\eht{\theta} \Big) \cdot \pp{( \dot{r}\eht{r} + r\dot{\theta}\eht{\theta})}{\dot{\theta}} \\
+\end{aligned}
+$$
+Obviously we will get the same results but with a bit more steps and algebras. These force has been implicitly accounted for by being included in the potential energy function. 
+
+### Problem 5.1:  linear torsional spring (comparing different methods to obtain EOMs)
+![[fig-p5-1_torsional_spring.png|400]]
+
+**Use Newton's law and free-body diagrams for the rod and mass.** \
+![[fig-p5-1_netwon's_method_free_body.png|150]]
+
+Summing the forces and torques on the <u>massless rod</u>:
+$0 \cdot \frac{d^2}{dt^2} \left( \frac{R}{2} \hat{e}_r \right) = (F_r - F_{or}) \hat{e}_r + (F_\theta + F_{o\theta}) \hat{e}_\theta$ \
+$-k \theta + R F_\theta = 0$ \
+from which we can resolve: 
+$F_{or} = F_r \quad F_{o\theta} = -F_\theta  \quad F_\theta = \frac{k \theta}{R}$
+
+Summing the forces on the <u>mass</u> (no torques because it's treated as a mass point now):
+$m \left( - R \dot{\theta}^2 \hat{e}_r + R \ddot{\theta} \hat{e}_\theta \right) = \left( - F_r + mg \cos \theta \right) \hat{e}_r + \left( - F_\theta - mg \sin \theta \right) \hat{e}_\theta$ \
+$F_r = mg \cos \theta + m r \dot{\theta}^2$ \
+$m R \ddot{\theta} = - \frac{k}{R} \theta - mg \sin \theta$
+
+And finally we have the equation of motion as a function of just the angle $\theta$: $\boxed{\ddot{\theta} = - \frac{k}{m R^2} \theta - \frac{g}{R} \sin \theta}$
+
+**Using Euler's equations of rotational motion,** which is essentially still Newton's law for special cases of rotation. \
+![[fig-p5-1_euler's_equation_free_body.png|100]]
+
+Apply the Euler's equation $\dot{\bmH} = \bmL$ directly to the total angular momentum (respect to $O$) $H = m R^2 \dot{\theta}$. Notice it is a planar case so only the magnitude will be considered. \
+The torque relative to the pivot $O$ can be easily formulated as $L=-mgR\sin\theta-k\theta$, where we assuming the positive direction for $\bmL$ is to point out of the screen/paper. \
+Then, we have
+$\boxed{m R^2 \ddot{\theta} = -k \theta - mg R \sin \theta}$
+which is already the EOM.
+
+**Using Lagrange's equations for conservative forces.**\
+The generalized coordinate is just $\theta$ as apparently from previous free-body diagrams. 
+The kinematic and potential functions are given as \
+$T = \frac{1}{2} m \dot{\bm{R}} \cdot \dot{\bm{R}} = \frac{1}{2} m r^2 \dot{\theta}^2$ \
+$V = mgR(1 - \cos \theta) + \frac{1}{2} k \theta^2$ \
+So, the Lagrangian function is $\mathcal{L} = T - V$ $= \frac{1}{2} m R^2 \dot{\theta}^2 + mg R \cos \theta - \frac{1}{2} k \theta^2 - mg R$ 
+
+Applying Lagrange's equations $\ddt\left( \pp{\calL}{\dq} \right) - \pp{\calL}{q} = 0$ requires the following derivatives: \
+$\frac{d}{dt} \left( \frac{\partial \mathcal{L}}{\partial \dot{\theta}} \right) = m R^2 \ddot{\theta}$ \
+$\frac{\partial \mathcal{L}}{\partial \theta} = -mg R \sin \theta - k \theta$
+
+Therefore the equation of motion is obtained as: 
+$\boxed{m R^2 \ddot{\theta} + mg R \sin \theta + k \theta = 0}$
+
+>[!question] After-class practice, can the spring force be considered directly in the Lagrange's equations? 
+>[Hint] Recall how the potential function $V$ is absorbed into the Lagrange function $\calL$.
+
+>[!done] In this case, Euler's equation of rotational motion turns out to be the easiest approach. But clearly Lagrange's equations have provided a more systematic and streamlined approach. 
+
+### Example 5.13: Generalize Example 5.3 with a damper (Applying Lagrange's equations with non-conservative forces)
+
+![[fig-5-13_pendulum_cart_damped.png|300]] 
+The spring is accompanied with a dashpot linear damper with the damping force given as $-c \dot{x} \nht1$. 
+
+The generalized coordinates are still $\{x,\theta\}$.
+
+The kinematics are 
+$$
+\dot{\bmR}_1 = \dot{x}\nht1 \qquad 
+\dot{\bmR}_2 = \dot{x}\nht1 + r\dot{\theta}\eht{\theta}
+$$
+
+The virtually working force is $\bmf_d = -c \dot{x}\nht1$
+
+The two generalized forces are (there are two generalized forces because of two generalized coordinates),
+$$
+\begin{aligned}
+Q_x &= \bmf_d \cdot \pp{\dot{\bmR}_1}{\dot{x}} + \ccancelto{0}{\bmf_2 \cdot \pp{\dot{\bmR}_2}{\dot{x}}} = -c \dot{x} \\
+Q_\theta &= \bmf_d \cdot  \pp{\dot{\bmR}_1}{\dot{\theta}} + \ccancelto{0}{\bmf_2 \cdot \pp{\dot{\bmR}_2}{\dot{\theta}}} = 0
+\end{aligned}
+$$
+
+So the kinetic energy is 
+$T=\frac{1}{2} (m_1\dot{\bmR}_1\cdot \dot{\bmR}_1 + m_1\dot{\bmR}_2\cdot \dot{\bmR}_2)$ $= \frac{1}{2}\left( m_1 \dot{x}^2 + m_2 \dot{x}^2 + m_2 r^2 \dot{\theta}^2 + 2 m_2\dot{x}r\dot{\theta} \cos\theta \right)$ \
+and the potential energy function is
+$V=\frac{1}{2}kx^2 - m_2gr\cos\theta$ \
+Thus, the Lagrangian function is
+$\calL = T-V$ $= \frac{1}{2}\left( m_1 \dot{x}^2 + m_2 \dot{x}^2 + m_2 r^2 \dot{\theta}^2 + 2 m_2 \dot{x}r\dot{\theta} \cos\theta \right)$ $- \frac{1}{2}kx^2 + m_2gr\cos\theta$
+
+Apply the Lagrange's equations with nonconservative forces below
+![[#^Lagranges-equation-conservative-and-nonconservative-forces]]
+we get
+$$
+\begin{aligned}
+\ddt\left( m_1 \dot{x} + m_2 \dot{x} + m_2 r\dot{\theta}\cos\theta \right) + kx &= -c \dot{x} \\
+\ddt\left( m_2r^2\dot{\theta} + m_2 \dot{x}r\cos\theta \right) + m_2 \dot{x}r\dot{\theta}\sin\theta + m_2gr\sin\theta &= 0
+\end{aligned}
+$$
+After working out the derivatives, we get the EOMs as
+$$
+\begin{aligned}
+ m_1 \ddot{x} + m_2 \ddot{x} + m_2 r\ddot{\theta}\cos\theta - m_2r\dot{\theta}^2\sin\theta + kx &= -c \dot{x} \\
+ m_2r^2\ddot{\theta} + m_2 \ddot{x}r\cos\theta - m_2 \dot{x}r \dot{\theta}\sin\theta  + m_2 \dot{x}r\dot{\theta}\sin\theta + m_2gr\sin\theta &= 0
+\end{aligned}
+$$
+
+Notice that we also don't need to calculate $\ddot{\bmR}_i$ in this approach, even though we need to calculate two "forces".
 
