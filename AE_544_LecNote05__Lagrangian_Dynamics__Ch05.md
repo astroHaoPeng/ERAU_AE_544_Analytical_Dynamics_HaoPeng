@@ -1,6 +1,6 @@
 ---
 date created: 2025-02-09T16:24:50-05:00
-date modified: 2025-03-20T21:35:23-04:00
+date modified: 2025-03-21T01:36:33-04:00
 ---
 # AE_544_LecNote05\__Lagrangian_Dynamics__Ch05
 ![[README#Disclaimers]]
@@ -781,4 +781,78 @@ $$
 $$
 
 Notice that we also don't need to calculate $\ddot{\bmR}_i$ in this approach, even though we need to calculate two "forces".
+
+
+### Redundant Coordinate Systems and Constrained Motion
+
+Goal: Extend Lagrange’s equations to consider redundant coordinates subject to <u>Pfaffian nonholonomic constraints</u> (which is more general and includes holonomic constraints).
+
+Previously we assumed $n$ was the number of degrees of freedom (which implicitly means all holonomic constraints have been eliminated, and that $\{\qOneToEnd\}$ are a minimal set of independent coordinates.
+Under this case, the virtual displacement $\delta q_j$ can be chosen arbitrarily.
+This can be expressed as the following principle that the virtual work is always zero for arbitrary $\delta q_j$
+$$
+\delta W = \sum_{j=1}^{n} \left[ Q_j + \frac{\partial T}{\partial q_j} - \ddt \left( \frac{\partial T}{\partial \dot{q}_j} \right) \right] \delta q_j = 0 
+\tag{5.165}
+$$
+
+Now, let's assume $\{\qOneToEnd\}$ are not independent and several constraints are present.
+Furthermore, let's consider there are $m$ Pfaffian form constraints
+$$
+\sum_{j=1}^n A_{kj}\dot{q}_j + B_k = 0  \qquad k = \oneTo{m}
+\tag{5.166}
+$$
+For instantaneous admissible virtual displacements under these constraints, we have
+$$
+\sum_{j=1}^n A_{kj} \delta q_j = 0    \qquad   k = \oneTo{m}
+\tag{5.168}
+$$
+where $A_{kj} = A_{kj}(\qOneToEnd,t)$ and $B_{k}=B_k(\qOneToEnd,t)$ are functions of generalized coordinates $q_j$ and time.
+
+Analogous to the development of the constraint optimization Lagrange multiplier rule, we have
+$$
+\delta W = \sum_{j=1}^{n} \left[ Q_j +  \sum_{k=1}^m \lambda_k A_{kj}  + \frac{\partial T}{\partial q_j} - \ddt \left( \frac{\partial T}{\partial \dot{q}_j} \right) \right] \delta q_j = 0 
+\tag{5.169}
+$$
+Finally, we get the constrained version of Lagrange’s equations of motion
+$$
+\begin{aligned}
+& \ddt \left( \frac{\partial T}{\partial \dot{q}_j} \right) - \frac{\partial T}{\partial q_j} = Q_j + \sum_{k=1}^{m} \lambda_k A_{kj}  &&j = 1, 2, \dots, n  \\
+& \sum_{j=1}^{n} A_{kj} \dot{q}_j + B_k = 0   & &k = 1, 2, \dots, m
+\end{aligned}
+\tag{5.170 and 171}
+$$
+^Lagranges-equation-constrained
+
+More conveniently, if there are some conservative forces, we can define the total potential function $V$ and the Lagrangian function $\calL = T-V$, then we get
+$$
+\begin{aligned}
+&\ddt \left( \frac{\partial \mathcal{L}}{\partial \dot{q}_j} \right) - \frac{\partial \mathcal{L}}{\partial q_j} = \bm{Q}_{nc_j} + \sum_{k=1}^{m} \lambda_k A_{kj}    &&  j = 1, 2, \dots, n  \\
+& \sum_{j=1}^{n} A_{kj} \dot{q}_j + B_k = 0   & &k = 1, 2, \dots, m
+\end{aligned}
+\tag{5.172}
+$$
+^Lagranges-equation-conservative-constrained
+
+
+### Summarize of All Formats
+
+> [!done] Summary of different forms of Lagrange's equation:
+> Fundamental with a minimum set of generalized coordinates:
+> ![[#^Lagranges-equation-fundamental]]
+> 
+> Only conserved forces:
+> ![[#^Lagranges-equation-conservative-forces]]
+> 
+> Both conservative and nonconservative forces:
+> ![[#^Lagranges-equation-conservative-and-nonconservative-forces]]
+> 
+> Redundant generalized coordinates with constraints:
+> ![[#^Lagranges-equation-constrained]]
+> 
+> Ultimate version with everything:
+> ![[#^Lagranges-equation-conservative-constrained]]
+^Lagranges-equation-summary
+
+
+
 
