@@ -1,6 +1,6 @@
 ---
 date created: 2025-02-09T16:24:50-05:00
-date modified: 2025-03-21T01:36:33-04:00
+date modified: 2025-03-24T14:05:35-04:00
 ---
 # AE_544_LecNote05\__Lagrangian_Dynamics__Ch05
 ![[README#Disclaimers]]
@@ -626,7 +626,7 @@ $$
 $$
 ^Lagranges-equation-conservative-forces
 
->[!info] For many elementary conservative systems, the potential and kinetic energy can be simply written with a minimum of derivations; for these cases, Eqs. (5.153) do not require derivation of any generalized forces and are therefore especially attractive.
+>[!info] For many elementary conservative systems, the potential and kinetic energy can be simply written with a minimum of derivations; for these cases, Eq. (5.153) do not require derivation of any generalized forces and are therefore especially attractive.
 
 For more general cases with both conservative and nonconservative forces, we just need to retain the generalized forces at the RHS, resulting,
 $$
@@ -856,3 +856,159 @@ $$
 
 
 
+
+### Example 5.14: Particle + Tube + Spring
+![[fig-5-16_particle_tube_spring.png|400]]  The particle sliding in a rotating tube with a constant rotation speed of $\Omega$. The spring force is given in the figure.
+
+Generalized coordinate is just $r$.
+
+Nonlinear spring force is a conserved force with $V=\int_0^r F(\rho)d\rho$
+
+The kinematics are
+$$
+\bmR = r\eht{r}  \qquad   \dot{\bmR} = \dot{r} \eht{r} + r \dot{\theta} \eht{\theta} = \dot{r}\eht{r} + \dot{r} \Omega\eht{\theta}
+$$
+The Lagrangian function is obtained as
+$$
+\begin{aligned}
+T &= \frac{1}{2} \dot{\bmR} \cdot \dot{\bmR} = \frac{1}{2}m(\dot{r}^2+r^2\Omega^2) \\
+V &= \frac{1}{2} k_1 r^2 + \frFour k_2 r^4 \\
+\calL &= T-V
+\end{aligned}
+$$
+Applying the following format
+![[#^Lagranges-equation-conservative-forces]]
+and we have
+$$
+\ddt\left( m \dot{r} \right) - mr\Omega^2 + k_1 r + k_2 r^3 = 0
+$$
+
+>[!question] <u>After-class exercise:</u> Solve for the constraint force $\bmF_\theta$ acting on the particle $m$. (Hint: use either Newton's second law or Lagrange's equation with a constraint $\dot{\theta}=\Omega$.)
+
+
+### Problem 5.4 (partial): Two particles connected by an ideal spring
+
+![[fig-p5-4_two_particles_with_spring.png|350]] Consider the two-particle system shown in Fig. P5.4. The particles move along a straight line on a frictionless plane. The unstreteched spring length is $d$. 
+
+Consider the generalized coordinates $(q_1,q_2)\equiv(x_1,x_2)$, as shown in the figure, formulate the equations of motion using Lagrange’s equations.
+
+The force acting on $m_1$ is $k[(x_2-x_1)-d]=k(x_{12}-d)$. 
+
+
+$T = \frac{1}{2} \left( m_1 \dot{x}_1^2 + m_2 \dot{x}_2^2 \right)$
+
+$V = \frac{1}{2} k (x_{12} - d)^2 = \frac{1}{2} k (x_2 - x_1 - d)^2$
+
+$\mathcal{L} = T - V = \frac{1}{2} \left( m_1 \dot{x}_1^2 + m_2 \dot{x}_2^2 \right) - \frac{1}{2} k (x_2 - x_1 - d)^2$
+
+$\frac{\partial \mathcal{L}}{\partial \dot{x}_1} = m_1 \dot{x}_1, \quad \frac{\partial \mathcal{L}}{\partial \dot{x}_2} = m_2 \dot{x}_2$
+
+$\frac{\partial \mathcal{L}}{\partial x_1} = k(x_2 - x_1 - d), \quad \frac{\partial \mathcal{L}}{\partial x_2} = -k(x_2 - x_1 - d)$
+
+Apply Lagrange's equations for conservative forces:
+![[#^Lagranges-equation-conservative-forces]]
+and we have
+$$
+\boxed{\begin{aligned}
+m_1 \ddot{x}_1 - k(x_2 - x_1 - d) &= 0 \\
+m_2 \ddot{x}_2 + k(x_2 - x_1 - d) &= 0
+\end{aligned}}
+$$
+
+
+>[!question] After-class practice, obtain the equations of motion using a different set of generalized coordinate $(x_c, x_{12})$, where $x_c$ is the center of mass and $x_{12}$ is the relative position of $m_2$ respect to $m_1$.
+>[hint] $\ddot{x}_c = 0$, which can be directly verified using the results from $(x_1, x_2)$.
+
+### Example: Two particles with spring and dashpot damper (Problem 5.4 altered)
+
+![[fig-p5-4_altered_two_particles_with_spring_dashpot.png|400]] Now, let's <mark style="color:#ff0000ff">add a dashpot damper</mark> to the previous example.
+
+$T = \frac{1}{2} \left( m_1 \dot{x}_1^2 + m_2 \dot{x}_2^2 \right)$
+
+$V = \frac{1}{2} k (x_{12} - d)^2 = \frac{1}{2} k (x_2 - x_1 - d)^2$
+
+$\mathcal{L} = T - V = \frac{1}{2} \left( m_1 \dot{x}_1^2 + m_2 \dot{x}_2^2 \right) - \frac{1}{2} k (x_2 - x_1 - d)^2$
+
+$\frac{\partial \mathcal{L}}{\partial \dot{x}_1} = m_1 \dot{x}_1, \quad \frac{\partial \mathcal{L}}{\partial \dot{x}_2} = m_2 \dot{x}_2$
+
+$\frac{\partial \mathcal{L}}{\partial x_1} = k(x_2 - x_1 - d), \quad \frac{\partial \mathcal{L}}{\partial x_2} = -k(x_2 - x_1 - d)$
+
+
+Generalized forces from Non-conservative damping force $F = -c(\dot{x}_2 - \dot{x}_1)$
+$Q_{x_1} = -[-c(\dot{x}_2 - \dot{x}_1)] \cdot \pp{x_1}{x_1} + [-c(\dot{x}_2 - \dot{x}_1)] \cdot \pp{x_2}{x_1} = c(\dot{x}_2 - \dot{x}_1)$ \
+Similarly, \
+$Q_{x_2} = -c(\dot{x}_2 - \dot{x}_1) \cdot \pp{x_2}{x_2} = -c(\dot{x}_2 - \dot{x}_1)$ 
+
+Apply Lagrange's equations for non-conservative forces:
+![[#^Lagranges-equation-conservative-and-nonconservative-forces]]
+and we have
+$$
+\boxed{\begin{aligned}
+m_1 \ddot{x}_1 - k(x_2 - x_1 - d) &= c(\dot{x}_2-\dot{x}_1) \\
+m_2 \ddot{x}_2 + k(x_2 - x_1 - d) &= -c(\dot{x}_2-\dot{x}_1)
+\end{aligned}}
+$$
+>[!info] Extension to Lagrange's equations using "Rayleigh dissipation function".
+>
+
+
+### Extensions to Torques and Rigid-body Dynamics
+
+>[!info] This is covered in Example 5.5: Generalize force for a torque on rigid body
+
+![[fig-5-7_generalized_force_for_torques.png|400]] Both a force and a torque are being applied to a rigid body $\calB$. The center of mass is $\bmR_c$ and is experiencing an external force $\bmF_c$.  Simultaneously, the body is experiencing a torque $\bmL$. 
+
+A trivial trick we used here is to represent this torque as two forces centered at $\bmR_c$ and of equal magnitudes $|\bmF_1|$ that are acting in the opposite direction. Denote the relative vector of the exerting point as $\bm{\rho}$ so the total torque $\bmL$ is expressed as
+$$
+\bmL = 2 \bm{\rho} \times \bmF_1
+$$
+According to the definition of the generalized force below
+![[#^generalized-force-Qi]]
+it is calculated as
+$$
+\begin{align}
+Q_j &= \bmF_c \cdot \pp{\bmR_c}{q_j} + \bmF_1 \cdot \pp{\bmR_1}{q_j} + (-\bmF_1) \cdot \pp{\bmR_2}{q_j} \\
+&= \bmF_c \cdot \pp{\bmR_c}{q_j} + \bmF_1 \cdot \pp{(\bmR_c+\bm{\rho})}{q_j} + (-\bmF_1) \cdot \pp{(\bmR_c-\bm{\rho})}{q_j} \\
+&= \bmF_c \cdot \pp{\bmR_c}{q_j} + 2\bmF_1 \cdot \pp{\bm{\rho}}{q_j} \\
+&= \bmF_c \cdot \pp{\bmR_c}{q_j} + 2\bmF_1 \cdot \pp{\textcolor{red}{ \dot{\bm{\rho}} }}{\dot{q}_j}    \tag{identity} \\
+&= \bmF_c \cdot \pp{\bmR_c}{q_j} + 2\bmF_1 \cdot \pp{(\textcolor{red}{ \bmo\times\bm{\rho} })}{\dot{q}_j}  \tag{rigid body} \\
+&= \bmF_c \cdot \pp{\bmR_c}{q_j} + 2\bmF_1 \cdot \left(\pp{\bmo}{\dot{q}_j}\times\bm{\rho} + \ccancelto{0}{\bm{\omega} \times \pp{\bm{\rho}}{\dot{q}_j}}\right)   \tag{position vector} \\ %
+&= \bmF_c \cdot \pp{\bmR_c}{q_j} + \pp{\bmo}{\dot{q}_j} \cdot \left(\textcolor{blue}{ \bm{\rho} \times 2\bmF_1 }\right)     \tag{triple product} \\
+&= \bmF_c \cdot \pp{\bmR_c}{q_j} + \textcolor{blue}{ \bmL } \cdot \pp{\bmo}{\dot{q}_j}
+\end{align}
+$$
+
+For the generalized coordinate $q_j$, the corresponding generalized force $Q_j$ is
+$$
+Q_j = \bm{F}_c \cdot \frac{\partial \bm{R}_c}{\partial q_j} + \bmL \cdot \frac{\partial \bmo}{\partial \dot{q}_j} = \bm{F}_c \cdot \frac{\partial \dot{\bm{R}}_c}{\partial \dot{q}_j} + \bmL \cdot \frac{\partial \bmo}{\partial \dot{q}_j}
+\tag{5.53}
+$$
+
+As a summary, we have dealt with a force as a pair of forces, then the assumed forces and displacements cancel out as the torque itself at the end. It is not surprising since Euler's equation is just a specialized application of Newton's second law.
+
+>[!info] The following is covered in Section 5.6 Quasi coordinates but omitted in our course.
+
+Extension of the Lagrange's equation to rigid body dynamics is more complicated and will not keep the original format of Lagrange's equation.
+
+This usually involves the introducing of **quasi coordinates** that are directly defined through velocities but their integrals usually do not a direct physical meaning as a generalized position coordinate.
+
+This treatment is usually too confusing and not practically useful. For example, for attitude dynamics, we can directly use Euler's equations.
+
+(Refer to textbook for more details.)
+
+
+
+
+
+---
+    
+## Summary
+
+
+Lagrangian dynamics does not prescribe a specific set of generalized coordinates.
+The choice of generalized coordinates is an art, guided by physics and mathematical simplicity. Some general guidelines are:
+
+1. Follow system symmetries to simplify potential energy.
+2. Use coordinates that eliminate constraints to avoid extra equations.
+3. Ensure a simple kinetic energy form to make equations manageable.
+4. Choose coordinates that reveal conserved quantities for easier solutions.
