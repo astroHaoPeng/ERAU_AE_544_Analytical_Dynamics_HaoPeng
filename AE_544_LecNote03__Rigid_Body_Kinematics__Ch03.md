@@ -1,6 +1,6 @@
 ---
 date created: 2025-01-26T13:00:00-05:00
-date modified: 2025-02-21T02:43:37-05:00
+date modified: 2025-03-24T00:35:15-04:00
 ---
 
 # AE_544_LecNote03\__Rigid_Body_Kinematics__Ch03
@@ -397,7 +397,7 @@ Note that each of the 12 possible sets of Euler angles has a **geometric singula
 
 ## Textbook problem 3.7
 
-![[Pasted image 20250206191842.png|500]]
+![[fig-p3-7_rolling_disk.png|500]]
 
 >[!warning] Notice the order of basis for $\calB$.
 
