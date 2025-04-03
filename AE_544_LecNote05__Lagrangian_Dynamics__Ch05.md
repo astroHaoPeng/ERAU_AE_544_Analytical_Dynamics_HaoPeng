@@ -826,7 +826,7 @@ $$
 More conveniently, if there are some conservative forces, we can define the total potential function $V$ and the Lagrangian function $\calL = T-V$, then we get
 $$
 \begin{aligned}
-&\ddt \left( \frac{\partial \mathcal{L}}{\partial \dot{q}_j} \right) - \frac{\partial \mathcal{L}}{\partial q_j} = \bm{Q}_{nc_j} + \sum_{k=1}^{m} \lambda_k A_{kj}    &&  j = 1, 2, \dots, n  \\
+&\ddt \left( \frac{\partial \mathcal{L}}{\partial \dot{q}_j} \right) - \frac{\partial \mathcal{L}}{\partial q_j} = {Q}_{nc_j} + \sum_{k=1}^{m} \lambda_k A_{kj}    &&  j = 1, 2, \dots, n  \\
 & \sum_{j=1}^{n} A_{kj} \dot{q}_j + B_k = 0   & &k = 1, 2, \dots, m
 \end{aligned}
 \tag{5.172}
