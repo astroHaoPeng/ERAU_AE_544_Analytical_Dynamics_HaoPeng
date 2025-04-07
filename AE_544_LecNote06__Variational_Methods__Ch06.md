@@ -1,6 +1,6 @@
 ---
 date created: 2025-02-09T16:24:50-05:00
-date modified: 2025-04-04T02:42:21-04:00
+date modified: 2025-04-07T00:18:46-04:00
 ---
 # AE_544_LecNote06\__Variational_Methods__Ch06
 ![[README#Disclaimers]]
@@ -13,7 +13,7 @@ In this chapter, we begin by developing basic concepts from variational calculus
 
 ## Fundamentals of Variational Calculus
 
-![[fig-6-1_path_and_time_variations.png|500]]
+![[fig-6-1_path_and_time_variations.png|450]]
 
 We seek to determine a space time trajectory or path $\bmx\in\fkR^n$ that causes a given <u>functional</u> $\calJ(\bmx(t),t_0,t_f)$ to achieve a local minimum (or maximum). 
 $\calJ$ is considered a functional because its argument list contains a vector of unknown functions $\bmx(t) = (x_1(t), x_2(t), \dots, x_n(t))\trans$.
@@ -261,7 +261,8 @@ $$
 
 Integrate the above equation and get the **most general from of Hamilton's principles**:
 $$
-\int_{t_0}^{t_f} (\delta W + \delta T) \, dt = \left.\left( \sum_{i=1}^{N} m_i \dot{\bm{R}}_i \cdot \delta \bm{R}_i \right)\right|_{t_0}^{t_f} 
+\boxed{
+\int_{t_0}^{t_f} (\delta W + \delta T) \, dt = \left.\left( \sum_{i=1}^{N} m_i \dot{\bm{R}}_i \cdot \delta \bm{R}_i \right)\right|_{t_0}^{t_f}}
 \tag{6.25}
 $$
 ^hamiltons-principle-most-general
@@ -269,7 +270,7 @@ $$
 It holds for the case of 1) arbitrary forces, 2) general constraints, and 3) general initial and final boundary conditions.
 
 
-If the virtually working forces are conservative, then $\delta W = - \delta V$, and if attention is restricted to fixed endpoint problems, then $\delta\bmR_i(t_0) = \delta\bmR_i(t_f) = 0$, the the above general form specializes to
+If the virtually working forces are conservative, then $\delta W = - \delta V$, and if attention is <u>**restricted to fixed endpoint problems, $\delta\bmR_i(t_0) = \delta\bmR_i(t_f) = 0$**</u>, then the the above general form specializes to
 $$
 \int_{t_0}^{t_f} (\delta T - \delta V )\, dt 
 = \int_{t_0}^{t_f} \delta(T-V) \, dt 
@@ -278,12 +279,12 @@ $$
 = 0
 \tag{6.26}
 $$
-Note that the interchangeability of variation operator and integral is generally true, even under holonomic constraints.
-
-Use examples, we will show that Hamilton's principle of varying action can provide a direct path to determine the system motion that does not "pass through" Lagrange's equations. 
+Note that the interchangeability of variation operator and integral is generally true under holonomic constraints.
 
 
 ## Example 6.5: motion in a constant gravity field
+
+This example shows that Hamilton's principle of varying action can provide a direct path to determine the system motion that does not "pass through" Lagrange's equations. 
 
 ![[fig-5-19_constant_gravity_field.png|300]]
 
@@ -313,9 +314,9 @@ Recall
 ![[#^hamiltons-principle-most-general]]
 
 Since $\delta y(0) = 0$ and $\delta y(f) = 0$, \
-$\int_{t_0}^{t_f} (mg\delta q + m \dot{q} \delta \dot{q}) \, dt = 0$ \
+$\int_{t_0}^{t_f} (mg\delta y + m \dot{y} \delta \dot{y}) \, dt = 0$ \
 Simplified to: \
-$\int_{t_0}^{t_f} (g\delta q + \dot{q} \delta \dot{q}) \, dt = 0$
+$\int_{t_0}^{t_f} (g\delta y + \dot{y} \delta \dot{y}) \, dt = 0$
 
 Since $dt$ is arbitrary, there must be $g\delta y + \dot{y} \delta \dot{y} = 0$
 
@@ -346,4 +347,148 @@ So, the solution is
 $y(t) = a_0 + a_1 t - \frac{1}{2}g t^2$
 
 >[!question] Can $a_0$ and $a_1$ be determined? How?
+>Left as a after-class practice. Answer is in the textbook.
+
+
+
+
+## Apply Hamilton's Principle to Distributed Parameter Systems
+
+We will mainly show two things:
+1. Hamilton's principle can provide natural boundary conditions "automatically" for distributed parameter systems. 
+2. Hamilton's principle can be used to derive very general versions of Lagrange's equations that are the partial differential equations governing families of distributed parameter systems. 
+
+Hamilton's law of varying action in Eq. (6.25) provides an approach to
+directly solve for the system motion, without first deriving a differential equa-
+tion.
+
+<u>Goal:</u> Before we can apply Hamilton's principle to a distributed parameter system, we need to first extend it to a continuous body instead of relying on a system of particles. 
+
+Recall the Hamilton's principle:
+![[#^hamiltons-principle-most-general]]
+Denote the RHS as
+$$
+\calB = \sum_{i=1}^N m_i \dot{\bmR}_i \cdot \delta \bmR_i
+\tag{6.40}
+$$
+Since we have used generalized coordinates for $\bmR_i(\qOneToEnd[n], t)$, we can use partial derivatives to get an express for $\delta\bmR_i$, which leads to:
+$$
+\calB = \sum_{i=1}^N m_i \dot{\bmR}_i \cdot \textcolor{red}{ \delta \bmR_i } 
+= \sum_{i=1}^N m_i \dot{\bmR}_i \cdot \textcolor{red}{ \left( \sum_{j=1}^n \pp{\bmR_i}{q_j} \delta q_j \right) }
+$$
+
+Using the two tricks of 1) cancellation of dots and 2) switching the order of summations, we can connect $\calB$ to kinetic energy $T$ through:
+$$
+\begin{align}
+\calB &= \sum_{j=1}^n \left( \sum_{i=1}^N m_i \dot{\bmR}_i \cdot \textcolor{green}{ \pp{\bmR_i}{q_j} } \right) \delta q_j \\
+&= \sum_{j=1}^n \left( \sum_{i=1}^N m_i \dot{\bmR}_i \cdot \textcolor{green}{ \pp{\dot{\bmR}_i}{\dot{q}_j} } \right) \delta q_j    \\
+&= \sum_{j=1}^n \left( \textcolor{red}{ \sum_{i=1}^N } \pp{}{q_j} \textcolor{red}{ \left( \frac{1}{2} m_i \dot{\bmR}_i^2 \right) } \right) \delta q_j \\
+&= \sum_{j=1}^n \pp{\textcolor{red}{ T }}{q_j} \delta q_j   \tag{6.43}
+\end{align}
+$$
+
+Substitute this back to the Hamilton's principle in Eq. (6.25) 
+![[#^hamiltons-principle-most-general]]
+and we have
+$$
+\int_{t_0}^{t_f} (\delta W + \delta T) \, dt = \left.\left( \sum_{j=1}^n \pp{T}{q_j} \delta q_j \right)\right|_{t_0}^{t_f} 
+\tag{6.44}
+$$
+Finally, the boundary terms (on RHS) in Eq. (6.44) turn out to be a more general form, whereas Eq. (6.25) applies only to the system of particles model.
+
+
+
+For dynamical systems with finite degrees of freedom, using Hamilton's law of
+varying action does not provide any further information. Hamilton's law has
+clear advantages when developing the equations of motion of an infinite degree
+of freedom dynamical system because it not only provides the equations of
+motion, but also the flexible domain boundary conditions.
+
+
+## Example 6.4: variable cross-sectional axial rod
+
+![[fig-6-4_elastic_rod.png|300]] \
+This rod is considered elastic, and neglecting all external forces and internal energy dissipation, this system is conservative.
+As the elastic simplest constitutive model, for uniaxial stress, the strain energy per unit volume is $\frac{1}{2} E \varepsilon^2$, where $\varepsilon \equiv \pp{u}{x}$ is the strain and $E$ is Young's modulus.
+Solve for the field function $u(x,t)$ which describe the motion at time $t$ and position $x$.
+
+For a differential mass $dm = \rho(x) A(x) dx$, the differential kinetic energy is 
+$$
+dT = \frac{1}{2} \rho(x) A(x) \left( \pp{u}{t} \right)^2 dx
+\tag{6.47}
+$$
+The differential potential energy due to strain is 
+$$
+dV = \frac{1}{2} E \, A(x) \varepsilon^2 dx \equiv \frac{1}{2} E \, A(x) \left( \frac{\partial u(x, t)}{\partial x} \right)^2 dx
+\tag{6.49}
+$$
+
+For the entire rod, the total kinetic energy is
+$$
+T = \frac{1}{2} \int_0^L \rho(x) A(x) \left( \frac{\partial u(x, t)}{\partial t} \right)^2 dx
+\tag{6.48}
+$$
+and the total potential energy is
+$$
+V = \frac{1}{2} \int_0^L E \, A(x) \left( \frac{\partial u(x, t)}{\partial x} \right)^2 dx
+\tag{6.50}
+$$
+
+Substitute into Hamilton's principle and we have:
+$$
+\begin{aligned}
+\delta \int_{t_0}^{t_f} (T - V) \, dt &= \int_{t_0}^{t_f} (\delta T - \delta V) \, dt \\
+&= \int_{t_0}^{t_f} \left[ \int_0^L \rho A \left( \frac{\partial u}{\partial t} \right) \delta \left( \frac{\partial u}{\partial t} \right) dx - \int_0^L EA(x) \left( \frac{\partial u}{\partial x} \right) \delta \left( \frac{\partial u}{\partial x} \right) dx \right] dt \\
+& =  \int_0^L \left[ \textcolor{red}{\int_{t_0}^{t_f} \rho A \left( \frac{\partial u}{\partial t} \right) \delta \left( \frac{\partial u}{\partial t} \right) dt } \right] dx    -    \int_{t_0}^{t_f} \left[ \textcolor{blue}{ \int_0^L EA(x) \left( \frac{\partial u}{\partial x} \right) \delta \left( \frac{\partial u}{\partial x} \right) dx } \right] dt
+\end{aligned}
+\tag{6.55}
+$$
+
+Next, we are going to use integration by parts to unify terms involving $\frac{\partial u(x, t)}{\partial t}$ and $\frac{\partial u(x, t)}{\partial x}$ to terms of $\delta u(x,t)$ only, so that we can then argue $\delta u$ to be arbitrary and get equations of motion.
+
+With this observation, the two integrations by parts in Eq. (6.55) are
+$$
+\textcolor{red}{ \int_{t_0}^{t_f} \rho(x) A(x) \left( \frac{\partial u}{\partial t} \right) \delta \left( \frac{\partial u}{\partial t} \right) dt  }
+= \textcolor{green}{ \left[ \rho(x) A(x) \left( \frac{\partial u}{\partial t} \right) \delta u \right]_{t_0}^{t_f} }  - \int_{t_0}^{t_f} \rho(x) A(x) \left( \frac{\partial^2 u}{\partial t^2} \right) \delta u dt
+$$
+and
+$$
+\textcolor{blue}{ \int_0^L E\,A(x) \left( \frac{\partial u}{\partial x} \right) \delta \left( \frac{\partial u}{\partial x} \right) dx }
+= \left[ E\,A(x) \left( \frac{\partial u}{\partial x} \delta u\right) \right]_{0}^{L}G - \int_0^L \frac{\partial}{\partial x} \left( E\,A(x) \left( \frac{\partial u}{\partial x} \right) \right) \delta u dx
+$$
+where we have used $\delta\pp{u}{t}=\pp{}{t} (\delta u)$ and $\delta\pp{u}{x}=\pp{}{x}(\delta u)$.
+
+The conditions $\delta u(x,t_0) = \delta u(x, t_f) = 0$ indicates that the terminal term of the first integrations by parts disappear, i.e.,
+$$
+\textcolor{green}{ \left[ \rho(x) A(x) \left( \frac{\partial u}{\partial t} \right) \delta u \right]_{t_0}^{t_f} } = 0
+$$
+These conditions reflect that we are solving a initial value problem where the initial condition should be given.
+Regarding why we can also set variation at end point to be zero is because we know that physically there will be only one true solution at the final moment and mathematically we can impose this condition to derive the equations of motion.
+
+At last, substituting everything back to Eq. (6.55) gives:
+$$
+\int_{t_0}^{t_f} \left\{ \int_0^L \left[ \frac{\partial}{\partial x} \left( E\, A(x) \frac{\partial u}{\partial x} \right) - \rho(x) A(x) \frac{\partial^2 u}{\partial t^2} \right] \delta u dx - \left[ EA(x) \frac{\partial u}{\partial x} \delta u(x, t) \right]_0^L \right\} dt = 0
+\tag{6.58}
+$$
+and we can argue that since $\delta u(x,t)$ is arbitrary, the governing equation of motion is
+$$
+\rho(x) A(x) \frac{\partial^2 u}{\partial t^2} - \frac{\partial}{\partial x} \left( EA(x) \frac{\partial u}{\partial x} \right) = 0
+\tag{6.59}
+$$
+together with the boundary conditions
+$$
+\left. E\, A(0) \frac{\partial u(x,t)}{\partial x} \right|_{x=0} \delta u(0, t) = 0
+\tag{6.60}
+$$
+$$
+\left. E\, A(L) \frac{\partial u(x,t)}{\partial x} \right|_{x=L} \delta u(L, t) = 0
+\tag{6.61}
+$$
+
+>[!info] The results are known widely as the wave equation.
+
+>[!question] After-class extension about transversality conditions.
+> - What would happen if we don't impose the conditions $\delta u(x,t_0) = \delta u(x, t_f) = 0$? 
+> - Why don't we just impose similar conditions to get rid of Eqs. (6.60) and (6.61)?
+
 
