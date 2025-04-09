@@ -1,6 +1,6 @@
 ---
 date created: 2025-02-09T16:24:50-05:00
-date modified: 2025-04-07T00:18:46-04:00
+date modified: 2025-04-09T01:52:11-04:00
 ---
 # AE_544_LecNote06\__Variational_Methods__Ch06
 ![[README#Disclaimers]]
@@ -454,7 +454,7 @@ $$
 and
 $$
 \textcolor{blue}{ \int_0^L E\,A(x) \left( \frac{\partial u}{\partial x} \right) \delta \left( \frac{\partial u}{\partial x} \right) dx }
-= \left[ E\,A(x) \left( \frac{\partial u}{\partial x} \delta u\right) \right]_{0}^{L}G - \int_0^L \frac{\partial}{\partial x} \left( E\,A(x) \left( \frac{\partial u}{\partial x} \right) \right) \delta u dx
+= \left[ E\,A(x) \left( \frac{\partial u}{\partial x} \delta u\right) \right]_{0}^{L} - \int_0^L \frac{\partial}{\partial x} \left( E\,A(x) \left( \frac{\partial u}{\partial x} \right) \right) \delta u dx
 $$
 where we have used $\delta\pp{u}{t}=\pp{}{t} (\delta u)$ and $\delta\pp{u}{x}=\pp{}{x}(\delta u)$.
 
@@ -492,3 +492,18 @@ $$
 > - Why don't we just impose similar conditions to get rid of Eqs. (6.60) and (6.61)?
 
 
+## Hybrid Coordinate Systems
+
+We consider a family of hybrid coordinate systems to be regarded as <u>consisting of a collection of rigid and elastic bodies</u>.
+
+It would be advantageous if analogous results existed for distributed parameter systems, i.e., simple differentiation of energy functions leads to the equations of motion, rather than more tedious integration by parts.
+
+Omitted here and are referred to the textbook and references therein.
+More intensive knowledge is required if you want to solve a flexible dynamics problem. 
+
+
+## Summary
+
+1. Hamilton's principle function $\calS \equiv \int_{t_0}^{t_f} \calL \dt$ connects the dynamics to variational calculus.
+2. Since Hamilton's principle treat the entire solution as a whole, a functional, all the boundary conditions will appear naturally as transversality conditions. This is a more holistic treatment compared to previous approaches we discussed in this class.
+3. Hamilton's principle in this chapter enables a new way to find the solution of a motion directly, but for most cases it still relies on falling back to Lagrange's equations to get the differential equations, which makes it seemingly less powerful.

@@ -7,11 +7,15 @@
 
 .trash/
 
+*.m
+
 *.md
 
-# *.pdf
+*.pdf
 
 *.pptx
+
+*hw*
 
 !LICENSE.md
 !README.md
@@ -21,10 +25,4 @@ AE_544_LecNote00__Introduction.md
 
 *.zip
 
-AE_544_LecNote_Examples_Ch01_Ch02.m
-
 .obsidian/plugins/remember-cursor-position/cursor-positions.json
-
-AE_544_Homework_01.pdf
-
-AE_544_Homework_02.pdf
