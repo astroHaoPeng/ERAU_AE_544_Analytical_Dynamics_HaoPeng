@@ -11,11 +11,10 @@
 
 *.md
 
-*.pdf
-
 *.pptx
 
 *hw*
+*Homework*
 
 !LICENSE.md
 !README.md
@@ -26,3 +25,5 @@ AE_544_LecNote00__Introduction.md
 *.zip
 
 .obsidian/plugins/remember-cursor-position/cursor-positions.json
+
+*submissions*

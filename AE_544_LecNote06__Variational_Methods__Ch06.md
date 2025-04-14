@@ -1,6 +1,10 @@
 ---
+date created: 2025-03-03T09:52:52-05:00
+date modified: 2025-04-14T01:18:59-04:00
+---
+git---
 date created: 2025-02-09T16:24:50-05:00
-date modified: 2025-04-09T01:52:11-04:00
+date modified: 2025-04-09T10:15:00-04:00
 ---
 # AE_544_LecNote06\__Variational_Methods__Ch06
 ![[README#Disclaimers]]
@@ -382,8 +386,8 @@ $$
 \begin{align}
 \calB &= \sum_{j=1}^n \left( \sum_{i=1}^N m_i \dot{\bmR}_i \cdot \textcolor{green}{ \pp{\bmR_i}{q_j} } \right) \delta q_j \\
 &= \sum_{j=1}^n \left( \sum_{i=1}^N m_i \dot{\bmR}_i \cdot \textcolor{green}{ \pp{\dot{\bmR}_i}{\dot{q}_j} } \right) \delta q_j    \\
-&= \sum_{j=1}^n \left( \textcolor{red}{ \sum_{i=1}^N } \pp{}{q_j} \textcolor{red}{ \left( \frac{1}{2} m_i \dot{\bmR}_i^2 \right) } \right) \delta q_j \\
-&= \sum_{j=1}^n \pp{\textcolor{red}{ T }}{q_j} \delta q_j   \tag{6.43}
+&= \sum_{j=1}^n \left( \textcolor{red}{ \sum_{i=1}^N } \pp{}{\dot{q}_j} \textcolor{red}{ \left( \frac{1}{2} m_i \dot{\bmR}_i^2 \right) } \right) \delta q_j \\
+&= \sum_{j=1}^n \pp{\textcolor{red}{ T }}{\dot{q}_j} \delta q_j   \tag{6.43}
 \end{align}
 $$
 
