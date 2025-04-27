@@ -1,6 +1,6 @@
 ---
 date created: 2025-03-03T09:54:12-05:00
-date modified: 2025-04-16T17:05:01-04:00
+date modified: 2025-04-27T11:34:04-04:00
 ---
 # AE_544_LecNote07\__Hamiltonian_Dynamics__Ch07
 ![[README#Disclaimers]]
@@ -253,7 +253,7 @@ then the gradient vector is
 $$
 \pp{\calH}{\bmx} = \bmt{\pp{\calH}{\bmq} \\ \pp{\calH}{\bmp}}
 $$
-and we have the matrix form of Hamilton's equations as (todo: verify if the negative sign is correct)
+and we have the matrix form of Hamilton's equations as (~~verify if the negative sign is correct~~ Whether there is a negative sign or not depends on the definition if $[J]$. Here it is consistent.)
 $$
 \dot{\bmx} = - [J] \pp{\calH}{\bmx} + \bmt{\bm{0} \\ \bmQ_{nc}},
 \tag{7.66}
@@ -302,7 +302,7 @@ $$
 $$
 where we have assumed a conservative system to get rid of $\bmQ$ for simplicity. It can be added back later without affecting the analysis here.
 
-For the partial derivative of any new coordinate $\alpha$ picked from $\bmq$ or $\bmp$
+For the partial derivative of any new coordinate $\alpha$ picked from $\bmq^*$ or $\bmp^*$
 $$
 \begin{aligned}
 \pp{\calH}{\alpha} &= \sum_{j=1}^{n} \left(\textcolor{red}{ \pp{\calH}{p_j} } \pp{p_j}{\alpha} + \textcolor{green}{ \pp{\calH}{q_j} } \pp{q_j}{\alpha} \right)   \\
@@ -334,9 +334,7 @@ $$
 \tag{7.90}
 $$
 
-The canonical transformation sufficiency conditions of Eqs. (7.90) and
-(7.91) hold for the case of general forces, with the generalized forces
-transformed using Eq. (7.93) below:
+The canonical transformation sufficiency conditions of Eqs. (7.90) and (7.91) hold for the case of general forces, with the generalized forces transformed using Eq. (7.93) below:
 $$
 \begin{aligned}
 \calQ_{q_j}^* &= \sum_{k=1}^{n} \left( \pp{q_k}{p_j^*} \calQ_{q_k} - \pp{f_k}{p_j^*} \calQ_{p_k} \right) \\
@@ -349,8 +347,7 @@ $$
 
 ### Perfect Differential Criterion for Canonical Transformations (convenient when forward transformation available)
 
-The perfect differential criterion is important because it is much more
-convenient to test than the Lagrange bracket conditions.
+The perfect differential criterion is important because it is much more convenient to test than the Lagrange bracket conditions.
 
 Assume the transformation is given by
 $$
@@ -390,14 +387,16 @@ $$
 = \sum_{k=1}^{n} \left( q_k^* - \sum_{j=1}^{n} q_j \pp{p_j}{p_k^*} \right) \mathrm{d}p_k^* - \sum_{k=1}^{n} \sum_{j=1}^{n} q_j \pp{p_j}{q_k^*} \mathrm{d}q_k^*.
 $$
 
-Equating the coefficients and we get
+Equating the coefficients and we get the expressions for first-order partial derivatives as:
 $$
 \pp{W}{q_k^*} = -\sum_{j=1}^{n} q_j \pp{p_j}{q_k^*}
 $$
 $$
 \pp{\calW}{p_k^*} = \left( q_k^* - \sum_{j=1}^{n} q_j \pp{p_j}{p_k^*} \right)
 $$
-which eventually leads to all the second order partial differentiations we need.
+
+From the above two equations, we can get two different expressions for the second order partial differentiations $\frac{\partial^2 W}{\partial q_k^* \partial q_l^*}$.
+Then substracting them lead to the desired Lagrange brackets.
 
 The last step is to verify Lagrange bracket conditions in Eq. (7.90) one by one.
 

@@ -1,6 +1,6 @@
 ---
 date created: 2025-03-03T09:54:12-05:00
-date modified: 2025-04-21T03:09:48-04:00
+date modified: 2025-04-21T09:54:34-04:00
 ---
 # AE_544_LecNote08\__Nonlinear_Spacecraft_Control__Ch08
 ![[README#Disclaimers]]
@@ -13,7 +13,7 @@ Designing spacecraft attitude control laws combines the skills of rigid body kin
 
 ## Stabilities of System
 
-![[fig-v4-8-1_different_stabilities.png|500]]
+![[fig-v4-8-1_different_stabilities.png|420]]
 
 A state vector point $\bmx_e$ is said to be an <u>equilibrium state</u> (or equilibrium point) of a dynamical system described by $\dot{\bmx} = \bmf(\bmx, t)$ at time $t_0$ if
 $$
@@ -122,11 +122,11 @@ $$
 $$
 
 
-<u>Lyapunov Function</u>: 
+**<u>Lyapunov Function</u>**: 
 The scalar function $V(\bmx)$ is a Lyapunov function for the dynamical system $\dot{\bmx} = \bmf(\bmx)$ if it is continuous and there exists a $\delta > 0$ such that for any $\bmx\in B_\delta(\bmx_r)$: \
 (1) $V(\bmx)$ is a positive definite function about $\bmx_r$. \
 (2) $V(\bmx)$ has continuous partial derivatives. \
-(3) $V(\bmx)$ is negative semidefinite. 
+(3) $\dot{V}(\bmx)$ is negative semidefinite. 
 
 The Lyapunov function $V(\bmx)$ is generally time-varying because $\bmx(t)$ is time-varying.
 
@@ -284,7 +284,7 @@ Thought $\bmq$ is of interest, $\dot{\bmq}$ is still treated as the control vari
 
 For a Lyapunov function
 $$
-V(\bmq) = \frac{1}{2} \bmq \bmq
+V(\bmq) = \frac{1}{2} \bmq\trans \bmq
 $$
 where the position vector $\bmq$ is assumed to be measured relative to the target state $\bmq_r$. 
 
