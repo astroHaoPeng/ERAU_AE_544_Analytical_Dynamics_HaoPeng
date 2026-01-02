@@ -3,27 +3,34 @@
 
 .obsidian/workspace.json
 
+.obsidian/plugins/remember-cursor-position/cursor-positions.json
+
 .pandoc/
 
 .trash/
 
+# Ignore all these extension by default
 *.m
-
 *.md
-
 *.pptx
+*.zip
 
+# Ignore all these files
 *hw*
-*Homework*
+*submissions*
 
+# Include specific files
 !LICENSE.md
 !README.md
 !AE_544_LecNote*.md
-
+# This not is not used for teaching. A powerpoint slide is used as instead. 
 AE_544_LecNote00__Introduction.md
 
-*.zip
+# Ignore all homework and solutions as they are provided as LaTeX from Canvas assignments.
+*Homework*
 
-.obsidian/plugins/remember-cursor-position/cursor-positions.json
+# Ignore the project folder as they are provided as LaTeX from Canvas assignments.
+Projects/
 
-*submissions*
+# Textbook is supposed to be downloaded through ERAU library.
+analytical-mechanics-of-space-systems-4nbsped-1624105211-9781624105210_compress.pdf

@@ -1,16 +1,18 @@
 [
-  "url-into-selection",
-  "obsidian-outliner",
   "obsidian-image-toolkit",
   "obsidian-linter",
+  "table-editor-obsidian",
+  "better-export-pdf",
   "obsidian-latex",
-  "obsidian-paste-image-rename",
-  "obsidian-text-format",
   "obsidian-latex-suite",
-  "remember-cursor-position",
-  "obsidian-underline",
+  "obsidian-outliner",
   "painter",
-  "obsidian-tikzjax",
+  "obsidian-paste-image-rename",
+  "url-into-selection",
+  "remember-cursor-position",
   "settings-search",
-  "zenmode"
+  "zenmode",
+  "obsidian-underline",
+  "obsidian-tikzjax",
+  "obsidian-text-format"
 ]

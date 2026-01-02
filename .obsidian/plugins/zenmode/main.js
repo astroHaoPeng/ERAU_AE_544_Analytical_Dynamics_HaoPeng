@@ -31,15 +31,50 @@ var import_obsidian = require("obsidian");
 var ZenMode = class extends import_obsidian.Plugin {
   constructor() {
     super(...arguments);
+    this.hasButton = false;
+    this._isTogglingZen = false;
+    this.visualViewportResizeHandler = null;
+    this._hasShownInitialHighlight = false;
+    this._highlightTimeouts = [];
     // refresh function for when we change settings
     this.refresh = () => {
       this.updateStyle();
       this.setSidebarVisibility();
       this.setButtonVisibility();
+      this.updateFocusedFileMode();
     };
     // update the styles (at the start, or as the result of a settings change)
     this.updateStyle = () => {
       document.body.classList.toggle("zenmode-active", this.settings.zenMode);
+      document.documentElement.style.setProperty(
+        "--zen-mode-top-padding",
+        `${this.settings.topPadding}px`
+      );
+      document.documentElement.style.setProperty(
+        "--zen-mode-bottom-padding",
+        `${this.settings.bottomPadding}px`
+      );
+      if (this.settings.zenMode) {
+        document.body.classList.toggle(
+          "zenmode-hide-properties",
+          this.settings.hideProperties
+        );
+      } else {
+        document.body.classList.remove("zenmode-hide-properties");
+      }
+      if (this.settings.zenMode) {
+        document.body.setAttribute(
+          "data-zen-hide-inline-title",
+          this.settings.hideInlineTitle.toString()
+        );
+        document.body.setAttribute(
+          "data-zen-focused-file",
+          this.settings.focusedFileMode.toString()
+        );
+      } else {
+        document.body.removeAttribute("data-zen-hide-inline-title");
+        document.body.removeAttribute("data-zen-focused-file");
+      }
     };
   }
   async onload() {
@@ -49,48 +84,55 @@ var ZenMode = class extends import_obsidian.Plugin {
       id: "toggle-zen-mode",
       name: "Toggle",
       callback: () => {
-        this.settings.zenMode = !this.settings.zenMode;
-        this.saveData(this.settings);
-        this.refresh();
+        this.toggleZenMode();
       }
     });
-    this.addRibbonIcon("expand", "Toggle Zen Mode", async () => {
-      this.settings.zenMode = !this.settings.zenMode;
-      this.saveData(this.settings);
-      this.refresh();
+    this.addRibbonIcon("expand", "Toggle Zen mode", async () => {
+      this.toggleZenMode();
+    });
+    this.registerEvent(
+      this.app.workspace.on("active-leaf-change", () => {
+        this.updateFocusedFileMode();
+      })
+    );
+    this.registerDomEvent(document, "keydown", (evt) => {
+      if (evt.key === "Escape" && this.settings.zenMode) {
+        const target = evt.target;
+        if (target) {
+          const cmEditor = target.closest(".cm-editor");
+          if (cmEditor) {
+            const vaultConfig = this.app.vault.config;
+            if (vaultConfig && vaultConfig.vimMode === true) {
+              return;
+            }
+          }
+          if (target instanceof HTMLTextAreaElement && target.className && target.className.includes("excalidraw")) {
+            return;
+          }
+        }
+        const activeModal = document.querySelector(".modal");
+        if (!activeModal) {
+          this.toggleZenMode();
+          evt.preventDefault();
+        }
+      }
     });
     this.refresh();
   }
   onunload() {
-    console.log("Unloading Zen Mode plugin");
+    this._highlightTimeouts.forEach((id) => clearTimeout(id));
+    if (this.buttonContainer) {
+      this.buttonContainer.remove();
+    }
+    if (this.visualViewportResizeHandler && window.visualViewport) {
+      window.visualViewport.removeEventListener(
+        "resize",
+        this.visualViewportResizeHandler
+      );
+    }
   }
   async loadSettings() {
     this.settings = Object.assign(DEFAULT_SETTINGS, await this.loadData());
-  }
-  createButton() {
-    this.buttonContainer = document.createElement("div");
-    this.buttonContainer.classList.add("zenmode-button");
-    this.button = new import_obsidian.ButtonComponent(this.buttonContainer);
-    this.button.setIcon("shrink");
-    this.button.onClick(() => {
-      this.settings.zenMode = !this.settings.zenMode;
-      this.saveSettings();
-      this.refresh();
-    });
-    document.body.appendChild(this.buttonContainer);
-  }
-  setButtonVisibility() {
-    if (this.settings.zenMode) {
-      if (!this.hasButton) {
-        this.createButton();
-        this.hasButton = true;
-      }
-      this.buttonContainer.style.display = "block";
-    } else {
-      if (this.hasButton) {
-        this.buttonContainer.style.display = "none";
-      }
-    }
   }
   async saveSettings() {
     await this.saveData(this.settings);
@@ -118,11 +160,180 @@ var ZenMode = class extends import_obsidian.Plugin {
       }
     }
   }
+  createButton() {
+    this.buttonContainer = document.createElement("div");
+    this.buttonContainer.classList.add("zenmode-button");
+    this.button = new import_obsidian.ButtonComponent(this.buttonContainer);
+    this.button.setIcon("shrink");
+    this.button.onClick(() => {
+      this.toggleZenMode();
+    });
+    document.body.appendChild(this.buttonContainer);
+    this.adjustButtonPosition();
+    this.registerDomEvent(window, "resize", () => {
+      this.adjustButtonPosition();
+    });
+    if (window.visualViewport) {
+      this.visualViewportResizeHandler = () => {
+        this.adjustButtonPosition();
+      };
+      window.visualViewport.addEventListener(
+        "resize",
+        this.visualViewportResizeHandler
+      );
+    }
+  }
+  adjustButtonPosition() {
+    var _a;
+    if (!this.buttonContainer || !document.body.classList.contains("is-mobile")) {
+      return;
+    }
+    const viewportHeight = ((_a = window.visualViewport) == null ? void 0 : _a.height) || window.innerHeight;
+    const windowHeight = window.outerHeight;
+    const navigationBarHeight = Math.max(0, windowHeight - viewportHeight);
+    const minBottomOffset = 60;
+    const calculatedOffset = Math.max(
+      minBottomOffset,
+      navigationBarHeight + 10
+    );
+    this.buttonContainer.style.bottom = `${calculatedOffset}px`;
+  }
+  setButtonVisibility() {
+    const isMobile = document.body.classList.contains("is-mobile");
+    const shouldShow = this.settings.zenMode && (this.settings.exitButtonVisibility === "always" || this.settings.exitButtonVisibility === "mobile-only" && isMobile);
+    if (shouldShow) {
+      if (!this.hasButton) {
+        this.createButton();
+        this.hasButton = true;
+      }
+      this.buttonContainer.style.display = "block";
+      if (this.settings.autoHideButtonOnDesktop && !isMobile && this.settings.exitButtonVisibility === "always") {
+        this.buttonContainer.classList.add("zenmode-button-auto-hide");
+        if (!this._hasShownInitialHighlight) {
+          this.buttonContainer.classList.add(
+            "zenmode-button-initial-highlight"
+          );
+          this._hasShownInitialHighlight = true;
+          const timeout1 = window.setTimeout(() => {
+            if (this.buttonContainer) {
+              this.buttonContainer.classList.remove(
+                "zenmode-button-initial-highlight"
+              );
+              const timeout2 = window.setTimeout(() => {
+                if (this.buttonContainer) {
+                  this.buttonContainer.classList.add(
+                    "zenmode-button-fade-out"
+                  );
+                }
+              }, 300);
+              this._highlightTimeouts.push(timeout2);
+            }
+          }, 1500);
+          this._highlightTimeouts.push(timeout1);
+        }
+      } else {
+        this.buttonContainer.classList.remove(
+          "zenmode-button-auto-hide"
+        );
+        this.buttonContainer.classList.remove(
+          "zenmode-button-initial-highlight"
+        );
+        this.buttonContainer.classList.remove(
+          "zenmode-button-fade-out"
+        );
+      }
+      this.adjustButtonPosition();
+    } else {
+      if (this.hasButton) {
+        this.buttonContainer.style.display = "none";
+      }
+    }
+  }
+  // Update focused file mode visibility
+  updateFocusedFileMode() {
+    if (!this.settings.zenMode || !this.settings.focusedFileMode) {
+      const allTabContainers2 = document.querySelectorAll(".workspace-tabs");
+      allTabContainers2.forEach((container) => {
+        const el = container;
+        el.style.display = "";
+        el.style.width = "";
+        el.style.flex = "";
+      });
+      return;
+    }
+    const activeLeaf = this.app.workspace.activeLeaf;
+    if (!activeLeaf) return;
+    const activeLeafContainer = activeLeaf && "containerEl" in activeLeaf ? activeLeaf.containerEl : null;
+    if (!activeLeafContainer) return;
+    const activeTabContainer = activeLeafContainer.closest(".workspace-tabs");
+    if (!activeTabContainer) return;
+    const allTabContainers = document.querySelectorAll(".workspace-tabs");
+    allTabContainers.forEach((tabContainer) => {
+      if (tabContainer === activeTabContainer) {
+        tabContainer.style.display = "";
+        tabContainer.style.width = "100%";
+        tabContainer.style.flex = "1 1 100%";
+      } else {
+        tabContainer.style.display = "none";
+      }
+    });
+  }
+  async toggleZenMode() {
+    if (this._isTogglingZen) {
+      return;
+    }
+    this._isTogglingZen = true;
+    try {
+      const enteringZenMode = !this.settings.zenMode;
+      if (!enteringZenMode) {
+        this._hasShownInitialHighlight = false;
+      }
+      if (enteringZenMode) {
+        if (this.settings.fullscreen && document.documentElement.requestFullscreen) {
+          try {
+            await document.documentElement.requestFullscreen();
+            await new Promise(
+              (resolve) => requestAnimationFrame(resolve)
+            );
+          } catch (e) {
+            console.warn("Failed to enter fullscreen:", e);
+          }
+        }
+        this.settings.zenMode = true;
+        await this.saveSettings();
+        this.refresh();
+      } else {
+        if (document.fullscreenElement && document.exitFullscreen) {
+          try {
+            await document.exitFullscreen();
+            await new Promise(
+              (resolve) => requestAnimationFrame(resolve)
+            );
+          } catch (e) {
+            console.warn("Failed to exit fullscreen:", e);
+          }
+        }
+        this.settings.zenMode = false;
+        await this.saveSettings();
+        this.refresh();
+      }
+    } finally {
+      this._isTogglingZen = false;
+    }
+  }
 };
 var DEFAULT_SETTINGS = {
   zenMode: false,
   leftSidebar: false,
-  rightSidebar: false
+  rightSidebar: false,
+  fullscreen: false,
+  exitButtonVisibility: "always",
+  autoHideButtonOnDesktop: false,
+  hideProperties: false,
+  hideInlineTitle: false,
+  topPadding: 0,
+  bottomPadding: 0,
+  focusedFileMode: false
 };
 var ZenModeSettingTab = class extends import_obsidian.PluginSettingTab {
   constructor(app, plugin) {
@@ -130,12 +341,68 @@ var ZenModeSettingTab = class extends import_obsidian.PluginSettingTab {
     this.plugin = plugin;
   }
   display() {
-    let { containerEl } = this;
+    const { containerEl } = this;
     containerEl.empty();
-    new import_obsidian.Setting(containerEl).setName("Enable Zen Mode").setDesc("Hide most UI elements").addToggle(
-      (toggle) => toggle.setValue(this.plugin.settings.zenMode).onChange((value) => {
-        this.plugin.settings.zenMode = value;
-        this.plugin.saveData(this.plugin.settings);
+    new import_obsidian.Setting(containerEl).setName("Full screen").setDesc("Automatically enter fullscreen when enabling Zen mode.").addToggle(
+      (toggle) => toggle.setValue(this.plugin.settings.fullscreen).onChange((value) => {
+        this.plugin.settings.fullscreen = value;
+        this.plugin.saveSettings();
+      })
+    );
+    new import_obsidian.Setting(containerEl).setName("Show Zen mode exit button").setDesc(
+      "When to show the exit button in Zen mode. You can also exit via the command palette, by pressing ESC, or by assigning a hotkey to the 'Toggle Zen mode' command."
+    ).addDropdown(
+      (dropdown) => dropdown.addOption("always", "Always show").addOption("mobile-only", "Mobile only").addOption("never", "Never show").setValue(this.plugin.settings.exitButtonVisibility).onChange((value) => {
+        this.plugin.settings.exitButtonVisibility = value;
+        this.plugin.saveSettings();
+        this.plugin.refresh();
+      })
+    );
+    new import_obsidian.Setting(containerEl).setName("Auto-hide Zen mode exit button on desktop").setDesc(
+      "When enabled, the exit button is hidden on desktop but reveals itself on hover as long as the Zen mode exit button is on."
+    ).addToggle(
+      (toggle) => toggle.setValue(this.plugin.settings.autoHideButtonOnDesktop).onChange((value) => {
+        this.plugin.settings.autoHideButtonOnDesktop = value;
+        this.plugin.saveSettings();
+        this.plugin.refresh();
+      })
+    );
+    new import_obsidian.Setting(containerEl).setName("Hide properties in Zen mode").setDesc("Hide properties when Zen mode is active.").addToggle(
+      (toggle) => toggle.setValue(this.plugin.settings.hideProperties).onChange((value) => {
+        this.plugin.settings.hideProperties = value;
+        this.plugin.saveSettings();
+        this.plugin.refresh();
+      })
+    );
+    new import_obsidian.Setting(containerEl).setName("Hide inline title in Zen mode").setDesc(
+      "Hide the inline title (note title) when Zen mode is active."
+    ).addToggle(
+      (toggle) => toggle.setValue(this.plugin.settings.hideInlineTitle).onChange((value) => {
+        this.plugin.settings.hideInlineTitle = value;
+        this.plugin.saveSettings();
+        this.plugin.refresh();
+      })
+    );
+    new import_obsidian.Setting(containerEl).setName("Top padding").setDesc("Top padding in pixels (0-100).").addSlider(
+      (slider) => slider.setLimits(0, 100, 1).setValue(this.plugin.settings.topPadding).setDynamicTooltip().onChange((value) => {
+        this.plugin.settings.topPadding = value;
+        this.plugin.saveSettings();
+        this.plugin.refresh();
+      })
+    );
+    new import_obsidian.Setting(containerEl).setName("Bottom padding").setDesc("Bottom padding in pixels (0-100).").addSlider(
+      (slider) => slider.setLimits(0, 100, 1).setValue(this.plugin.settings.bottomPadding).setDynamicTooltip().onChange((value) => {
+        this.plugin.settings.bottomPadding = value;
+        this.plugin.saveSettings();
+        this.plugin.refresh();
+      })
+    );
+    new import_obsidian.Setting(containerEl).setName("Focused file mode").setDesc(
+      "Only show the active file in Zen mode, hide all other panes."
+    ).addToggle(
+      (toggle) => toggle.setValue(this.plugin.settings.focusedFileMode).onChange((value) => {
+        this.plugin.settings.focusedFileMode = value;
+        this.plugin.saveSettings();
         this.plugin.refresh();
       })
     );
