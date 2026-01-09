@@ -1,6 +1,6 @@
 ---
 date created: 2025-01-12T15:56:32-05:00
-date modified: 2025-02-11T10:43:34-05:00
+date modified: 2026-01-09T09:29:48-05:00
 ---
 
 # AE_544_LecNote01\__Particle_Kinematics__Ch01
@@ -14,13 +14,14 @@ The key points here are:
 - Coordinate system
 
 >[!question]- Reference frame vs. coordinate system?
-> *Coordinate system*: A mathematical construct/concept. The direction matters more than the origin. Example: velocity vector $\bm{v}$ and acceleration vector $\bm{a}$.
-> 
-> The transformation from one coordinate system to another is kind of "static", where no physics are involved.
->  
-> *Frame, or reference frame*: A physics-involved concept. The origin matters more than the direction. Example: position vector $\bm{r}$.
+> *Frame*, or reference frame, or frame of reference: A physics-involved concept. The origin matters more than the direction. Example: position vector $\bm{r}$.
 > 
 > The transformation from one frame to another is kind of "dynamic", which usually involves the transport theorem.
+>
+> *Coordinate system*: A mathematical construction/concept. The direction matters more than the origin. Example: velocity vector $\bm{v}$ and acceleration vector $\bm{a}$. 
+> Because origin is usually pre-determined by the frame the coordinate system is attached to, but you have free choice of the direction of each basis. 
+> 
+> The transformation from one coordinate system to another at the same origin is kind of "static", where no physics are involved. (<-- NOT always true! Just to help understanding.)
 
 *<u>Particle</u> Kinematics* means the physical dimensions and properties are not concerned.
 
@@ -143,7 +144,7 @@ A spherical coordinate system $\mathcal{S}$ is illustrated in Fig. 1.3 with its 
 
 ![[fig-1-3__spherical_frame.png|300]]
 
-The position vector and coordinates in $\mathcal{S}$ are
+For the position vector $\bmr$ of the point $\bm{P}$, its coordinates in $\mathcal{S}$ are given as
 $$
 \begin{aligned}
 \bm{r} &= r \sht{r} \\
@@ -162,7 +163,7 @@ $$
 \end{alignat*}
 $$
 
->[!question] Similarly, do we must define a Cartesian coordinate system first before a Spherical Coordinate system?
+>[!question]- Similarly, do we must define a Cartesian coordinate system first before a Spherical Coordinate system?
 >No answer is provided.
 
 
@@ -181,7 +182,7 @@ $$
 >Especially when dealing with attitude dynamics, or rigid body rotation, it is convenient to express $\bm{\omega}$ in the body frame. We will see this in later discussions.
 
 >[!warning] 
->*Textbook convention*: Always use rad/s for angular velocity. Note that any time numerical values of $\bm{\omega}$ are used that units of <u>radians per second</u> must be used. Otherwise any formulas that use x will not yield correct results.
+>*Textbook convention*: Always use <u>rad/s</u> for angular velocity. Note that any time numerical values of $\bm{\omega}$ are used that units of <u>radians per second</u> must be used. Otherwise any formulas that use $\times$ will not yield correct results.
 
 
 ## Rotation About a Fixed Axis
@@ -202,7 +203,7 @@ $$
 
 So the transport velocity of a point $P$ in/on a rigid body is
 $$
-\dot{\bm{r}} = (r \sin\theta) \cdot \omega \cdot \frac{\bm{\omega} \times \bm{r}} {|\bm{\omega} \times \bm{r}|} = \bm{\omega} \times \bm{r}
+\dot{\bm{r}} = (r \sin\theta) \, \omega \cdot \frac{\bm{\omega} \times \bm{r}} {|\bm{\omega} \times \bm{r}|} = \bm{\omega} \times \bm{r}
 \tag{1.13 and 1.14}
 $$
 
@@ -288,7 +289,7 @@ $$
 
 Finally, we have the transport theorem:
 >[!theorem 1.1]
->(Transport Theorem): (... omitted details of symbols and assumptions ...)
+>(Transport Theorem): (... omitted details of symbols and assumptions ...)  the derivative of $\bmr$ in the $\calN$ frame can be related to the derivative of $\bmr$ in the $\calB$ frame as
 > $$
 > \ddtN(\bm{r}) = \ddtB(\bm{r}) + \bm{\omega}_{\Bcal/\Ncal} \times \bm{r}
 > \tag{1.21}
@@ -310,7 +311,7 @@ $$
 
 >[!note] Transport theorem doesn't depend on the handedness of the coordinate system. 
 >But switching from right-handed system to a left-handed system will change all the coordinates, and also change the cross-product rules, meaning that $\iht{}\times\hat{\bm{j}}=\hat{{\bm{k}}}$ will be changed to $\iht{}\times\hat{\bm{j}}=-\hat{{\bm{k}}}$.
->So, no only does the definition of the direction of the angular velocity vector is changed, but also how it is calculated in a cross-product.
+>So, not only does the definition of the direction of the angular velocity vector is changed, but also how it is calculated in a cross-product.
 >If all the coordinates are handled carefully and correctly, the transport theorem will be proved to be correct for this transformation.
 >
 >One trick during this change is to consider just a flip of one basis. If additional rotations are needed, they can be decomposed as a regular rotational transformation in right-handed frames.
