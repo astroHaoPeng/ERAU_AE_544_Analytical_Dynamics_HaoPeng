@@ -1,6 +1,6 @@
 ---
 date created: 2025-01-12T15:56:32-05:00
-date modified: 2026-01-12T09:13:01-05:00
+date modified: 2026-01-12T10:23:59-05:00
 ---
 
 # AE_544_LecNote01\__Particle_Kinematics__Ch01
@@ -232,7 +232,7 @@ $$
 ## Transport Theorem (*Proof required*)
 
 Let $\mathcal{N}$ be an inertially fixed reference frame with a corresponding triad of $\mathcal{N}$-fixed orthogonal base vectors $\{ \nht{1}, \nht{2}, \nht{3} \}$. \
-Let $\mathcal{B}$ be another reference frame with the B-fixed base vectors $\{ \bht{1}, \bht{2}, \bht{3} \}$. \
+Let $\mathcal{B}$ be another reference frame with the $\calB$-fixed base vectors $\{ \bht{1}, \bht{2}, \bht{3} \}$. \
 For simplicity, let the origins of the two frames be coincident.
 
 Given the position vector $\bmr$ and angular velocity vector $\bm{\omega}_{\Bcal/\Ncal}$ (of the frame $\calB$ relative to the frame $\calN$) as following:
@@ -264,6 +264,9 @@ $$
 = \dot{r}_1 \bht{1} + \dot{r}_2 \bht{2} + \dot{r}_3 \bht{3}
 \tag{1.17}
 $$
+$$
+\ddtB(r_1 \bht1) = \ddtB(r_1) \bht1 + \ccancelto{0}{r_1 \cdot \ddtB (\bht1)}
+$$
 where $\dot{r}_i = \ddtB (r_i)$ since the derivative of a scaler is not affected by rotations.
 
 >[!note]
@@ -287,6 +290,12 @@ the derivatives of the basis vectors can be found as (expand this)
 $$
 \ddtN(\bht{i}) = \bm{\omega}_{\Bcal/\Ncal} \times \bht{i}
 \tag{1.19}
+$$
+
+$$
+\bmo_{\calB/\calN} \times (r_1 \bht1) 
++ \bmo_{\calB/\calN} \times (r_2 \bht2) 
++ \bmo_{\calB/\calN} \times (r_3 \bht3)
 $$
 
 Finally, we have the transport theorem:
