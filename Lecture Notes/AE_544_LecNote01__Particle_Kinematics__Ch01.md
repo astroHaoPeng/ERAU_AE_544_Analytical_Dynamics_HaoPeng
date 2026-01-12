@@ -1,6 +1,6 @@
 ---
 date created: 2025-01-12T15:56:32-05:00
-date modified: 2026-01-09T09:29:48-05:00
+date modified: 2026-01-12T09:13:01-05:00
 ---
 
 # AE_544_LecNote01\__Particle_Kinematics__Ch01
@@ -231,11 +231,11 @@ $$
 
 ## Transport Theorem (*Proof required*)
 
-Let $\mathcal{N}$ be an inertially fixed reference frame with a corresponding triad of $\mathcal{N}$-fixed orthogonal base vectors $\{ \nht{1}, \nht{2}, \nht{3} \}$. 
-Let $\mathcal{B}$ be another reference frame with the B-fixed base vectors $\{ \bht{1}, \bht{2}, \bht{3} \}$.
+Let $\mathcal{N}$ be an inertially fixed reference frame with a corresponding triad of $\mathcal{N}$-fixed orthogonal base vectors $\{ \nht{1}, \nht{2}, \nht{3} \}$. \
+Let $\mathcal{B}$ be another reference frame with the B-fixed base vectors $\{ \bht{1}, \bht{2}, \bht{3} \}$. \
 For simplicity, let the origins of the two frames be coincident.
 
-Given the position vector and angular velocity vector as following:
+Given the position vector $\bmr$ and angular velocity vector $\bm{\omega}_{\Bcal/\Ncal}$ (of the frame $\calB$ relative to the frame $\calN$) as following:
 $$
 \bm{r} = r_1 \bht{1} + r_2 \bht{2} + r_3 \bht{3}
 \tag{1.15}
@@ -264,24 +264,26 @@ $$
 = \dot{r}_1 \bht{1} + \dot{r}_2 \bht{2} + \dot{r}_3 \bht{3}
 \tag{1.17}
 $$
-where $\dot{r}_i = \ddtB (r_i)$.
+where $\dot{r}_i = \ddtB (r_i)$ since the derivative of a scaler is not affected by rotations.
 
 >[!note]
->This is also referred to as *relative velocity* sometimes in different books.
+>$\ddtB(\bm{r})$ is also referred to as *relative velocity* sometimes, in different books. 
 
-The derivative in the $\Ncal$ frame is given by
+Then, the derivative in the $\Ncal$ frame is given by
 $$
 \ddtN(\bm{r}) = \ddtN \left( r_1 \bht{1} + r_2 \bht{2} + r_3 \bht{3} \right)
 = \dot{r}_1 \bht{1} + \dot{r}_2 \bht{2} + \dot{r}_3 \bht{3} 
 + r_1 \ddtN (\bht{1}) + r_2 \ddtN (\bht{2}) + r_3 \ddtN (\bht{3}) 
 \tag{1.18}
 $$
-where $\dot{r}_i$ is defined as previous.
-Using Eq. (1.14) (copied here), the derivatives of the basis vectors can be found as
+where $\dot{r}_i = \ddtN(r_1) = \ddtB(r_1)$ due to the same reason given previously.
+Using Eq. (1.14) (copied here),
 $$
 \dot{\bm{r}} = \bm{\omega} \times \bm{r}
 \tag{1.14}
 $$
+
+the derivatives of the basis vectors can be found as (expand this)
 $$
 \ddtN(\bht{i}) = \bm{\omega}_{\Bcal/\Ncal} \times \bht{i}
 \tag{1.19}
@@ -295,21 +297,21 @@ Finally, we have the transport theorem:
 > \tag{1.21}
 > $$
 
-> Notice that $\Bcal$ and $\Ncal$ are arbitrarily moving reference frames. This permits one to relate the derivative of $\bm{r}$ as it would be seen from the $\Ncal$ frame to the analogous rate of change of $\bm{r}$ as seen in the $\Bcal$ frame.
+Notice that $\Bcal$ and $\Ncal$ are arbitrarily moving reference frames. This permits one to relate the derivative of $\bm{r}$ as it would be seen from the $\Ncal$ frame to the analogous rate of change of $\bm{r}$ as seen in the $\Bcal$ frame.
 
-> It is a very fundamental and important result that is used almost every time kinematic equations are derived.
+**It is a very fundamental and important result that is used almost every time kinematic equations are derived.**
 
-Simplify the notation using the following shorthand notation:
+Simplify the notation using the following shorthand notation, assuming the dot differential symbol is always default to a non-rotating frame $\calN$, we can write 
 $$
 \ddtN(\bm{x}) \equiv \dot{\bm{x}}
 \tag{1.22}
 $$
 
 >[!hint] 
->It can be confusing by not specifying the underlying frame or coordinate system used to express vectors. 
+>However, it can be confusing by not specifying the underlying frame or coordinate system used to express vectors. 
 
 
->[!note] Transport theorem doesn't depend on the handedness of the coordinate system. 
+>[!note] (Fun fact!) Transport theorem doesn't depend on the handedness of the coordinate system. 
 >But switching from right-handed system to a left-handed system will change all the coordinates, and also change the cross-product rules, meaning that $\iht{}\times\hat{\bm{j}}=\hat{{\bm{k}}}$ will be changed to $\iht{}\times\hat{\bm{j}}=-\hat{{\bm{k}}}$.
 >So, not only does the definition of the direction of the angular velocity vector is changed, but also how it is calculated in a cross-product.
 >If all the coordinates are handled carefully and correctly, the transport theorem will be proved to be correct for this transformation.
@@ -401,7 +403,7 @@ $$
 > 
 > The orbit plane is chosen as a reference plan to define the two body frames. 
 
-To obtain the relative acceleration as seen in the $\Acal$ frame, the preceding differentiation process is repeated to yield
+To obtain the **relative acceleration as seen in the $\Acal$ frame**, the preceding differentiation process is repeated to yield
 $$
 \dddttA (\bm{\rho}) = \ddtA \left[ \dot{r}_B \iht{r_B} + (\dot{\theta}_B - \dot{\theta}_A) r_B \, \iht{\theta_B} - \dot{r}_A \iht{r_A} \right]
 $$
