@@ -1,6 +1,6 @@
 ---
 date created: 2025-01-12T15:56:32-05:00
-date modified: 2026-01-12T10:23:59-05:00
+date modified: 2026-01-21T08:57:00-05:00
 ---
 
 # AE_544_LecNote01\__Particle_Kinematics__Ch01
@@ -518,21 +518,26 @@ where $\bm{\alpha}_{\Bcal/\Acal} = \ddtA(\bm{\omega}_{\Bcal/\Acal})$ is the angu
 > [!important] 
 > The vector components used in the various terms on the right-hand side of Eq. (1.35) can be taken along any choice of unit vectors. It is important that we recognize the complete freedom we have to use any basis vectors we wish to express components of any vector in Eq. (1.35).
 
-> [!info]- There is some ambiguity about `centrifugal/centripetal acceleration`, but no ambiguity about `centrifugal force`.
+> [!info] There is some ambiguity about `centrifugal/centripetal acceleration`, but no ambiguity about `centrifugal force`.
 > >[!warning] Read with caution. My understanding could be wrong.
 > 
-> In the textbook we are using, particularly, under Eq. (1.36) on page 20, there are both mentioning of `centrifugal` and `centripical` (a typo for `centripetal`). In my opinion, it is indeed a confusing expression, and there is no easy correction to that.
+> In the textbook we are using, particularly, under Eq. (1.36) on page 20, there are both mentioning of `centrifugal` and `centripical` (a typo for `centripetal`). In my opinion, it is indeed a confusing expression, and it should be both `centrifugal` here.
+> ![[fig-centrifugal-vs-centripetal.png|300]]
 > 
-> Additionally, I find the usage of the terms `centrifugal acceleration` and `centripetal acceleration` is kind of inconsistent through different textbook and online resources. 
+> Additionally, I find the usage of the terms `centrifugal acceleration` and `centripetal acceleration` is kind of inconsistent through different textbook and online resources. When describing accelerations using these two terms, the direction is the emphasis, in my opinion.
 > 
-> Alternatively, my suggestion is to try to discuss `centrifugal force` instead of `centrifugal acceleration`. 
+> But for forces, these two terms usually have more consistent definitions:
+> - `centrifugal force` is the *fictitious* force apparently being exerted on the object, due to the rotating of the reference frame.
+> - `centripetal force` is the *real* force applied on the object in order to counterpart the above fictitious force.
+>
+> Therefore, my suggestion is to try to discuss `centrifugal force` instead of `centrifugal acceleration`.
 > 
 > Resort to these Wikipedia links for some good explanations of these fictitious forces, which are more or less consistent with each other:
-> - https://en.wikipedia.org/wiki/Centrifugal_force?useskin=vector#Force
-> - https://en.wikipedia.org/wiki/Fictitious_force?useskin=vector#General_derivation
-> - https://en.wikipedia.org/wiki/Coriolis_force?useskin=vector#Formula
+> - https://en.wikipedia.org/wiki/Centrifugal_force#Force
+> - https://en.wikipedia.org/wiki/Fictitious_force#General_derivation
+> - https://en.wikipedia.org/wiki/Coriolis_force#Formula
 > 
-> My conclusion is that language interpretation can be confusing with a specific background, but the mathematical derivation is straightforward and unambiguous.
+> My comment is that language interpretation can be confusing with a specific background, but the mathematical derivation is straightforward and unambiguous.
 
 ## Example 1.5 Rolling disk inside a tube
 
@@ -544,7 +549,7 @@ Three frames are defined and involved:
 - $\mathcal{E}: \{ O, \eht{L}, \eht{\theta}, \eht{3} \}$, cylindrical
 - $\mathcal{B}: \{ O', \bht{r}, \bht{\phi}, \bht{3} \}$, cylindrical
 
-The logics are:
+The logics are (detailed steps are referred to the textbook):
 1. Find $\bm{\omega}_{\Bcal/\Ncal}$ and $\bm{\omega}_{\mathcal{E}/\Ncal}$.
 2. Express $\bm{r}$ and $\bm{L}+\bm{\rho}$.
 3. Using transport theorem repeatedly to find $\dot{\bm{r}}$ and then $\ddot{\bm{r}}$. During process, resolving $\bm{L}$ and $\bm{\rho}$ to coordinates to simplify the problem.
@@ -557,11 +562,11 @@ The logics are:
 ## Textbook problem 1.8 (Rotating disk on train)
 ![[fig-p1-8_rotating_disk_on_train.png|600]]
 
-The rail is straight.
+The rail is straight. The $P$ point is given by $\bmr$ in the figure.
 
-Inertial frame $\calN:\{\nht{}\}$ not shown in the figure, assume $v(t)$ is measured in this frame, doesn't really matter. 
+Inertial frame $\calN:\{\nht{}\}$ not shown in the figure. We assume $\bmv(t)$ is measured in this frame. But it doesn't really matter where the origin of $\calN$ is.
 
-Cartesian frame $\calD:\{\dht1,\dht2,\dht3\}$ centered at the disk
+Cartesian frame $\calD:\{\dht1,\dht2,\dht3\}$ centered at the disk.
 
 Polar frame $\calE: \{\eht{r},\eht{\theta},\dht3\}$ at the same center
 
@@ -569,7 +574,7 @@ Train is moving in a constant/fixed direction, which is $\dht1$ in the figure.
 
 Disk's constant rotation vector is $\bmo = \omega_{\calE/\calD} \dht3$
 
-Position vector is
+Position vector of the point $P$ is
 $$
 \bmr = r \eht{r}
 $$
@@ -597,7 +602,7 @@ $$
 
 ## Textbook problem 1.9 (Rotating disk on train variant)
 ![[fig-p1-8_rotating_disk_on_train.png|600]]
-Repeat problem 1.8, but this time assume that the particle P is free to move radially on the disk. Again find the corresponding inertial velocity and acceleration.
+Repeat problem 1.8, but this time assume that the particle $P$ (given by $\bmr$ in the figure) is free to move radially on the disk. Again find the corresponding inertial velocity and acceleration.
 
 Inertial frame $\calN:\{\nht{}\}$ not shown in the figure, assume $v(t)$ is measured in this frame.
 
