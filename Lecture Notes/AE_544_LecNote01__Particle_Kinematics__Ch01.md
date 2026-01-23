@@ -1,6 +1,6 @@
 ---
 date created: 2025-01-12T15:56:32-05:00
-date modified: 2026-01-21T08:57:00-05:00
+date modified: 2026-01-22T23:13:46-05:00
 ---
 
 # AE_544_LecNote01\__Particle_Kinematics__Ch01
@@ -480,13 +480,13 @@ $\mathcal{B}: \{ O', \bht{1}, \bht{2}, \bht{3} \}$
 
 **New notation**: The velocity vector of the particle $P$ with the derivative taken relative to the $\Bcal$ frame:
 $$
-(v^P)_\Bcal \equiv \ddtB( \bm{\rho} )
+(\bmv^P)_\Bcal \equiv \ddtB( \bm{\rho} )
 \tag{1.26}
 $$
 
 The velocity vector of $P$ relative to the $\Acal$ frame is given as
 $$
-(v^P)_A \equiv \ddtA (\bm{r}) = \ddtA (\bm{R}+\bm{\rho}) = \ddtA (\bm{R}) + \ddtA (\bm{\rho})
+(\bmv^P)_A \equiv \ddtA (\bm{r}) = \ddtA (\bm{R}+\bm{\rho}) = \ddtA (\bm{R}) + \ddtA (\bm{\rho})
 \tag{1.27}
 $$
 $$
@@ -503,12 +503,12 @@ $$
 \cood{\bm{a}^P}{\Acal} = \ddtA\left( \cood{\bm{v}^{O'}}{\Acal} + \cood{\bm{v}^P}{\Bcal} + \bm{\omega}_{\Bcal/\Acal} \times \bm{\rho} \right)
 $$
 $$
-= \cood{\bm{a}^{O'}}{\Acal} + \cood{\bm{a}^P}{\Bcal} + \bm{\alpha}_{\Bcal/\Acal} \times \bm{\rho} + 2\bm{\omega}_{\Bcal/\Acal} \times \cood{v^P}{\Bcal} + \bm{\omega}_{\Bcal/\Acal} \times \left( \bm{\omega}_{\Bcal/\Acal} \times \bm{\rho} \right)
+= \cood{\bm{a}^{O'}}{\Acal} + \cood{\bm{a}^P}{\Bcal} + \bm{\alpha}_{\Bcal/\Acal} \times \bm{\rho} + 2\bm{\omega}_{\Bcal/\Acal} \times \cood{\bmv^P}{\Bcal} + \bm{\omega}_{\Bcal/\Acal} \times \left( \bm{\omega}_{\Bcal/\Acal} \times \bm{\rho} \right)
 \tag{1.35}
 $$
 where $\bm{\alpha}_{\Bcal/\Acal} = \ddtA(\bm{\omega}_{\Bcal/\Acal})$ is the angular acceleration vector of the $\Bcal$ frame relative to the $\Acal$ frame.
 
-- Coriolis acceleration: $2\bm{\omega}_{\Bcal/\Acal} \times \cood{v^P}{\Bcal}$
+- Coriolis acceleration: $2\bm{\omega}_{\Bcal/\Acal} \times \cood{\bmv^P}{\Bcal}$
 - Centrifugal acceleration: $\bm{\omega}_{\Bcal/\Acal} \times \left( \bm{\omega}_{\Bcal/\Acal} \times \bm{\rho} \right)$
 - Euler acceleration: $\bm{\alpha}_{\Bcal/\Acal} \times \bm{\rho}$
 
@@ -606,9 +606,9 @@ Repeat problem 1.8, but this time assume that the particle $P$ (given by $\bmr$ 
 
 Inertial frame $\calN:\{\nht{}\}$ not shown in the figure, assume $v(t)$ is measured in this frame.
 
-Cartesian frame $\calD:\{\dht1,\dht2,\dht3\}$ centered at the disk
+Cartesian frame $\calD:\{\dht1,\dht2,\dht3\}$ **centered at the disk** (to simplify the problem)
 
-Polar frame $\calE: \{\eht{r},\eht{\theta},\dht3\}$ at the same center
+Polar frame $\calE: \{\eht{r},\eht{\theta},\dht3\}$ at the same center, and $\eht{r}$ pointing to the particle $P$.
 
 Train is moving in a constant/fixed direction, which is $\dht1$ in the figure.
 

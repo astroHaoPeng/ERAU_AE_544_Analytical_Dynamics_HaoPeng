@@ -1,7 +1,8 @@
 ---
 date created: 2025-01-12T16:04:10-05:00
-date modified: 2025-02-11T10:36:39-05:00
+date modified: 2026-01-22T23:15:53-05:00
 ---
+
 # AE_544_LecNote02\__Newtonian_Mechanics__Ch02
 
 ![[README#Disclaimers]]
@@ -556,7 +557,7 @@ Study Section 2.6 Rocket Problem and try answer textbook problem 2.15.
 
 ## Homework 01
 
-Due on Feb 08. 
+Due on Jan 28. 
 Check Canvas for detailed guidance on submissions.
 
 Use office hours if you need.
