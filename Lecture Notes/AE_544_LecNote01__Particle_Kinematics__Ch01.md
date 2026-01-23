@@ -1,6 +1,6 @@
 ---
 date created: 2025-01-12T15:56:32-05:00
-date modified: 2026-01-22T23:13:46-05:00
+date modified: 2026-01-23T15:17:51-05:00
 ---
 
 # AE_544_LecNote01\__Particle_Kinematics__Ch01
@@ -608,31 +608,34 @@ Inertial frame $\calN:\{\nht{}\}$ not shown in the figure, assume $v(t)$ is meas
 
 Cartesian frame $\calD:\{\dht1,\dht2,\dht3\}$ **centered at the disk** (to simplify the problem)
 
-Polar frame $\calE: \{\eht{r},\eht{\theta},\dht3\}$ at the same center, and $\eht{r}$ pointing to the particle $P$.
+Polar frame $\calE: \{\eht{r},\eht{\theta},\dht3\}$ at the same center to $\calD$, and $\eht{r}$ pointing to the particle $P$.
 
-Train is moving in a constant/fixed direction, which is $\dht1$ in the figure.
+The angle between $\dht1$ and $\eht{r}$ is denoted as $\theta$.
+
+Train is moving in a constant/fixed direction, which is $\dht1$ in the figure, but with a time varying velocity $v(t)$.
 
 Disk's constant rotation vector is $\bmo = \omega_{\calE/\calD} \dht3$
 
-Position vector is
+Denote the position vector of the disk center as $\bmR$, the position vector $\bmr$ of the particle is
 $$
-\bmr = r \eht{r}
+\bmr = \bmR + r \eht{r}
 $$
 
-The vector measured in $\calE$ is
+The velocity vector measured in $\calE$ is
 $$
 \begin{aligned}
-\ddtD{\bmr} &= \dot{r}\eht{r} + r \ddtE\eht{r} \\
+\ddtD{(r \eht{r})} &= \dot{r}\eht{r} + r \ddtE\eht{r} \\
 &= \dot{r}\eht{r} + r \bmo\times\eht{r} = \dot{r}\eht{r} + r\omega_{\calE/\calD}\dht3\times\eht{r} \\
 &= \dot{r}\eht{r} + r\omega\eht{\theta} \\
 &= \dot{r}(\cos\theta\dht1 + \sin\theta\dht2) + r\omega (-\sin\theta\dht1 + \cos\theta\dht2)\\
 &=  (\dot{r}\cos\theta - r\omega\sin\theta)\dht1 + (\dot{r}\sin\theta + r\omega\cos\theta)\dht2
 \end{aligned}
 $$
-The inertial velocity is then
+The inertial velocity $\bmv = \dot{\bmr}$ is then given by
 $$
 \begin{aligned}
-\dot{\bmr} &= \ddtN \bmr = v(t)\dht{1} + \ddtD \bmr \\
+\dot{\bmr} = \ddtN \bmr &= \ddtN (\bmR + r \eht{r}) \\ 
+&= v(t)\dht{1} + \ddtD \bmr \\
 &= v(t)\dht1 + (\dot{r}\cos\theta - r\omega\sin\theta)\dht1 + (\dot{r}\sin\theta + r\omega\cos\theta)\dht2 \\
 &= (v(t) + \dot{r}\cos\theta - r\omega\sin\theta)\dht1 + (\dot{r}\sin\theta + r\omega\cos\theta)\dht2
 \end{aligned}
@@ -655,11 +658,13 @@ $$
 ## Textbook problem 1.14 (Grinding disk and missile)
 ![[fig-p1-14_grinding_disk.png|600]]
 
-Inertial frame $\calN:\{\nht1,\nht2,\nht3\}$
+Inertial frame $\calN:\{\nht1,\nht2,\nht3\}$, centered at the shaft.
 
-Polar frame $\calE:\{\eht{r},\eht{\phi},\eht{3}\}$, centered at the center of the grind.
+Polar frame $\calE:\{\eht{r},\eht{\phi},\eht{3}\}$, centered at the center of the grinder.
 
-Polar frame $\calS:\{\sht{r},\sht{\theta},\sht{3}\}$, centered at the grind, pointing to $P$.
+Polar frame $\calS:\{\sht{r},\sht{\theta},\sht{3}\}$, centered at the grind, $\sht{r}$ is pointing to $P$, $\sht{\theta}$ is pointing to the rotating direction, thus $\sht{3}$ is opposition to $\eht{r}$.
+
+Useful relationship: $\sht{3} = -\eht{r}$ and $\nht{3} = \eht{3}$
 
 Constants: $R$, $r$, $h$
 
@@ -669,11 +674,11 @@ Rotation velocity vectors:
 
 $\bmo_{\calE/\calN} = \dot{\phi}\nht3$
 
-$\bmo_{\calS/\calE} = - \dot{\theta}\eht{r}$ (Notice this is in the negative direction!)
+$\bmo_{\calS/\calE} = \dot{\theta} \sht{3} = - \dot{\theta}\eht{r}$ (Notice this is in the negative direction!)
 
 $\bmo_{\calS/\calN} = \dot{\phi}\nht3 - \dot{\theta}\eht{r}$
 
-### (a) inertial v and a
+### (a) inertial velocity and acceleration
 $$
 \bmr = r \sht{r} + R \eht{r}
 $$
