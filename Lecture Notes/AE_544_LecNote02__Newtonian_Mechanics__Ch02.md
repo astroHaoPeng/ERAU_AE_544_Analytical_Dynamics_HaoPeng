@@ -1,6 +1,6 @@
 ---
 date created: 2025-01-12T16:04:10-05:00
-date modified: 2026-01-26T09:31:54-05:00
+date modified: 2026-01-26T12:05:56-05:00
 ---
 
 # AE_544_LecNote02\__Newtonian_Mechanics__Ch02
@@ -75,20 +75,27 @@ Inertial acceleration $\ddot{\bm{r}} = -L\dot{\theta}^2 \eht{r} + L \ddot{\theta
 > \end{align}
 > $$
 
-FBD gives:
+Next we will decompose all external force $\bmF_e$ in frame $\calE$, where FBD should gives
+$$\bmF_e = (-F_L + mg \cos \theta) \eht{r} + (-mg \sin \theta) \eht{\theta}$$
+
+Appling Newton's second law $m \ddot{\bmr}  = m \bm{a}$ gives a set of two equations,
 $$
+\left\{ 
 \begin{aligned}
 -mL\dot{\theta}^2 &= -F_L + mg \cos \theta \\
 mL\ddot{\theta} &= -mg \sin \theta
 \end{aligned}
+\right.
 $$
 
-The tension force magnitude $F_L = mL\dot{\theta}^2 +  mg \cos \theta$
-
-The nonlinear differential equations of motion of the spherical pendulum mass $m$ is 
+From the second equation, the nonlinear differential equations of motion of the spherical pendulum mass $m$ is 
 $$
 \ddot{\theta} = \frac{-g \sin \theta}{L}
 $$
+
+After solving for the above equation to get a solution of $\theta(t)$, the tension force magnitude $F_L$ can be resolved from the first equation as 
+$$F_L = mL\dot{\theta}^2 +  mg \cos \theta$$
+
 
 ## Textbook problem 2.10 (rolling cylinder on slope)
 ![[fig-p2-10_rolling_cylinder_with_offset_mass.png|600]]
