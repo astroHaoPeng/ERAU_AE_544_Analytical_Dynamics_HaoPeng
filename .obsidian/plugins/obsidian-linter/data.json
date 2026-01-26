@@ -277,7 +277,13 @@
   "displayLintOnFileChangeNotice": false,
   "settingsConvertedToConfigKeyValues": true,
   "foldersToIgnore": [],
-  "filesToIgnore": [],
+  "filesToIgnore": [
+    {
+      "label": "",
+      "match": "preamble.md",
+      "flags": "i"
+    }
+  ],
   "linterLocale": "system-default",
   "logLevel": "INFO",
   "lintCommands": [],

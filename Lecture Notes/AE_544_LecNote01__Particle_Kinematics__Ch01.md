@@ -1,6 +1,6 @@
 ---
 date created: 2025-01-12T15:56:32-05:00
-date modified: 2026-01-23T15:17:51-05:00
+date modified: 2026-01-26T09:15:06-05:00
 ---
 
 # AE_544_LecNote01\__Particle_Kinematics__Ch01
@@ -664,13 +664,18 @@ Polar frame $\calE:\{\eht{r},\eht{\phi},\eht{3}\}$, centered at the center of th
 
 Polar frame $\calS:\{\sht{r},\sht{\theta},\sht{3}\}$, centered at the grind, $\sht{r}$ is pointing to $P$, $\sht{\theta}$ is pointing to the rotating direction, thus $\sht{3}$ is opposition to $\eht{r}$.
 
-Useful relationship: $\sht{3} = -\eht{r}$ and $\nht{3} = \eht{3}$
+Useful relationship among basis of three frames: 
+
+$\sht{3} = -\eht{r}$ \
+$\nht{3} = \eht{3}$ \
+$\eht{r} = \cos \phi \nht1 + \sin \phi\nht2, \qquad \eht{\theta} = -\sin \phi\nht1 + \cos \phi\nht2$ \
+$\sht{r} = \sin\theta\eht{\phi} + \cos\theta{\eht{3}},   \qquad    \sht{\theta} = \cos\theta\eht{\phi} - \sin\theta\eht{3}$
 
 Constants: $R$, $r$, $h$
 
-Time-varying variables: $\dot{\phi}$, $\dot{\theta}$
+Time-varying variables: $\{ \phi, \dot{\phi}, \theta, \dot{\theta} \}$
 
-Rotation velocity vectors: 
+Relative angular velocity vectors among three frames: 
 
 $\bmo_{\calE/\calN} = \dot{\phi}\nht3$
 
@@ -679,6 +684,8 @@ $\bmo_{\calS/\calE} = \dot{\theta} \sht{3} = - \dot{\theta}\eht{r}$ (Notice this
 $\bmo_{\calS/\calN} = \dot{\phi}\nht3 - \dot{\theta}\eht{r}$
 
 ### (a) inertial velocity and acceleration
+
+The position vector defined in $\calN$ is given by
 $$
 \bmr = r \sht{r} + R \eht{r}
 $$
@@ -704,12 +711,15 @@ $$
 $$
 
 ### (b) as seen by point P
-A new frame $\cal{M}:\{\nht1,\nht2,\nht3\}$, which is non-rotating and non-accelerating but just moving along a straight line.
+Define a new frame $\cal{M}:\{\mht1,\mht2,\mht3\}$, which is attached to the missile, thus non-rotating and non-accelerating but just moving along a straight line.
 
+The position vector in frame $\calM$ is given by
 $$
 \bm{\rho} = \bmr - \bmr_M
 $$
+where $\bmr_M = h \nht3 - t \nht2$ is the position of the missile in frame $\calN$.
 
+The apparent velocity in the frame $\calM$ is then given by
 $$
 \begin{aligned}
 \ddtM \bm{\rho} &= \ddtM \bmr - \ddtM \bmr_M \\
@@ -720,11 +730,12 @@ $$
 \end{aligned}
 $$
 
+Similar for the apparent acceleration in the frame $\calM$,
 $$
-\ddtM \left(\ddtM \bm{\rho}\right) = \ddtN \left(\ddtN \bmr - \ddtN\bmr_M\right) = \ddot{\bmr} - \ddot{\bmr}_M = \ddot{\bmr}
+\ddtM \left(\ddtM \bm{\rho}\right) = \ddtN \left(\ddtN \bmr - \ddtN\bmr_M\right) = \ddot{\bmr} - \ccancelto[red]{0}{\ddot{\bmr}_M} = \ddot{\bmr}
 $$
 
-Alternatively, noticing that $\calM$ is non-rotating and non-accelerating, we can directly calculate the relative velocity and acceleration without taking derivatives using $\ddtM$.
+Alternatively, noticing that $\calM$ is non-rotating and non-accelerating, we can directly calculate the relative velocity and acceleration without taking derivatives using $\ddtM$. However, here we show that by defining another frame and applying transport theorem, it can be resoled using the standard process.
 
 
 ## Textbook problem 1.10 (Two rotating disks)
@@ -763,14 +774,25 @@ Rod polar frame $\calE$
 
 Disk polar/spherical frame $\calS$
 
-Constants: $\dot{L}$, $\dot{\theta}$, $\dot{\alpha}$, $r$
+Constants: $\dot{L}, \dot{\theta}, \dot{\alpha}, r$
 
+Time varying: $L, \theta, \alpha$
+
+Relative angular velocity vectors: \
+$\bmo_{\calE/\calN} = \dot{\theta} \nht3$ \
+$\bmo_{\calS/\calE} = \dot{\alpha} \sht3$
+
+
+The position vector of point $P$ in frame $\calN$ is given by
 $$
 \bmr = L\eht{L} + r \sht{r}
 $$
+
+The inertial velocity is obtained by taken time derivative in frame $\calN$, i.e., $\ddtN$
 $$
 \begin{aligned}
-\dot{\bmr} &= \dot{L}\eht{L} + L \bmo_{\calE/\calN}\times\eht{L} + r \ddtN \sht{r} \\
+\dot{\bmr} &= \ddtN (L\eht{L} + r \sht{r}) \\
+&= \dot{L}\eht{L} + L \bmo_{\calE/\calN}\times\eht{L} + \ccancelto{0}{\dot{r} \sht{r}}  + r \ddtN \sht{r} \\
 &= \dot{L}\eht{L} + L \dot{\theta}\eht{\theta} + r \ddtE \sht{r} + r \bmo_{\calE/\calN} \times \sht{r} \\
 &= \dot{L}\eht{L} + L \dot{\theta}\eht{\theta}  + r \bmo_{\calS/\calE} \times \sht{r} + r \bmo_{\calE/\calN} \times \sht{r} \\
 &= \dot{L}\eht{L} + L \dot{\theta}\eht{\theta}  + r \dot{\alpha} \sht{\alpha} + r \dot{\theta} \sht{\alpha} \\

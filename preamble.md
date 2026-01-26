@@ -1,9 +1,6 @@
----
-date created: 2025-01-12T15:32:58-05:00
-date modified: 2025-04-13T21:46:55-04:00
----
 % This file include all LaTeX commands used in this Obsidian vault. 
 % This file is loaded by the Obsidian plugin `Extended MathJax`.
+% This file cannot include non-latex syntax contents, so it has to be excluded from the Obsidian `Linter` plugin.
 
 \newcommand{\bm}[1]{\boldsymbol{#1}}
 \newcommand{\ccancel}[2][red]{{\color{#1}\cancel{\color{black}#2}}}
@@ -18,6 +15,7 @@ date modified: 2025-04-13T21:46:55-04:00
 \newcommand{\ght}[1]{\hat{\bm{g}}_{#1}}
 \newcommand{\iht}[1]{\hat{\bm{i}}_{#1}}
 \newcommand{\jht}[1]{\hat{\bm{j}}_{#1}}
+\newcommand{\mht}[1]{\hat{\bm{m}}_{#1}}
 \newcommand{\nht}[1]{\hat{\bm{n}}_{#1}}
 \newcommand{\rht}[1]{\hat{\bm{r}}_{#1}}
 \newcommand{\sht}[1]{\hat{\bm{s}}_{#1}}

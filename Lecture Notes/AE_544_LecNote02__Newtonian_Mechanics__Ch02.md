@@ -1,6 +1,6 @@
 ---
 date created: 2025-01-12T16:04:10-05:00
-date modified: 2026-01-22T23:15:53-05:00
+date modified: 2026-01-26T09:31:54-05:00
 ---
 
 # AE_544_LecNote02\__Newtonian_Mechanics__Ch02
@@ -15,20 +15,18 @@ Unless acted upon by a force, a particle will maintain a straight line motion wi
 > [!info] This actually express a belief that there is an ideal and isolated inertial frame.
 
 **Newton's Second law**\
-Let the vector $\bm{F}$ be the sum of all forces acting on
-a particle having a mass $m$ with the inertial position vector $\bm{r}$. Assume that $\mathcal{N}$
-is an inertial reference frame, then
+Let the vector $\bm{F}$ be the sum of all forces acting on a particle having a mass $m$ with the inertial position vector $\bm{r}$. Assume that $\mathcal{N}$ is an inertial reference frame, then
 $$
 \bm{F} = \ddtN (m \dot{\bm{r}})
 \tag{2.1}
 $$
-*If the mass $m$ is constant*, then this result simplifies to the well known result
+<u>If the mass $m$ is constant</u>, then this result simplifies to the well known result
 $$
 \bm{F} = m \ddot{\bm{r}}
 \tag{2.2}
 $$
 
-> [!info] Note that all derivatives taken in Newton’s second law must be inertial derivatives.
+> [!info] Note that all derivatives taken in Newton’s second law must be inertial derivatives, meaning that we need to use absolute accelerations.
 
 > [!info] Without correctly formulated kinematics, the dynamical system description will be incorrect from the start. *The textbook authors* mention that a large fraction of errors made in practice have their origin in kinematics errors formulating $\ddot{\bm{r}}$ and similar vector derivatives.
 
@@ -41,16 +39,18 @@ $$
 
 > [!warning] Textbook convention for Free-Body Diagram (FBD)
 > The FBD should show all forces and moments acting on the system. We exclude from our FBDs acceleration vectors and so-called inertia forces that are subsets of the $m \ddot{\bm{r}}$ terms in Eq. (2.2) that may arise in rotating coordinate systems.
-> (*TL;DR*: Only inertial and real forces/moments; no fictitious ones.)
+> 
+> **TL;DR**: In this textbook, only inertial and real forces/moments in FBD; no fictitious ones.
 
 
 **Newton’s Law of Universal Gravitation**\
-Let the vector $\bm{r}_{12} = \bm{r}_2 - \bm{r}_1$ describe the position of mass $m_2$ relative to mass $m_1$ as shown in Fig. 2.2. Then the mutually attractive gravitational force between the objects will be
+Let the vector $\bm{r}_{12} = \bm{r}_2 - \bm{r}_1$ describe the position of mass $m_2$ relative to mass $m_1$. Then the mutually attractive gravitational force between the objects will be
 $$
 \bm{F}_{12} = - \bm{F}_{21} = \frac{G m_1 m_2}{|\bm{r}_{12}|^2} \cdot \frac{\bm{r}_{12}}{|\bm{r}_{12}|}
 \tag{2.4}
 $$
 where $G \approx 6.6732 \times 10^{-11} \,{\rm m^3/(s^2\cdot kg)}$ is the universal gravity constant.
+
 
 
 ## Example 2.4 Planar pendulum
@@ -102,6 +102,10 @@ Translational moving frame $\calN$.
 
 Moving and rotating body frame $\calE$.
 
+Relationships among axes: \
+$\eht{r} = \sin\theta\nht1 + \cos\theta\nht2,  \qquad    \eht\theta = \cos\theta\nht1 - \sin\theta\nht2$ \
+$\nht1 = \cos\theta\eht{\theta}+\sin\theta\eht{r},  \qquad    \nht2 = -\sin\theta\eht{\theta} + \cos\theta\eht{r}$
+
 Position vector
 $$
 \bmr = \bmr_N + R \nht{2} + \frac{1}{2}R\eht{r}
@@ -130,7 +134,7 @@ $$
 \end{aligned}
 $$
 
-Total external force is
+Total external force $\bmF_e$ is expressed in frame $\calN$ and the converted to frame $\calE$
 $$
 \begin{aligned}
 \bm{F}_e &= (mg\sin\alpha\nht{1} - mg\cos\alpha\nht{2}) + N\nht{2} \\
@@ -140,6 +144,7 @@ $$
 \end{aligned}
 $$
 
+Equate the corresponding elements on two sides of $\bmF_e = m\bm{a}$, getting
 $$
 \left\{
 \begin{aligned}
@@ -148,6 +153,8 @@ mg\sin\alpha \sin^2\theta+(N-mg\cos\alpha) \cos\theta \sin\theta &= m \left(  \d
 \end{aligned}
 \right.
 $$
+
+Then, solve the equation for an ODE of $\theta$ as follows:
 $$
 \begin{aligned}
 mg\sin\alpha\cos^2\theta + mg\sin\alpha \sin^2\theta &= m \left(\ddot{\theta}R\cos\theta + \frac{1}{2}R\ddot{\theta}\right) \cos\theta + m \left(  \ddot{\theta}R\sin\theta - \frac{1}{2}R\dot{\theta}^2\right) \sin\theta \\
@@ -159,7 +166,7 @@ g\sin\alpha &=  \left( R\cos^2\theta+\frac{1}{2}R\cos\theta+R\sin^2\theta \right
 \end{aligned}
 $$
 
-Alternatively, keep $F_e$ in $\calN$ but convert $\bm{a}$ to $\calN$
+**As an alternatively solution**, we will keep $F_e$ expressed in $\calN$ but convert the expression of $\bm{a}$ from $\calE$ to $\calN$, which gives
 $$
 \begin{aligned}
 \bm{a} &= \ddot{\theta}R\nht{1} + \bm{0} + \frac{1}{2}R\ddot{\theta}\eht{\theta} - \frac{1}{2}R\dot{\theta}^2\eht{r} \\
@@ -167,7 +174,14 @@ $$
 &= \left( \ddot{\theta}R+\frac{1}{2}R\ddot{\theta}\cos\theta-\frac{1}{2}R\dot{\theta}^2\sin\theta \right) \nht{1} + \left( -\frac{1}{2}R\ddot{\theta}\sin\theta-\frac{1}{2}R\dot{\theta}^2\cos\theta\right) \nht{2} \\
 \end{aligned}
 $$
-Then directly, we have 
+Recall we already have
+$$
+\begin{aligned}
+\bm{F}_e &= (mg\sin\alpha\nht{1} - mg\cos\alpha\nht{2}) + N\nht{2} \\
+&= mg\sin\alpha\nht{1} + (N - mg\cos\alpha)\nht{2}
+\end{aligned}
+$$
+Then, similarly, using $\bmF_e = m \bm{a}$, we have 
 $$
 \begin{aligned}
 mg\sin\alpha &= m \left( \ddot{\theta}R+\frac{1}{2}R\ddot{\theta}\cos\theta-\frac{1}{2}R\dot{\theta}^2\sin\theta \right) \\
@@ -175,9 +189,11 @@ g\sin\alpha &= \ddot{\theta} \left( R+\frac{1}{2}R\cos\theta\right)-\frac{1}{2}R
 \ddot{\theta}  &=  \frac {\left( g\sin\alpha + \frac{1}{2}R\dot{\theta}^2\sin\theta \right)} {\left( R+\frac{1}{2}R\cos\theta\right)} = \frac { 2g\sin\alpha + R\dot{\theta}^2\sin\theta } {\left( 2R+R\cos\theta\right)} \\
 \end{aligned}
 $$
-which is the same result.
+which is the same result to the first approach.
 
 ### (b) Supporting force vector
+
+Following the alternative approach from (a), we can solve for the magnitude $N$ of the support force $\bm{N}$ from
 $$
 \begin{align}
 (N - mg\cos\alpha) &= m \left( -\frac{1}{2}R\ddot{\theta}\sin\theta-\frac{1}{2}R\dot{\theta}^2\cos\theta\right) \\
