@@ -1,6 +1,6 @@
 ---
 date created: 2025-01-12T16:04:10-05:00
-date modified: 2026-01-26T12:05:56-05:00
+date modified: 2026-01-28T09:18:37-05:00
 ---
 
 # AE_544_LecNote02\__Newtonian_Mechanics__Ch02
@@ -101,36 +101,40 @@ $$F_L = mL\dot{\theta}^2 +  mg \cos \theta$$
 ![[fig-p2-10_rolling_cylinder_with_offset_mass.png|600]]
 
 ### (a) EOM
-Assuming no slip between the cylinder and the ground.
+**Assuming no slip between the cylinder and the ground.**
 
-Inertial frame $\calM$.
+*First, we need to solve for the kinematics of the point mass $m$.*
 
-Translational moving frame $\calN$.
+Inertial frame $\calM$, attached to the ground or the slope and centered at somewhere.
 
-Moving and rotating body frame $\calE$.
+Translational moving frame $\calN: \{ N, \nht1, \nht2, \nht3 \}$, centered at the contact point between the slope and the cylinder.
+
+Moving and rotating body frame $\calE: \{ \eht{r}, \eht{\theta}, \eht{3} \}$
 
 Relationships among axes: \
+$\nht3 = \eht3$ \
 $\eht{r} = \sin\theta\nht1 + \cos\theta\nht2,  \qquad    \eht\theta = \cos\theta\nht1 - \sin\theta\nht2$ \
 $\nht1 = \cos\theta\eht{\theta}+\sin\theta\eht{r},  \qquad    \nht2 = -\sin\theta\eht{\theta} + \cos\theta\eht{r}$
 
-Position vector
+Position vector $\bmr$ of the mass $m$ in the frame $\calM$:
 $$
 \bmr = \bmr_N + R \nht{2} + \frac{1}{2}R\eht{r}
 $$
+where $\bmr_N$ is the position of $N$ in frame $\calM$.
 
-Velocity vector
+Velocity vector $\bmv$ of the mass $m$ in the frame $\calM$:
 $$
-\begin{aligned}
+\begin{align}
 \bmv = \dot{\bmr} &= \ddtM \left( \bmr_N + R \nht{2} + \frac{1}{2}R\eht{r} \right) \\
-&= \dot{\theta}R\nht{1} + R \ddtM\nht{2} + \frac{1}{2}R \ddtM\eht{r} \\
-&= \dot{\theta}R\nht{1} + R \bmo_{\calN/\calM}\times\nht{2} + \frac{1}{2}R\bmo_{\calE/\calM}\times\eht{r} \\
+&= \dot{\theta}R\nht{1} + R \ddtM\nht{2} + \frac{1}{2}R \ddtM\eht{r}      \tag{Chain-rule}  \\ 
+&= \dot{\theta}R\nht{1} + R \bmo_{\calN/\calM}\times\nht{2} + \frac{1}{2}R\bmo_{\calE/\calM}\times\eht{r}            \tag{Transport Theorem} \\
 &= \dot{\theta}R\nht{1} + \bm{0} + \frac{1}{2}R\dot{\theta}\eht{\theta} \\
-&= \dot{\theta}R(\cos\theta\eht{\theta}+\sin\theta\eht{r}) + \frac{1}{2}R\dot{\theta}\eht{\theta} \\
+&= \dot{\theta}R(\cos\theta\eht{\theta}+\sin\theta\eht{r}) + \frac{1}{2}R\dot{\theta}\eht{\theta}    \tag{unify bases}\\
 &= (\dot{\theta}R\cos\theta + \frac{1}{2}R\dot{\theta})\eht{\theta} + \dot{\theta}R\sin\theta\eht{r} \\
-\end{aligned}
+\end{align}
 $$
 
-Acceleration vector
+Acceleration vector $\bm{a}$ of the mass $m$ in the frame $\calM$:
 $$
 \begin{aligned}
 \bm{a} = \dot{\bmv} &= \ddtM \left( \dot{\theta}R\nht{1} + \bm{0} + \frac{1}{2}R\dot{\theta}\eht{\theta} \right) \\
@@ -141,22 +145,35 @@ $$
 \end{aligned}
 $$
 
+*Next, we are going to relate $\bm{a}$ to forces using Newton's second law.*
+
 Total external force $\bmF_e$ is expressed in frame $\calN$ and the converted to frame $\calE$
 $$
-\begin{aligned}
-\bm{F}_e &= (mg\sin\alpha\nht{1} - mg\cos\alpha\nht{2}) + N\nht{2} \\
+\begin{align}
+\bm{F}_e &= (mg\sin\alpha\nht{1} - mg\cos\alpha\nht{2}) + N\nht{2}   \tag{FBD} \\
 &= mg\sin\alpha\nht{1} + (N - mg\cos\alpha)\nht{2} \\
-&= mg\sin\alpha (\cos\theta\eht{\theta}+\sin\theta\eht{r})   +   (N - mg\cos\alpha) (-\sin\theta\eht{\theta} + \cos\theta\eht{r}) \\
-&= \left(mg\sin\alpha\cos\theta - (N-mg\cos\alpha)\sin\theta \right) \eht{\theta} + \left( mg\sin\alpha \sin\theta+(N-mg\cos\alpha) \cos\theta) \eht{r} \right)
-\end{aligned}
+&= mg\sin\alpha (\cos\theta\eht{\theta}+\sin\theta\eht{r})   +   (N - mg\cos\alpha) (-\sin\theta\eht{\theta} + \cos\theta\eht{r})     \tag{substitude bases}  \\
+&= \left(mg\sin\alpha\cos\theta - (N-mg\cos\alpha)\sin\theta \right) \eht{\theta} \\
+ &\phantom{\,=}+ \left( mg\sin\alpha \sin\theta+(N-mg\cos\alpha) \cos\theta \right) \eht{r}   \tag{collect terms}
+\end{align}
 $$
 
 Equate the corresponding elements on two sides of $\bmF_e = m\bm{a}$, getting
 $$
 \left\{
 \begin{aligned}
-mg\sin\alpha\cos^2\theta - (N-mg\cos\alpha)\sin\theta \cos\theta &= m \left(\ddot{\theta}R\cos\theta + \frac{1}{2}R\ddot{\theta}\right) \cos\theta \\
-mg\sin\alpha \sin^2\theta+(N-mg\cos\alpha) \cos\theta \sin\theta &= m \left(  \ddot{\theta}R\sin\theta - \frac{1}{2}R\dot{\theta}^2\right) \sin\theta \\
+mg\sin\alpha\cos\theta - (N-mg\cos\alpha)\sin\theta &= m \left(\ddot{\theta}R\cos\theta + \frac{1}{2}R\ddot{\theta}\right) \\
+mg\sin\alpha \sin\theta+(N-mg\cos\alpha) \cos\theta &= m \left(  \ddot{\theta}R\sin\theta - \frac{1}{2}R\dot{\theta}\right) \\
+\end{aligned}
+\right.
+$$
+
+Since we want to solve for an equation of $\theta$, we want to cancel out $N$ using the following trick:
+$$
+\left\{
+\begin{aligned}
+mg\sin\alpha\cos\theta \textcolor{red}{ \cos\theta } - (N-mg\cos\alpha)\sin\theta \textcolor{red}{ \cos\theta } &= m \left(\ddot{\theta}R\cos\theta + \frac{1}{2}R\ddot{\theta}\right) \textcolor{red}{ \cos\theta } \\
+mg\sin\alpha \sin\theta \textcolor{blue}{ \sin\theta }  +(N-mg\cos\alpha) \cos\theta \textcolor{blue}{ \sin\theta } &= m \left(  \ddot{\theta}R\sin\theta - \frac{1}{2}R\dot{\theta}^2\right) \textcolor{blue}{ \sin\theta } \\
 \end{aligned}
 \right.
 $$
@@ -164,20 +181,23 @@ $$
 Then, solve the equation for an ODE of $\theta$ as follows:
 $$
 \begin{aligned}
-mg\sin\alpha\cos^2\theta + mg\sin\alpha \sin^2\theta &= m \left(\ddot{\theta}R\cos\theta + \frac{1}{2}R\ddot{\theta}\right) \cos\theta + m \left(  \ddot{\theta}R\sin\theta - \frac{1}{2}R\dot{\theta}^2\right) \sin\theta \\
+mg\sin\alpha\textcolor{red}{ \cos^2\theta } + mg\sin\alpha \textcolor{blue}{ \sin^2\theta } &= m \left(\ddot{\theta}R\cos\theta + \frac{1}{2}R\ddot{\theta}\right) \textcolor{red}{ \cos\theta } + m \left(  \ddot{\theta}R\sin\theta - \frac{1}{2}R\dot{\theta}^2\right) \textcolor{blue}{ \sin\theta } \\
 g\sin\alpha &=  \left(\ddot{\theta}R\cos\theta + \frac{1}{2}R\ddot{\theta}\right) \cos\theta +  \left(  \ddot{\theta}R\sin\theta - \frac{1}{2}R\dot{\theta}^2\right) \sin\theta \\
 g\sin\alpha &=  \left( R\cos^2\theta+\frac{1}{2}R\cos\theta+R\sin^2\theta \right) \ddot{\theta} - \frac{1}{2}R\sin\theta \dot{\theta}^2 \\
 \left( R+\frac{1}{2}R\cos\theta \right) \ddot{\theta}  &=  g\sin\alpha + \frac{1}{2}R\dot{\theta}^2 \sin\theta \\
 \left( 2R+R\cos\theta \right) \ddot{\theta}  &=  2g\sin\alpha + R\dot{\theta}^2 \sin\theta \\
-\ddot{\theta}  &=  \frac{2g\sin\alpha + R\dot{\theta}^2 \sin\theta} {R\left( 2+\cos\theta \right) }  \\
 \end{aligned}
 $$
+Finally we have,
+$$
+\boxed{ \ddot{\theta}  =  \frac{2g\sin\alpha + R\dot{\theta}^2 \sin\theta} {R\left( 2+\cos\theta \right)} }
+$$
 
-**As an alternatively solution**, we will keep $F_e$ expressed in $\calN$ but convert the expression of $\bm{a}$ from $\calE$ to $\calN$, which gives
+**As an alternatively approach**, we will keep $F_e$ expressed in $\calN$ but convert the expression of $\bm{a}$ from $\calE$ to $\calN$, which gives
 $$
 \begin{aligned}
-\bm{a} &= \ddot{\theta}R\nht{1} + \bm{0} + \frac{1}{2}R\ddot{\theta}\eht{\theta} - \frac{1}{2}R\dot{\theta}^2\eht{r} \\
-&= \ddot{\theta}R\nht{1} + \bm{0} + \frac{1}{2}R\ddot{\theta} (\cos\theta\nht1-\sin\theta\nht2) - \frac{1}{2}R\dot{\theta}^2 (\sin\theta\nht1+\cos\theta\nht2) \\
+\bm{a} &= \ddot{\theta}R\nht{1} + \bm{0} + \frac{1}{2}R\ddot{\theta}\textcolor{red}{ \eht{\theta} } - \frac{1}{2}R\dot{\theta}^2\textcolor{blue}{ \eht{r} } \\
+&= \ddot{\theta}R\nht{1} + \bm{0} + \frac{1}{2}R\ddot{\theta} (\textcolor{red}{ \cos\theta\nht1-\sin\theta\nht2 }) - \frac{1}{2}R\dot{\theta}^2 (\textcolor{blue}{ \sin\theta\nht1+\cos\theta\nht2 }) \\
 &= \left( \ddot{\theta}R+\frac{1}{2}R\ddot{\theta}\cos\theta-\frac{1}{2}R\dot{\theta}^2\sin\theta \right) \nht{1} + \left( -\frac{1}{2}R\ddot{\theta}\sin\theta-\frac{1}{2}R\dot{\theta}^2\cos\theta\right) \nht{2} \\
 \end{aligned}
 $$
@@ -198,6 +218,8 @@ g\sin\alpha &= \ddot{\theta} \left( R+\frac{1}{2}R\cos\theta\right)-\frac{1}{2}R
 $$
 which is the same result to the first approach.
 
+**However, usually, you won't know in advance that which approach is easier for complicated problems.**
+
 ### (b) Supporting force vector
 
 Following the alternative approach from (a), we can solve for the magnitude $N$ of the support force $\bm{N}$ from
@@ -208,7 +230,7 @@ $$
 N &= \dots  \tag{omitted}
 \end{align}
 $$
-Finally, don't forget the supporting force is a vector, $\bm{N} = N \nht2$.
+At last, don't forget the supporting force $\bm{N}$ is a vector, $\bm{N} = N \nht2$.
 
 ## A system of particles
 
@@ -219,12 +241,12 @@ Finally, don't forget the supporting force is a vector, $\bm{N} = N \nht2$.
 - Each has a constant mass $m_i$.
 - Don't need to be rigid.
 
-Using Newton's second law, the force acting on $m_i$ can be broken down into two subsets of forces as
+Using Newton's second law, the force acting on the $i$-th mass point $m_i$ can be broken down into two subsets of forces as
 $$
 \bm{F}_i = m_i \ddot{\bm{R}}_i = \bm{F}_{iE} + \sum_{j=1}^N \bm{F}_{ij}
 \tag{2.39 and 2.40}
 $$
-where $\bm{F}_{iE}$ is the **external forces**, and $\bm{F}_{ij}$ is the **internal force** due to the $j$th masses.
+where $\bm{F}_{iE}$ is the **external forces**, and $\bm{F}_{ij}$ is the **internal force** due to the $j$-th mass.
 
 The total force vector $\bm{F}$ acting on the entire system of these $N$ particles is given as
 $$
@@ -256,7 +278,7 @@ $$
 > \tag{2.45}
 > $$
 
-> [!question]- Why the center of mass is defined in this way, as a mass-weighted ($m$-weighted) position? Why not a mass-squared-weighted ($m^2$-weighted) position (just an arbitrary statement)?
+> [!question]- Why the center of mass is defined in this way, as a mass-weighted ($m$-weighted) position? For  an arbitrary example, why not using a mass-squared-weighted ($m^2$-weighted) position?
 > 
 > - The net external force acting on the object produces a translational motion of the center of mass. 
 > - The net external torque about the center of mass produces a rotational motion around the center of mass.
@@ -276,7 +298,7 @@ Think of the Earth-Moon system in the solar system as an example.
 
 ### Kinetic Energy
 
-The total kinetic energy of a system of N constant mass particles mi can therefore be written as
+The total kinetic energy of a system of N constant mass particles $m_i$ can therefore be written as
 $$
 \begin{align}
 T &= \frac{1}{2} \sum_{i=1}^{N} \left( m_i \dot{\bm{R}}_i \cdot \dot{\bm{R}}_i \right)
@@ -290,7 +312,7 @@ T &= \frac{1}{2} \sum_{i=1}^{N} \left( m_i \dot{\bm{R}}_i \cdot \dot{\bm{R}}_i \
 &= \frac{1}{2} \left( \sum_{i=1}^{N} m_i \right) \dot{\bm{R}}_c \cdot \dot{\bm{R}}_c + \dot{\bm{R}}_c \cdot \left( \sum_{i=1}^{N} m_i \dot\bmr_i \right) + \frac{1}{2} \sum_{i=1}^{N} \left( m_i \dot{\bm{r}}_i \cdot \dot{\bm{r}}_i \right)  \\
 &= \frac{1}{2} \left( \sum_{i=1}^{N} m_i \right) \dot{\bm{R}}_c \cdot \dot{\bm{R}}_c + \dot{\bm{R}}_c \cdot \left( \sum_{i=1}^{N} \ddt (m_i \bmr_i) \right) + \frac{1}{2} \sum_{i=1}^{N} \left( m_i \dot{\bm{r}}_i \cdot \dot{\bm{r}}_i \right) \\
 &= \frac{1}{2} \left( \sum_{i=1}^{N} m_i \right) \dot{\bm{R}}_c \cdot \dot{\bm{R}}_c + \dot{\bm{R}}_c \cdot \ddt \left( \sum_{i=1}^{N} (m_i \bmr_i) \right) + \frac{1}{2} \sum_{i=1}^{N} \left( m_i \dot{\bm{r}}_i \cdot \dot{\bm{r}}_i \right) \\
-&= \frac{1}{2} \left( \sum_{i=1}^{N} m_i \right) \dot{\bm{R}}_c \cdot \dot{\bm{R}}_c + \dot{\bm{R}}_c \cdot \ddt \ccancelto[green]{\bm{0}}{\left( \sum_{i=1}^{N} (m_i \bmr_i) \right)} + \frac{1}{2} \sum_{i=1}^{N} \left( m_i \dot{\bm{r}}_i \cdot \dot{\bm{r}}_i \right) \\
+&= \frac{1}{2} \left( \sum_{i=1}^{N} m_i \right) \dot{\bm{R}}_c \cdot \dot{\bm{R}}_c + \dot{\bm{R}}_c \cdot \ddt \ccancelto[green]{\bm{0}}{\left( \sum_{i=1}^{N} (m_i \bmr_i) \right)} + \frac{1}{2} \sum_{i=1}^{N} \left( m_i \dot{\bm{r}}_i \cdot \dot{\bm{r}}_i \right)   \tag{Superparticle} \\
 \tag{2.50} \\
 \end{align}
 $$
@@ -306,13 +328,13 @@ $$
 The **kinetic energy rate** $\dot{T}$ is:
 $$
 \begin{align}
-\frac{dT}{dt} &= \textcolor{blue}{ M \ddot{\bm{R}}_c } \cdot \dot{\bm{R}}_c + \sum_{i=1}^{N} m_i \textcolor{red}{ \ddot{\bm{r}}_i } \cdot \dot{\bm{r}}_i  \tag{2.52} \\
+\ddt T &= \textcolor{blue}{ M \ddot{\bm{R}}_c } \cdot \dot{\bm{R}}_c + \sum_{i=1}^{N} m_i \textcolor{red}{ \ddot{\bm{r}}_i } \cdot \dot{\bm{r}}_i  \tag{2.52} \\
 %
-\frac{dT}{dt} &= \textcolor{blue}{ \bm{F} } \cdot \dot{\bm{R}}_c + \sum_{i=1}^{N} m_i \textcolor{red}{ \ddot{\bm{R}}_i } \cdot \dot{\bm{r}}_i \textcolor{red}{ - } \sum_{i=1}^{N} m_i \textcolor{red}{ \ddot{\bm{R}}_c } \cdot \dot{\bm{r}}_i   \tag{2.53} \\
+\ddt T &= \textcolor{blue}{ \bm{F} } \cdot \dot{\bm{R}}_c + \sum_{i=1}^{N} m_i \textcolor{red}{ \ddot{\bm{R}}_i } \cdot \dot{\bm{r}}_i \textcolor{red}{ - } \sum_{i=1}^{N} m_i \textcolor{red}{ \ddot{\bm{R}}_c } \cdot \dot{\bm{r}}_i   \tag{2.53} \\
 %
 &= \bm{F} \cdot \dot{\bm{R}}_c + \sum_{i=1}^{N} \textcolor{green}{ m_i \ddot{\bm{R}}_i } \cdot \dot{\bm{r}}_i - \ddot{\bm{R}}_c \cdot \cancelto{\bm{0}}{ \left( \sum_{i=1}^{N} m_i \dot{\bm{r}}_i \right) }  \\
 %
-&= \bm{F} \cdot \dot{\bm{R}}_c + \sum_{i=1}^{N} \textcolor{green}{ \bm{F}_i } \cdot \dot{\bm{r}}_i  \tag{2.54} 
+&= \bm{F} \cdot \dot{\bm{R}}_c + \sum_{i=1}^{N} \textcolor{green}{ \bm{F}_i } \cdot \dot{\bm{r}}_i   \qquad\qquad \text{(Superparticle)} \tag{2.54} 
 \end{align}
 $$
 
@@ -329,10 +351,10 @@ V (\bmr_1, \bmr_2, \cdots, \bmr_N) = \sum_{i=1}^N V_i (\bmr_i) \,,
 $$
 and using the relationship
 $$
-{\rm d} V_i(\bmr_i(t), t)  = \frac{\partial V_i}{\partial \bmr_i} \cdot {\rm d}{\bmr}_i + \cancelto{0}{\frac{\partial V_i}{\partial t}} {\rm d}t\,,  \tag{Total derivative, move ${\rm d}t$ then}
+{\rm d} V_i(\bmr_i(t))  = \frac{\partial V_i}{\partial \bmr_i} \cdot {\rm d}{\bmr}_i + \cancelto{0}{\frac{\partial V_i}{\partial t}} {\rm d}t\,,  \tag{Total derivative, move ${\rm d}t$ then}
 $$
 $$
-\ddt V_i(\bmr_i(t), t) = \frac{\partial V_i}{\partial \bmr_i} \cdot \dot{\bmr}_i + \cancelto{0}{\frac{\partial V_i}{\partial t}} ,   \tag{*Explicitly* independent of $t$ }
+\ddt V_i(\bmr_i(t)) = \frac{\partial V_i}{\partial \bmr_i} \cdot \dot{\bmr}_i + \cancelto{0}{\frac{\partial V_i}{\partial t}} ,   \tag{*Explicitly* independent of $t$ }
 $$
 then we have:
 $$
@@ -345,7 +367,15 @@ $$
 > - The summation is finite (or absolutely convergent if infinite).
 > - Each term $V_i(\bmr_i, t)$​ is differentiable with respect to $t$.
 
-
+With
+$$
+\ddt T = \bm{F} \cdot \dot{\bm{R}}_c + \sum_{i=1}^{N} \textcolor{green}{ \bm{F}_i } \cdot \dot{\bm{r}}_i  \tag{2.54}
+$$
+and
+$$
+\ddt V = - \sum_{i=1}^N \bmF_i \cdot \dot{\bmr}_i
+\tag{from 2.56}
+$$
 Now Eq. (2.54) can be written as
 $$
 \ddt T + \ddt V = \bmF \cdot \dot{\bmR}_c
