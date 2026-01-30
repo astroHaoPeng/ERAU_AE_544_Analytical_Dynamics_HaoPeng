@@ -1,6 +1,6 @@
 ---
 date created: 2025-01-12T16:04:10-05:00
-date modified: 2026-01-28T09:18:37-05:00
+date modified: 2026-01-28T10:13:08-05:00
 ---
 
 # AE_544_LecNote02\__Newtonian_Mechanics__Ch02
@@ -112,9 +112,12 @@ Translational moving frame $\calN: \{ N, \nht1, \nht2, \nht3 \}$, centered at th
 Moving and rotating body frame $\calE: \{ \eht{r}, \eht{\theta}, \eht{3} \}$
 
 Relationships among axes: \
-$\nht3 = \eht3$ \
+$\nht3 = - \eht3$ \
 $\eht{r} = \sin\theta\nht1 + \cos\theta\nht2,  \qquad    \eht\theta = \cos\theta\nht1 - \sin\theta\nht2$ \
 $\nht1 = \cos\theta\eht{\theta}+\sin\theta\eht{r},  \qquad    \nht2 = -\sin\theta\eht{\theta} + \cos\theta\eht{r}$
+
+Relative angular velocity vector of $\calE$ relative to $\calN$:
+$\bmo_{\calE/\calN} = \dot{\theta}\eht{3} = - \dot{\theta} \nht{3}$
 
 Position vector $\bmr$ of the mass $m$ in the frame $\calM$:
 $$
