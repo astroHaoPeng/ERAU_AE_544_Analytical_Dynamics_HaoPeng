@@ -342,7 +342,7 @@ $$
 $$
 
 Now we try to *simplify the second term under certain assumptions*.
-If there are only **conservative forces $\bm{F}_i$** are acting on $m_i$ , which can be written as the gradient of a potential function $V_i(\bmr_i)$:
+If there are only **conservative internal forces $\bm{F}_i$** are acting on $m_i$ , which can be written as the gradient of a potential function $V_i(\bmr_i)$:
 $$
 \bmF_i = - \nabla V_i(\bmr_i) = - \frac{\partial V_i}{\partial \bmr_i}
 \tag{2.55}
@@ -386,7 +386,7 @@ $$
 
 - If the total force $\bmF = \bm{0}$, the total energy $E=T+V$ is conserved.
 
-- If the total force $\bmF = -\nabla V_c(\bmR_c)$ is also a conservative force due to a potential function $V_c(\bmR)_c$, the total system energy $E=T+V+V_c$ is conserved. 
+- If the total force $\bmF = -\nabla V_c(\bmR_c)$ is also a conservative force due to a potential function $V_c(\bmR_c)$, the total system energy $E=T+V+V_c$ is conserved. 
 
 In other cases of general forces exerted, we need to integrate the kinetic energy rate $\dot{{T}}$ to find the work, which is:
 $$

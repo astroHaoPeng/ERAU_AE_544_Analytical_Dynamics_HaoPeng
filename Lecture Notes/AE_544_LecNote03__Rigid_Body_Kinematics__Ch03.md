@@ -1,18 +1,18 @@
 ---
 date created: 2025-01-26T13:00:00-05:00
-date modified: 2025-03-24T00:35:15-04:00
+date modified: 2026-02-01T22:59:18-05:00
 ---
 
 # AE_544_LecNote03\__Rigid_Body_Kinematics__Ch03
 
 ![[README#Disclaimers]]
 
-Fun facts about rigid body attitude coordinates from authors:
-1. A minimum of three coordinates is required to describe the relative angular displacement between two reference frames.
-2. Any minimal set of three attitude coordinates will contain at least one geometrical orientation where the coordinates are singular, namely at least two coordinates are undefined or not unique.
-3. At or near such a geometric singularity, the corresponding kinematic differential equations are also singular.
-4. The geometric singularities and associated numerical difficulties can be avoided altogether through a regularization. Redundant sets of four or more coordinates exist that are universally determined and contain no geometric singularities.
-5. Two rigid body (or coordinate frame) orientations can differ at most by a 180 deg rotation.
+Fun facts about rigid body attitude coordinates:
+1. Two rigid body (or coordinate frame) orientations can differ at most by a 180-deg rotation.
+2. A minimum of three coordinates is required to describe the relative angular displacement between two reference frames.
+3. Any minimal set of three attitude coordinates will contain at least one geometrical orientation where the coordinates are singular, namely at least two coordinates are undefined or not unique.
+4. At or near such a geometric singularity, the corresponding kinematic differential equations are also singular.
+5. The geometric singularities and associated numerical difficulties can be avoided altogether through a regularization. Redundant sets of four or more coordinates exist that are universally determined and contain no geometric singularities.
 
 ## Direction Cosine Matrix (DCM) Basics
 
@@ -74,7 +74,7 @@ $$
 The direct transformation matrix from the first to the last cascading reference frame is clearly found by successive matrix-multiplications of each relative transformation matrix in reverse order as just shown.
 
 >[!info]
-> The direction cosine matrix is the most fundamental, but highly redundant, method of describing a relative orientation.
+> The direction cosine matrix (DCM) is the most fundamental, but highly redundant, method of describing a relative orientation.
 > The biggest asset of the direction cosine matrix is the ability to easily transform vectors from one reference frame to another.
 
 
@@ -119,7 +119,7 @@ $$
 \end{aligned}
 $$
 
->[!check] This operator is independent of coordinate transformations (Cartesian) and holds for abstract vectors.
+>[!check]- This operator is independent of coordinate transformations (Cartesian) and holds for abstract vectors.
 > We want to show that the tilde operator doesn't change under a coordinate transformation from Cartesian frame $\calB$ to Cartesian frame $\calF$, where the orientation of $\calF$ is given by the DCM $\dcm{FB}$, which can be expressed as
 > $$
 > (\dcm{FB}(\bmo)_\calB) \times (\dcm{FB}(\bht{i})_\calB) = \dcm{FB} \left( (\bmo)_\calB \times (\bht{i})_\calB \right)
@@ -170,7 +170,9 @@ $$
 \ddtN \{ \bht{} \} = - \bmt{\tilde{\bmo}} \{ \bht{} \}
 \tag{3.24}
 $$
->[!warning] Eq. (3.22) to Eq. (3.24) is how skew-symmetric matrix is applied on a **vectrix**. For vectors, the rule is different!
+>[!warning] Vectrix operations. 
+> Eq. (3.22) contains <u>vector cross-product</u>. \
+> Eq. (3.24) contains a new operation between matrix and **vectrix**, which is defined as an aggregation of three <u>vector cross-products</u>.
 
 Take time derivate to Eq. (3.5)
 $$
