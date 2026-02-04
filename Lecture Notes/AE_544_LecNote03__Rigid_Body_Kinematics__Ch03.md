@@ -269,7 +269,7 @@ $$
 
 Let the $(\alpha, \beta, \gamma)$ ($\alpha, \beta, \gamma \in \{1,2,3\}$ are indices) Euler angle sequence be $(\theta_1, \theta_2, \theta_3)$ ($\theta_i$ are angles in radian by default), the direction cosine matrix **of the rotated frame relative to the original frame** is given as
 $$
-\dcm{C(\theta_1, \theta_2, \theta_3)} = \dcm{M_\gamma(\theta_3)} \cdot \dcm{M_\beta(\theta_2)} \cdot \dcm{M_\alpha(\theta_1)}
+\dcm{C(\theta_1, \theta_2, \theta_3)}_{(\alpha,\beta,\gamma)} = \dcm{M_\gamma(\theta_3)} \cdot \dcm{M_\beta(\theta_2)} \cdot \dcm{M_\alpha(\theta_1)}
 \tag{3.33}
 $$
 
