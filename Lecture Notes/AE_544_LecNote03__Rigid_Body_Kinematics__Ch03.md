@@ -1,6 +1,6 @@
 ---
 date created: 2025-01-26T13:00:00-05:00
-date modified: 2026-02-01T22:59:18-05:00
+date modified: 2026-02-04T09:49:53-05:00
 ---
 
 # AE_544_LecNote03\__Rigid_Body_Kinematics__Ch03
@@ -80,9 +80,9 @@ The direct transformation matrix from the first to the last cascading reference 
 
 ## Kinematics using DCMs
 
-The instantaneous angular velocity vector $\bmo$ of the $\calB$ frame relative to the $\calN$ frame, expressed in $\calB$ frame orthogonal components as
+The instantaneous angular velocity vector $\bmo_{\calB/\calN}$ of the $\calB$ frame relative to the $\calN$ frame, expressed in $\calB$ frame orthogonal components as
 $$
-\bmo = \omega_1 \bht1 + \omega_2 \bht2 + \omega \bht3
+\bmo_{\calB/\calN} = \omega_1 \bht1 + \omega_2 \bht2 + \omega_3 \bht3
 $$
 
 >[!info] Expressed the body angular velocity in the body frame.
@@ -94,85 +94,50 @@ $$
 \tag{3.22}
 $$
 
-Define **skew-symmetric tilde matrix operator** such that for any given vector
+Define **skew-symmetric tilde matrix operator** such that for any given vector $\bmx$ can defines a matrix $\bmt{\tilde{\bmx}}$ as follows,
 $$
-\bmx = \bmt{x_1 \\ x_2 \\ x_3} \in \bbR^3
+\bmx = \bmt{x_1 \\ x_2 \\ x_3} \in \bbR^3     \qquad \Longrightarrow \qquad \bmt{\tilde{\bmx}} = \skewmt{x}
 $$
-a matrix $\bmt{\tilde{\bmx}}$ is defined as following,
-$$
-\bmt{\tilde{\bmx}} = \skewmt{x}
-$$
-such that $\bmt{\tilde{\bmx}} = - \bmt{\tilde{\bmx}}\trans$.
-
+Apparently, it has the good skew-symmetric feature that $\bmt{\tilde{\bmx}} = - \bmt{\tilde{\bmx}}\trans$.
 
 
 For example, applying this title matrix operation to Eq. (3.22) for $\bht{1}$ in $\calB$ gives
 $$
 \begin{aligned}
-(\bmo)_\calB \times (\bht{i})_\calB = \left( \bmt{\omega_1 \\ \omega_2 \\ \omega_3} \times \bmt{1 \\ 0 \\ 0} \right)_\calB
+(\bmo)_\calB \times (\bht{1})_\calB &= \left( \bmt{\omega_1 \\ \omega_2 \\ \omega_3} \times \bmt{1 \\ 0 \\ 0} \right)_\calB
 = \begin{vmatrix}
 \bht1 & \bht2 & \bht3 \\
 \omega_1 & \omega_2 & \omega_3 \\
 1 & 0 & 0
-\end{vmatrix} = \omega_3 \bht2 - \omega_2 \bht3 
-= - \bmt{1 & 0 & 0} \skewmt{\omega} \Bmt{\bht1 \\ \bht2 \\ \bht3}
+\end{vmatrix} = \omega_3 \bht2 - \omega_2 \bht3 \\
+&= - \bmt{1 & 0 & 0} \skewmt{\omega} \Bmt{\bht1 \\ \bht2 \\ \bht3} \\
+&= - \bmt{\tilde{\bmx}} \{ \bht{} \}
 \end{aligned}
 $$
 
->[!check]- This operator is independent of coordinate transformations (Cartesian) and holds for abstract vectors.
-> We want to show that the tilde operator doesn't change under a coordinate transformation from Cartesian frame $\calB$ to Cartesian frame $\calF$, where the orientation of $\calF$ is given by the DCM $\dcm{FB}$, which can be expressed as
-> $$
-> (\dcm{FB}(\bmo)_\calB) \times (\dcm{FB}(\bht{i})_\calB) = \dcm{FB} \left( (\bmo)_\calB \times (\bht{i})_\calB \right)
-> \tag{to prove}
-> $$
-> First, let's prove a general rule for the tilde operator. For two generic vectors $\bmu$ and $\bmv$, after a transformation of DCM $\dcm{C}$, the new coordinates can be obtained as
-> $$
-> \bmu' = \dcm{C} \cdot \bmu   \qquad    \bmv' = \dcm{C} \cdot \bmv
-> $$
-> Using the definition of tilde operators, and plugging in the above transformed vectors, we have the first expression:
-> $$
-> \begin{aligned}
-> \bmu \times \bmv &= - \bmt{\tilde{\bmu}} \cdot \bmv \\
-> \bmu' \times \bmv' &= - \bmt{\tilde{\bmu'}} \cdot \bmv' = -\bmt{\tilde{\bmu'}} \cdot \dcm{C} \cdot \bmv
-> \end{aligned}
-> $$
-> Since $\bmu' \times \bmv'$ and $\bmu \times \bmv$ themselves are also a vector, so the following relation holds as our second expression:
-> $$
-> \bmu' \times \bmv' = \dcm{C} \cdot ( \bmu \times \bmv ) = - \dcm{C} \cdot \bmt{\tilde{\bmu}} \cdot \bmv
-> $$
-> Equate the above two expressions and we have:
-> $$
-> - \bmt{\tilde{\bmu'}} \cdot \dcm{C} = - \dcm{C} \cdot \bmt{\tilde{\bmu}} 
-> \implies
-> \bmt{\tilde{\bmu'}} = \dcm{C} \cdot \bmt{\tilde{\bmu}} \cdot \dcm{C}\trans
-> $$
-> 
-> Then let's apply this to our problem. After the coordinate transformation $\dcm{FB}$ ($\calB \to \calF$), the following derivation becomes apparent:
-> $$
-> \begin{aligned}
-> (\textcolor{red}{ \dcm{FB}(\bmo)_\calB }) \times (\dcm{FB}(\bht{i})_\calB) 
-> %&= (\bmo)_\calF \times (\bht{i})_\calF 
-> %&= - \left(\bmt{\tilde{\bmo}}\right)_\calF \cdot (\bht{i})_\calF  \\
-> &= - \textcolor{red}{ \dcm{FB} \cdot \left(\bmt{\tilde{\bmo}}\right)_\calB \cdot \dcm{FB}\trans } \cdot \dcm{FB} \cdot (\bht{i})_\calB  \\
-> &= - \textcolor{red}{ \dcm{FB} \cdot \left(\bmt{\tilde{\bmo}}\right)_\calB \cdot {} } \left( \textcolor{red}{ \dcm{FB}\trans } \cdot \dcm{FB} \cdot (\bht{i})_\calB \right)  \\
-> &= - \dcm{FB} \cdot \left(\bmt{\tilde{\bmo}}\right)_\calB \cdot (\bht{i})_\calB \\
-> &= \dcm{FB} \left( (\bmo)_\calB \times (\bht{i})_\calB \right)
-> \end{aligned}
-> $$
-
-Applying this tilde operator to Eq. (3.22), and we get a **vectrix** equation for the rate of the basis
+Applying this tilde operator to Eq. (3.22)
 $$
-\ddtN \bht{i} = \ddtB \bht{i} + \bmo \times \bht{i}  
+\ddtN \bht{i} = \ccancelto{\bm{0}}{\ddtB \bht{i}} + \bmo \times \bht{i}  
 \tag{3.22 copied}
 $$
-
 $$
-\ddtN \{ \bht{} \} = - \bmt{\tilde{\bmo}} \{ \bht{} \}
+\begin{aligned}
+\bmo \times \bht{1} &=   \omega_3 \bht2 - \omega_2 \bht3 
+= - \bmt{1 & 0 & 0} \skewmt{\omega} \Bmt{\bht1 \\ \bht2 \\ \bht3} \\
+\bmo \times \bht{2} &= - \omega_3 \bht1 + \omega_1 \bht3  
+= - \bmt{0 & 1 & 0} \skewmt{\omega} \Bmt{\bht1 \\ \bht2 \\ \bht3} \\
+\bmo \times \bht{3} &=   \omega_2 \bht1 - \omega_1 \bht2 
+= - \bmt{0 & 0 & 1} \skewmt{\omega} \Bmt{\bht1 \\ \bht2 \\ \bht3}
+\end{aligned}
+$$
+and we get a **vectrix** equation for the rate of the basis:
+$$
+\ddtN \{ \bht{} \} = - \bmt{\tilde{\bmo}} \, \{ \bht{} \}
 \tag{3.24}
 $$
 >[!warning] Vectrix operations. 
 > Eq. (3.22) contains <u>vector cross-product</u>. \
-> Eq. (3.24) contains a new operation between matrix and **vectrix**, which is defined as an aggregation of three <u>vector cross-products</u>.
+> Eq. (3.24) contains a new operation between matrix and **vectrix**, which is defined as a "collection" of three <u>vector cross-products</u>.
 
 Take time derivate to Eq. (3.5)
 $$
@@ -225,6 +190,46 @@ At the cost of having a highly redundant formulation.
 >In other words, everything happened at a fixed instant of $t_0$, it's only when you start propagate the ODE in Eq. (3.28) from $t_0$ to $t>0$, the vector starts to change.
 
 
+>[!check]- This **skew-symmetric tilde matrix operator** is independent of coordinate transformations (Cartesian) and holds for abstract vectors.
+> We want to show that <u>the tilde operator doesn't change under a coordinate transformation</u> from Cartesian frame $\calB$ to Cartesian frame $\calF$, where the orientation of $\calF$ is given by the DCM $\dcm{FB}$, which can be expressed as
+> $$
+> (\dcm{FB}(\bmo)_\calB) \times (\dcm{FB}(\bht{i})_\calB) = \dcm{FB} \left( (\bmo)_\calB \times (\bht{i})_\calB \right)
+> \tag{to prove}
+> $$
+> First, let's prove a general rule for the tilde operator. For two generic vectors $\bmu$ and $\bmv$, after a transformation of DCM $\dcm{C}$, the new coordinates can be obtained as
+> $$
+> \bmu' = \dcm{C} \cdot \bmu   \qquad    \bmv' = \dcm{C} \cdot \bmv
+> $$
+> Using the definition of tilde operators, and plugging in the above transformed vectors, we have the first expression:
+> $$
+> \begin{aligned}
+> \bmu \times \bmv &= - \bmt{\tilde{\bmu}} \cdot \bmv \\
+> \bmu' \times \bmv' &= - \bmt{\tilde{\bmu'}} \cdot \bmv' = -\bmt{\tilde{\bmu'}} \cdot \dcm{C} \cdot \bmv
+> \end{aligned}
+> $$
+> Since $\bmu' \times \bmv'$ and $\bmu \times \bmv$ themselves are also a vector, so the following relation holds as our second expression:
+> $$
+> \bmu' \times \bmv' = \dcm{C} \cdot ( \bmu \times \bmv ) = - \dcm{C} \cdot \bmt{\tilde{\bmu}} \cdot \bmv
+> $$
+> Equate the above two expressions and we have:
+> $$
+> - \bmt{\tilde{\bmu'}} \cdot \dcm{C} = - \dcm{C} \cdot \bmt{\tilde{\bmu}} 
+> \implies
+> \bmt{\tilde{\bmu'}} = \dcm{C} \cdot \bmt{\tilde{\bmu}} \cdot \dcm{C}\trans
+> $$
+> 
+> Then let's apply this to our problem. After the coordinate transformation $\dcm{FB}$ ($\calB \to \calF$), the following derivation becomes apparent:
+> $$
+> \begin{aligned}
+> (\textcolor{red}{ \dcm{FB}(\bmo)_\calB }) \times (\dcm{FB}(\bht{i})_\calB) 
+> %&= (\bmo)_\calF \times (\bht{i})_\calF 
+> %&= - \left(\bmt{\tilde{\bmo}}\right)_\calF \cdot (\bht{i})_\calF  \\
+> &= - \textcolor{red}{ \dcm{FB} \cdot \left(\bmt{\tilde{\bmo}}\right)_\calB \cdot \dcm{FB}\trans } \cdot \dcm{FB} \cdot (\bht{i})_\calB  \\
+> &= - \textcolor{red}{ \dcm{FB} \cdot \left(\bmt{\tilde{\bmo}}\right)_\calB \cdot {} } \left( \textcolor{red}{ \dcm{FB}\trans } \cdot \dcm{FB} \cdot (\bht{i})_\calB \right)  \\
+> &= - \dcm{FB} \cdot \left(\bmt{\tilde{\bmo}}\right)_\calB \cdot (\bht{i})_\calB \\
+> &= \dcm{FB} \left( (\bmo)_\calB \times (\bht{i})_\calB \right)
+> \end{aligned}
+> $$
 
 
 
@@ -273,7 +278,7 @@ $$
 All possible Euler Angle sets (a permutation problem requiring different adjacent elements):
 ```mermaid
 flowchart TD
-subgraph All possitlbe Euler angle sets
+subgraph All possible Euler angle sets
     id1((1)) --> id12((2)) --> id121((1))
                   id12 --> id123((3))
     
@@ -297,8 +302,8 @@ id313 --> coe[Classical<br>orbital<br>elements]
 ```
 
 Two types:
-- Asymmetric Euler angle set: 1st and 3rd rotations around different body frame axis
-- Symmetric Euler angle set: 1st and 3rd rotations around the same body frame axis
+1. Asymmetric Euler angle set: 1st and 3rd rotations around <u>different body frame axes</u>.
+2. Symmetric Euler angle set: 1st and 3rd rotations around <u>the same body frame axis</u>.
 
 >[!warning] The term "symmetric" doesn't mean the order can be changed!
 
@@ -381,7 +386,7 @@ $$
 $$
 
 >[!info] When specifying Euler angle sets, it must be clear which frame is the reference. There must be two frames involved: one serves as the reference, the other is the one gets rotated. 
->The **vectrix** only unifies directions of **change of basis/frame** and **coordinate transformation** in mathematical expression.
+>The **vectrix** only unifies directions of **change of basis/frame** and **coordinate transformation** in mathematical expressions.
 >
 >Physically, the "directions" of **change of basis/frame** and **coordinate transformation** are always "opposite", regardless of the mathematical conventions and notations.
 
@@ -393,7 +398,8 @@ Note that each of the 12 possible sets of Euler angles has a **geometric singula
 > "Singularity" usually means something doesn't work, abnormal, ill-defined, unexpected, or giving infinity.
 > DCM has no singularity, if one cannot resolve a set of Euler angles from DCM, then it's a singularity of that particular set of Euler angles.
 > 
-> Go back and check Eqs. (3.34) and (3.36).
+> Go back and check Eqs. (3.34) and (3.36). \
+> Find when there will be an issue of undefined $\frac{0}{0}$.
 
 
 

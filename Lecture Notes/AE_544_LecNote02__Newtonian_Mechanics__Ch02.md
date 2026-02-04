@@ -1,6 +1,6 @@
 ---
 date created: 2025-01-12T16:04:10-05:00
-date modified: 2026-01-28T10:13:08-05:00
+date modified: 2026-02-02T11:58:47-05:00
 ---
 
 # AE_544_LecNote02\__Newtonian_Mechanics__Ch02
@@ -549,7 +549,7 @@ $$
 %
 &= r \ddot{\theta} \cos \phi \sht{\theta} - r \dot{\theta} \dot{\phi} \sin \phi \sht{\theta} + r \ddot{\phi}\sht\phi + \left( r \dot{\theta}^2\sin \phi \cos \phi\sht{\phi} - \dot{\theta}r \dot{\phi}\sin \phi\sht\theta - r \dot{\theta}^2\cos^2\phi\sht{r} - r \dot{\phi}^2\sht{r}  \right)  \\
 %
-&= - (r \dot{\theta}^2\cos^2\phi + r \dot{\phi}^2)\sht{r}  +  (r \dot{\theta}^2\sin \phi \cos \phi + r \ddot{\phi})\sht{\phi}  +  (r \ddot{\theta} \cos \phi \sht{\theta} - 2r \dot{\theta} \dot{\phi} \sin \phi) \sht{\theta}   \\
+&= - (r \dot{\theta}^2\cos^2\phi + r \dot{\phi}^2)\sht{r}  +  (r \dot{\theta}^2\sin \phi \cos \phi + r \ddot{\phi})\sht{\phi}  +  (r \ddot{\theta} \cos \phi - 2r \dot{\theta} \dot{\phi} \sin \phi) \sht{\theta}   \\
 \end{aligned}
 $$
 
@@ -567,7 +567,7 @@ $$
 \begin{aligned}
 mg\sin \phi-N &= - m (r \dot{\theta}^2\cos^2\phi + r \dot{\phi}^2) \\
 g\cos \phi &= r \dot{\theta}^2\sin \phi \cos \phi + r \ddot{\phi} \\
-0 &= r \ddot{\theta} \cos \phi \sht{\theta} - 2r \dot{\theta} \dot{\phi} \sin \phi
+0 &= r \ddot{\theta} \cos \phi - 2r \dot{\theta} \dot{\phi} \sin \phi
 \end{aligned}
 $$
 
@@ -576,11 +576,12 @@ If we can get an expression of $\dot{\theta}$ in terms of $(\phi, \dot{\phi}, \d
 Using conservation of angular momentum along $\nht3$:
 $$
 \begin{aligned}
+\bmH \cdot \nht3 &= \bmH_0 \cdot \nht3 \\
 \bmH \cdot \nht3 &= (\bmr \times m\bmv) \cdot \nht3 \\
 &= mr\sht{r} \times (r\dot{\theta}\cos\phi\sht{\theta} + r \dot{\phi}\sht{\phi}) \cdot \nht3 \\
 &= (-mr\sht{r}r\dot{\theta}\cos\phi\sht\phi + mr^2 \dot{\phi}\sht{\theta}) \cdot \nht3 \\
 &= mr^2\dot{\theta}\cos^2\phi \\
-&= \bmH_0 \cdot \nht3 = mr^2 \dot{\theta}_0 \cos^2\phi_0
+\bmH_0 \cdot \nht3 &= mr^2 \dot{\theta}_0 \cos^2\phi_0
 \end{aligned}
 $$
 So,
@@ -613,7 +614,7 @@ Study Section 2.6 Rocket Problem and try answer textbook problem 2.15.
 
 ## Homework 01
 
-Due on Jan 28. 
+Due on ~~Jan 28~~. Extended to Feb 02, 2026.
 Check Canvas for detailed guidance on submissions.
 
 Use office hours if you need.
