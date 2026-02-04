@@ -111,7 +111,7 @@ $$
 1 & 0 & 0
 \end{vmatrix} = \omega_3 \bht2 - \omega_2 \bht3 \\
 &= - \bmt{1 & 0 & 0} \skewmt{\omega} \Bmt{\bht1 \\ \bht2 \\ \bht3} \\
-&= - \bmt{\tilde{\bmx}} \{ \bht{} \}
+&= - \bmt{1 & 0 & 0} \bmt{\tilde{\bmx}} \{ \bht{} \}
 \end{aligned}
 $$
 
