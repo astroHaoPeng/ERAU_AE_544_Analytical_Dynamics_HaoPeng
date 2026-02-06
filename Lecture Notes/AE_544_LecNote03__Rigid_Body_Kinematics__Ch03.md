@@ -1,6 +1,6 @@
 ---
 date created: 2025-01-26T13:00:00-05:00
-date modified: 2026-02-04T09:49:53-05:00
+date modified: 2026-02-06T09:54:37-05:00
 ---
 
 # AE_544_LecNote03\__Rigid_Body_Kinematics__Ch03
@@ -407,9 +407,8 @@ Note that each of the 12 possible sets of Euler angles has a **geometric singula
 
 ![[fig-p3-7_rolling_disk.png|500]]
 
->[!warning] Notice the order of basis for $\calB$.
+>[!warning] (Similar to the grind in [[AE_544_LecNote01__Particle_Kinematics__Ch01#Textbook problem 1.14 (Grinding disk and missile)|the problem 1.14 in lecture note 01]]). But notice the order of basis for $\calB$. 
 
-(Similar to the grind in [[AE_544_LecNote01__Particle_Kinematics__Ch01#Textbook problem 1.14 (Grinding disk and missile)|the problem 1.14 in lecture note 01]]).
 
 ### (a) DCM transforms $\calN$ to $\calB$
 Assumed no slip between the disk and the ground, leading to a constraint between $\theta$ and $\phi$: the speed of the contact point should be the same
@@ -420,6 +419,7 @@ Given $\theta_0$ and $\phi_0$, a simple definite integration gives
 $$
 \phi \cdot L + \phi_0 \cdot L = \theta \cdot r + \theta_0 \cdot r
 $$
+such that any $\theta$ can be expressed as a function of $\phi$, which is required by the problem statement.
 
 Get DCM from two consecutive rotations:
 $$
@@ -437,9 +437,9 @@ $$
 $$
 
 ### (b) coordinate transformation
-The given vector $\bmv$ (not necessarily to be a velocity vector)
+The given vector $\bmv = 1 \bht{r} + 1 \bht{\theta} + 2\bht{L}$  (not necessarily to be a velocity vector), its vector form is
 $$
-\cdB{\bmv} = \bmt{2\\1\\1}  \tag{notice the order}
+\cdB{\bmv} = \bmt{2\\1\\1}  \qquad \text{\color{red}(notice the order!)}
 $$
 Apply DCM
 $$
@@ -468,7 +468,7 @@ $$
 $$
 where $\bht{2}'$ above is the $\bht{2}$ (after pitch, before roll) on the third subplot in the order given by gigantic arrows, and $\nht{3}$ is apparent.
 
->[!info]- The reason Eq. (3.53) is "apparent" in the textbook.
+>[!info]- The reason Eq. (3.53) is "apparent" in the textbook: think of this as a *composition* but not a ~~*decomposition*~~.
 >This equation is rigorous and we are not using any approximation here. 
 >Why it's apparent is because this is simply a composition, or an integration, of different sources of angular velocities. We have three sources of angular velocity (try think of three motors along each axis), each of them is along a well-defined axis. So, this is not about decomposition of a vector into a frame (like what Eq. 3.52 does), but to physically integrate all angular velocity vectors into a total velocity vector.
 >
@@ -496,8 +496,9 @@ or
 $$
 \cdFrame{\calB}{\bmt{\omega_1 \\ \omega_2 \\ \omega_3}} = 
 \bmt{-\sin \theta & 0 & 1 \\ \sin \phi \cos \theta & \cos \phi & 0 \\ \cos \phi \cos \theta & -\sin \phi & 0}
-\bmt{\dot{\psi} \\ \dot{\theta} \\ \dot{\phi}}
+\bmt{\dot{\psi} \\ \dot{\theta} \\ \dot{\phi}}_\text{3-2-1}
 $$
+Notice that the RHS $3\times1$ vector is not the coordinate of a physical vector.
 
 Finally, <u>the kinematic ODE of (3-2-1) Euler angle set</u>  (yaw-$\theta_1$-$\psi$, pitch-$\theta_2$-$\theta$, roll-$\theta_3$-$\phi$ )  is obtained by inversing the above equation, which gives:
 $$
@@ -548,7 +549,7 @@ $$
 \cdB{\bmt{e_{1} \\ e_{2} \\ e_{3}}} = \dcm{C} \cdot \cdN{\bmt{e_{1} \\ e_{2} \\ e_{3}}}
 $$
 the principal axis unit vector $\bht{}$ is the unit eigenvector of $\Phi$ corresponding to the eigenvalue $+1$.
-Thus the proof of the principal rotation theorem reduces to proving the $\Phi$  has an eigenvalue of $+1$.
+Thus, the proof of the principal rotation theorem reduces to proving the $\Phi$  has an eigenvalue of $+1$.
 
 >[!info]- Logic to prove $\dcm{C}$ has only one eigenvalue $+1$. 
 >Because $\det(\dcm{C}) = \lambda_1 \lambda_2 \lambda_3 = 1$ and all $\lambda_i$ are on the unit circle:
@@ -563,7 +564,7 @@ In most cases the magnitude of $\Phi$ is simply chosen to be less than or equal 
 **Conversions between principal axis and DCM**
 
 ![[fig-3-9_principle_and_angle_to_DCM.png|300]] \
-Our goal for the following discussion is: **Rotate $\{\nht{}\}$ to $\{\bht{}\}$, in other words, to find basis vector $\bht{i}$ in terms of $(\eht{}, \Phi)$ and $(\nht1, \nht2, \nht3)$.**
+Our goal for the following discussion is: **Rotate $\{\nht{}\}$ to $\{\bht{}\}$ around $\eht{}$ for an angle of $\Phi$**, in other words, to find basis vector $\bht{i}$ in terms of $(\eht{}, \Phi)$ and $(\nht1, \nht2, \nht3)$.
 
 Define the intermediate frame $\{\uht{}, \uht{}', \eht{}\}$ using geometric relationship in the figure:
 $$
@@ -584,19 +585,19 @@ $$
 e_i = \cos \xi_i = \eht{} \cdot \nht{i}.
 $$
 
-After a rotation of $\Phi$, $\uht{}$ is rotated to a new direction,
+After a rotation of $\Phi$, $\uht{}$ is rotated to a new direction $\uht{}'$ given as,
 $$
 \uht{}' = \cos \Phi \uht{} + \sin \Phi \vht{}.
 $$
 
-In this intermediate frame, $\nht{i}$ is expressed as
+In this intermediate frame $\{\uht{}, \uht{}', \eht{}\}$, $\nht{i}$ is expressed as
 $$
-\nht{i} = \cos \xi_i \eht{} + \sin \xi_i \uht{}.
+\nht{i} = \cos \xi_i \eht{} + \sin \xi_i \textcolor{red}{ \uht{} }.
 $$
-After the rotation, since $\bht{i}$ and $\nht{i}$ are in the same plane that is normal to $\eht{}$, only the transversal component of $\nht{i}$ gets changed:
+After the rotation, since $\bht{i}$ and $\nht{i}$ are in the same plane that contains $\eht{}$, only the transversal component of $\nht{i}$ gets changed:
 $$
 \begin{align}
-\bht{i} &= \cos \xi_i \eht{} + \sin \xi_i \uht{}' \\
+\bht{i} &= \cos \xi_i \eht{} + \sin \xi_i \textcolor{magenta}{ \uht{}' } \\
 &= \cos \xi_i \eht{} + \sin \xi_i (\cos \Phi \uht{} + \sin \Phi \vht{}) \\
 &= e_i \eht{} + \sin \xi_i \cos \Phi \left( \frac{1}{\sin\xi_i}(\nht{i}-e_i\eht{}) + \sin \Phi \frac{1}{\sin \xi_i} (\eht{}\times\nht{i}) \right) \\
 &= e_i \eht{} + \cos \Phi (\nht{i}-e_i\eht{}) + \sin \Phi (\eht{}\times\nht{i})   \\
@@ -612,7 +613,7 @@ $$
 > = (\cdN{\nht{i}}) \eht{} \eht{}\trans \Bmt{\nht1\\ \nht2\\ \nht3} 
 > $$
 
-Write all three equations in the vectrix format:
+Write all three equations in the *vectrix* format:
 $$
 \{\bht{}\} = (\cos \Phi [I_{3\times3}] + (1-\cos \Phi) \eht{}\eht{}\trans - \sin \Phi \bmt{\tilde{\bm{e}}} )  \{\nht{}\}
 \tag{3.71}
@@ -685,6 +686,9 @@ $$
 $$
 
 This derivation of using principle rotation vector to find DCM also holds for higher dimension rotations.
+
+
+The kinematic differential equation using $(\eht{}, \Phi)$ (or $\bm{\gamma}$) is referred to the textbook.
 
 
 
