@@ -1,6 +1,6 @@
 ---
 date created: 2025-01-26T13:00:00-05:00
-date modified: 2026-02-06T09:54:37-05:00
+date modified: 2026-02-09T09:47:02-05:00
 ---
 
 # AE_544_LecNote03\__Rigid_Body_Kinematics__Ch03
@@ -127,7 +127,8 @@ $$
 \bmo \times \bht{2} &= - \omega_3 \bht1 + \omega_1 \bht3  
 = - \bmt{0 & 1 & 0} \skewmt{\omega} \Bmt{\bht1 \\ \bht2 \\ \bht3} \\
 \bmo \times \bht{3} &=   \omega_2 \bht1 - \omega_1 \bht2 
-= - \bmt{0 & 0 & 1} \skewmt{\omega} \Bmt{\bht1 \\ \bht2 \\ \bht3}
+= - \bmt{0 & 0 & 1} \skewmt{\omega} \Bmt{\bht1 \\ \bht2 \\ \bht3} \\
+\text{So, } &\bmo \times \{\bht{}\} = - \bmt{\tilde{\bmx}} \{\bht{}\}
 \end{aligned}
 $$
 and we get a **vectrix** equation for the rate of the basis:
@@ -164,9 +165,10 @@ $$
 $$
 Since this equation shall hold for the basis vectrix $\{\nht{}\}$ of any arbitrary frame $\calN$, so there must be
 $$
-\dot{\dcm{C}} = - \bmt{\tilde{\bmo}} \dcm{C}
+\dot{\dcm{C}} = - \bmt{\tilde{\bmo}} \dcm{C} = - \skewmt{\omega} \dcm{C}
 \tag{3.27}
 $$
+^kinematics-in-dcm
 
 It seems everything are expressed in the body frame $\calB$ now, but we still need the reference frame $\calN$ for calculation. 
 But $\calN$ doesn't need to be inertial.
@@ -466,7 +468,7 @@ $$
 \bmo = \dot{\psi} \nht{3} + \dot{\theta} \bht{2}' + \dot{\phi} \bht{1}
 \tag{3.53}
 $$
-where $\bht{2}'$ above is the $\bht{2}$ (after pitch, before roll) on the third subplot in the order given by gigantic arrows, and $\nht{3}$ is apparent.
+where $\nht{3}$ is apparent; $\bht{2}'$ above is the $\bht{2}$ (after pitch, before roll) on the third subplot in order, and $\bht{1}$ is the actual first axis of $\calB$ in both the third and fourth subplots.
 
 >[!info]- The reason Eq. (3.53) is "apparent" in the textbook: think of this as a *composition* but not a ~~*decomposition*~~.
 >This equation is rigorous and we are not using any approximation here. 
@@ -502,7 +504,7 @@ Notice that the RHS $3\times1$ vector is not the coordinate of a physical vector
 
 Finally, <u>the kinematic ODE of (3-2-1) Euler angle set</u>  (yaw-$\theta_1$-$\psi$, pitch-$\theta_2$-$\theta$, roll-$\theta_3$-$\phi$ )  is obtained by inversing the above equation, which gives:
 $$
-\bmt{\dot{\psi} \\ \dot{\theta} \\ \dot{\phi}} 
+\bmt{\dot{\psi} \\ \dot{\theta} \\ \dot{\phi}}_\text{3-2-1} 
 = \frac{1}{\cos \theta} \bmt{0 & \sin \phi & \cos \phi \\ 0 & \cos \phi \cos \theta & -\sin \phi \cos \theta \\ \cos \theta & \sin \phi \sin \theta & \cos \phi \sin \theta} \cdot \cdFrame{\calB}{\bmt{\omega_1 \\ \omega_2 \\ \omega_3}}
 \tag{3.57}
 $$
@@ -512,7 +514,7 @@ $$
 Similarly, <u>the ODE of (3-1-3) Euler angle set</u> can be obtained as
 
 $$
-\bmt{\dot{\theta_1} \\ \dot{\theta_2} \\ \dot{\theta_3}} 
+\bmt{\dot{\theta_1} \\ \dot{\theta_2} \\ \dot{\theta_3}}_\text{3-1-3}
 = \frac{1}{\sin \theta_2} \bmt{\sin \theta_3 & \cos \theta_3 & 0 \\ \cos \theta_3 \sin \theta_2 & -\sin \theta_3 \sin \theta_2 & 0 \\ -\sin \theta_3\cos \theta_2 & -\cos \theta_3\cos \theta_2 & \sin \theta_2} \cdot \cdFrame{\calB}{\bmt{\omega_1 \\ \omega_2 \\ \omega_3}}
 \tag{3.59}
 $$
@@ -528,7 +530,7 @@ $$
 
 
 
-## Principal Rotation Vector $(\eht{}, \Phi)$
+## Principal Rotation Axis $\eht{}$ and Angle $\Phi$
 
 ![[fig-3-8_two_principle_rotation_angles.png|300]]
 
@@ -566,7 +568,7 @@ In most cases the magnitude of $\Phi$ is simply chosen to be less than or equal 
 ![[fig-3-9_principle_and_angle_to_DCM.png|300]] \
 Our goal for the following discussion is: **Rotate $\{\nht{}\}$ to $\{\bht{}\}$ around $\eht{}$ for an angle of $\Phi$**, in other words, to find basis vector $\bht{i}$ in terms of $(\eht{}, \Phi)$ and $(\nht1, \nht2, \nht3)$.
 
-Define the intermediate frame $\{\uht{}, \uht{}', \eht{}\}$ using geometric relationship in the figure:
+Define the intermediate frame $\{\uht{}, \vht{}, \eht{}\}$ using geometric relationship in the figure:
 $$
 \vht{} = \frac{\eht{}\times\nht{i}}{\|\eht{}\times\nht{i}\|} = \frac{1}{\sin \xi_i} (\eht{}\times\nht{i})
 \tag{3.66}
@@ -580,21 +582,18 @@ $$
 &= \frac{1}{\sin\xi_i}(\nht{i}-e_i\eht{})  \tag{3.69}
 \end{align}
 $$
-where we have used the following identity to simplify notations
-$$
-e_i = \cos \xi_i = \eht{} \cdot \nht{i}.
-$$
+where $e_i = \cos \xi_i = \eht{} \cdot \nht{i}$.
 
 After a rotation of $\Phi$, $\uht{}$ is rotated to a new direction $\uht{}'$ given as,
 $$
 \uht{}' = \cos \Phi \uht{} + \sin \Phi \vht{}.
 $$
 
-In this intermediate frame $\{\uht{}, \uht{}', \eht{}\}$, $\nht{i}$ is expressed as
+In this intermediate frame $\{\uht{}, \vht{}, \eht{}\}$, $\nht{i}$ is expressed as
 $$
 \nht{i} = \cos \xi_i \eht{} + \sin \xi_i \textcolor{red}{ \uht{} }.
 $$
-After the rotation, since $\bht{i}$ and $\nht{i}$ are in the same plane that contains $\eht{}$, only the transversal component of $\nht{i}$ gets changed:
+Because $\nht{i}$ and $\bht{i}$ are both in the plane that contains $\eht{}$, after the rotation around $\eht{}$, only the direction of the transversal component of $\nht{i}$ gets changed from $\uht{}$ to $\uht{}'$,
 $$
 \begin{align}
 \bht{i} &= \cos \xi_i \eht{} + \sin \xi_i \textcolor{magenta}{ \uht{}' } \\
@@ -606,7 +605,7 @@ $$
 \end{align}
 $$
 
->[!info] Derive $e_i \eht{}$ explicitly.
+>[!info]- Derive $e_i \eht{}$ explicitly.
 > $$
 > e_i\eht{} = e_i (e_1 \nht1 + e_2 \nht2 + e_3\nht3) 
 > = (\cdN{\nht{i}})\trans \cdot \bmt{e_1 e_1 &e_1 e_2 & e_1 e_3 \\ e_2e_1 & e_2e_2 & e_2 e_3 \\ e_3e_1 & e_3e_2 & e_3e_3} \Bmt{\nht1\\ \nht2\\ \nht3}
@@ -626,9 +625,10 @@ $$
 e_1^2 \Sigma + c\Phi & e_1 e_2 \Sigma + e_3 s\Phi & e_1 e_3 \Sigma - e_2 s\Phi \\
 e_2 e_1 \Sigma - e_3 s\Phi & e_2^2 \Sigma + c\Phi & e_2 e_3 \Sigma + e_1 s\Phi \\
 e_3 e_1 \Sigma + e_2 s\Phi & e_3 e_2 \Sigma - e_1 s\Phi & e_3^2 \Sigma + c\Phi
-\end{bmatrix}.
+\end{bmatrix}  \qquad \text{where }  \Sigma = 1 - c\Phi.
 \tag{3.72}
 $$
+^principal-parameters-to-dcm
 
 The <u>inverse transformation</u> from the direction cosine matrix $\dcm{C}$ to the **principal rotation elements** $(\eht{},\Phi)$ is found to be
 $$
@@ -640,7 +640,11 @@ $$
 \tag{3.74}
 $$
 
----
+Many important attitude parameters that are derived from Euler's principal rotation axis $\eht{}$ and angle $\Phi$.
+
+The kinematic differential equation using $(\eht{}, \Phi)$ (or $\bm{\gamma}$ below) is referred to the textbook.
+
+## Principle Rotation Vector $\bm{\gamma}$
 
 The **principal rotation vector** $\bm{\gamma}$ is defined as
 $$
@@ -653,8 +657,7 @@ $$
 \bmt{\tilde{\bmo}} = \dot{\Phi} \bmt{\tilde{\bm{e}}}
 \tag{3.78 and 3.79}
 $$
-
-
+The conversion from $\bm{\gamma}$ to DCM is obtained by solving the matrix differential equation below:
 $$
 \dot{\dcm{C}} = - \bmt{\tilde{\bmo}} \dcm{C}
 \tag{3.27 copied}
@@ -669,7 +672,7 @@ $$
 \end{align}
 $$
 
-Express the matrix power using infinite time series definition,
+Express <u>the matrix power using infinite time series definition</u>,
 $$
 \dcm{C} = e^{-\bmt{\tilde{\bm{\gamma}}}} = \sum_{n=0}^\infty \frac{1}{n!} (-\bmt{\tilde{\bm{\gamma}}})^n
 $$
@@ -679,7 +682,7 @@ $$
 \tag{3.71 copied}
 $$
 
-The inverse transformation from $\dcm{C}$ to $\bm{\gamma}$ is also given my matrix logarithm as
+The inverse transformation from $\dcm{C}$ to $\bm{\gamma}$ is also given by matrix logarithm as
 $$
 \bmt{\tilde{\bm{\gamma}}} = - \ln\dcm{C} = \sum_{n=0}^\infty \frac{1}{n} (1-\dcm{C})^n
 \tag{3.83}
@@ -687,16 +690,13 @@ $$
 
 This derivation of using principle rotation vector to find DCM also holds for higher dimension rotations.
 
-
-The kinematic differential equation using $(\eht{}, \Phi)$ (or $\bm{\gamma}$) is referred to the textbook.
-
-
+The kinematic differential equation using $\bm{\gamma}$ is referred to the textbook as it is not often used.
 
 
 
 ## Euler Parameters $\bmbet$ (aka. Quaternions sometimes)
 
-The Euler parameter vector $\bmbet$ is defined in terms of the principal rotation elements as
+The Euler parameter vector $\bmbet$ is defined in terms of the principal rotation axis $\eht{}$ elements and angle $\Phi$ as
 $$
 \begin{aligned}
 \beta_0 &= \cos(\Phi/2) \\
@@ -706,31 +706,19 @@ $$
 \end{aligned}
 $$
 
-There is one holonomic constraint
+There is one holonomic constraint which describes a 4D unit sphere:
 $$
 \beta_0^2 + \beta_1^2 + \beta_2^2 + \beta_3^2 = 1
 $$
-which describes a 4D unit sphere.
+
 Any rotation described through the Euler parameters has a trajectory on the surface of this constraint sphere.
 
-Given a certain attitude, there are actually two sets of Euler parameters that will describe the same orientation. This is due to the non-uniqueness of the principal rotation elements themselves. 
+**Ambiguity** (not singularity): Given a certain attitude, there are actually two sets of Euler parameters that will describe the same orientation. This is due to the non-uniqueness of the principal rotation elements themselves. 
 Try flip the sign of $\eht{}$ and $\Phi$ in the above definition.
 
 Because any point on the unit constraint sphere surface represents a specific orientation, the anti-pole to that point represents the exact same orientation.
 
-> $$
-> [\bm{C}] =
-> \begin{bmatrix}
-> e_1^2 \Sigma + c\Phi & e_1 e_2 \Sigma + e_3 s\Phi & e_1 e_3 \Sigma - e_2 s\Phi \\
-> e_2 e_1 \Sigma - e_3 s\Phi & e_2^2 \Sigma + c\Phi & e_2 e_3 \Sigma + e_1 s\Phi \\
-> e_3 e_1 \Sigma + e_2 s\Phi & e_3 e_2 \Sigma - e_1 s\Phi & e_3^2 \Sigma + c\Phi
-> \end{bmatrix}.
-> \tag{3.72 copied}
-> $$
-> 
-> $$
-> \Sigma = 1 - c\Phi
-> $$
+![[#^principal-parameters-to-dcm]]
 
 Using Eq. (3.72) and half-angle identities,
 $$
@@ -749,6 +737,8 @@ $$
 \end{bmatrix}
 \tag{3.93}
 $$
+^euler-parameters-to-dcm
+
 The inverse transformation can be found as:
 $$
 \begin{aligned}
@@ -780,18 +770,18 @@ $$
 >[!note] The composition only involved matrix multiplication.
 >These transformations provide a simple, nonsingular, and bilinear method to combine two successive rotations described through Euler parameters. For other attitude parameters such as the Euler angles, this same composite transformation would yield a very complicated, transcendental expression. (refer to textbook for those equations)
 
-Next, discuss the kinematics using Euler parameters.
-Take time derivative directly:
+Next, discuss the **kinematics using Euler parameters**.
+
+Take time derivative directly to each component $\beta_i$, for example $\beta_0$:
 $$
 \dot{\beta}_0 = \frac{\dot{C}_{11} + \dot{C}_{22} + \dot{C}_{33}}{8\beta_0}
 \tag{3.101}
 $$
-> $$
-> \dot{\dcm{C}} = - \bmt{\tilde{\bmo}} \dcm{C} = - \skewmt{\omega} \dcm{C}
-> \tag{3.27 copied}
-> $$
 
-Using Eq. 3.27 to find derivatives of $C_{ij}$, then plugging in to Eq. 3.101,
+The using Eq. 3.27 to find derivatives of $C_{ij}$, and plugging into Eq. 3.101 to get rid of $\dot{C}_{ij}$ terms:
+
+![[#^kinematics-in-dcm]]
+
 $$
 \dot{\beta}_0 = \frac{1}{2} \left( 
 -\frac{C_{23} - C_{32}}{4\beta_0} \omega_1
@@ -800,13 +790,15 @@ $$
 \right)
 \tag{3.102}
 $$
-Then replacing all $C_{ij}$ using the Euler parameters $\beta_i$ in DCM, we get
+Lastly, replace all $C_{ij}$ using the Euler parameters $\beta_i$ in DCM covernsion, and we can get the kinematics equations:
+
+![[#^euler-parameters-to-dcm]]
 $$
 \dot{\beta}_0 = \frac{1}{2} (-\beta_1 \omega_1 - \beta_2 \omega_2 - \beta_3 \omega_3)
 \tag{3.103}
 $$
 
-Similarly, we can get
+Similarly, we can get for all the other components
 $$
 \begin{aligned}
 \dot{\beta}_1 &= \frac{1}{2} (\beta_0 \omega_1 - \beta_3 \omega_2 + \beta_2 \omega_3) \\
@@ -858,16 +850,7 @@ $$
 \bmq = \tan\frac{\Phi}{2} \eht{} 
 $$
 
-
-> $$
-> \dcm{C} = 
-> \begin{bmatrix}
-> \beta_0^2 + \beta_1^2 - \beta_2^2 - \beta_3^2 & 2(\beta_1 \beta_2 + \beta_0 \beta_3) & 2(\beta_1 \beta_3 - \beta_0 \beta_2) \\
-> 2(\beta_1 \beta_2 - \beta_0 \beta_3) & \beta_0^2 - \beta_1^2 + \beta_2^2 - \beta_3^2 & 2(\beta_2 \beta_3 + \beta_0 \beta_1) \\
-> 2(\beta_1 \beta_3 + \beta_0 \beta_2) & 2(\beta_2 \beta_3 - \beta_0 \beta_1) & \beta_0^2 - \beta_1^2 - \beta_2^2 + \beta_3^2
-> \end{bmatrix}
-> \tag{3.93 copied}
-> $$
+![[#^euler-parameters-to-dcm]]
 
 DCM can be get from DCM of Euler parameters (Eq. 3.93) above,
 $$
@@ -899,7 +882,7 @@ $$
 ![[fig-3-10_CRP.png|400]]
 ![[fig-3-11_MRP.png|400]]
 
-The MRP vector s is defined in terms of the Euler parameters as the transformation
+The MRP vectors is defined in terms of the Euler parameters as the transformation
 $$
 \sigma_i = \frac{\beta_i}{1 + \beta_0}  \qquad i = 1,2,3
 \tag{3.137}
