@@ -1,6 +1,6 @@
 ---
 date created: 2025-01-26T13:00:00-05:00
-date modified: 2026-02-09T09:47:02-05:00
+date modified: 2026-02-09T13:05:56-05:00
 ---
 
 # AE_544_LecNote03\__Rigid_Body_Kinematics__Ch03
@@ -601,7 +601,7 @@ $$
 &= e_i \eht{} + \sin \xi_i \cos \Phi \left( \frac{1}{\sin\xi_i}(\nht{i}-e_i\eht{}) + \sin \Phi \frac{1}{\sin \xi_i} (\eht{}\times\nht{i}) \right) \\
 &= e_i \eht{} + \cos \Phi (\nht{i}-e_i\eht{}) + \sin \Phi (\eht{}\times\nht{i})   \\
 &= \cos \Phi\nht{i} + (1-\cos \Phi) e_i \eht{} + \sin \Phi (\eht{}\times\nht{i})  \\
-&= \cos \Phi\nht{i} + (1-\cos \Phi) (\cdN{\nht{i}})\eht{}\eht{}\trans \{\nht{}\} + \sin \Phi (\eht{}\times\nht{i})\tag{3.70 altered}  \\
+&= \cos \Phi\nht{i} + (1-\cos \Phi) (\cdN{\nht{i}})^T\eht{}\eht{}\trans \{\nht{}\} + \sin \Phi (\eht{}\times\nht{i})\tag{3.70 altered}  \\
 \end{align}
 $$
 
@@ -609,7 +609,7 @@ $$
 > $$
 > e_i\eht{} = e_i (e_1 \nht1 + e_2 \nht2 + e_3\nht3) 
 > = (\cdN{\nht{i}})\trans \cdot \bmt{e_1 e_1 &e_1 e_2 & e_1 e_3 \\ e_2e_1 & e_2e_2 & e_2 e_3 \\ e_3e_1 & e_3e_2 & e_3e_3} \Bmt{\nht1\\ \nht2\\ \nht3}
-> = (\cdN{\nht{i}}) \eht{} \eht{}\trans \Bmt{\nht1\\ \nht2\\ \nht3} 
+> = (\cdN{\nht{i}})^T \eht{} \eht{}\trans \Bmt{\nht1\\ \nht2\\ \nht3} 
 > $$
 
 Write all three equations in the *vectrix* format:
