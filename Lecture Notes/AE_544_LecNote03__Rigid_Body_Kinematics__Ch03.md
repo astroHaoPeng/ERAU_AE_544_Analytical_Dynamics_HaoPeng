@@ -1,6 +1,6 @@
 ---
 date created: 2025-01-26T13:00:00-05:00
-date modified: 2026-02-09T13:05:56-05:00
+date modified: 2026-02-11T09:19:39-05:00
 ---
 
 # AE_544_LecNote03\__Rigid_Body_Kinematics__Ch03
@@ -756,6 +756,7 @@ Initially one simply picks an initial condition on one Euler parameter trajector
 $$
 \dcm{FN(\bmbet)} = \dcm{FB(\bmbet'')} \cdot \dcm{BN(\bmbet')}
 $$
+
 $$
 \bmt{\beta_0 \\ \beta_1 \\ \beta_2 \\ \beta_3}
 = \begin{bmatrix}
@@ -772,15 +773,29 @@ $$
 
 Next, discuss the **kinematics using Euler parameters**.
 
-Take time derivative directly to each component $\beta_i$, for example $\beta_0$:
+Take time derivative directly to each component $\beta_i$, for example $\beta_0$ (here we've chosen positive $\beta_0$):
 $$
 \dot{\beta}_0 = \frac{\dot{C}_{11} + \dot{C}_{22} + \dot{C}_{33}}{8\beta_0}
 \tag{3.101}
 $$
 
+%% $$
+\begin{aligned}
+\ddt \left[ \frac{1}{2} (C_{11} + C_{22} + C_{33} + 1)^\frac{1}{2} \right] \\
+\frac{1}{4} (C_{11} + C_{22} + C_{33} + 1)^\frac{-1}{2} \left[ \dot{C}_{11} + \dot{C}_{22} + \dot{C}_{33} \right] \\
+\frac{1}{4 (C_{11} + C_{22} + C_{33} + 1)^\frac{1}{2}} \left[ \dot{C}_{11} + \dot{C}_{22} + \dot{C}_{33} \right] \\
+\frac{1}{8 \cdot \frac{1}{2} (C_{11} + C_{22} + C_{33} + 1)^\frac{1}{2}} \left[ \dot{C}_{11} + \dot{C}_{22} + \dot{C}_{33} \right] \\
+\frac{1}{8 \cdot \beta_0} \left[ \dot{C}_{11} + \dot{C}_{22} + \dot{C}_{33} \right]
+\end{aligned}
+$$ %%
+
 The using Eq. 3.27 to find derivatives of $C_{ij}$, and plugging into Eq. 3.101 to get rid of $\dot{C}_{ij}$ terms:
 
 ![[#^kinematics-in-dcm]]
+
+%% $$
+- \skewmt{\omega}\dcmExpand{C} = 
+$$ %%
 
 $$
 \dot{\beta}_0 = \frac{1}{2} \left( 
@@ -831,7 +846,7 @@ $$
 
 ![[fig-3-10_CRP.png|400]]
 
-This rigid body attitude coordinate set reduces the redundant Euler parameters to a minimal three-parameter set through the transformation
+Classical Rodrigues parameters $\bmq$ reduce the redundant Euler parameters to a minimal three-parameter set through the transformation
 $$
 q_i = \frac{\beta_i}{\beta_0}  \qquad i = 1,2,3
 \tag{3.114}
@@ -845,7 +860,8 @@ $$
 \end{aligned}
 $$
 
-Classical Rodrigues parameters can also be defined using principal rotation parameters as
+Notice that it's essentially still based on the principal rotation axis $\eht{}$ and angle $\Phi$.
+So, classical Rodrigues $\bmq$ parameters can also be defined using principal rotation parameters as
 $$
 \bmq = \tan\frac{\Phi}{2} \eht{} 
 $$
@@ -879,8 +895,8 @@ $$
 
 ## Modified Rodrigues Parameters
 
-![[fig-3-10_CRP.png|400]]
-![[fig-3-11_MRP.png|400]]
+![[fig-3-10_CRP.png|400]] <- *classical*
+![[fig-3-11_MRP.png|400]] <- **modified**
 
 The MRP vectors is defined in terms of the Euler parameters as the transformation
 $$
@@ -897,7 +913,9 @@ i = 1,2,3
 $$
 
 ---
->[!done] End of Lecture Note 04.
+## End of Lecture Note 04
+
+>[!done] Study the textbook.
 >More useful and interesting contents are available in the textbook, but are omitted here.
 > Understanding DCM, Euler angles, quaternions, and Rodrigues parameters are adequate in many cases.
 

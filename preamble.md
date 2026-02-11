@@ -133,6 +133,7 @@
 \newcommand{\diagmt}[3]{\bmt{#1 & 0 & 0 \\ 0 & #2 & 0 \\ 0 & 0 & #3}}
 % DCM
 \newcommand{\dcm}[1]{\left[#1\right]}
+\newcommand{\dcmExpand}[1]{\bmt{#1_{11} & #1_{12} & #1_{13} \\ #1_{21} & #1_{22} & #1_{23} \\ #1_{31} & #1_{32} & #1_{33}}}
 
 % Define elementary rotation matrix M1, M2, and M3 introduced in Ch03
 \newcommand{\dcmOne}[1]{\bmt{1 & 0 & 0 \\ 0 & \cos #1 & \sin #1 \\ 0 & -\sin #1 & \cos #1}}

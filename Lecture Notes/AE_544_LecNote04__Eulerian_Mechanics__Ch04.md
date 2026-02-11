@@ -1,7 +1,8 @@
 ---
 date created: 2025-01-26T13:42:36-05:00
-date modified: 2025-03-01T23:51:15-05:00
+date modified: 2026-02-11T09:39:28-05:00
 ---
+
 # AE_544_LecNote04\__Eulerian_Mechanics__Ch04
 
 ![[README#Disclaimers]]
@@ -14,12 +15,17 @@ But it is actually just Newtonian Mechanics being specialized for the case of ri
 > [!info] Review
 > Newton's second law:
 > $$
-> \bmF = m \bm{a}
+> \bmF = \ddt (m\bmv) = m \bm{a}
 > $$
 > 
 > Euler's rotational equation of motion
 > $$
-> \bmL = \dot{\bmH} = \ddt {\large(} \bmt{I} \bmo {\large)} = \bmt{I} ~ \dot{\bmo} + \bmo\times(\bmt{I}~\bmo)
+> \dot{\bmH} = \ddt {\large(} \bmt{I} \bmo {\large)} = \bmt{I} ~ \dot{\bmo} + \bmo\times(\bmt{I}~\bmo)
+> $$
+> 
+> Euler’s equation 
+> $$
+> \dot{\bmH} = \bmL
 > $$
 
 ## Rigid Body Dynamics
@@ -55,7 +61,7 @@ $$
 - The first term is the angular momentum of the mass center about the origin, and its behavior was studied when discussing the dynamics of <u>a single particle</u> (the superparticle). 
 - The second term is the angular momentum vector of the rigid body $\calB$ about its mass center $\bmR_c$. 
 
-We define the angular momentum vector $\bmH_c$ of the rigid body $\calB$ about its mass center $\bmR_c$  
+We define the angular momentum vector $\bmH_c$ of the rigid body $\calB$ about its mass center $\bmR_c$ as  
 $$
 \bm{H}_c = \int_B \bm{r} \times \dot{\bm{r}} \, \dm 
 \tag{4.6}
@@ -73,7 +79,7 @@ So,
 $$
 \bm{H}_c = \int_B \bm{r} \times (\bm{\omega} \times \bm{r}) \, \dm 
 = \int_B - \bmt{\bm{\tilde{r}}} \bmt{\bm{\tilde{r}}} ~ \bm{\omega} \, \dm 
-= \left( \int_B - \bmt{\bm{\tilde{r}}} \bmt{\bm{\tilde{r}}} \, \dm  \right)~ \bm{\omega} 
+= \left( \int_B - \bmt{\bm{\tilde{r}}} \bmt{\bm{\tilde{r}}} \, \dm  \right) \cdot \bm{\omega} 
 $$
 Express all the coordinates in the body frame $\calB$, 
 $$
@@ -95,7 +101,7 @@ $$
 \cdot \cdB{\bmt{\omega_1 \\ \omega_2 \\ \omega_3}}
 
 $$
-Define the <u>inertia matrix at the center of mass</u> $\cdB{\bmt{I_c}}$ as
+**Define the <u>inertia matrix at the center of mass</u> $\cdB{\bmt{I_c}}$ as**
 $$
 \cdB{\bmt{I_c}} = \int_B
 \cdB{\bmt{r_2^2 + r_3^2 & -r_1 r_2 & -r_1 r_3 \\
@@ -134,6 +140,11 @@ $$
 $$
 where $\bm{\nu}_i$ and $I_i$ are the eigenvector and eigenvalue satisfying $\cdB{\bmt{I}} \bm{\nu}_i = I_i~\bm{\nu}_i$ 
 This new set of body-fixed coordinate basis $\{\bm{\nu}_1,\bm{\nu}_2,\bm{\nu}_3\}$ are called the **principal axes**.
+
+
+> [!Question] Will $\cdB{\bmt{I}}$ in an arbitrary body frame $\calB$ be symmetric for an asymmetric rigid body? 
+
+> [!Question] Can the inertia matrix $\cdB{\bmt{I}}$ of an asymmetric rigid body be diagonal?
 
 
 ## Euler's Rotational Equations of Motion
