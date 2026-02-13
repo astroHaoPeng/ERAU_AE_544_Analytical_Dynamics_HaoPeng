@@ -1,6 +1,6 @@
 ---
 date created: 2025-01-26T13:42:36-05:00
-date modified: 2026-02-11T09:39:28-05:00
+date modified: 2026-02-13T09:01:16-05:00
 ---
 
 # AE_544_LecNote04\__Eulerian_Mechanics__Ch04
@@ -44,7 +44,9 @@ $$
 In the inertial frame $\calN$, \
 vector $\bmR$ is the inertial position vector of an infinitesimal mass element $\dm$; \
 $\bmR_c$ is the center of mass; \
-$\bmr=\bmR-\bmR_c$ is the relative position vector.
+$\bmr=\bmR-\bmR_c$ is the relative position vector; \
+$\bmo$ is the instantaneous angular velocity vector $\bmo_{\calB/\calN}$ of the rigid
+body frame $\calB$ relative to the inertial frame $\calN$.
 
 The angular momentum relative to $O$ is then given by
 $$
@@ -89,6 +91,11 @@ $$
 \bmH_c &= H_{c_1}\bht1 + H_{c_2}\bht2 + H_{c_3}\bht3
 \end{aligned}
 $$
+and recall the skew-symmetric tilde matrix is defined as
+$$
+\cdB{[\tilde{\bmr}]} = \skewmt{r}
+$$
+
 The component form of $\bmH_c$ is obtained as:
 $$
 \bm{H}_c =
@@ -149,20 +156,25 @@ This new set of body-fixed coordinate basis $\{\bm{\nu}_1,\bm{\nu}_2,\bm{\nu}_3\
 
 ## Euler's Rotational Equations of Motion
 
-Using transport theorem
+Use transport theorem to expand the rotational equations of motion as:
 $$
 \begin{align}
 \bmL_c &= \dot{\bmH}_c = \ddtB \bmH_c + \textcolor{red}{ \bmo_{\calB/\calN} \times \bmH_c } \\
-&= \cancelto{\bm{0}}{\left(\ddtB \bmt{I}\right) \bmo} + \bmt{I} \ddtB \bmo + \textcolor{red}{ \bmo_{\calB/\calN} \times(\bmt{I}\bmo) }     \tag{used $\bmH_c=\bmt{I}\bmo$ in body frame} \\
+&= \cancelto{\bm{0}}{\left(\ddtB \bmt{I}\right)} \bmo + \bmt{I} \ddtB \bmo + \textcolor{red}{ \bmo_{\calB/\calN} \times(\bmt{I}\bmo) }     \tag{used $\bmH_c=\bmt{I}\bmo$ in body frame} \\
 &= \bmt{I} \ddtB \bmo + \textcolor{red}{ \bmo\times (\bmt{I}~\bmo) }      \tag{$\cdB{\bmt{I}}$ is constant} \\
 &= \bmt{I} \ddtB \bmo \textcolor{red}{ + \bmt{\tilde{\bmo}}\bmt{I}~\bmo }      \tag{$\cdB{\bmt{I}}$ is constant} \\
-&= \bmt{I} \left( \ddtN\bmo + \bmo_{\calN/\calB} \times \bmo \right) + \bmt{\tilde{\bmo}}\bmt{I}~\bmo \\
+&= \bmt{I} \left( \ddtN\bmo + \cancelto{\bm{0}}{\bmo_{\calN/\calB} \times \bmo} \right) + \bmt{\tilde{\bmo}}\bmt{I}~\bmo \\
 &= \bmt{I} ~ \dot{\bmo} + \bmt{\tilde{\bmo}}\bmt{I}~\bmo    \tag{4.32} \\
 &= \bmt{I} ~ \dot{\bmo} + \bmo\times(\bmt{I}~\bmo)  \tag{4.32 alternative}
 \end{align}
 $$
 where we have used the fact that $\bmo = \bmo_{\calB/\calN} = - \bmo_{\calN/\calB}$
 
+The derivative of the body angular velocity vector $\bmo$ is the same as seen in the $\calB$ and the $\calN$ frame:
+$$
+\dot{\bmo} = \ddtN \bmo = \ddtB \bmo + \bmo \times \bmo = \ddtB{\bmo}
+\tag{4.30}
+$$
 
 In the principal body frame, the Euler's equation reduces to
 $$
@@ -174,6 +186,8 @@ I_{33} \dot{\omega}_3 &= -(I_{22} - I_{11}) \omega_1 \omega_2 + L_3
 \tag{4.33}
 $$
 ^Euler-equation-principal-frame
+
+where $\omega_i$ and $L_j$ are components expressed in the body frame of the inertial vectors $\dot{\bmo}$ and $\bmL_c$.
 
 For an axially symmetric body with transverse inertia $I_T = I_{11} = I_{22}$, this can be further simplified to
 $$
