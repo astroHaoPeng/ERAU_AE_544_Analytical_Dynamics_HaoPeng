@@ -1,6 +1,6 @@
 ---
 date created: 2025-01-26T13:42:36-05:00
-date modified: 2026-02-13T09:01:16-05:00
+date modified: 2026-02-20T09:36:29-05:00
 ---
 
 # AE_544_LecNote04\__Eulerian_Mechanics__Ch04
@@ -127,10 +127,23 @@ $$
 
 **Transformation from center of mass to a different point:** (Parallel axis theorem) Given the moment of inertia matrix $\bmt{I_c}$ of a rigid body $\calB$ about its center of mass and the position vector $\bmR_c$ of this center of mass relative to some fixed point $O$, then the inertia matrix $\calB$ about $O$ is given through the transformation
 $$
-\bmt{I_O} = \bmt{I_c} + M \bmt{\tilde{\bmR}_c} \bmt{\tilde{\bmR}_c}\trans
+\bmt{I_O} = \bmt{I_c} + M \bmt{\tilde{\bmR}_c} \bmt{\tilde{\bmR}_c}\trans %\text{\color{red}checked! the transpose is correct.}
 \tag{4.19}
 $$
 All the components must be expressed in the same coordinate system/frame.
+
+$$
+\begin{align}
+\dot{\bmR_c} &= \ddtB \bmR_c + \bmo \times \bmR_c = \bm{0} + \bmo \times \bmR_c   \tag{4.16}\\
+
+\bmH_O 
+&= \bm{R}_c \times M \dot{\bm{R}}_c + \int_B \bm{r} \times \dot{\bm{r}} \, dm    \tag{4.15}\\
+&= \bmR_c \times M (\bmo \times \bmR_c) + \bmt{I_c} \\
+&= M \bmt{\tilde{\bmR}_c} (\bmo \times \bmR_c) + \bmt{I_c} \\
+&= - M \bmt{\tilde{\bmR}_c} \bmt{\tilde{\bmR}_c} \bmo + \bmt{I_c} \tag{4.18} \\
+&= M \bmt{\tilde{\bmR}_c} \bmt{\tilde{\bmR}_c}^T \bmo + \bmt{I_c} \tag{skew-symmetric}
+\end{align}
+$$
 
 **Transformation from one body frame to another:**
 Let the reference frames $\calB$ and $\calF$ both be proper body-fixed coordinate systems.
@@ -198,7 +211,7 @@ I_{33} \dot{\omega}_3 &= 0
 \end{aligned}
 \tag{4.34}
 $$
-which can be solved analytically. Then we can analyze the different procession behaviors of prolate and oblate bodies. (Refer to textbook Sec. 4.2.3)
+This can be solved analytically. And with analytical solutions, we can analyze the different procession behaviors of prolate and oblate bodies. (Refer to textbook Sec. 4.2.3)
 
 Later, the same problem will be discussed in a more geometric perspective using Euler angles (refer to textbook Sec. 4.3.3, or lecture note section [[#Special Discussions About Axisymmetric Rigid Body]] later).
 
