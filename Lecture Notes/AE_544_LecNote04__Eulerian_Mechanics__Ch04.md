@@ -1,6 +1,6 @@
 ---
 date created: 2025-01-26T13:42:36-05:00
-date modified: 2026-02-23T09:47:49-05:00
+date modified: 2026-02-23T10:07:27-05:00
 ---
 
 # AE_544_LecNote04\__Eulerian_Mechanics__Ch04
@@ -313,7 +313,7 @@ L_3 &= I_3( \dot{\omega}_s + \dot{\omega}_p\cos\theta-\omega_p \omega_n\sin\thet
 \end{aligned}
 $$
 
-Next, solve first-order ODEs numerically.
+Next, solve first-order ODEs numerically. ODE integration omitted here.
 
 ## Textbook problem 4.10 (cylinder in gyroscope)
 
