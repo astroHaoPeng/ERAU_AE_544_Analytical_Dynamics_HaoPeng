@@ -1,6 +1,6 @@
 ---
 date created: 2025-01-26T13:42:36-05:00
-date modified: 2026-02-20T09:36:29-05:00
+date modified: 2026-02-23T09:47:49-05:00
 ---
 
 # AE_544_LecNote04\__Eulerian_Mechanics__Ch04
@@ -256,6 +256,23 @@ $$
 \dot{\bmH} = \bmt{I_W} \ddtG \bmo_{\calW/\calI} + \bmo_{\calG/\calI} \times (\bmt{I_W} \bmo_{\calW/\calI})
 $$
 
+> [!Notice]- Here, the two angular velocity terms in the second term are not the same. Directly applying Euler's rotational equation of motion will be wrong. 
+> See %% the wrong %% derivations below:
+> $$
+> \begin{align}
+> \bmH &= \bmt{I_W} \bmo_{\calW/\calI} \\
+> \ddtN \bmH &= \bmt{I_W} \ddtN \bmH = \bmt{I_W} \ddtG \bmo_{\calW/\calI} + \bmt{I_W} \bmo_{\calG/\calI} \times \bmo_{\calW/\calI} \\
+> \end{align}
+> $$
+
+%% The correct one: 
+$$
+\begin{aligned}
+\bmH &= \bmt{I_W} \bmo_{\calW/\calI} \\
+\ddtN \bmH &= \ddtN \left( \bmt{I_W} \bmo_{\calW/\calI} \right) = \ddtG \left( \bmt{I_W} \bmo_{\calW/\calI} \right) + \bmo_{\calG/\calI} \times \left( \bmt{I_W} \bmo_{\calW/\calI} \right)
+\end{aligned}
+$$ %%
+
 The first term without $\bmt{I_W}$ is:
 $$
 \begin{aligned}
@@ -282,7 +299,7 @@ $$
 \end{aligned}
 $$
 
-The torque acting on the rotor is
+The total torque from all the rotors (along each $\calG$ frame axis) is
 $$
 \bmL = L_1 \ght1 + L_2 \ght2 + L_3 \ght3
 $$
@@ -303,22 +320,22 @@ Next, solve first-order ODEs numerically.
 ![[fig-p4-10_solid_cylinder_in_gyro.png|500]]
 
 Defining the body frame $\{\bht{}\}$ as shown in the figure:\
-![[fig-p4-10_solid_cylinder_in_gyro_with_axis.png.png|400]]
+![[fig-p4-10_solid_cylinder_in_gyro_with_axis.png|400]] where $\bht{1}$ is pointing towards the back.
 
 ### (a) natural frequency around $\theta=\pi/2$
-The cylinder inertias are given by 
+The cylinder's transversal inertias $I_t$ and axial inertia $I_a$ are given by
 $$
-I_t = \frac{m}{12}(3a^2+l^2)
+I_t = \frac{m}{12}(3a^2+l^2) = I_{11} = I_{33}
 $$
 $$
-I_a = \frac{m}{2} a^2
+I_a = \frac{m}{2} a^2 = I_{22}
 $$
 
 Angular velocity vector due to the prescribed gimbal motion and the rotation around $B$-$B'$ axle:
 $$
 \begin{aligned}
-\bmo &= \omega_1 \bht1 + \omega_2 \bht2 + \omega_3 \bht3 \\
-&= \sin\theta \Omega \bht1 + \cos\theta \Omega\bht2 + \dot{\theta}\bht3
+\bmo &= &\omega_1 &\bht1 +& \omega_2 &\bht2 +& \omega_3 &\bht3 \\
+&= &\sin\theta \Omega &\bht1 +& \cos\theta \Omega &\bht2 +& \dot{\theta}&\bht3
 \end{aligned}
 $$
 
@@ -334,7 +351,7 @@ $$
 
 The frequency of small oscillations at $\theta=\pi/2$ means the linear frequency around the equilibrium $\theta=\pi/2$, so we can do a variationally analysis by plugging in $\theta+\delta\theta$ and expand using Taylor series around $\theta=\pi/2$, which leads to:
 $$
-\ddot{\delta\theta} = 0 + \left. \frac{I_t-I_a}{2I_t} \Omega^2 2 \cos(2\theta) \right|_{\pi/2} \delta\theta + O(\delta\theta^2)
+\ddot{\delta\theta} = 0 + \left. \frac{I_t-I_a}{2I_t} \Omega^2 2 \cos(2\theta) \right|_{\pi/2} \delta\theta + O(\delta\theta^2) = \frac{I_t-I_a}{I_t} \Omega^2 \delta\theta + O(\delta\theta^2)
 $$
 
 Upon checking that $I_t - I_a = \frac{m}{12}(3a^2+l^2) - \frac{m}{2} a^2 = \frac{m}{12}(l^2-3a^2)<0$, we know that the solution to the first-order approximation will be a trigonometric (harmonic) function with a natural frequency $\omega_n$ of
@@ -344,13 +361,18 @@ $$
 =  \Omega \sqrt{ \frac{l^2-3a^2}{l^2+3a^2} }
 $$
 
-### (b) final velocity
+### (b) final angular velocity starting from $\theta=0$
+
+We will integrate the equations of motion to get the history of the angular motion of $\theta$. 
 
 Multiple $\dot{\theta}$ at both size and do a definite integral:
 $$
-\int_0^{t} \ddot{\theta} \dot{\theta} dt = \int_0^{t} d\left(\frac{\dot{\theta}^2}{2}\right) = \int_0^{t} \frac{k}{2} \sin(2\theta) \dot{\theta} dt = \int_0^{\theta(t)} \frac{k}{2} \sin(2\theta) d\theta
+\begin{aligned}
+\text{LHS} &= \int_0^{t} \ddot{\theta} \dot{\theta} dt = \int_\theta^{\theta(t)} \ddot{\theta} d\theta \\
+\text{RHS} &= \int_0^{t} \frac{k}{2} \sin(2\theta) \dot{\theta} dt = \int_0^{\theta(t)} \frac{k}{2} \sin(2\theta) d\theta
+\end{aligned}
 $$
-where $k=\omega_n^2={ \frac{l^2-3a^2}{l^2+3a^2} } \Omega^2$.
+where $k=\omega_n^2={ \frac{l^2-3a^2}{l^2+3a^2} } \Omega^2$ as a shorthand.
 
 So,
 $$
@@ -360,11 +382,14 @@ $$
 \dot{\theta}(t)^2 = \frac{k}{2} ( 1 - \cos(2\theta(t)))
 $$
 
-At $\theta_f = \theta(t_f) = \pi/2$,
+At $\theta_f = \theta(t_f) = \pi/2$, we have
 $$
 \dot{\theta}_f = \dot{\theta}(t_f) = \sqrt{ \frac{k}{2} } (1 - (-1)) = \sqrt{ k } = \Omega \sqrt{ \frac{l^2-3a^2}{l^2+3a^2} }
 $$
 
+
+> [!Question]- Open question: Why does the problem need the assumption that $l \ge \sqrt{ 3 } a$?
+> Hint: It impacts ratio of $I_t$ and $I_a$.
 
 
 
@@ -380,33 +405,42 @@ T_\text{rot} = \frac{1}{2} \bmo \cdot \bmH_c = \frac{1}{2} \bmo\trans \bmt{I}~\b
 \tag{4.52}
 $$
 
-%% The total kinetic energy of a rigid body B is the sum of translational and rotational energy
-$$
-T = \frac{1}{2}M \dot{\bmR}_c \cdot \dot{\bmR}_c + \frac{1}{2} \bmo \cdot \bmH_c = \frac{1}{2} \bmo\trans \bmt{I}~\bmo
-\tag{4.53}
-$$ %%
-
 The work done by the torque $\bmL_c$ onto a rigid body $\calB$
-%% $$
+$$
 \dot{T}_\text{rot} = \frac{1}{2} \dot{\bmo} \cdot \bmH_c + \frac{1}{2} \bmo \cdot \dot{\bmH}_c
 = \frac{1}{2} \dot{\bmo} \cdot \bmH_c + \frac{1}{2} \bmo \cdot \bmL_c
 \tag{4.54 and 4.55}
-$$ %%
+$$
 $$
 \dot{T}_\text{rot} = \dot{\bmo}\trans[I]\bmo = \bmo \cdot \bmL_c
+\tag{4.56}
 $$
-where $\bmL_c = \bmt{I} ~ \dot{\bmo} + \bmo\times(\bmt{I}~\bmo)$, as given in Eq. (4.32 alternative).
+where $\bmL_c = \dot{\bmH}_c = \bmt{I} ~ \dot{\bmo} + \bmo\times(\bmt{I}~\bmo)$ is the Euler's rotational equation of motion, as given in Eq. (4.32 alternative).
+
+
+
+The total kinetic energy of a rigid body B is the sum of translational and rotational energy
+$$
+T = \frac{1}{2}M \dot{\bmR}_c \cdot \dot{\bmR}_c + \frac{1}{2} \bmo \cdot \bmH_c = \frac{1}{2} \bmo\trans \bmt{I}~\bmo
+\tag{4.53}
+$$The total kinetic energy rate or power is then given by
+$$
+\dot{\bm{T}} = \bmF \cdot \dot{\bmR}_c + \bmL_c \cdot \bmo
+\tag{4.57}
+$$
+
 
 
 
 ## Torque-Free Rigid Body Rotation (a geometric approach)
 
-If no external torques are acting on a system,  the total angular momentum vector $\bmH$ is constant in the inertial frame, and the total rotational kinetic energy is also a constant.
+If no external torques $\bmL_c$ are acting on a system, the total angular momentum vector $\bmH$ is constant in the inertial frame, and the total rotational kinetic energy $T$ (dropped subscription "rot" from $T_\text{rot}$ as a shorthand) is also a constant.
 
 When expressed in body frame $\calB$, the angular momentum vector $\bmH$ will generally not appear to be constant but rotating. However, the angular momentum magnitude $H$ is still a constant.
 
 **Principal axes assumption**: We always assume that the body-fixed coordinate axes are all aligned with principal inertia axes.
 
+(In the space of $\{\omega_1, \omega_2, \omega_3\}$)
 Using coordinates of the angular momentum $\bmH$ and angular velocity $\bmo$ in body frame $\calB$, we have the angular momentum ellipsoid as
 $$
 H^2 = H_1^2 + H_2^2 + H_3^2 = I_1^2\omega_1^2 + I_2^2\omega_2^2 + I_3^2\omega_3^2
@@ -419,6 +453,7 @@ T = \frac{1}{2} (I_1\omega_1^2 + I_2\omega_2^2 + I_3\omega_3^2)
 $$
 The geometric interpretation of this is that $\bmo(t)$ must lie on the intersection of the momentum and energy ellipsoid surfaces.
 
+(In the space of $\{H_1, H_2, H_3\}$)
 To simplify one ellipsoid to a sphere, using $H_i$ as independent coordinates, so we have the momentum sphere 
 $$
 H^2 = H_1^2 + H_2^2 + H_3^2
@@ -433,6 +468,7 @@ $$
 Further requiring
 $$
 I_1 \ge I_2 \ge I_3
+\tag{Important!}
 $$
 the largest ellipsoid semi-axis occurs along $\bht1$ and the smallest along $\bht3$. 
 The overall shape and aspect ratio of the ellipsoid will remain the same for each choice in the energy $T$, and varying $T$ will only uniformly scale the ellipsoid.
@@ -461,7 +497,12 @@ $$
 
 ![[fig-4-10_family_of_intersections.png|400]]
 All feasible $\bmo(t)$ paths form closed trajectories.
-The energy is not conserved in reality, so the motion will wobble along $\bht3$ when the energy is higher than that on the separatrix, then wobble along $\bht2$ after crossing the separatrix, and eventually stabilized and slows down along $\bht1$.
+The energy is not conserved in reality and will dissipate, so the motion will wobble along $\bht3$ when the energy is higher than that on the separatrix, then wobble along $\bht2$ after crossing the separatrix, and eventually stabilized and slows down along $\bht1$.
+
+Dancing T-handle in zero-g, HD: https://youtu.be/1n-HMSCDYtM?si=FDVAI-HH0qQMOA9l
+
+
+
 
 
 ## Special Discussions on Axisymmetric Rigid Body
