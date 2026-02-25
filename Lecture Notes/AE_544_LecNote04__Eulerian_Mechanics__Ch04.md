@@ -1,6 +1,6 @@
 ---
 date created: 2025-01-26T13:42:36-05:00
-date modified: 2026-02-23T10:07:27-05:00
+date modified: 2026-02-25T09:57:19-05:00
 ---
 
 # AE_544_LecNote04\__Eulerian_Mechanics__Ch04
@@ -264,14 +264,14 @@ $$
 > \ddtN \bmH &= \bmt{I_W} \ddtN \bmH = \bmt{I_W} \ddtG \bmo_{\calW/\calI} + \bmt{I_W} \bmo_{\calG/\calI} \times \bmo_{\calW/\calI} \\
 > \end{align}
 > $$
-
-%% The correct one: 
-$$
-\begin{aligned}
-\bmH &= \bmt{I_W} \bmo_{\calW/\calI} \\
-\ddtN \bmH &= \ddtN \left( \bmt{I_W} \bmo_{\calW/\calI} \right) = \ddtG \left( \bmt{I_W} \bmo_{\calW/\calI} \right) + \bmo_{\calG/\calI} \times \left( \bmt{I_W} \bmo_{\calW/\calI} \right)
-\end{aligned}
-$$ %%
+> 
+> The correct one: 
+> $$
+> \begin{aligned}
+> \bmH &= \bmt{I_W} \bmo_{\calW/\calI} \\
+> \ddtN \bmH &= \ddtN \left( \bmt{I_W} \bmo_{\calW/\calI} \right) = \ddtG \left( \bmt{I_W} \bmo_{\calW/\calI} \right) + \bmo_{\calG/\calI} \times \left( \bmt{I_W} \bmo_{\calW/\calI} \right)
+> \end{aligned}
+> $$
 
 The first term without $\bmt{I_W}$ is:
 $$
@@ -293,8 +293,8 @@ $$
 \bmo_{\calG/\calI} \times (\bmt{I_W} \bmo_{\calW/\calI}) 
 &= (\omega_n\ght1 + \omega_p \sin\theta\ght2 + \omega_p\cos\theta\ght3) \times (I_1\omega_n\ght1 + I_2 \omega_p  \sin\theta\ght2 + I_3 (\omega_s+\omega_p\cos\theta)\ght3) \\
 &= I_2\omega_n\omega_p \sin\theta\ght3 - I_3\omega_n(\omega_s+\omega_p\cos\theta)\ght2 \\
-&- I_1\omega_p\omega_n \sin\theta\ght3 + I_3\omega_p(\omega_s+\omega_p\cos\theta) \sin\theta\ght1\\
-&+ I_1\omega_p\omega_n\cos\theta\ght2 - I_2\omega_p^2\cos\theta \sin\theta\ght1
+&\phantom{=,}- I_1\omega_p\omega_n \sin\theta\ght3 + I_3\omega_p(\omega_s+\omega_p\cos\theta) \sin\theta\ght1\\
+&\phantom{=,}+ I_1\omega_p\omega_n\cos\theta\ght2 - I_2\omega_p^2\cos\theta \sin\theta\ght1
 
 \end{aligned}
 $$
@@ -354,7 +354,7 @@ $$
 \ddot{\delta\theta} = 0 + \left. \frac{I_t-I_a}{2I_t} \Omega^2 2 \cos(2\theta) \right|_{\pi/2} \delta\theta + O(\delta\theta^2) = \frac{I_t-I_a}{I_t} \Omega^2 \delta\theta + O(\delta\theta^2)
 $$
 
-Upon checking that $I_t - I_a = \frac{m}{12}(3a^2+l^2) - \frac{m}{2} a^2 = \frac{m}{12}(l^2-3a^2)<0$, we know that the solution to the first-order approximation will be a trigonometric (harmonic) function with a natural frequency $\omega_n$ of
+Upon checking that $I_t - I_a = \frac{m}{12}(3a^2+l^2) - \frac{m}{2} a^2 = \frac{m}{12}(l^2-3a^2) > 0$, we know that the solution to the first-order approximation will be a trigonometric (harmonic) function with a natural frequency $\omega_n$ of
 $$
 \omega_n = \sqrt{ \frac{I_t-I_a}{I_t} \Omega^2 } 
 =  \Omega \sqrt{\frac{\frac{m}{12}(3a^2+l^2) - \frac{m}{2} a^2}{\frac{m}{12}(3a^2+l^2)}}
@@ -423,7 +423,9 @@ The total kinetic energy of a rigid body B is the sum of translational and rotat
 $$
 T = \frac{1}{2}M \dot{\bmR}_c \cdot \dot{\bmR}_c + \frac{1}{2} \bmo \cdot \bmH_c = \frac{1}{2} \bmo\trans \bmt{I}~\bmo
 \tag{4.53}
-$$The total kinetic energy rate or power is then given by
+$$
+
+The total kinetic energy rate or power is then given by
 $$
 \dot{\bm{T}} = \bmF \cdot \dot{\bmR}_c + \bmL_c \cdot \bmo
 \tag{4.57}
@@ -507,7 +509,7 @@ Dancing T-handle in zero-g, HD: https://youtu.be/1n-HMSCDYtM?si=FDVAI-HH0qQMOA9l
 
 ## Special Discussions on Axisymmetric Rigid Body
 
-Without loss of generality, assume that $I_2 = I_3$. Then the yaw, pitch, and roll angle rates are given as
+Without loss of generality, assume that $I_2 = I_3$. Then the yaw, pitch, and roll angle rates are given as (see Section 4.3.3 for the derivations)
 $$
 \begin{aligned}
 \dot{\psi} &= - \frac{H}{I_2} \\
@@ -522,10 +524,12 @@ $$
 Using a (3-2-1) Euler angle set, i.e. yaw-pitch-roll set, the precession motion of oblate (disk) or prolate (stick) bodies.
 ![[fig-oblate_vs_prolate.png]]
 
-Details omitted, please refer to the textbook section 4.3.3.
+Details omitted, please study the textbook section 4.3.3.
 
 
 ## Dynamics of Dual-Spin Spacecraft (or Reaction Wheels)
+
+### Equations of motion
 
 The dual-spin spacecraft is a simple system where passive attitude stability is achieved by adding a single fly-wheel to the rigid spacecraft.
 
@@ -539,7 +543,7 @@ $$
 \bmH = \bmt{I_s} \bmo + \bmt{I_W} (\Omega \bht1 + \bmo)
 \tag{4.82}
 $$
-where $\bmt{I_s}$ is <u>the inertia matrix of the main spacecraft system</u>, while $\bmt{I_W}$ is the inertia of the fly-wheel component.
+where $\bmt{I_s}$ is <u>the inertia matrix of the main spacecraft system</u>, while $\bmt{I_W}$ is the inertia of the fly-wheel component. Notice that we haven't specify the coordinate system used to work out inertia matrices yet.
 
 >[!warning] $\bmt{I_s}$ doesn't include $\bmt{I_W}$ in Eq. (4.82).
 
@@ -549,17 +553,14 @@ $$
 \tag{4.83}
 $$
 
-> Skew-symmetric tilde operator:
-> $$
-> \bmt{\tilde{\bmx}} = \skewmt{x}
-> $$
-
-Assuming no external torque is present, and the body frame is principal,
+<u>Assuming no external torque</u> is present, and the body frame is principal,
 $$
 \newcommand{\colo}{\bmt{\omega_1\\ \omega_2\\ \omega_3}}
 \newcommand{\Ithree}{\bmt{I_1 & 0 & 0 \\ 0 & I_2 & 0 \\ 0 & 0 & I_3}}
 \bm{0} = \Ithree \bmt{\dot{\omega}_1\\ \dot{\omega}_2\\ \dot{\omega}_3} + \skewmt{\omega} \Ithree \colo + \diagmt{I_{W_s}}{I_{W_t}}{I_{W_t}} \dot{\Omega} \bmt{1\\0\\0} + \skewmt{\omega} \diagmt{I_{W_s}}{I_{W_t}}{I_{W_t}} \Omega \bmt{1\\0\\0}
 $$
+Notice that $\bmt{I_s}$ is diagonal because we use the main craft's principal body frame, and $\bmt{I_W}$ is diagonal because its principal body frame happens to be aligned with that of the main craft.
+
 Inspect each components and we have
 $$
 \begin{aligned}
@@ -568,6 +569,7 @@ $$
 & I_3 \dot{\omega}_3 - \omega_2 \omega_1 I_1 + \omega_1 \omega_2 I_2 - I_{W_s} \omega_2 \Omega = 0
 \end{aligned}
 $$
+
 Move all the derivatives to the LHS and we have
 $$
 \begin{aligned}
@@ -577,6 +579,7 @@ I_3 \dot{\omega}_3 &= (I_1 - I_2) \omega_1 \omega_2 + I_{W_s} \omega_2 \Omega
 \end{aligned}
 \tag{4.85}
 $$
+
 For the dual-spin spacecraft concept, the spin rate $\Omega$ is typically held at a constant value, so we can eliminate $\dot{\Omega}$ and get
 $$
 \begin{aligned}
@@ -586,8 +589,10 @@ I_3 \dot{\omega}_3 &= (I_1 - I_2) \omega_1 \omega_2 + I_{W_s} \omega_2 \Omega
 \end{aligned}
 \tag{4.86 dual-spin S/C}
 $$
+### Linear stability analysis
 
-It is apparent that the only equilibrium spin configuration (meaning $\bmo$ is time-invariant) is when both $\omega_2$ and $\omega_3$ are zero
+The equilibrium point of the system is find by setting $\dot{\bmo}$ to $\bm{0}$. 
+It is apparent from Eq. (4.86) that the only equilibrium spin configuration $\bmo_e$ (meaning $\bmo$ is time-invariant) is when both $\omega_2$ and $\omega_3$ are zero
 $$
 \bmo_e = \omega_{e_1} \bht1
 \tag{4.87}
@@ -614,15 +619,16 @@ Eq. (4.89a) tells $\delta\omega_1$ is constant, and thus $\omega_{e_1} + \delta\
 Rewrite the two coupled first-order differential equations into two uncoupled second-order differential equations, by taking derivative of Eq. (4.89b):
 $$
 \begin{aligned}
-\ddot{\delta \omega_2} &= \left( \frac{\textcolor{red}{ I_3-I_1 }}{I_2}R \omega_{e_1} - \frac{I_{W_s}}{I_2} \Omega \right) \textcolor{blue}{ \dot{\delta \omega_3} }  \\
-&= \textcolor{red}{ - } \left( \frac{\textcolor{red}{ I_1 - I_3 }}R{I_2} \omega_{e_1} \textcolor{red}{ + } \frac{I_{W_s}}{I_2} \Omega \right) \textcolor{blue}{ \left( \frac{I_1 - I_2}{I_3} \omega_{e_1} + \frac{I_{W_s}}{I_3} \Omega \right) \delta \omega_2 } \\
+\ddot{\delta \omega_2} &= \left( \frac{\textcolor{red}{ I_3-I_1 }}{I_2} \omega_{e_1} - \frac{I_{W_s}}{I_2} \Omega \right) \textcolor{blue}{ \dot{\delta \omega_3} }  \\
+&= \textcolor{red}{ - } \left( \frac{\textcolor{red}{ I_1 - I_3 }}{I_2} \omega_{e_1} \textcolor{red}{ + } \frac{I_{W_s}}{I_2} \Omega \right) \textcolor{blue}{ \left( \frac{I_1 - I_2}{I_3} \omega_{e_1} + \frac{I_{W_s}}{I_3} \Omega \right) \delta \omega_2 } \\
 &= - \frac{\omega_{e_1}^2}{I_2 I_3}   \left( I_1 - I_3 + I_{W_s} \frac{\Omega}{\omega_{e_1}} \right)   \left( I_1 - I_2 + I_{W_s} \frac{\Omega}{\omega_{e_1}} \right)    \delta\omega_2 \\
 &= - \frac{\omega_{e_1}^2}{I_2 I_3}   \left( I_1 - I_3 + I_{W_s} \hat{\Omega} \right)   \left( I_1 - I_2 + I_{W_s} \hat{\Omega} \right)    \delta\omega_2 \\
 \end{aligned}
 \tag{4.92--95 combined}
 $$
-If and only if the factor is negative, the system is linearly stable (when the solution is trigonometric function, otherwise it's exponential function).
-Two critical wheel speeds are:
+If and only if the factor is negative, the system is linearly stable (when the solution is a harmonic (trigonometric) function, otherwise it's exponential function).
+
+With that, two critical wheel speeds $\Omega$ are identified as:
 $$
 \begin{align}
 \hat{\Omega}_1 = \frac{I_3 - I_1}{I_{W_s}}  \tag{leads 1st term to 0}  \\
@@ -631,13 +637,13 @@ $$
 $$
 
 ![[fig-4-16_stability_ranges_in_shades.png|400]]
-A lot of interesting discussions can be conducted about this results. 
+A lot of interesting discussions can be conducted about this results, please check the textbook.
 Basically, when the wheel is spinning fast enough and governs the ratio of $H_1, H_2, H_3$, it can change the intersection curve of the energy ellipsoid and momentum sphere. 
-(Omitted here and refer to the textbook)
 
->[!info]- Revisit Fig. 4.9 
+>[!info] Revisit Fig. 4.9 
 > 
-> ![[fig-4-9_intersection_of_ellipsoids.png|400]]
+> ![[fig-4-9_intersection_of_ellipsoids.png|400]] \
+> 
 > For a rigid body, its distribution of $\bmH$ along three principal axes is determined by the inertia $I_1, I_2, I_3$.
 > But for a dual-spin S/C, it can increase a particular $H_i$ without affecting the other two components much. 
 > Therefore, even for the intermediate energy case in (b), the wheel can spin up fast enough to blow up the ellipsoid along $\bht2$ or $H_2$ direction until it becomes the minimum energy case in (a). 
@@ -669,6 +675,7 @@ features of both the single-gimbal CMGs and the RWs.</u>
 
 ![[fig-4-17_VSCMG.png|400]]
 
+**Set up frames and their relationship.** \
 The reference frame is the spacecraft body frame $\calB$ (usually the principal inertia frame).
 
 Gimbal frame $\calG: \{\ght{s},\ght{t},\ght{g}\}$, where the <u>gimbal axis</u> $\ght{g}$ is fixed in $\calB$, and the spin axis $\ght{s}$ and the transverse axis $\ght{t}$ are time varying in $\calB$ described by the gimbal angle angle $\gamma(t)$. $\calG$ is aligned with the gimbal principal inertia axes.
@@ -679,6 +686,7 @@ The spinning angular velocity vector of the wheel is $\bmo_{\calW/\calG}=\Omega\
 
 The angular velocity vector of the gimbal frame $\calG$ is $\bmo_{\calG/\calB}=\dot{\gamma}\ght{g}$.
 
+**Determine inertial matrices.** \
 Given an initial gimbal angle $\gamma_0$, we have the evolution of spin and transverse axes as
 $$
 \begin{aligned}
@@ -692,7 +700,7 @@ Gimbal frame inertial matrix is $\cdG{\bmt{I_G}} = \cdG{\diagmt{I_{G_s}}{I_{G_t}
 
 The reaction wheel inertia about the same axes is $\cdG{\bmt{I_W}} = \cdG{\diagmt{I_{W_s}}{I_{W_t}}{I_{W_t}}}$.
 
-In this development the RW and gimbal frame inertias are not combined early on into one overall VSCMG inertia matrix; rather, they are retained as separate entities until later in the development. This will allow for a precise formulation of the actual physical motor torques that drive the RWs or the CMGs.
+> In this development the RW and gimbal frame inertias are not combined early on into one overall VSCMG inertia matrix; rather, they are retained as separate entities until later in the development. This will allow for a precise formulation of the actual physical motor torques that drive the RWs or the CMGs.
 
 Assuming that the coordinate of each gimbal frame vector is given in $\calB$, we have the DCM of $\calG$ relative to $\calB$ as
 $$
@@ -713,7 +721,11 @@ $$
 $$
 ^VSCMG-I-body-frame
 
->[!tip] (Part-1) Now, find the total angular momentum as a summation of three parts: S/C with a static VSCMG (body), the gimbal frame of VSCMG (gimbal), and the wheel of VSCMG (wheel).
+### Part-1, decompose angular momentum $\bmH$
+>[!tip] (Part-1) Now, find the total angular momentum as a summation of angular momentums of three parts: 
+> - (body) S/C with a mass-point VSCMG, 
+> - (gimbal) the gimbal frame of VSCMG, 
+> - (wheel) the wheel of VSCMG.
 
 The total angular momentum $\bmH$ of the spacecraft and the VSCMG (frame and wheel) about the spacecraft center of mass is given by
 $$
@@ -723,12 +735,14 @@ $$
 
 ^total-H-VSCMG
 
-where the angular momentum component of spacecraft is
+The angular momentum component $\bmH_B$ of spacecraft and a static VSCMG is
 $$
 \bmH_B = \bmt{I_s} \, \bmo_{\calB/\calN}
 \tag{4.109}
 $$
-the component of the gimbal frame is
+where $\bmt{I_s}$ is the S/C (without VSCMG) inertia matrix and the mass-point VSCMG inertia components.
+
+The component $\bmH_G$ of the gimbal frame is
 $$
 \begin{align}
 \bmH_G &= \bmt{I_G} \, \bmo_{\calG/\calN}    \tag{4.109} \\
@@ -739,7 +753,8 @@ $$
 &= \omega_sI_{G_s} \ght{s} + \omega_t I_{G_t} \ght{t} + (\omega_g + \dot{\gamma})I_{G_g} \ght{g}   \tag{4.112}
 \end{align}
 $$
-and the component of the reaction wheel (RW) is obtained similarly as
+
+The component $\bmH_W$ of the reaction wheel (RW) is obtained similarly as
 $$
 \begin{align}
 \bmH_W &= \bmt{I_W} \, \bmo_{\calW/\calN}    \tag{4.113}  \\
@@ -750,12 +765,13 @@ $$
 \end{align}
 $$
 
-In the above calculation, the angular velocity $\bmo_{\calB/\calN}$ has been expressed in the gimbal frame $\calB$ as
+In the above calculation, the S/C angular velocity $\bmo_{\calB/\calN}$ has been expressed in the gimbal frame $\calG$ as
 $$
-\cdG{\bmo} = \omega_s \ght{s} + \omega_t \ght{t} + \omega_g \ght{g}.
+\bmo_{\calB/\calN} = \omega_s \ght{s} + \omega_t \ght{t} + \omega_g \ght{g}.
 \tag{4.115}
 $$
 
+### Part-2, find necessary derivatives
 >[!tip] (Part-2) Now, find inertial derivatives in order to apply Euler's equation of rigid body rotation.
 
 The equations of motion of a system of rigid bodies follow from Euler’s equation
@@ -764,7 +780,7 @@ $$
 $$
 ![[#^total-H-VSCMG]]
 
-From Eq. 4.107 we know that in order to find $\dot{\bmH}$, we need to find the time derivatives of the basis vectors of $\calG$ first, and then the derivatives of $\omega_s,\omega_t,\omega_g$. 
+From previous discussions, we know that in order to find $\dot{\bmH}_B, \dot{\bmH}_G, \dot{\bmH}_W$, we need to find the time derivatives of the basis vectors of the basis vectors of the gimble frame $\calG$ first, and then the derivatives of $\omega_s,\omega_t,\omega_g$. 
 
 Using transport theorem, we have
 $$
@@ -784,14 +800,15 @@ $$
 \tag{4.117}
 $$
 
-Next, the time derivatives of the basis are obtained as
+Next, the time derivatives of the basis are obtained as (we dropped subscript $\calB/\calN$ from $\bmo_{\calB/\calN}$)
 $$
 \begin{aligned}
-\dot{\bmo}_s &= \ddtN (\bmo \cdot \ght{s}) = \dot{\bmo} \cdot \ght{s} + \bmo \ddtN\ght{s} \\
+\dot{\omega}_s &= \ddtN (\bmo \cdot \ght{s}) = \dot{\bmo} \cdot \ght{s} + \bmo \ddtN\ght{s} \\
 &= \ght{s}\trans \dot{\bmo} + (\omega_s \ght{s} + \omega_t \ght{t} + \omega_g \ght{g}) \cdot ((\dot{\gamma}+\omega_g) \ght{t} - \omega_t \ght{g})  \\
 &= \ght{s}\trans \dot{\bmo} + (\omega_s \ght{s} + \omega_t \ght{t} + \omega_g \ght{g}) \cdot ((\dot{\gamma}+\omega_g) \ght{t} - \omega_t \ght{g})  \\
 &= \ght{s}\trans \dot{\bmo} + \omega_t \dot{\gamma}
 \end{aligned}
+\tag{4.121a explained}
 $$
 and similarly
 $$
@@ -799,12 +816,13 @@ $$
 \dot{\omega}_t &= -\dot{\gamma}\omega_s + \ght{t}\trans \dot{\bmo} \\
 \dot{\omega}_g &= \ght{g}\trans \dot{\bmo}
 \end{aligned}
-\tag{4.121}
+\tag{4.121b and 4.121c}
 $$
 
-Other derivatives are considered known or given, such as $\dot{\Omega}, \dot{\gamma}, \ddot{\gamma}$ etc.
+Other derivatives are considered known or given, such as $\dot{\Omega}, \dot{\gamma}, \ddot{\gamma}$, etc.
 
->[!tip] (Part-3) Now, isolating the dynamics of the RW.
+### Part-3, wheel's dynamics
+>[!tip] (Part-3) Now, isolating the dynamics of RW.
 
 The inertial derivative of $\bmH_W$ is
 $$
@@ -832,6 +850,7 @@ $$
 and the other two torques $u_t$ and $u_g$ are produced by the gimbal frame.
 
 
+### Part-4, wheel and gimbal combined dynamics
 >[!tip] (Part-4) Now, isolating the RW and the gimbal frame as a whole
 
 The inertial derivative $\dot{\bmH}_G$ is calculated as
@@ -858,6 +877,7 @@ $$
 \cdG{\bmt{J}} = \cdG{\bmt{I_G}} + \cdG{\bmt{I_W}} = \cdG{\diagmt{I_{G_s}+I_{W_s}}{I_{G_t}+I_{W_s}}{I_{G_g}+I_{G_g}}} = \cdG{\diagmt{J_s}{J_t}{J_g}}.
 $$
 
+### Part-5, S/C and VSCMG combined dynamics
 >[!tip] (Part-5) Now, combine everything into Euler's equation.
 
 The inertial derivative $\dot{\bmH}_B$ of the spacecraft without the VSCMG is calculated easily as
@@ -926,6 +946,7 @@ $$
 >[!notice] $\bmt{I}$ is a time-varying quantity in Eq. 4.131 because there is relative motion between the gimbal, RW, and spacecraft.
 >
 
+
 (Reduce to CMG only) 
 If we set $\dot{\Omega}=0$, it means the RW spin speed is constant, thus<u> the equations of motion becomes those of a single-gimbal CMG (not varying-speed)</u>, which is
 $$
@@ -960,7 +981,7 @@ $$
 \tag{Example 4.8}
 $$
 
-
+### Part-6, include multiple VSCMGs
 >[!tip] (Part-6) Now, extend to multiple VSCMGs.
 
 The essential is to notice that all the above derivations are the same and will be repeated for each VSCMG introduced to the spacecraft, but the only difference is how the DCM $\dcm{BG}_i$ is defined for the $i$-th VSCMG.
