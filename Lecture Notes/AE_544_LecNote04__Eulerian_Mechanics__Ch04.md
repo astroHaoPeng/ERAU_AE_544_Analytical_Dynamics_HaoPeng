@@ -1,6 +1,6 @@
 ---
 date created: 2025-01-26T13:42:36-05:00
-date modified: 2026-02-25T09:57:19-05:00
+date modified: 2026-02-25T15:36:02-05:00
 ---
 
 # AE_544_LecNote04\__Eulerian_Mechanics__Ch04
@@ -421,7 +421,7 @@ where $\bmL_c = \dot{\bmH}_c = \bmt{I} ~ \dot{\bmo} + \bmo\times(\bmt{I}~\bmo)$ 
 
 The total kinetic energy of a rigid body B is the sum of translational and rotational energy
 $$
-T = \frac{1}{2}M \dot{\bmR}_c \cdot \dot{\bmR}_c + \frac{1}{2} \bmo \cdot \bmH_c = \frac{1}{2} \bmo\trans \bmt{I}~\bmo
+T = \frac{1}{2}M \dot{\bmR}_c \cdot \dot{\bmR}_c + \frac{1}{2} \bmo \cdot \bmH_c = \frac{1}{2}M \dot{\bmR}_c \cdot \dot{\bmR}_c + \frac{1}{2} \bmo\trans \bmt{I}~\bmo
 \tag{4.53}
 $$
 
