@@ -1,6 +1,6 @@
 ---
 date created: 2025-01-26T13:42:36-05:00
-date modified: 2026-02-25T15:36:02-05:00
+date modified: 2026-03-02T09:55:12-05:00
 ---
 
 # AE_544_LecNote04\__Eulerian_Mechanics__Ch04
@@ -686,6 +686,8 @@ The spinning angular velocity vector of the wheel is $\bmo_{\calW/\calG}=\Omega\
 
 The angular velocity vector of the gimbal frame $\calG$ is $\bmo_{\calG/\calB}=\dot{\gamma}\ght{g}$.
 
+The angular velocity vector of the S/C is $\bmo_{\calB/calN} = \omega_s \ght{s} + \omega_t \ght{t} + \omega_g \ght{g}$
+
 **Determine inertial matrices.** \
 Given an initial gimbal angle $\gamma_0$, we have the evolution of spin and transverse axes as
 $$
@@ -711,7 +713,7 @@ $$
 \dcm{BG} = \bmt{ \cdB{(\ght{s})} & \cdB{(\ght{t})} & \cdB{(\ght{g}})}.
 $$
 
-The inertial of the gimbal frame and the reaction wheel in the body frame can be found through
+The inertia matrices of the gimbal frame and the reaction wheel in the body frame $\calB$ can be found by transforming the inertia matrices in $\calG$ using the DCM $\dcm{BG}$, as following,
 $$
 \begin{aligned}
 \cdB{\bmt{I_G}} &= \dcm{BG} \cdot \cdG{\bmt{I_G}} \cdot \dcm{BG}\trans = I_{G_s} \ght{s}\ght{s}\trans + I_{G_t} \ght{t}\ght{t}\trans + I_{G_g} \ght{g}\ght{g}\trans  \\
@@ -721,7 +723,9 @@ $$
 $$
 ^VSCMG-I-body-frame
 
-### Part-1, decompose angular momentum $\bmH$
+Notice that $\cdB{\bmt{I_G}}$ and $\cdB{\bmt{I_W}}$ are time-varying now because the gimbal frame $\calG$ is time-varying.
+
+### Part-1, write out total angular momentum $\bmH$
 >[!tip] (Part-1) Now, find the total angular momentum as a summation of angular momentums of three parts: 
 > - (body) S/C with a mass-point VSCMG, 
 > - (gimbal) the gimbal frame of VSCMG, 
@@ -780,7 +784,7 @@ $$
 $$
 ![[#^total-H-VSCMG]]
 
-From previous discussions, we know that in order to find $\dot{\bmH}_B, \dot{\bmH}_G, \dot{\bmH}_W$, we need to find the time derivatives of the basis vectors of the basis vectors of the gimble frame $\calG$ first, and then the derivatives of $\omega_s,\omega_t,\omega_g$. 
+From previous discussions, we know that in order to find $\dot{\bmH}_B, \dot{\bmH}_G, \dot{\bmH}_W$, we need to find the time derivatives of the basis vectors of the gimble frame $\calG$ first, and then the derivatives of $\omega_s,\omega_t,\omega_g$. 
 
 Using transport theorem, we have
 $$
@@ -988,7 +992,7 @@ The essential is to notice that all the above derivations are the same and will 
 
 ![[#^VSCMG-I-body-frame]]
 
-(Refer to Sec. 4.5.2 for details.)
+Refer to Sec. 4.5.2 for detailed derivations for multiple VSCMGs.
 
 
 ---

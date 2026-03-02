@@ -1,6 +1,6 @@
 ---
 date created: 2025-01-26T13:00:00-05:00
-date modified: 2026-02-11T09:19:39-05:00
+date modified: 2026-02-25T17:27:37-05:00
 ---
 
 # AE_544_LecNote03\__Rigid_Body_Kinematics__Ch03
@@ -913,7 +913,7 @@ i = 1,2,3
 $$
 
 ---
-## End of Lecture Note 04
+## End of Lecture Note 03
 
 >[!done] Study the textbook.
 >More useful and interesting contents are available in the textbook, but are omitted here.

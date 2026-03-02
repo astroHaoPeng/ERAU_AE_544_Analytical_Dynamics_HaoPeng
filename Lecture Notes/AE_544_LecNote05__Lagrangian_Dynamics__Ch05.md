@@ -1,52 +1,73 @@
 ---
 date created: 2025-02-09T16:24:50-05:00
-date modified: 2025-04-03T17:55:31-04:00
+date modified: 2026-03-02T09:49:55-05:00
 ---
+
 # AE_544_LecNote05\__Lagrangian_Dynamics__Ch05
 ![[README#Disclaimers]]
 
+%% These results provided a unifying perspective on analytical mechanics and also stimulated fundamental advances in allied mathematical subfields such as variational calculus, differential equations, and topology. %%
+
+In this section, we will explore three major concepts:
+- Generalized coordinates
+- D'Alembert's Principle
+- Lagrangian Dynamics
+And additionally, how the constraints are handled in different approaches.
+It won't be surprising that they seem closely related to Newtonian Dynamics, since they all describe the same physical motion. 
+The essential point is to understand the shift in perspectives across different approaches, and thus to know their pros and cons.
 
 ## Generalized Coordinates
 
-%% These results provided a unifying perspective on analytical mechanics and also stimulated fundamental advances in allied mathematical subfields such as variational calculus, differential equations, and topology. %%
+
+![[fig-5-1_various_coordinate_choices.png|350]]
 
 Even in this simple and most familiar example, we see that **an infinity of coordinate choices** is possible. Depending on the **objectives being pursued** in any given problem, any of these coordinate choices may be **appropriate**. It is clear that the details of most traditional analyses, such as formulating the differential equations of motion, are affected by the coordinates selected, because expressions for all kinematical and physical quantities depend on the coordinate choice. 
 
-Develop **a universal form of the differential equations of motion**, as a function of the system kinetic energy and unspecified generalized coordinates, i.e., $T(q_1, q_2, \cdots, q_n; \dot{q}_1, \dot{q}_2, \cdots, \dot{q}_n)$, that holds for all infinity of possible coordinate choices, and for particle motions, rigid body motions, translations, rotations, deformational vibrations, etc.
-
-At the heart of these developments, it is evident that the various vector descriptions for position $\bmr$, velocity $\dot{\bmr}$, and acceleration $\ddot{\bmr}$ are alternative descriptions or mathematical representations of **the same physical quantities**.
+The goal for Lagrangian dynamics: \
+Develop **a universal form of the differential equations of motion**, as a function of the system kinetic energy $T$ and unspecified generalized coordinates $\{q_1, q_2, \cdots, q_n\}$, i.e., $T(q_1, q_2, \cdots, q_n; \dot{q}_1, \dot{q}_2, \cdots, \dot{q}_n)$, that holds for all infinity of possible coordinate choices, and for particle motions, rigid body motions, translations, rotations, deformational vibrations, etc.
 
 Although broad generality necessarily **introduces a level of abstraction in the formulation**, the ensuing analysis is of bearable complexity and well justified by the powerful generalized results obtained therefrom.
+
+At the heart of these developments, it is evident that the various vector descriptions for position $\bmr$, velocity $\dot{\bmr}$, and acceleration $\ddot{\bmr}$ are alternative descriptions or mathematical representations of **the same physical quantities**.
 
 
 ## D’Alembert’s Principle (a reformulation of Newton’s second law)
 
->[!check] The most important role of d’Alembert’s principle is that it is a stepping stone leading to Lagrange’s equations, Hamilton’s principle, and other variational principles in analytical dynamics. 
+>[!check] Significances
+>- A cornerstone of classical mechanics that transforms complex dynamic problems into equivalent static equilibrium problems by introducing inertial forces.
+>- A stepping stone leading to Lagrange’s equations, Hamilton’s principle, and other variational principles in analytical dynamics. 
 
 
 ### Virtual Displacements and Virtual Work
 
 ![[fig-5-2_particle_system.png|400]]
 
-For a system of N particles, the total force vector acting on mi to be segregated into two summed
-subsets of forces as
+For a system of N particles, the total force vector $\bmF_i$ acting on $m_i$ to be segregated into two summed subsets of forces as
 $$
 \bmF_i = \bmf_{c_i} + \bmf_i + \sum_{j=1, i\neq j}^N \bmf_{ij}
 \tag{5.8}
 $$
+^total-force-vector-segregation
+
 where
-- $\bmf_{c_i}$ is the vector sum of all virtually nonworking constraint forces (as explained in the following).
-- $\bmf_{ij}$ is the system internal force acting on the $i$-th due to the $j$-th particle.
+- $\bmf_{c_i}$ is the vector sum of all virtually nonworking constraint forces (no displacement along the force direction; will be explained further in the following).
 - $\bmf_i$ is the vector sum of all other forces except the total constraint force $\bmf_{c_i}$.
+- $\bmf_{ij}$ is the system internal force acting on the $i$-th due to the $j$-th particle.
 
-We will show that the constraint forces $\bmf_c$ can be eliminated from the analysis, and this is an advantageous feature common to all of the methods of generalized mechanics. 
+By introducing the concept of virtual displacement $\delta\bmR_i$, the constraint forces $\bmf_c$ can be eliminated from the analysis. 
+This is an advantageous feature common to all of the methods of generalized mechanics. 
 
-To accomplish the elimination of the constraint forces, we introduce the concept of virtual displacement $\delta\bmR_i$ . A virtual displacement, in the most general context, is an instantaneous differential displacement for the sake of analysis.
+A virtual displacement $\delta\bmR_i$, in the most general context, is an instantaneous differential displacement <u>for the sake of analysis</u>.
 
 >[!info] The virtual displacement $\delta(\cdot)$ of a dynamical motion variable $(\cdot)$ is closely related to the first variation of coordinates in variational calculus, which we will discuss in the later semester.
 
 
-If the constraints acting on the system are smooth differential functions of $\bmR_i(t,\qOneToEnd)$, then admissible $\delta\bmR_i$ are constrained to lie on a smooth holonomic (function of position coordinates only) constraint surface $\psi(t,\qOneToEnd)$, and we see that admissible or consistent virtual displacements $\delta\bmR_i$ locate points in a tangent plane, whose normal can be obtained by taking the gradient $\nabla \psi$ of the constraint surface. 
+If the constraints acting on the system are smooth differential functions of $\bmR_i(t,\qOneToEnd)$, then admissible virtual displacement $\delta\bmR_i$ are constrained to lie on a smooth holonomic (function of position coordinates only) constraint surface $\psi(t,\qOneToEnd)$, and we see that admissible or consistent virtual displacements $\delta\bmR_i$ locate points in a tangent plane, whose normal can be obtained by taking the gradient $\nabla \psi$ of the constraint surface. 
+$$
+\nabla \psi = \bmt{ \pp{\psi}{q_1} \\ \pp{\psi}{q_2} \\ \vdots \\ \pp{\psi}{q_n} } 
+= \bmt{ \pp{\psi}{q_1} & \pp{\psi}{q_2} & \cdots & \pp{\psi}{q_n} }\trans
+\tag{gradient vector}
+$$
 
 ![[fig-5-3_smooth_constraint_surface.png|400]]
 
@@ -56,7 +77,7 @@ Thus <u>the virtual displacements are not necessarily tangent to any solution tr
 
 The constraint force $\bmf_{c_i}$ is always normal to the constraint surface (i.e., in the direction of $\nabla \psi$), and therefore can be written as
 $$
-\bmf_{c_i} = \lambda \nabla \psi
+\bmf_{c_i} = \lambda \cdot \nabla \psi
 \tag{5.9}
 $$
 
@@ -96,25 +117,27 @@ $$
 \delta W = \sum_{i=1}^N \bmf_i \cdot \delta\bmR_i
 \tag{5.17}
 $$
-So, both the **nonworking constraint forces $\bmf_{c_i}$** as well as the **nonworking system internal forces $\bmf_{ik}$** do not contribute to the total virtual work calculation.
+^virtual-work-rigid-body
+
+So, both the **nonworking constraint forces $\bmf_{c_i}$** as well as the **nonworking system internal forces $\bmf_{ik}$** do not contribute to the *total virtual work calculation*.
 
 >[!info] The rigid-body assumption doesn't require $\delta\bmR_i-\delta\bmR_k=\bm{0}$, but just requires 
 >$$(\bmR_i-\bmR_k)\cdot(\delta\bmR_i-\delta\bmR_k)=0 \tag{5.15}$$
->meaning that the relative virtual displacement are orthogonal to the relative position vector, and thus the internal force $\bmf_{ik}$. (Refer to textbook for details.)
+>meaning that the relative virtual displacement are orthogonal to the relative position vector, and thus the internal force $\bmf_{ik}$. 
+>(Refer to textbook for details.)
 
 
 ### Development of d’Alembert’s Principle using Virtual Work
 
-> $$
-> \bmF_i = \bmf_{c_i} + \bmf_i + \sum_{j=1, i\neq j}^N \bmf_{ij}
-> \tag{5.8 copied}
-> $$
+Recall the segregation of the total force $\bmF_i$ applied on a single particle in Eq. (5.8),
+![[#^total-force-vector-segregation]]
 
 Applying Newton's second law for the motion of $m_i$, we have
 $$
 \bmf_{c_i} + \bmf_i + \sum_{j=1, i\neq j}^N \bmf_{ij} - m_i \ddot{\bmR}_i = 0
 \tag{5.18}
 $$
+
 Upon taking the dot product of Eq. (5.18) with an arbitrary consistent/admissible virtual displacement $\delta\bmR_i$ and summing over all $N$ particles, we find the <u>most general form of d’Alembert’s principle</u> to be:
 $$
 \delta W - \sum_{i=1}^N m_i \ddot{\bmR}_i \cdot \delta\bmR_i = 0
@@ -127,14 +150,10 @@ $$
 \delta \bmR_i = \sum_{j=1}^n \pp{\bmR_i}{q_j} \delta q_j
 \tag{5.20}
 $$
->[!note] The number of particles $m_i$ is $N$. The number of general variables $q_j$ is $n$.
 
-> $$
-> \delta W = \sum_{i=1}^{N} \bm{f}_i \cdot \delta \bm{R}_i + \sum_{i=1}^{N-1} \sum_{k=i+1}^{N} \bm{f}_{ik} \cdot (\delta \bm{R}_i - \delta \bm{R}_k)
-> \tag{5.13 copied}
-> $$
+![[#^virtual-work-rigid-body]]
 
-As a consequence, the virtual work $\delta W$ in Eq. (5.17) can be rewritten as
+The virtual work $\delta W$ in Eq. (5.17) can be rewritten in terms of each $\delta q_i$ as
 $$
 \begin{align}
 \delta W &= \sum_{i=1}^{N} \bm{f}_i \cdot \delta \bm{R}_i  \\
@@ -144,6 +163,9 @@ $$
 &= \sum_{j=1}^n \textcolor{red}{ Q_j } \delta q_j    \tag{5.21}
 \end{align}
 $$
+
+Notice that we have changed the order of the summation, which leads to the concept of virtual force corresponding to each general coordinate.
+
 Here, we defined **generalized force $Q_j$** as a combination of $N$ virtually working forces $\bmf_i$, which is
 $$
 Q_j \equiv \sum_{i=1}^{N} \left(\bmf_i \cdot  \pp{\bmR_i}{q_j} \right)
@@ -151,13 +173,13 @@ Q_j \equiv \sum_{i=1}^{N} \left(\bmf_i \cdot  \pp{\bmR_i}{q_j} \right)
 $$
 ^generalized-force-Qi
 
-Plugging everything back to Eq. (5.19) gives us
+Plugging everything back to Eq. (5.19) (<u>most general form of d’Alembert’s principle</u>) gives us:
 $$
 \sum_{j=1}^{n} \left[ Q_j - \sum_{i=1}^{N} m_i \ddot{\bm{R}}_i \cdot \frac{\partial \bm{R}_i}{\partial q_j} \right] \delta q_j = 0
 \tag{5.23}
 $$
 Because the $\delta q_j$ are independent virtual variations, they may be chosen independently and arbitrarily, so each coefficient must be 0 by itself.
-This leads to the most famous form of **<u>d’Alembert’s principle</u>**:
+This leads to the <u>most famous form of d’Alembert’s principle</u>:
 $$
 \sum_{i=1}^N m_i \ddot{\bmR}_i \cdot \frac{\partial \bmR_i}{\partial q_j} = Q_j   \qquad \text{for } j=1,2,\dots,n
 \tag{5.24}
@@ -171,7 +193,7 @@ $$
 \bmV_i(t,\qOneToEnd,\qDotOneToEnd) = \dot{\bmR}_i(t,q_1,q_2,\dots,q_n) = \pp{\bmR_i}{t} + \sum_{k=1}^n \pp{\bmR_i}{q_k} \dot{q}_k  \qquad  i = 1,2,\dots,N
 \tag{5.25}
 $$
-From this, we can get the following identity (cancellation of dots identity)
+From this, we can get the following identity (<u>**cancellation of dots identity**</u>)
 $$
 \pp{\bmV_i}{\dot{q}_k} = \pp{\dot{\bmR}_i}{\dot{q}_k} = \pp{\bmR_i}{q_k}
 \tag{5.26}
@@ -262,8 +284,9 @@ $$
 Using the definition in Eq. (5.22), we can obtain the generalized forces as
 $$
 \begin{aligned}
-Q_x &= \bmf_1 \cdot \pp{\bmR_1}{x} + \bmf_2 \cdot \pp{\bmR_2}{x} \\
-&= (-kx\nht1-m_1g\nht2) \cdot \nht1 + (-m_2g\nht2) \cdot \nht1 = -kx \\
+Q_x &= \bmf_1 \cdot \pp{\bmR_1}{x} + \bmf_2 \cdot \pp{\bmR_2}{x} & \\
+&= (-kx\nht1-m_1g\nht2) \cdot \nht1 + (-m_2g\nht2) \cdot \nht1 \\
+&= -kx \\
 %
 Q_y &= \bmf_1 \cdot \pp{\bmR_1}{\theta} + \bmf_2 \cdot \pp{\bmR_2}{\theta} \\
 &= (-kx\nht1-m_1g\nht2) \cdot 0 + (-m_2g\nht2) \cdot (r\cos\theta\nht1 + r\sin\theta\nht2) \\
@@ -550,7 +573,7 @@ $$
 &= Q_j + \pp{T}{q_j}
 \end{align}
 $$
-Therefore, we have the **most fundamental version of Lagrange’s equations**,
+Therefore, we have the <u>**most fundamental version of Lagrange’s equations**</u>,
 $$
 \ddt \left(\pp{T}{\dot{q}_j}\right) - \pp{T}{q_j} = \sum_{i=1}^N \bmf_i \cdot \pp{\dot{\bmR}_i}{\dot{q}_j} \equiv Q_j     \qquad \text{for } j = 1,2,\dots,n
 \tag{5.139}

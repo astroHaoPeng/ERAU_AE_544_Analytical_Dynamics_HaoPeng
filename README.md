@@ -1,6 +1,6 @@
 ---
 date created: 2025-01-12T18:05:24-05:00
-date modified: 2026-02-01T23:03:26-05:00
+date modified: 2026-02-27T09:43:54-05:00
 ---
 
 # AE 544 Analytical Dynamics
@@ -10,7 +10,7 @@ date modified: 2026-02-01T23:03:26-05:00
 This repository contains markdown-based lecture notes for the Spring 2026 semester. These materials are intended solely for students enrolled in the course during this term. Mistakes may exist and will be corrected as they are identified, but the official textbook (and its errata) remains the ultimate reference for accuracy.
 
 
-> [!Warning] PDF will NOT be updated as frequently as Markdown notes. Please use Markdown notes for reference.
+> [!Warning] PDFs will NOT be uploaded anymore and have been removed from the repo ~~be updated as frequently as Markdown notes~~. Compiled PDFs will be distributed via the Canvas Course page. I recommend using Markdown notes directly.
 
 
 ## Obsidian Markdown notes
