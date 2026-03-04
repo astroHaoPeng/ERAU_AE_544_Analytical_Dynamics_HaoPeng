@@ -4,6 +4,7 @@
 .obsidian/workspace.json
 
 .obsidian/plugins/remember-cursor-position/cursor-positions.json
+.obsidian/plugins/remember-cursor-position/cursor-positions*.json
 
 .pandoc/
 
@@ -25,6 +26,7 @@
 !README.md
 !preamble.md
 !AE_544_LecNote*.md
+
 # This not is not used for teaching. A powerpoint slide is used as instead. 
 AE_544_LecNote00__Introduction.md
 
@@ -37,4 +39,7 @@ Projects/
 # Textbook is supposed to be downloaded through ERAU library.
 analytical-mechanics-of-space-systems-4nbsped-1624105211-9781624105210_compress.pdf
 
+# Solution manual will not be provided.
 Analytical Mechanics of Space Systems - Solution Manual.pdf
+
+

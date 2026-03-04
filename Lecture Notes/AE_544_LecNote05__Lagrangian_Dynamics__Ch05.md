@@ -1,6 +1,6 @@
 ---
 date created: 2025-02-09T16:24:50-05:00
-date modified: 2026-03-02T09:49:55-05:00
+date modified: 2026-03-04T00:51:43-05:00
 ---
 
 # AE_544_LecNote05\__Lagrangian_Dynamics__Ch05
@@ -12,7 +12,9 @@ In this section, we will explore three major concepts:
 - Generalized coordinates
 - D'Alembert's Principle
 - Lagrangian Dynamics
-And additionally, how the constraints are handled in different approaches.
+
+We will also discuss how constraints are handled in different approaches.
+
 It won't be surprising that they seem closely related to Newtonian Dynamics, since they all describe the same physical motion. 
 The essential point is to understand the shift in perspectives across different approaches, and thus to know their pros and cons.
 

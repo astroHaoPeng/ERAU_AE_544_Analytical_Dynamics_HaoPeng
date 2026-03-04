@@ -1,6 +1,6 @@
 ---
 date created: 2025-01-26T13:42:36-05:00
-date modified: 2026-03-02T15:06:18-05:00
+date modified: 2026-03-04T00:48:50-05:00
 ---
 
 # AE_544_LecNote04\__Eulerian_Mechanics__Ch04
@@ -79,9 +79,9 @@ $$
 
 So,
 $$
-\bm{H}_c = \int_B \bm{r} \times (\bm{\omega} \times \bm{r}) \, \dm 
-= \int_B - \bmt{\bm{\tilde{r}}} \bmt{\bm{\tilde{r}}} ~ \bm{\omega} \, \dm 
-= \left( \int_B - \bmt{\bm{\tilde{r}}} \bmt{\bm{\tilde{r}}} \, \dm  \right) \cdot \bm{\omega} 
+\bm{H}_c = \int_B \bm{r} \times (\bmo \times \bm{r}) \, \dm 
+= \int_B - \bmt{\bm{\tilde{r}}} \bmt{\bm{\tilde{r}}} ~ \bmo \, \dm 
+= \left( \int_B - \bmt{\bm{\tilde{r}}} \bmt{\bm{\tilde{r}}} \, \dm  \right) \cdot \bmo 
 $$
 Express all the coordinates in the body frame $\calB$, 
 $$
@@ -549,7 +549,7 @@ where $\bmt{I_s}$ is <u>the inertia matrix of the main spacecraft system</u>, wh
 
 Using Euler's equation $\dot{\bmH} = \bmL$, we have
 $$
-\dot{\bm{H}} = \bm{L} = (\bmt{I_s} + \bmt{I_W})\dot{\bm{\omega}} + [\bm{\tilde{\omega}}](\bmt{I_s} + \bmt{I_W})\bm{\omega} + \bmt{I_W}(\dot{{\Omega}}\bm{\hat{b}}_1) + [\bm{\tilde{\omega}}]\bmt{I_W}({\Omega}\bm{\hat{b}}_1)
+\dot{\bm{H}} = \bm{L} = (\bmt{I_s} + \bmt{I_W})\dot{\bmo} + [\bm{\tilde{\omega}}](\bmt{I_s} + \bmt{I_W})\bmo + \bmt{I_W}(\dot{{\Omega}}\bm{\hat{b}}_1) + [\bm{\tilde{\omega}}]\bmt{I_W}({\Omega}\bm{\hat{b}}_1)
 \tag{4.83}
 $$
 
@@ -763,8 +763,8 @@ The component $\bmH_W$ of the reaction wheel (RW) is obtained similarly as
 $$
 \begin{align}
 \bmH_W &= \bmt{I_W} \, \bmo_{\calW/\calN}    \tag{4.113}  \\
-&= \bmH_W \cdot (\bmo_{\calW/\calG} + \bmo_{\calG/\calB} + \bmo_{\calB/\calN})    \tag{used 4.106}   \\
-&= (I_{W_s} \ght{s}\ght{s}\trans + I_{W_t} \ght{t}\ght{t}\trans + I_{W_t} \ght{g}\ght{g}\trans) \cdot (\Omega\ght{s} + \dot{\gamma}\ght{g} + \omega_s \ght{s} + \omega_t \ght{t} + \omega_g \ght{g})   \\
+&= \bmt{I_W} \cdot (\bmo_{\calW/\calG} + \bmo_{\calG/\calB} + \bmo_{\calB/\calN})    \\
+&= (I_{W_s} \ght{s}\ght{s}\trans + I_{W_t} \ght{t}\ght{t}\trans + I_{W_t} \ght{g}\ght{g}\trans) \cdot (\Omega\ght{s} + \dot{\gamma}\ght{g} + \omega_s \ght{s} + \omega_t \ght{t} + \omega_g \ght{g})   \tag{used 4.106}  \\
 &= \Omega I_{W_s} \ght{s} + \dot{\gamma} I_{W_t} \ght{g} + \omega_s I_{W_s} \ght{s} + \omega_t I_{W_t} \ght{t} + \omega_g I_{W_t} \ght{g}    \\
 &= (\Omega + \omega_s) I_{W_s} \ght{s}  + \omega_t I_{W_t} \ght{t} + (\dot{\gamma} + \omega_g) I_{W_t} \ght{g}   \tag{4.114}
 \end{align}
@@ -779,18 +779,20 @@ The equations of motion of a system of rigid bodies follow from Euler’s equati
 $$
 \dot{\bmH} = \bmL
 $$
+
+So, we need to find derivative of each angular momentum part of $\bmH$.
 ![[#^total-H-VSCMG]]
 
-From previous discussions, we know that in order to find $\dot{\bmH}_B, \dot{\bmH}_G, \dot{\bmH}_W$, we need to find the time derivatives of the basis vectors of the gimble frame $\calG$ first, and then the derivatives of $\omega_s,\omega_t,\omega_g$. 
+From previous discussions, we know that in order to find $\dot{\bmH}_B, \dot{\bmH}_G, \dot{\bmH}_W$, we will need to find the time derivatives of the basis vectors of the gimble frame $\calG$, and also the derivatives of components $\omega_s,\omega_t,\omega_g$ of the angular velocity $\bmo$ expressed in the gimble frame $\calG$. 
 
-Using transport theorem, we have
+Using the transport theorem twice, we have
 $$
-\begin{aligned}
-\dot{\ght{}}_s &= \ddtB \ght{s} + \bmo \times \ght{s} \\
-&= \ccancelto{\bm{0}}{\ddtG \ght{s}} + \bmo_{\calG/\calB} \times \ght{s} + \bmo \times \ght{s} \\
+\begin{align}
+\dot{\ght{}}_s &= \ddtB \ght{s} + \bmo \times \ght{s}  \tag{$\calN \to \calB$} \\
+&= \ccancelto{\bm{0}}{\ddtG \ght{s}} + \bmo_{\calG/\calB} \times \ght{s} + \bmo \times \ght{s}  \tag{$\calB \to \calG$} \\
 &= \dot{\gamma}\ght{g}\times\ght{s} + (\omega_s \ght{s} + \omega_t \ght{t} + \omega_g \ght{g}) \times \ght{s} \\
 &= (\dot{\gamma}+\omega_g) \ght{t} - \omega_t \ght{g}
-\end{aligned}
+\end{align}
 $$
 and similarly
 $$
@@ -801,10 +803,11 @@ $$
 \tag{4.117}
 $$
 
-Next, the time derivatives of the basis are obtained as (we dropped subscript $\calB/\calN$ from $\bmo_{\calB/\calN}$)
+Next, the time derivatives of the basis are obtained as (we've dropped subscript $\calB/\calN$ from $\bmo_{\calB/\calN}$)
 $$
 \begin{aligned}
-\dot{\omega}_s &= \ddtN (\bmo \cdot \ght{s}) = \dot{\bmo} \cdot \ght{s} + \bmo \ddtN\ght{s} \\
+\dot{\omega}_s &= \ddtN (\bmo \cdot \ght{s}) \\
+&= \dot{\bmo} \cdot \ght{s} + \bmo \ddtN\ght{s} \\
 &= \ght{s}\trans \dot{\bmo} + (\omega_s \ght{s} + \omega_t \ght{t} + \omega_g \ght{g}) \cdot ((\dot{\gamma}+\omega_g) \ght{t} - \omega_t \ght{g})  \\
 &= \ght{s}\trans \dot{\bmo} + (\omega_s \ght{s} + \omega_t \ght{t} + \omega_g \ght{g}) \cdot ((\dot{\gamma}+\omega_g) \ght{t} - \omega_t \ght{g})  \\
 &= \ght{s}\trans \dot{\bmo} + \omega_t \dot{\gamma}
@@ -820,7 +823,7 @@ $$
 \tag{4.121b and 4.121c}
 $$
 
-Other derivatives are considered known or given, such as $\dot{\Omega}, \dot{\gamma}, \ddot{\gamma}$, etc.
+Regarding other derivatives, $\dot{\Omega}, \dot{\gamma}, \ddot{\gamma}$ are known from the wheel rotor and the gimble rotor, and $\dot{\bmo}$ is obtained from measurement sensors with proper transformations.
 
 ### Part-3, wheel's dynamics
 >[!tip] (Part-3) Now, isolating the dynamics of RW.
@@ -829,12 +832,14 @@ Other derivatives are considered known or given, such as $\dot{\Omega}, \dot{\ga
 $$
 \dot{\bmH}_W = \ddtN \left[ (\Omega + \omega_s) I_{W_s} \ght{s} + \omega_t I_{W_t} \ght{t} + (\dot{\gamma} + \omega_g) I_{W_t} \ght{g} \right]
 $$
+Apply product rule to each term:
 $$
 = (\dot{\Omega}+\dot{\omega}_s)I_{W_s}\ght{s} + (\Omega + \omega_s) I_{W_s} \dot{\ght{}}_s 
 +\dot{\omega}_t I_{W_T}\ght{t} + \omega_tI_{W_t}\dot{\ght{}}_t 
 +(\ddot{\gamma}+\dot{\omega}_g)I_{W_t}\ght{g} + (\dot{\gamma} + \omega_g) I_{W_t} \dot{\ght{}}_g
 $$
 
+Substitute each derivatives we found in part-2:
 $$
 = (\dot{\Omega}+\ght{s}\trans \dot{\bmo} + \omega_t \dot{\gamma})I_{W_s}\ght{s} 
 + (\Omega + \omega_s) I_{W_s} ((\dot{\gamma}+\omega_g) \ght{t} - \omega_t \ght{g})
@@ -844,12 +849,13 @@ $$
 + (\dot{\gamma} + \omega_g) I_{W_t} (\omega_t \ght{s} - \omega_s \ght{t})
 $$
 
+Copy and paste the above line, and organize terms by eliminating everything not containing $\ght{s}$ (paying attention to how the source code is organized to write product in one line to make this process less error-prone.)
 $$
-= (\dot{\Omega}+\ght{s}\trans \dot{\bmo} + \omega_t \dot{\gamma})I_{W_s}\ght{s} 
+\text{(terms with $\ght{s}$)} = (\dot{\Omega}+\ght{s}\trans \dot{\bmo} + \omega_t \dot{\gamma})I_{W_s}\ght{s} 
 + \omega_t I_{W_t} (-(\dot{\gamma}+\omega_g) \ght{s} ) 
 + (\dot{\gamma} + \omega_g) I_{W_t} (\omega_t \ght{s} )
 
-= I_{W_s}(\dot{\Omega} + \hat{\bm{g}}_s^T \dot{\bmo} + \dot{\gamma} \omega_t)
+= I_{W_s}(\dot{\Omega} + \hat{\bm{g}}_s^T \dot{\bmo} + \dot{\gamma} \omega_t) \cdot \ght{s}
 $$
 %%
 
@@ -859,7 +865,7 @@ $$
 \dot{\bm{H}}_W
 &= \phantom{+}\hat{\bm{g}}_s \left[ I_{W_s}(\dot{\Omega} + \hat{\bm{g}}_s^T \dot{\bmo} + \dot{\gamma} \omega_t) \right] \\
 %
-&\phantom{=\,} + \hat{\bm{g}}_t \left[ I_{W_s}(\dot{\gamma}(\bm{\omega}_s + \bm{\Omega}) + \bm{\Omega} \bm{\omega}_g) + I_W \hat{\bm{g}}_t^T \dot{\bmo} + (I_{W_s} - I_{W_t}){\omega}_s {\omega}_g - 2 I_W \omega_s \dot{\gamma} \right] \\
+&\phantom{=\,} + \hat{\bm{g}}_t \left[ I_{W_s}(\dot{\gamma}({\omega}_s + {\Omega}) + {\Omega} {\omega}_g) + I_{W_t} \hat{\bm{g}}_t^T \dot{\bmo} + (I_{W_s} - I_{W_t}){\omega}_s {\omega}_g - 2 I_{W_t} \omega_s \dot{\gamma} \right] \\
 %
 &\phantom{=\,} + \hat{\bm{g}}_g \left[I_{W_s}(\hat{\bm{g}}_g^T \dot{\bmo} + \ddot{\gamma})] + (I_{W_t} - I_{W_s})\omega_s{\omega}_t - I_{W_s} {\Omega} {\omega}_t \right] \\
 %
@@ -908,7 +914,7 @@ u_g = J_g \left( \ght{g}\trans \dot{\bmo} + \ddot{\gamma} \right) - (J_s-J_t) \o
 $$
 where we have <u>combined the inertia matrices of RW and the gimbal frame</u> into a single matrix $\bmt{J}$
 $$
-\cdG{\bmt{J}} = \cdG{\bmt{I_G}} + \cdG{\bmt{I_W}} = \cdG{\diagmt{I_{G_s}+I_{W_s}}{I_{G_t}+I_{W_s}}{I_{G_g}+I_{G_g}}} = \cdG{\diagmt{J_s}{J_t}{J_g}}.
+\cdG{\bmt{J}} = \cdG{\bmt{I_G}} + \cdG{\bmt{I_W}} = \cdG{\diagmt{I_{G_s}+I_{W_s}}{I_{G_t}+I_{W_t}}{I_{G_g}+I_{W_t}}} = \cdG{\diagmt{J_s}{J_t}{J_g}}.
 $$
 
 Notice: This expression of $u_g$ in Eq. (4.126) actually gives a way to compute the torque applied by the gimble frame rotor.
@@ -928,15 +934,15 @@ $$
 Now, we can plugin all the derivates to the derivative of total angular momentum (spacecraft, gimble, and RW), apply the general Euler's equation, and get the full express as
 $$
 \begin{align}
-& \bmt{I_s} \dot{\bmo} + \bmo \times \bmt{I_s} \bmo   \tag{from $\dot{\bmH}_B$} \\
+&\phantom{=\,} \bmt{I_s} \dot{\bmo} + \bmo \times \bmt{I_s} \bmo   \tag{from $\dot{\bmH}_B$} \\
 %
 &+ \ght{s} \left[ (\ig{s}-\ig{t}+\ig{g})\dot{\gamma}\omega_t + \ig{s}\ght{s}\trans\dot{\bmo} + (\ig{g}-\ig{t})\omega_t\omega_g \right] \\
 & + \ght{t} \left[ (\ig{s}-\ig{t}-\ig{g})\dot{\gamma}\omega_s + \ig{t}\ght{t}\trans\dot{\bmo} + (\ig{s}-\ig{g}\omega_s\omega_g) \right] \\
 & + \ght{g} \left[ \ig{g}(\ght{g}\trans \dot{\bmo} + \ddot{\gamma}) + (\ig{t}-\ig{s})\omega_s\omega_t \right]       \tag{from $\dot{\bmH}_G$} \\
 %
 &+ \hat{\bm{g}}_s \left[ I_{W_s}(\dot{\Omega} + \hat{\bm{g}}_s^T \dot{\bmo} + \dot{\gamma} \omega_t) \right] \\
-&+ \hat{\bm{g}}_t \left[ I_{W_s}(\dot{\gamma}(\bm{\omega}_s + \bm{\Omega}) + \bm{\Omega} \bm{\omega}_g) + I_W \hat{\bm{g}}_t^T \dot{\bmo} + (I_{W_s} - I_{W_t}){\omega}_s {\omega}_g - 2 I_W \omega_s \dot{\gamma} \right] \\
-&+ \hat{\bm{g}}_g \left[I_{W_s}(\hat{\bm{g}}_g^T \dot{\bmo} + \ddot{\gamma})] + (I_{W_t} - I_{W_s})\omega_s{\omega}_t - I_{W_s} {\Omega} {\omega}_t \right]G    \tag{from $\dot{\bmH}_W$} \\
+&+ \hat{\bm{g}}_t \left[ I_{W_s}(\dot{\gamma}({\omega}_s + {\Omega}) + {\Omega} {\omega}_g) + I_{W_t} \hat{\bm{g}}_t^T \dot{\bmo} + (I_{W_s} - I_{W_t}){\omega}_s {\omega}_g - 2 I_{W_t} \omega_s \dot{\gamma} \right] \\
+&+ \hat{\bm{g}}_g \left[I_{W_s}(\hat{\bm{g}}_g^T \dot{\bmo} + \ddot{\gamma})] + (I_{W_t} - I_{W_s})\omega_s{\omega}_t - I_{W_s} {\Omega} {\omega}_t \right]    \tag{from $\dot{\bmH}_W$} \\
 %
 &= \bmL   \tag{External torque}
 \end{align}
@@ -959,16 +965,16 @@ $$
 \end{aligned}
 \tag{4.129}
 $$
-(*Notice*: We can confirm again that, $\dot{\bmo}$ and $\bmo$ will be expressed in the body frame $\calB$; $\ght{s}, \ght{t}, \ght{g}$ are specified in $\calB$; and $\bmL$ should be given in $\calB$ as well. These are all consistent with the determination of $\bmt{I}, \bmt{I_G}, \bmt{I_W}, \bmt{J}$ in $\calB$.)
+(*Notice*: We can verify again that, $\dot{\bmo}$ and $\bmo$ will be expressed in the body frame $\calB$; $\ght{s}, \ght{t}, \ght{g}$ are specified in $\calB$; and $\bmL$ should be given in $\calB$ as well. These are all consistent with the determination of $\bmt{I}, \bmt{I_G}, \bmt{I_W}, \bmt{J}$ in $\calB$.)
 
-**Addtitional simplifications:**
+**Introducing additional simplifications to simplify the dynamics:**
 A common assumption/fact is that the gimbal frame inertial $I_{G_s}$ about the spin axis is negligible. 
 Because the frame is usually designed as lightweight as possible to avoid interfering with the spinning wheel.
 The magnitude of difference can be 2 to 3 magnitudes.
 $\hspace{5em}$ ![[fig-4-17_VSCMG.png|200]]
 
 
-With this assumption that $J_s = I_{G_s} + I_{W_s} \approx I_{W_s}$ and we have the common equations of motion of a spacecraft equipped with one VSCMG as follows,
+With this assumption that $J_s = I_{G_s} + I_{W_s} \approx I_{W_s}$ and we have the common equations of motion of a spacecraft equipped with one VSCMG as follows (replacing all $I_{W_s}$ with $J_s$ in Eq. (4.129)),
 $$
 \begin{aligned}
 \bmt{I} \dot{\bmo} 
@@ -982,11 +988,13 @@ $$
 \end{aligned}
 \tag{4.131}
 $$
->[!notice] $\bmt{I}$ is a time-varying quantity in Eq. 4.131 because there is relative motion between the gimbal, RW, and spacecraft.
->
+>[!notice] 
+>$\bmt{I}$ is a time-varying quantity in Eq. 4.131 because there is relative motion between the gimbal and RW in the spacecraft body frame $\calB$. \
+>But $J_s, J_t, J_g$ are constants, because they are calculated in the gimble frame $\calG$.
 
 
-(Reduce to CMG only) 
+
+**Reduce VSCMG to CMG only:**
 If we set $\dot{\Omega}=0$, it means the RW spin speed is constant, thus<u> the equations of motion becomes those of a single-gimbal CMG (not varying-speed)</u>, which is
 $$
 \begin{aligned}
@@ -1002,7 +1010,7 @@ $$
 \tag{Example 4.8}
 $$
 
-(Reduce to RW only) 
+**Reduce VSCMG to RW only:**
 If we set the gimbal to be fixed, thus $\dot{\gamma}=\ddot{\gamma}=0$, we get <u>the equations of motion for RW</u> as
 $$
 \begin{aligned}
@@ -1019,6 +1027,8 @@ $$
 \end{aligned}
 \tag{Example 4.8}
 $$
+
+After-class practice: Verify this RW only equations of motion with that of the dual-spin S/C, in Eq. (4.83), where the gimble frame spin axis $\ght{s}$ will be assumed to align the body frame axis $\bht{1}$.
 
 ### Part-6, include multiple VSCMGs
 >[!tip] (Part-6) Now, extend to multiple VSCMGs.
