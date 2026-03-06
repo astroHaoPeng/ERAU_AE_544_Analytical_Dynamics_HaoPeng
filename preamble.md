@@ -79,11 +79,14 @@
 % derivatives
 \newcommand{\dt}{{\rm d}t}
 \newcommand{\dm}{{\rm d}m}
+\newcommand{\dx}{{\rm d}x}
+\newcommand{\dy}{{\rm d}y}
+\newcommand{\dz}{{\rm d}z}
 \newcommand{\ddt}[1][]{\frac{{\rm d} #1}{{\rm d}t}}
-\newcommand{\ddtDoNotUse}[1]{\frac{^{#1}\rm d \phantom{t}}{\phantom{^{#1}}{\rm d }t}}
 \newcommand{\dq}{\dot{q}}
 
 % derivatives in different frame: d( )/dt in any frame
+\newcommand{\ddtDoNotUse}[1]{\frac{^{#1}\rm d \phantom{t}}{\phantom{^{#1}}{\rm d }t}}
 \newcommand{\ddtA}{\ddtDoNotUse{\calA}}
 \newcommand{\ddtB}{\ddtDoNotUse{\calB}}
 \newcommand{\ddtD}{\ddtDoNotUse{\calD}}

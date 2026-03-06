@@ -1,11 +1,8 @@
 ---
 date created: 2025-03-03T09:52:52-05:00
-date modified: 2025-04-14T01:18:59-04:00
+date modified: 2026-03-05T18:52:47-05:00
 ---
-git---
-date created: 2025-02-09T16:24:50-05:00
-date modified: 2025-04-09T10:15:00-04:00
----
+
 # AE_544_LecNote06\__Variational_Methods__Ch06
 ![[README#Disclaimers]]
 
@@ -208,9 +205,9 @@ As a consequence of the fact that the general virtual displacements contain path
 ### Hamilton's Principle Derived from D'Alembert's Principle
 
 Let $\bmF_i$ include all virtually working forces, recall that the d'Alembert's principle is obtained by combining
-![[AE_544_LecNote05__Lagrangian_Dynamics__Ch05#^virtual-work-definition]] 
+![[AE_544_LecNote05__Lagrangian_Dynamics__Ch05#^5-10-virtual-work-definition]] 
 and
-![[AE_544_LecNote05__Lagrangian_Dynamics__Ch05#^dalemberts-principle-most-general-form]]
+![[AE_544_LecNote05__Lagrangian_Dynamics__Ch05#^5-19-dalemberts-principle-most-general-form]]
 such that we have
 $$
 \sum_{i=1}^{N} \left( \bm{F}_i - m_i \ddot{\bm{R}}_i \right) \cdot \delta \bm{R}_i = 0
@@ -218,7 +215,7 @@ $$
 $$
 
 >[!question] Relation to other versions of d'Alembert's principle?
->![[AE_544_LecNote05__Lagrangian_Dynamics__Ch05#^dalemberts-principle-different-forms]]
+>![[AE_544_LecNote05__Lagrangian_Dynamics__Ch05#^summary-dalemberts-principle-different-forms]]
 
 
 Although d'Alembert's principle was derived for the most general case that $\delta\bmR_i$ are instantaneous virtual displacements, this condition also holds for the special case that $\delta\bmR_i(t)$ are path variations with $\tilde{\bmR}_i(t) = \bmR_i(t) + \delta\bmR_i(t)$ locating an infinite family of neighboring varied paths. 
