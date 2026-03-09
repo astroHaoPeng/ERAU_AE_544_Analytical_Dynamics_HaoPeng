@@ -1,6 +1,6 @@
 ---
 date created: 2025-02-09T16:24:50-05:00
-date modified: 2026-03-06T04:17:52-05:00
+date modified: 2026-03-09T09:50:14-04:00
 ---
 
 # AE_544_LecNote05\__Lagrangian_Dynamics__Ch05
@@ -45,6 +45,8 @@ Understanding d'Alembert's principle is the first step.
 ### Virtual Displacements and Virtual Work
 
 ![[fig-5-2_particle_system.png|400]]
+
+Recall the earlier diagram of a system of particles: [[AE_544_LecNote02__Newtonian_Mechanics__Ch02#A system of particles | A system of particles in Ch02]]
 
 For a system of N particles, the total force vector $\bmF_i$ acting on $m_i$ to be segregated into two summed subsets of forces as
 $$
@@ -312,13 +314,19 @@ $$
 $$
 The $n$ vectors $\{\bmv_{i1}, \bmv_{i2}, \dots, \bmv_{in}\}$ form a vector basis for the inertial velocity $\bmV_i$ of the $i$-th mass $m_i$, and for the case that time does not appear explicitly, the $\dq_k$ are the coefficients that linearly combine the basis vectors $v_{ik}$ to give the velocity vector $\bmV_i$.
 
-The d'Alembert's principle in Eq. (5.24) can be rewritten <u>using generalized forces</u> $Q_j$ as
+The generalized forces $Q_j$ in Eq. (5.22) can be rewritten as
 $$
-\sum_{i=1}^N m_i \ddot{\bmR}_i \cdot \bmv_{ij} = Q_j    \qquad \text{for } j = 1,2,\dots,n
+Q_j = \sum_{i=1}^N \bmf_i \cdot \bmv_{ij}
+\tag{5.29}
+$$
+
+Then, the d'Alembert's principle in Eq. (5.24) can be rewritten as, using the above partial velocity expression of $Q_j$,
+$$
+\sum_{i=1}^N m_i \ddot{\bmR}_i \cdot \bmv_{ij} = Q_j = \sum_{i=1}^N \bmf_i \cdot \bmv_{ij}    \qquad \text{for } j = 1,2,\dots,n
 \tag{5.28}
 $$
 
-Combine Eqs. (5.22) and (5.29), we have the <u>virtual power form of the d'Alembert's principle</u>:
+Now we have the <u>virtual power form of the d'Alembert's principle</u>:
 $$
 \sum_{i=1}^N [\bmf_i - m_i \dot{\bmV}_i] \cdot \bmv_{ij} = 0  \qquad  \text{ for } j = 1,2,\dots,n
 \tag{5.30}
@@ -387,7 +395,7 @@ $$
 $$
 and the following steps are the same will be omitted. 
 
-*Notice:* Comparing* to the previous solution, one advantage is that there is no partial derivatives of $\pp{\bmR_i}{q_i}$ calculated and the partial velocities $\pp{\bmV_i}{\dq_j}$ are readily available from kinematics.
+*Notice:* Comparing to the previous solution, one advantage is that there is no partial derivatives of $\pp{\bmR_i}{q_i}$ calculated and the partial velocities $\pp{\bmV_i}{\dq_j}$ are readily available from kinematics.
 
 ### Summary of D'Alembert's Principle
 
@@ -458,13 +466,13 @@ From Eqs. (5.69) and (5.70), we observe that the constraint force $\bmf_c$ is no
 ### (more general case) Pfaffian constraints
 
 <u>Next, we observe another feature that enables an extension from holonomic constraints to a more general type of constraints. </u>
-Differential change $dx,dy,dz$ along the trajectory satisfies the following constraint:
+Differential change $\dx,\dy,\dz$ along the trajectory satisfies the following constraint:
 $$
-\frac{d\psi}{dt} = \frac{\partial \psi}{\partial x} \dot{x} + \frac{\partial \psi}{\partial y} \dot{y} + \frac{\partial \psi}{\partial z} \dot{z} + \frac{\partial \psi}{\partial t} = 0
+\frac{{\rm d}\psi}{\dt} = \frac{\partial \psi}{\partial x} \dot{x} + \frac{\partial \psi}{\partial y} \dot{y} + \frac{\partial \psi}{\partial z} \dot{z} + \frac{\partial \psi}{\partial t} = 0
 $$
 which is equivalent to
 $$
-d\psi = \frac{\partial \psi}{\partial x} \dx + \frac{\partial \psi}{\partial y} \dy + \frac{\partial \psi}{\partial z} \dz + \frac{\partial \psi}{\partial t} \dt = 0.
+{\rm d}\psi = \frac{\partial \psi}{\partial x} \dx + \frac{\partial \psi}{\partial y} \dy + \frac{\partial \psi}{\partial z} \dz + \frac{\partial \psi}{\partial t} \dt = 0.
 \tag{5.66}
 $$
 
@@ -600,7 +608,9 @@ which is the same to the previous approach.
 
 ## Lagrangian Dynamics
 
-- Lagrange's equations require only velocity-level vector kinematics.
+
+> [!check] Differences
+ Lagrange's equations require only velocity-level vector kinematics, first-order derivatives only, unlike that D'Alembert's principle requires second-order derivatives.
 
 ### Minimal Coordinate Systems and Unconstrained Motion
 
@@ -634,7 +644,7 @@ $$
 Now we can do
 $$
 \begin{align}
-\ddt \left( \frac{\partial T}{\partial \dot{q}_j} \right) &= \ddt \left( \sum_{i=1}^{N} m_i \dot{\bm{R}}_i \cdot \frac{\partial \dot{\bm{R}}_i}{\partial \dot{q}_j} \right)   \tag{used 5.137} \\
+&\ddt \left( \frac{\partial T}{\partial \dot{q}_j} \right) = \ddt \left( \sum_{i=1}^{N} m_i \dot{\bm{R}}_i \cdot \frac{\partial \dot{\bm{R}}_i}{\partial \dot{q}_j} \right)   \tag{used 5.137} \\
 %
 &= \sum_{i=1}^{N} m_i \ddot{\bm{R}}_i \cdot \frac{\partial \dot{\bm{R}}_i}{\partial \dot{q}_j} + \sum_{i=1}^{N} m_i \dot{\bm{R}}_i \cdot \ddt \left( \frac{\partial \dot{\bm{R}}_i}{\partial \dot{q}_j} \right) \\
 %
