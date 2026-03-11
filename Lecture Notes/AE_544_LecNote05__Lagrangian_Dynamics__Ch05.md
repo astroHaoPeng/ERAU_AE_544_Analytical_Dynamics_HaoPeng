@@ -1,6 +1,6 @@
 ---
 date created: 2025-02-09T16:24:50-05:00
-date modified: 2026-03-09T09:50:14-04:00
+date modified: 2026-03-11T09:26:35-04:00
 ---
 
 # AE_544_LecNote05\__Lagrangian_Dynamics__Ch05
@@ -211,7 +211,7 @@ $$
 \begin{aligned}
 \bmR_2 &= x\nht1 + r\eht{r} = (x+r\sin\theta)\nht1 + (-r\cos\theta)\nht2 \\
 %
-\dot{\bm{R}}_2 &= \dot{x} \hat{n}_1 + r \dot{\theta} \hat{e}_{\theta} = (\dot{x} + r \dot{\theta} \cos \theta) \hat{n}_1 + (r \dot{\theta} \sin \theta) \hat{n}_2 \\
+\dot{\bm{R}}_2 &= \dot{x} \nht1 + r \dot{\theta} \eht{\theta} = (\dot{x} + r \dot{\theta} \cos \theta) \nht1 + (r \dot{\theta} \sin \theta) \nht2 \\
 %
 \ddot{\bm{R}}_2 &= \ddot{x} \nht1 - r \dot{\theta}^2 \eht{r} + r \ddot{\theta} \eht{\theta} \\
 &= (\ddot{x} - r \dot{\theta}^2 \sin \theta + r \ddot{\theta} \cos \theta) \nht1 + (r \dot{\theta}^2 \cos \theta + r \ddot{\theta} \sin \theta) \nht2 \\
@@ -353,7 +353,7 @@ $$
 \begin{aligned}
 \bmR_2 &= x\nht1 + r\eht{r} = (x+r\sin\theta)\nht1 + (-r\cos\theta)\nht2 \\
 %
-\bmV_2 = \dot{\bmR}_2 &= \dot{x} \hat{n}_1 + r \dot{\theta} \hat{e}_{\theta} = (\dot{x} + r \dot{\theta} \cos \theta) \nht{1} + (r \dot{\theta} \sin \theta) \nht{2} \\
+\bmV_2 = \dot{\bmR}_2 &= \dot{x} \nht1 + r \dot{\theta} \eht{\theta} = (\dot{x} + r \dot{\theta} \cos \theta) \nht{1} + (r \dot{\theta} \sin \theta) \nht{2} \\
 %
 \dot{\bmV}_2 = 
 \ddot{\bm{R}}_2 &= \ddot{x} \nht1 - r \dot{\theta}^2 \eht{r} + r \ddot{\theta} \eht{\theta} \\
@@ -525,7 +525,7 @@ The Eqs. (5.102) and (5.103) constitute a set of **differential-algebraic equati
 
 **Algebraic constraint elimination:**
 $$
-\bm{R} = r \hat{e}_r, \quad \dot{\bm{R}} = \dot{r} \hat{e}_r + r \dot{\theta} \hat{e}_{\theta}, \quad \ddot{\bm{R}} = (\ddot{r} - r \dot{\theta}^2) \hat{e}_r + (r \ddot{\theta} + 2r \dot{\theta}^2) \hat{e}_{\theta}
+\bm{R} = r \eht{r}, \quad \dot{\bm{R}} = \dot{r} \eht{r} + r \dot{\theta} \eht{\theta}, \quad \ddot{\bm{R}} = (\ddot{r} - r \dot{\theta}^2) \eht{r} + (r \ddot{\theta} + 2r \dot{\theta}^2) \eht{\theta}
 $$
 and there is a holonomic constraint
 $$
@@ -570,7 +570,7 @@ which leads to
 $$
 \begin{aligned}
 m \left[ (\ddot{r} - r \dot{\theta}^2) \eht{r} + (r \ddot{\theta} + 2r \dot{\theta}) \eht{\theta} \right] \cdot \eht{r} &= [-mg\nht2+\lambda\eht{r}] \cdot \eht{r} = mg\cos\theta+\lambda  \\
-m \left[ (\ddot{r} - r \dot{\theta}^2) \hat{e}_r + (r \ddot{\theta} + 2r \dot{\theta}) \hat{e}_{\theta} \right] \cdot r\eht\theta &= [-mg\nht2+\lambda\eht{r}] \cdot (r\eht\theta) = -mgr\sin\theta
+m \left[ (\ddot{r} - r \dot{\theta}^2) \eht{r} + (r \ddot{\theta} + 2r \dot{\theta}) \eht{\theta} \right] \cdot r\eht\theta &= [-mg\nht2+\lambda\eht{r}] \cdot (r\eht\theta) = -mgr\sin\theta
 \end{aligned}
 $$
 Because $r=R$ is a constant, $\dot{r}=\ddot{r}=0$ and we have
@@ -582,19 +582,21 @@ $$
 $$
 which is the same to the previous approach.
 
->[!info]- Partial derivatives in polar coordinates $\pp{\eht{r}}{\theta}=\eht{\theta}$, $\pp{\eht{\theta}}{\theta}=-\eht{r}$.
+>[!info] Partial derivatives in polar coordinates 
+>$$\pp{\eht{r}}{\theta}=\eht{\theta}    \qquad    \pp{\eht{\theta}}{\theta}=-\eht{r}$$
+>
 >Proof #1: resolving to $\nht1,\nht2$ to show $\theta$ explicitly, then taking partial derivatives directly.
 >
 >Proof #2:
 > $$
-> d\eht{r} = \pp{\eht{r}}{t} dt + \pp{\eht{r}}{r} d{r} + \pp{\eht{r}}{\theta} d{\theta}  \tag{total derivative}
+> {\rm d}\eht{r} = \pp{\eht{r}}{t} \dt + \pp{\eht{r}}{r} {\rm d}{r} + \pp{\eht{r}}{\theta} {\rm d}{\theta}  \tag{total derivative}
 > $$
 > $$
 > \ddtN\eht{r} = \ddtE\eht{r} + \dot{\theta} \eht3 \times \eht{r} = \dot{\theta} \eht{\theta}   \tag{transport theorem}
 > $$
 > and
 > $$
-> d\eht{\theta} = \pp{\eht{\theta}}{t} dt + \pp{\eht{\theta}}{r} dr + \pp{\eht{\theta}}{\theta} d{\theta}   \tag{total derivative}
+> {\rm d}\eht{\theta} = \pp{\eht{\theta}}{t} \dt + \pp{\eht{\theta}}{r} {\rm d}r + \pp{\eht{\theta}}{\theta} {\rm d}{\theta}   \tag{total derivative}
 > $$
 > $$
 > \ddtN\eht{\theta} = \ddtE\eht{\theta} + \dot{\theta} \eht3 \times \eht{\theta} = -\dot{\theta}\eht{r}   \tag{transport theorem}
@@ -603,8 +605,11 @@ which is the same to the previous approach.
 
 
 ### D'Alembert's principle vs. Newton's second law
+
 - A fundamental advantage over Newton's second law in that the internal forces and all other virtually nonworking constraint forces can be simply ignored in developing the equations of motion.
+    - Those omitted constraint forces can still be calculated later.
 - The vector kinematic algebraic overhead associated with Newton's second law and d'Alembert's principle is essentially identical, because both require vector kinematics to be taken through the acceleration level.
+    - The virtual power force can save a few steps of derivatives calculation, but the kinematics still requires second-order derivatives.
 
 ## Lagrangian Dynamics
 
@@ -646,13 +651,9 @@ $$
 \begin{align}
 &\ddt \left( \frac{\partial T}{\partial \dot{q}_j} \right) = \ddt \left( \sum_{i=1}^{N} m_i \dot{\bm{R}}_i \cdot \frac{\partial \dot{\bm{R}}_i}{\partial \dot{q}_j} \right)   \tag{used 5.137} \\
 %
-&= \sum_{i=1}^{N} m_i \ddot{\bm{R}}_i \cdot \frac{\partial \dot{\bm{R}}_i}{\partial \dot{q}_j} + \sum_{i=1}^{N} m_i \dot{\bm{R}}_i \cdot \ddt \left( \frac{\partial \dot{\bm{R}}_i}{\partial \dot{q}_j} \right) \\
+&= \sum_{i=1}^{N} m_i \ddot{\bm{R}}_i \cdot \frac{\partial \dot{\bm{R}}_i}{\partial \dot{q}_j} + \sum_{i=1}^{N} m_i \dot{\bm{R}}_i \cdot \ddt \left( \frac{\partial \dot{\bm{R}}_i}{\partial \dot{q}_j} \right)    \tag{product rule} \\
 %
-&= \sum_{i=1}^{N} \left( \bm{f}_i + \bm{f}_{ci} \right) \cdot \frac{\partial \dot{\bm{R}}_i}{\partial \dot{q}_j} + \sum_{i=1}^{N} m_i \dot{\bm{R}}_i \cdot \ddt \left( \frac{\partial \dot{\bm{R}}_i}{\partial \dot{q}_j} \right) \\
-%
-&=  \sum_{i=1}^{N} \bm{f}_i \cdot \frac{\partial \dot{\bm{R}}_i}{\partial \dot{q}_j}  +  {\sum_{i=1}^{N}\bm{f}_{ci}  \cdot \frac{\partial {\bm{R}}_i}{\partial {q}_j}} +  \sum_{i=1}^{N} m_i \dot{\bm{R}}_i \cdot \ddt \left( \frac{\partial \dot{\bm{R}}_i}{\partial \dot{q}_j} \right) \tag{cancel dots for last two terms} \\
-%
-&=  \sum_{i=1}^{N} \bm{f}_i \cdot \frac{\partial \dot{\bm{R}}_i}{\partial \dot{q}_j}  +  \ccancelto{0}{\sum_{i=1}^{N}\bm{f}_{ci}  \cdot \sum_{j=1}^n\frac{\partial {\bm{R}}_i}{\partial {q}_j}\delta q_j} +  \sum_{i=1}^{N} m_i \dot{\bm{R}}_i \cdot \ddt \left( \frac{\partial {\bm{R}}_i}{\partial {q}_j} \right) \tag{special admissible $\delta\bmR_i$ with only $\delta q_j\neq0$} \\
+&= \sum_{i=1}^{N} (\bmf_i + \bmf_{ci}) \cdot \frac{\partial \dot{\bm{R}}_i}{\partial \dot{q}_j} + \sum_{i=1}^{N} m_i \dot{\bm{R}}_i \cdot \ddt \left( \frac{\partial \dot{\bm{R}}_i}{\partial \dot{q}_j} \right)    \tag{product rule} \\
 %
 &= \sum_{i=1}^{N} \bm{f}_i \cdot \frac{\partial \dot{\bm{R}}_i}{\partial \dot{q}_j} + \sum_{i=1}^{N} m_i \dot{\bm{R}}_i \cdot \frac{\partial }{\partial {q}_j}\left(\ddt{\bm{R}}_i\right)       \tag{smooth $\bmR_i$, switch $\pp{}{q_j}$ and $\ddt$} \\
 %
@@ -661,6 +662,23 @@ $$
 &= Q_j + \pp{T}{q_j}
 \end{align}
 $$
+
+
+> [!info]- From the 3rd to the 4th line:
+> 
+> 
+> $$
+> \begin{align}
+> \sum_{i=1}^{N}\bm{f}_{ci}  \cdot \delta \bmR_i &= \sum_{i=1}^{N}\bm{f}_{ci} \cdot \left( \frac{\partial {\bm{R}}_i}{\partial {q}_j} \delta q_j \right)  \\
+> %
+> & = \left( \sum_{i=1}^{N}\bm{f}_{ci} \cdot \frac{\partial {\bm{R}}_i}{\partial {q}_j}\right) \delta q_j = 0  \quad \text{for any } \delta q_j=\oneTo n  \\
+> \end{align}
+> $$
+> Since we can choose $\delta\bmR_i$ arbitrarily, thus $\delta q_j$ arbitrarily, each coefficient must vanish by itself, which gives
+> $$
+> \sum_{i=1}^{N}\bm{f}_{ci} \cdot \frac{\partial {\bm{R}}_i}{\partial {q}_j} = 0
+> $$
+
 Therefore, we have the <u>**most fundamental version of Lagrange's equations**</u>,
 $$
 \ddt \left(\pp{T}{\dot{q}_j}\right) - \pp{T}{q_j} = \sum_{i=1}^N \bmf_i \cdot \pp{\dot{\bmR}_i}{\dot{q}_j} \equiv Q_j     \qquad \text{for } j = 1,2,\dots,n
@@ -698,15 +716,17 @@ $$
 \ddt \left( mr^2\dot{\theta} \right) &= 0
 \end{aligned}
 $$
+which means that once $r_0$ and $\theta_0$ are given, the product $(mr^2\dot{\theta})$ is a constant. 
+
 Since $r = r_0 - ct$ is time-varying, we have 
 $$
-(r_0 - ct)^2 \dot{\theta} = r_0^2 \dot{\theta}_0 \quad \Longrightarrow \quad \dot{\theta} = \frac{r_0^2}{(r_0 - ct)^2} \dot{\theta}_0
+(r_0 - ct)^2 \dot{\theta} = r_0^2 \dot{\theta}_0 \quad \Longrightarrow  \quad \boxed{ \dot{\theta} = \frac{r_0^2}{(r_0 - ct)^2} \dot{\theta}_0 }
 $$
 
 
 ### Lagrange's Equations for Conservative Forces
 
-For the conservative force $\bmf_i$ determined by the potential function $V(t,\qOneToEnd)$, we have
+For the conservative force $\bmf_i$ determined by a potential function $V(t,\qOneToEnd)$, we have
 $$
 \bmf_i = - \pp{V}{\bmR_i}
 $$
@@ -727,7 +747,7 @@ $$
 \pp{\calL}{{q}} &= \pp{T}{{q}_j} - \pp{V}{\dot{q}_j}
 \end{aligned}
 $$
-If all forces are conservative, for the fundamental format of Lagrange's equstions
+If all forces are conservative, for the fundamental format of Lagrange's equations
 ![[#^Lagranges-equation-fundamental]]
 we can move all $Q_j$ to LHS and plugin Eq. (5.151) to get
 $$
@@ -742,7 +762,7 @@ $$
 
 >[!info] For many elementary conservative systems, the potential and kinetic energy can be simply written with a minimum of derivations; for these cases, Eq. (5.153) do not require derivation of any generalized forces and are therefore especially attractive.
 
-For more general cases with both conservative and nonconservative forces, we just need to retain the generalized forces at the RHS, resulting,
+For more general cases with both conservative and <u>nonconservative forces</u>, we just need to retain the generalized forces at the RHS, resulting,
 $$
 \ddt \left( \pp{\calL}{\dot{q}_j} \right) - \pp{\calL}{q_j} = Q_{nc_j}
 \tag{5.154}
@@ -777,16 +797,18 @@ $$
 which gives
 $$
 \begin{aligned}
-&\ddt \left( m \dot{r} \right) - mr \dot{\theta}^2 - mg\cos\theta + k(r-r_0) = 0 \\
-&\ddt \left( mr^2 \dot{\theta} \right) - mgr\sin\theta = 0 \\
+ \ddt \left( m \dot{r} \right) - mr \dot{\theta}^2 - mg\cos\theta + k(r-r_0) &= 0 \\
+ \ddt \left( mr^2 \dot{\theta} \right) - mgr\sin\theta &= 0 \\
 \end{aligned}
 $$
 then
 $$
+\boxed{
 \begin{aligned}
-& m \ddot{r} - mr \dot{\theta}^2 - mg\cos\theta + k(r-r_0) = 0 \\
-& 2mr \dot{r} \dot{\theta} + mr^2 \ddot{\theta} + mgr\sin\theta = 0 \\
+ m \ddot{r} - mr \dot{\theta}^2 - mg\cos\theta + k(r-r_0) &= 0 \\
+ 2mr \dot{r} \dot{\theta} + mr^2 \ddot{\theta} + mgr\sin\theta &= 0 \\
 \end{aligned}
+}
 $$
 
 Alternatively, if we want to apply the other format of Lagrange's equations
@@ -798,7 +820,8 @@ Q_r &= \Big(-k(r-r_0) \eht{r} + mg \cos\theta\eht{r} - mg\sin\theta\eht{\theta} 
 Q_\theta &= \Big(-k(r-r_0) \eht{r} + mg \cos\theta\eht{r} - mg\sin\theta\eht{\theta} \Big) \cdot \pp{( \dot{r}\eht{r} + r\dot{\theta}\eht{\theta})}{\dot{\theta}} \\
 \end{aligned}
 $$
-Obviously we will get the same results but with a bit more steps and algebras. These force has been implicitly accounted for by being included in the potential energy function. 
+Of course, we will get the same results but with a bit more steps and algebras. 
+These force has been implicitly accounted for by being included in the potential energy function. 
 
 #### Problem 5.1:  linear torsional spring (comparing different methods to obtain EOMs)
 ![[fig-p5-1_torsional_spring.png|400]]
@@ -807,13 +830,13 @@ Obviously we will get the same results but with a bit more steps and algebras. T
 ![[fig-p5-1_netwon's_method_free_body.png|150]]
 
 Summing the forces and torques on the <u>massless rod</u>:
-$0 \cdot \frac{d^2}{dt^2} \left( \frac{R}{2} \hat{e}_r \right) = (F_r - F_{or}) \hat{e}_r + (F_\theta + F_{o\theta}) \hat{e}_\theta$ \
+$0 \cdot \frac{d^2}{dt^2} \left( \frac{R}{2} \eht{r} \right) = (F_r - F_{or}) \eht{r} + (F_\theta + F_{o\theta}) \eht{\theta}$ \
 $-k \theta + R F_\theta = 0$ \
 from which we can resolve: 
 $F_{or} = F_r \quad F_{o\theta} = -F_\theta  \quad F_\theta = \frac{k \theta}{R}$
 
 Summing the forces on the <u>mass</u> (no torques because it's treated as a mass point now):
-$m \left( - R \dot{\theta}^2 \hat{e}_r + R \ddot{\theta} \hat{e}_\theta \right) = \left( - F_r + mg \cos \theta \right) \hat{e}_r + \left( - F_\theta - mg \sin \theta \right) \hat{e}_\theta$ \
+$m \left( - R \dot{\theta}^2 \eht{r} + R \ddot{\theta} \eht{\theta} \right) = \left( - F_r + mg \cos \theta \right) \eht{r} + \left( - F_\theta - mg \sin \theta \right) \eht{\theta}$ \
 $F_r = mg \cos \theta + m r \dot{\theta}^2$ \
 $m R \ddot{\theta} = - \frac{k}{R} \theta - mg \sin \theta$
 
@@ -839,7 +862,7 @@ Applying Lagrange's equations $\ddt\left( \pp{\calL}{\dq} \right) - \pp{\calL}{q
 $\frac{d}{dt} \left( \frac{\partial \mathcal{L}}{\partial \dot{\theta}} \right) = m R^2 \ddot{\theta}$ \
 $\frac{\partial \mathcal{L}}{\partial \theta} = -mg R \sin \theta - k \theta$
 
-Therefore the equation of motion is obtained as: 
+Therefore, the equation of motion is obtained as: 
 $\boxed{m R^2 \ddot{\theta} + mg R \sin \theta + k \theta = 0}$
 
 >[!question] After-class practice, can the spring force be considered directly in the Lagrange's equations? 
@@ -894,7 +917,7 @@ $$
 \end{aligned}
 $$
 
-Notice that we also don't need to calculate $\ddot{\bmR}_i$ in this approach, even though we need to calculate two "forces".
+Notice that we still don't need to calculate $\ddot{\bmR}_i$ in this approach, even though we need to calculate two "forces".
 
 
 ### Redundant Coordinate Systems and Constrained Motion
@@ -994,7 +1017,7 @@ Applying the following format
 ![[#^Lagranges-equation-conservative-forces]]
 and we have
 $$
-\ddt\left( m \dot{r} \right) - mr\Omega^2 + k_1 r + k_2 r^3 = 0
+\boxed{ \ddt\left( m \dot{r} \right) - mr\Omega^2 + k_1 r + k_2 r^3 = 0 }
 $$
 
 >[!question] <u>After-class exercise:</u> Solve for the constraint force $\bmF_\theta$ acting on the particle $m$. (Hint: use either Newton's second law or Lagrange's equation with a constraint $\dot{\theta}=\Omega$.)
