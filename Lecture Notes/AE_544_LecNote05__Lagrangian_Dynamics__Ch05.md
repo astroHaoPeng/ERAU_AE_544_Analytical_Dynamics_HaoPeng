@@ -1,6 +1,6 @@
 ---
 date created: 2025-02-09T16:24:50-05:00
-date modified: 2026-03-11T09:26:35-04:00
+date modified: 2026-03-13T09:06:09-04:00
 ---
 
 # AE_544_LecNote05\__Lagrangian_Dynamics__Ch05
@@ -971,29 +971,6 @@ $$
 ^Lagranges-equation-conservative-constrained
 
 
-### Summarize of All Formats
-
-> [!done] Summary of different forms of Lagrange's equation:
-> Fundamental with a minimum set of generalized coordinates:
-> ![[#^Lagranges-equation-fundamental]]
-> 
-> Only conserved forces:
-> ![[#^Lagranges-equation-conservative-forces]]
-> 
-> Both conservative and nonconservative forces:
-> ![[#^Lagranges-equation-conservative-and-nonconservative-forces]]
-> 
-> Redundant generalized coordinates with constraints:
-> ![[#^Lagranges-equation-constrained]]
-> 
-> Ultimate version with everything:
-> ![[#^Lagranges-equation-conservative-constrained]]
-^Lagranges-equation-summary
-
-
-
-
-
 #### Example 5.14: Particle + Tube + Spring
 ![[fig-5-16_particle_tube_spring.png|400]]  The particle sliding in a rotating tube with a constant rotation speed of $\Omega$. The spring force is given in the figure.
 
@@ -1087,6 +1064,30 @@ m_2 \ddot{x}_2 + k(x_2 - x_1 - d) &= -c(\dot{x}_2-\dot{x}_1)
 $$
 >[!info] Extension to Lagrange's equations using "Rayleigh dissipation function".
 >
+
+
+### Summarize of Different Forms of Lagrangian Equation
+
+> [!done] Summary of different forms of Lagrangian equation:
+> 
+> Fundamental form with a minimum set of generalized coordinates:
+> ![[#^Lagranges-equation-fundamental]]
+> 
+> Only conserved forces that are absorbed into $V$ and thus $\calL = T - V$:
+> ![[#^Lagranges-equation-conservative-forces]]
+> 
+> With both conservative and nonconservative forces, nonconservative forces are retained in generalized forces $Q_{nc_j}$,
+> ![[#^Lagranges-equation-conservative-and-nonconservative-forces]]
+> 
+> Redundant generalized coordinates with Pfaffian nonholonomic constraints, dealt with Lagrange multiplier $\lambda_k$:
+> ![[#^Lagranges-equation-constrained]]
+> 
+> Redundant generalized coordinates with Pfaffian nonholonomic constraints, dealt with Lagrange multiplier $\lambda_k$, and also some nonconservative forces included in $Q_{nc_j}$:
+> ![[#^Lagranges-equation-conservative-constrained]]
+^Lagranges-equation-summary
+
+
+
 
 
 ### Extensions to Torques and Rigid-body Dynamics
