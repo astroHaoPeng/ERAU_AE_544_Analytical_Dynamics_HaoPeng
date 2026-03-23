@@ -1,6 +1,6 @@
 ---
 date created: 2025-02-09T16:24:50-05:00
-date modified: 2026-03-13T09:06:09-04:00
+date modified: 2026-03-23T09:27:38-04:00
 ---
 
 # AE_544_LecNote05\__Lagrangian_Dynamics__Ch05
@@ -1062,35 +1062,41 @@ m_1 \ddot{x}_1 - k(x_2 - x_1 - d) &= c(\dot{x}_2-\dot{x}_1) \\
 m_2 \ddot{x}_2 + k(x_2 - x_1 - d) &= -c(\dot{x}_2-\dot{x}_1)
 \end{aligned}}
 $$
->[!info] Extension to Lagrange's equations using "Rayleigh dissipation function".
->
+>[!info] An extension to Lagrange's equations using "Rayleigh dissipation function".
+> Define Rayleigh dissipation function as $R = \frTwo \sum_{i=1}^N \bm{k}_i \cdot \bmv_i$, where the friction forces $\bmF_{f,i} = - \bm{k}_i \cdot \bmv_i$ is proportional to each particle's velocity, then the Lagrange's equations can be written as
+> $$
+> \ddt \left( \pp{\calL}{\dq_i} \right) + \pp{\calL}{q_i} - \pp{R}{\dq_i} = 0
+> $$
 
 
-### Summarize of Different Forms of Lagrangian Equation
 
-> [!done] Summary of different forms of Lagrangian equation:
-> 
-> Fundamental form with a minimum set of generalized coordinates:
-> ![[#^Lagranges-equation-fundamental]]
-> 
-> Only conserved forces that are absorbed into $V$ and thus $\calL = T - V$:
-> ![[#^Lagranges-equation-conservative-forces]]
-> 
-> With both conservative and nonconservative forces, nonconservative forces are retained in generalized forces $Q_{nc_j}$,
-> ![[#^Lagranges-equation-conservative-and-nonconservative-forces]]
-> 
-> Redundant generalized coordinates with Pfaffian nonholonomic constraints, dealt with Lagrange multiplier $\lambda_k$:
-> ![[#^Lagranges-equation-constrained]]
-> 
-> Redundant generalized coordinates with Pfaffian nonholonomic constraints, dealt with Lagrange multiplier $\lambda_k$, and also some nonconservative forces included in $Q_{nc_j}$:
-> ![[#^Lagranges-equation-conservative-constrained]]
+### Summary of Different Forms of Lagrangian Equation
+
+<u>Fundamental form</u> with a minimum set of generalized coordinates:
+![[#^Lagranges-equation-fundamental]]
+
+<u>Only conserved forces</u> that are absorbed into $V$ and thus $\calL = T - V$:
+![[#^Lagranges-equation-conservative-forces]]
+
+With <u>both conservative and nonconservative forces</u>, nonconservative forces are retained in generalized forces $Q_{nc_j}$,
+![[#^Lagranges-equation-conservative-and-nonconservative-forces]]
+
+Redundant generalized coordinates with <u>Pfaffian nonholonomic constraints</u>, dealt with Lagrange multiplier $\lambda_k$:
+![[#^Lagranges-equation-constrained]]
+
+Redundant generalized coordinates with Pfaffian nonholonomic constraints, dealt with Lagrange multiplier $\lambda_k$, and also some nonconservative forces included in $Q_{nc_j}$:
+![[#^Lagranges-equation-conservative-constrained]]
 ^Lagranges-equation-summary
 
 
 
 
 
-### Extensions to Torques and Rigid-body Dynamics
+### Extensions to Torques and Rigid-body Dynamics (Example of quasi coordinates)
+
+The next natural question is whether the introduced Lagrangian dynamics can solve Eulerian rigid-body dynamics. 
+
+And the first hurdle is to handle torques as generalized forces.
 
 >[!info] This is covered in Example 5.5: Generalize force for a torque on rigid body
 
@@ -1122,22 +1128,78 @@ Q_j = \bm{F}_c \cdot \frac{\partial \bm{R}_c}{\partial q_j} + \bmL \cdot \frac{\
 \tag{5.53}
 $$
 
-As a summary, we have dealt with a force as a pair of forces, then the assumed forces and displacements cancel out as the torque itself at the end. It is not surprising since Euler's equation is just a specialized application of Newton's second law.
+As a summary, we have dealt with a torque as a pair of forces, then the assumed forces and displacements cancel out to be the torque itself at the end. It is not surprising since Euler's equation is just a specialized application of Newton's second law.
 
 >[!info] The following is covered in Section 5.6 Quasi coordinates but omitted in our course.
 
-Extension of the Lagrange's equation to rigid body dynamics is more complicated and will not keep the original format of Lagrange's equation.
 
-This usually involves the introducing of **quasi coordinates** that are directly defined through velocities but their integrals usually do not a direct physical meaning as a generalized position coordinate.
+Thus the most natural Newton–Euler differential equations do not have the natural form $\bmf(\bmq, \dot{\bmq}, \ddot{\bmq})$ expected from Lagrange’s equations, but rather a set of function of $\bmR, \dot{\bmR}, \ddot{\bmR}, \bmO, \dot{\bmO}$,
+$$
+\begin{aligned}
+\bmF &= m \ddot{\bmR}  \\
+\bmL &= \ddtN \bmH = \ddtB \bmH + \bmO_{\calB/\calN} \times \bmH
+\end{aligned}
+$$
 
-This treatment is usually too confusing and not practically useful. For example, for attitude dynamics, we can directly use Euler's equations.
+As a similar observation, the kinetic energy for a rigid body is given in the nicest format as
+$$
+T = \frTwo m \left( \dot{x}^2 + \dot{y}^2 + \dot{z}^2 \right) + \frTwo \left( I_1 \Omega_1^2 + I_2 \Omega_2^2 + I_3 \Omega_3^2 \right)
+$$
+where the integration of $\Omega_i$ would be any configuration coordinates. 
 
-(Refer to textbook for more details.)
+Without delving into the details, we just give the result that: 
+the extension of the Lagrange's equation to rigid body dynamics is feasible and will not keep the original format of the Lagrange's equation.
+
+This process involves the introducing of **quasi coordinates** that are directly defined through velocities but their integrals usually do not a direct physical meaning as a generalized position coordinate.
+
+%% This treatment is usually too confusing and not practically useful.  For example, for attitude dynamics, we can directly use Euler's equations.%%
 
 
 ### Cyclic Coordinates and Conservations
 
-TBA
+The existence of a cyclic coordinates is a consequence of symmetry and invariability of forces to variations in the cyclic coordinates.
+
+Three useful conditions can result in cyclic coordinates:
+1. If a virtual displacement of a coordinate is perpendicular to the force doing work, then the coordinate will be cyclic.
+2. If some coordinate represents a rotation about fixed force direction, then including this coordinate as a generalized coordinate will result in this coordinate being cyclic.
+3. For classical Euler angles that displace from an inertially fixed frame, we see that the first rotation is always about an inertially fixed axis.
+All of the preceding conditions obviously give rise to the kinetic and potential energy not being dependent on the cyclic coordinate.
+
+When only a subset of generalized coordinates $\qOneToEnd$ appear in the Lagrangian function $\calL(t, \qOneToEnd[m], \qDotOneToEnd)$ $(m<n)$ explicitly, furthermore, when the virtual work along any $\delta q_j$ is zero, the Lagrange's equation gives
+$$
+\ddt \left( \pp{\calL}{\dot{q}_j} \right) = 0    \qquad j = m+1 , \cdots, n
+\tag{5.251}
+$$
+
+Defining the exact integral as the corresponding conjugate momentum $p_j$, which is a constant:
+$$
+p_j = \pp{\calL}{\dot{q}_j} = \text{constant}
+$$
+
+
+The existence of a cyclic coordinate depends both on the <u>physics</u> and <u>the choice of generalized coordinates</u>.
+
+**First example**, example 5.18 (in textbook), consider the simple problem of motion in a constant gravity field.
+
+![[fig-5-19_motion_in_gravity_field.png|350]]
+
+$\calL = \frTwo m (\dot{x}^2 + \dot{y}^2) - mgy$, where $x$ is a cyclic coordinate.
+
+$\calL = \frTwo m (\dot{r}^2 + r^2 \dot{\theta}^2) - mgr \sin\theta$, where there is no cyclic coordinate.
+
+So, the existence of one or more cyclic coordinates evidently depends on our choice of coordinates (as well as the physics of the problem).
+
+
+**Another example** 5.19 (in textbook), consider the particle moving without friction on a horizontal plane, where the particle is attached by a linear spring to a fixed point as shown in Fig. 5.20.
+
+![[fig-5-20_planar_motion_linear_radial_spring.png|350]]
+
+$\calL = \frTwo m (\dot{x}^2 + \dot{y}^2) - \frTwo k (x^2 + y^2)$, with no cyclic coordinate.
+
+$\calL = \frTwo m (\dot{r}^2 + r^2 \dot{\theta}^2) - \frTwo k r^2$, where $\theta$ is a cyclic coordinate.
+
+This physics of angular momentum reservation is less intuitive, but based on the conclusion of cyclic coordinates, we know that the motion described by $\theta$ is conserved.
+
 
 ---
 
@@ -1151,3 +1213,6 @@ The choice of generalized coordinates is an art, guided by physics and mathemati
 2. Use coordinates that eliminate constraints to avoid extra equations.
 3. Ensure a simple kinetic energy form to make equations manageable.
 4. Choose coordinates that reveal conserved quantities for easier solutions.
+
+
+![[#Summary of Different Forms of Lagrangian Equation]]
