@@ -1,6 +1,6 @@
 ---
 date created: 2025-02-09T16:24:50-05:00
-date modified: 2026-03-23T09:27:38-04:00
+date modified: 2026-03-23T12:02:42-04:00
 ---
 
 # AE_544_LecNote05\__Lagrangian_Dynamics__Ch05
@@ -1063,9 +1063,9 @@ m_2 \ddot{x}_2 + k(x_2 - x_1 - d) &= -c(\dot{x}_2-\dot{x}_1)
 \end{aligned}}
 $$
 >[!info] An extension to Lagrange's equations using "Rayleigh dissipation function".
-> Define Rayleigh dissipation function as $R = \frTwo \sum_{i=1}^N \bm{k}_i \cdot \bmv_i$, where the friction forces $\bmF_{f,i} = - \bm{k}_i \cdot \bmv_i$ is proportional to each particle's velocity, then the Lagrange's equations can be written as
+> Define Rayleigh dissipation function as $R = \frTwo \sum_{i=1}^N (k_{x_i} v_{x_i}^2 + k_{y_i} v_{y_i}^2 + k_{z_i} v_{z_i}^2)$, where the friction forces $\bmF_{f,i} = - \bm{k}_i \cdot \bmv_i$ is proportional to each particle's velocity, then the Lagrange's equations can be written as
 > $$
-> \ddt \left( \pp{\calL}{\dq_i} \right) + \pp{\calL}{q_i} - \pp{R}{\dq_i} = 0
+> \ddt \left( \pp{\calL}{\dq_i} \right) - \pp{\calL}{q_i} + \pp{R}{\dq_i} = 0
 > $$
 
 
