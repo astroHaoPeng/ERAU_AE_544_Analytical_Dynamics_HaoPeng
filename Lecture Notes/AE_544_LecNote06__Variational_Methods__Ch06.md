@@ -1,15 +1,16 @@
 ---
 date created: 2025-03-03T09:52:52-05:00
-date modified: 2026-03-05T18:52:47-05:00
+date modified: 2026-03-30T09:40:11-04:00
 ---
 
 # AE_544_LecNote06\__Variational_Methods__Ch06
 ![[README#Disclaimers]]
 
-In this chapter, we begin by developing basic concepts from variational calculus and then turn to the development of the most important results in variational mechanics:
-1. A family of variational principles due to Hamilton that hold for the motion of very general systems, including distributed parameter systems.
-2. Hamilton's principal function $\calS \equiv \int_{t_0}^{t_f} \calL \dt$, which has several important properties.
-3. Extensions of Lagrange's equations for the case of distributed parameter systems.
+In this chapter, we will discuss the following topics:
+1. Develop basic concepts from variational calculus and then turn to the development of the most important results in variational mechanics:
+2. Show that these variational principles hold for the motion of very general systems including distributed parameter systems.
+3. Revisit the Hamilton's principal function $\calS \equiv \int_{t_0}^{t_f} \calL \dt$, which has several important properties.
+
 
 
 ## Fundamentals of Variational Calculus
@@ -21,7 +22,7 @@ $\calJ$ is considered a functional because its argument list contains a vector o
 
 Let us consider the special case that $\calJ(\bmx(t),t_0,t_f)$ is expressible as a path integral:
 $$
-\calJ = \calJ(\bmx(t), t_0, t_f) = \int_{t_0}^{t_f} \calF(\bmx(t), \dot{\bmx}(t), t) \, dt
+\calJ = \calJ(\bmx(t), t_0, t_f) = \int_{t_0}^{t_f} \calF(\bmx(t), \dot{\bmx}(t), t) \, \dt
 \tag{6.1}
 $$
 
@@ -49,7 +50,7 @@ $$
 
 The varied path integral of $\tilde{\calJ}$ is
 $$
-\tilde{\calJ} = \calJ(\tilde{\bmx}(t), \tilde{t}_0, \tilde{t}_f) = \int_{\tilde{t}_0}^{\tilde{t}_f} \calF(\bmx(t) + \delta \bmx(t), \dot{\bmx}(t) + \delta \dot{\bmx}(t), t) \, dt
+\tilde{\calJ} = \calJ(\tilde{\bmx}(t), \tilde{t}_0, \tilde{t}_f) = \int_{\tilde{t}_0}^{\tilde{t}_f} \calF(\bmx(t) + \delta \bmx(t), \dot{\bmx}(t) + \delta \dot{\bmx}(t), t) \, \dt
 \tag{6.6}
 $$
 
@@ -57,7 +58,7 @@ The variation $\delta\calJ$ is obtained as
 $$
 \begin{aligned}
 \delta \calJ &\equiv \tilde{\calJ} - \calJ \\
-&= \textcolor{red}{ \int_{t_0 + \delta t_0}^{t_f + \delta t_f} \calF(\bmx(t) + \delta \bmx(t), \dot{\bmx}(t) + \delta \dot{\bmx}(t), t) \, dt } - \int_{t_0}^{t_f} \calF(\bmx(t), \dot{\bmx}(t), t) \, dt
+&= \textcolor{red}{ \int_{t_0 + \delta t_0}^{t_f + \delta t_f} \calF(\bmx(t) + \delta \bmx(t), \dot{\bmx}(t) + \delta \dot{\bmx}(t), t) \, \dt } - \int_{t_0}^{t_f} \calF(\bmx(t), \dot{\bmx}(t), t) \, \dt
 \end{aligned}
 \tag{6.7}
 $$
@@ -65,34 +66,34 @@ $$
 Express the first integral using Taylor series, and truncate at the first-order terms, we have
 $$
 \begin{aligned}
-&\phantom{=\,} \textcolor{red}{ \int_{t_0 + \delta t_0}^{t_f + \delta t_f} \calF(\bmx(t) + \delta \bmx(t), \dot{\bmx}(t) + \delta \dot{\bmx}(t), t) \, dt } \\
+&\phantom{=\,} \textcolor{red}{ \int_{t_0 + \delta t_0}^{t_f + \delta t_f} \calF(\bmx(t) + \delta \bmx(t), \dot{\bmx}(t) + \delta \dot{\bmx}(t), t) \, \dt } \\
 %
-&\boxed{\approx} \int_{t_0}^{t_f} \calF(\bmx(t), \dot{\bmx}(t), t) \, dt 
-+ \left[ \pp{}{\bmx} \left( \int_{t_0}^{t_f} \calF(\bmx(t), \dot{\bmx}(t), t) \, dt  \right) \right]\trans \delta \bmx \\
-&\phantom{=\,} + \left[ \pp{}{\dot{\bmx}} \left( \int_{t_0}^{t_f} \calF(\bmx(t), \dot{\bmx}(t), t) \, dt  \right)\right]\trans \delta \dot{\bmx} 
-+ \pp{}{t_0} \left( \int_{t_0}^{t_f} \calF(\bmx(t), \dot{\bmx}(t), t) \, dt  \right) \delta t_0 \\
-&\phantom{=\,} + \pp{}{t_f} \left( \int_{t_0}^{t_f} \calF(\bmx(t), \dot{\bmx}(t), t) \, dt  \right) \delta t_f \\
+&\boxed{\approx} \int_{t_0}^{t_f} \calF(\bmx(t), \dot{\bmx}(t), t) \, \dt 
++ \left[ \pp{}{\bmx} \left( \int_{t_0}^{t_f} \calF(\bmx(t), \dot{\bmx}(t), t) \, \dt  \right) \right]\trans \delta \bmx \\
+&\phantom{=\,} + \left[ \pp{}{\dot{\bmx}} \left( \int_{t_0}^{t_f} \calF(\bmx(t), \dot{\bmx}(t), t) \, \dt  \right)\right]\trans \delta \dot{\bmx} 
++ \pp{}{t_0} \left( \int_{t_0}^{t_f} \calF(\bmx(t), \dot{\bmx}(t), t) \, \dt  \right) \delta t_0 \\
+&\phantom{=\,} + \pp{}{t_f} \left( \int_{t_0}^{t_f} \calF(\bmx(t), \dot{\bmx}(t), t) \, \dt  \right) \delta t_f \\
 %
-&\boxed{=} \int_{t_0}^{t_f} \calF(\bmx(t), \dot{\bmx}(t), t) \, dt 
-+ \int_{t_0}^{t_f} \left( \pp{}{\bmx} \calF(\bmx(t), \dot{\bmx}(t), t) \cdot\delta \bmx \right)\, dt \\
-&\phantom{=\,} + \int_{t_0}^{t_f} \left( \pp{}{\dot{\bmx}} \calF(\bmx(t), \dot{\bmx}(t), t) \cdot\delta \dot{\bmx} \right)\, dt 
+&\boxed{=} \int_{t_0}^{t_f} \calF(\bmx(t), \dot{\bmx}(t), t) \, \dt 
++ \int_{t_0}^{t_f} \left( \pp{}{\bmx} \calF(\bmx(t), \dot{\bmx}(t), t) \cdot\delta \bmx \right)\, \dt \\
+&\phantom{=\,} + \int_{t_0}^{t_f} \left( \pp{}{\dot{\bmx}} \calF(\bmx(t), \dot{\bmx}(t), t) \cdot\delta \dot{\bmx} \right)\, \dt 
 + \Big[ - \calF(\bmx(t_0), \dot{\bmx}(t_0), t_0)  \cdot\delta t_0 \Big] \\
 &\phantom{=\,} + \calF(\bmx(t_f), \dot{\bmx}(t_f), t_f) \cdot \delta t_f \\
 \end{aligned}
 \tag{1st term in 6.7}
 $$
 
->[!info] Taylor expansion for multi-variable function $K(\bmx, \dot{\bmx}, t_0, t_f)$ is
+>[!info] Taylor expansion for a multi-variable function $K(\bmx, \dot{\bmx}, t_0, t_f)$ is
 > $$
-> K = \left(\pp{K}{\bmx}\right)\trans d\bmx + \left(\pp{K}{\dot{\bmx}}\right)\trans d \dot{\bmx} + \pp{K}{t_0} dt_0 + \pp{K}{t_f} dt_f + O(\|d\bmx, d \dot{\bmx}, dt_0, dt_f\|^2)
+> K = \left(\pp{K}{\bmx}\right)\trans {\rm d}\bmx + \left(\pp{K}{\dot{\bmx}}\right)\trans {\rm d} \dot{\bmx} + \pp{K}{t_0} \dt_0 + \pp{K}{t_f} \dt_f + O(\|{\rm d}\bmx, {\rm d}\dot{\bmx}, \dt_0, \dt_f\|^2)
 > $$
 
 Plug the 1st order Taylor expansion back into Eq. (6.7) and we have
 $$
 \begin{aligned}
 \delta \calJ &= 
-\int_{t_0}^{t_f} \left[ \left( \pp{\calF(\ast)}{\bmx(t)} \right) \trans \delta \bmx(t) \right] dt 
-+ \textcolor{blue}{ \int_{t_0}^{t_f} \left[ \left( \pp{\calF(\ast)}{\dot{\bmx}(t)} \right) \trans \delta \dot{\bmx}(t) \right] dt  } \\
+\int_{t_0}^{t_f} \left[ \left( \pp{\calF(\ast)}{\bmx(t)} \right) \trans \delta \bmx(t) \right] \dt 
++ \textcolor{blue}{ \int_{t_0}^{t_f} \left[ \left( \pp{\calF(\ast)}{\dot{\bmx}(t)} \right) \trans \delta \dot{\bmx}(t) \right] \dt  } \\
 &\phantom{=\,}+ \calF(\bmx(t_f), \dot{\bmx}(t_f), t_f) \delta t_f 
 - \calF(\bmx(t_0), \dot{\bmx}(t_0), t_0) \delta t_0
 \end{aligned}
@@ -104,20 +105,20 @@ the variation $\delta\calJ$ has to vanish, or in other words, be equal to 0.
 
 Notice that we can do integral by parts for the second term in Eq. (6.8), which is
 $$
-\int_{t_0}^{t_f} \left[ \pp{\calF(\ast)}{\dot{\bmx}(t)} \right] \trans \delta \dot{\bmx}(t) \, dt 
+\int_{t_0}^{t_f} \left[ \pp{\calF(\ast)}{\dot{\bmx}(t)} \right] \trans \delta \dot{\bmx}(t) \, \dt 
 =
-\textcolor{blue}{ \left( \left[ \pp{\calF(\ast)}{\dot{\bmx}(t)} \right] \trans \delta \bmx(t) \right) \Bigg|_{t_0}^{t_f} - \int_{t_0}^{t_f} \ddt \left[ \pp{\calF(\ast)}{\dot{\bmx}(t)} \right] \trans \delta \bmx(t) \, dt }
+\textcolor{blue}{ \left( \left[ \pp{\calF(\ast)}{\dot{\bmx}(t)} \right] \trans \delta \bmx(t) \right) \Bigg|_{t_0}^{t_f} - \int_{t_0}^{t_f} \ddt \left[ \pp{\calF(\ast)}{\dot{\bmx}(t)} \right] \trans \delta \bmx(t) \, \dt }
 \tag{6.10}
 $$
 This finally gives us an expression of the variation as a function of just $\delta\bmx$ and terminal times $t_0$ and $t_f$, which is
 $$
 \begin{aligned}
-\delta \calJ &= \int_{t_0}^{t_f} \left[ \left( \pp{\calF(\ast)}{\bmx(t)} \right) \trans \delta \bmx(t) \right] dt 
-+ \textcolor{blue}{ \left( \left[ \pp{\calF(\ast)}{\dot{\bmx}(t)} \right] \trans \delta \bmx(t) \right) \Bigg|_{t_0}^{t_f} - \int_{t_0}^{t_f} \ddt \left[ \pp{\calF(\ast)}{\dot{\bmx}(t)} \right] \trans \delta \bmx(t) \, dt } \\
+\delta \calJ &= \int_{t_0}^{t_f} \left[ \left( \pp{\calF(\ast)}{\bmx(t)} \right) \trans \delta \bmx(t) \right] \dt 
++ \textcolor{blue}{ \left( \left[ \pp{\calF(\ast)}{\dot{\bmx}(t)} \right] \trans \delta \bmx(t) \right) \Bigg|_{t_0}^{t_f} - \int_{t_0}^{t_f} \ddt \left[ \pp{\calF(\ast)}{\dot{\bmx}(t)} \right] \trans \delta \bmx(t) \, \dt } \\
 &\phantom{=\,}+ \calF(\bmx(t_f), \dot{\bmx}(t_f), t_f) \delta t_f 
 - \calF(\bmx(t_0), \dot{\bmx}(t_0), t_0) \delta t_0 \\
 %
-&= \int_{t_0}^{t_f} \left[ \pp{\calF(\ast)}{\bmx(t)}      -    \ddt \left( \pp{\calF(\ast)}{\dot{\bmx}(t)} \right) \right] \trans \delta \bmx(t) dt 
+&= \int_{t_0}^{t_f} \left[ \pp{\calF(\ast)}{\bmx(t)}      -    \ddt \left( \pp{\calF(\ast)}{\dot{\bmx}(t)} \right) \right] \trans \delta \bmx(t) \dt 
 + \left( \left[ \pp{\calF(\ast)}{\dot{\bmx}(t)} \right] \trans \delta \bmx(t) \right) \Bigg|_{t_0}^{t_f} \\
 &\phantom{=\,}+ \calF(\bmx(t_f), \dot{\bmx}(t_f), t_f) \delta t_f 
 - \calF(\bmx(t_0), \dot{\bmx}(t_0), t_0) \delta t_0
@@ -165,7 +166,7 @@ which is exactly in the form of Euler-Lagrange equation we just obtained:
 
 Therefore, we can conclude that the <u>Hamilton's principal function</u> $\calS$
 $$
-\calS = \int_{t_0}^{t_f} \calL \, dt
+\calS = \int_{t_0}^{t_f} \calL \, \dt
 \tag{6.16}
 $$
 is an extremum for dynamical motions with zero generalized forces on the right side of Eq. (6.15), and for this class of systems we have the simplest version of Hamilton's variational principle
@@ -175,7 +176,6 @@ $$
 $$
 
 
-%% Add the example of cycloid here if time permits. %%
 
 
 ## Hamilton's Variational Principles
@@ -263,7 +263,7 @@ $$
 Integrate the above equation and get the **most general from of Hamilton's principles**:
 $$
 \boxed{
-\int_{t_0}^{t_f} (\delta W + \delta T) \, dt = \left.\left( \sum_{i=1}^{N} m_i \dot{\bm{R}}_i \cdot \delta \bm{R}_i \right)\right|_{t_0}^{t_f}}
+\int_{t_0}^{t_f} (\delta W + \delta T) \, \dt = \left.\left( \sum_{i=1}^{N} m_i \dot{\bm{R}}_i \cdot \delta \bm{R}_i \right)\right|_{t_0}^{t_f}}
 \tag{6.25}
 $$
 ^hamiltons-principle-most-general
@@ -273,23 +273,23 @@ It holds for the case of 1) arbitrary forces, 2) general constraints, and 3) gen
 
 If the virtually working forces are conservative, then $\delta W = - \delta V$, and if attention is <u>**restricted to fixed endpoint problems, $\delta\bmR_i(t_0) = \delta\bmR_i(t_f) = 0$**</u>, then the the above general form specializes to
 $$
-\int_{t_0}^{t_f} (\delta T - \delta V )\, dt 
-= \int_{t_0}^{t_f} \delta(T-V) \, dt 
-= \int_{t_0}^{t_f} \delta\calL \, dt 
-= \delta \int_{t_0}^{t_f} \calL \, dt 
+\int_{t_0}^{t_f} (\delta T - \delta V )\, \dt 
+= \int_{t_0}^{t_f} \delta(T-V) \, \dt 
+= \int_{t_0}^{t_f} \delta\calL \, \dt 
+= \delta \int_{t_0}^{t_f} \calL \, \dt 
 = 0
 \tag{6.26}
 $$
 Note that the interchangeability of variation operator and integral is generally true under holonomic constraints.
 
 
-## Example 6.5: motion in a constant gravity field
+### Example 6.5: motion in a constant gravity field
 
-This example shows that Hamilton's principle of varying action can provide a direct path to determine the system motion that does not "pass through" Lagrange's equations. 
+This example shows how to use Hamilton’s law of varying action to directly solve for $q_j(t)$.
 
 ![[fig-5-19_constant_gravity_field.png|300]]
 
-**(Example 5.18) Lagrange's equations**: 
+**Recall the Lagrange's equations approach in (Example 5.18)**: 
 
 $\calL = \frac{1}{2} m ( \dot{x}^2 + \dot{y}^2 ) - m g y$
 
@@ -297,40 +297,40 @@ $\pp{\calL}{{x}} = 0$, $\pp{\calL}{{y}}=-mg$
 
 $\pp{\calL}{\dot{x}} = m \dot{x}$, $\pp{\calL}{\dot{y}}=m \dot{y}$
 
-$\ddt \pp{\calL}{\dot{x}} - \pp{\calL}{{x}} = m \ddot{x} = 0$
-
-$\ddt \pp{\calL}{\dot{y}} - \pp{\calL}{{y}} = m \ddot{y} + mg = 0$
+$\ddt \left(\pp{\calL}{\dot{x}}\right) - \pp{\calL}{{x}} = m \ddot{x} = 0     \qquad \text{and} \qquad     \ddt \left(\pp{\calL}{\dot{y}}\right) - \pp{\calL}{{y}} = m \ddot{y} + mg = 0$
 
 So, $\dot{x} = \dot{x}_0 = \text{constant}$, $y=y_0+\dot{y}_0 t - \frac{1}{2} g t^2$.
 
-**Hamilton's principle:** (Let's look at just vertical motion for simplicity.)
+**Hamilton's principle directly:** 
+Let's look at just vertical motion for simplicity.
 
-$T=\frac{1}{2} m \dot{y}^2$, $V=mgy$
+$$T=\frac{1}{2} m \dot{y}^2   \qquad \text{and} \qquad    V=mgy$$
 
-$\delta T = m \dot{y} \delta \dot{y}$, $\delta V = -\delta W=mg\delta y$
+$$\delta T = m \dot{y} \delta \dot{y}\qquad \text{and} \qquad    \delta V = -\delta W=mg\delta y$$
 
-$\pp{T}{\dot{y}} = m \dot{y}$
+$$\pp{T}{\dot{y}} = m \dot{y}$$
 
-Recall
+Recall the general format of Hamilton's principle
 ![[#^hamiltons-principle-most-general]]
 
-Since $\delta y(0) = 0$ and $\delta y(f) = 0$, \
-$\int_{t_0}^{t_f} (mg\delta y + m \dot{y} \delta \dot{y}) \, dt = 0$ \
-Simplified to: \
-$\int_{t_0}^{t_f} (g\delta y + \dot{y} \delta \dot{y}) \, dt = 0$
+Since $\delta y(0) = 0$ and $\delta y(f) = 0$,
+$$\int_{t_0}^{t_f} (mg\delta y + m \dot{y} \delta \dot{y}) \, \dt = 0$$
+Simplified to: 
+$$\int_{t_0}^{t_f} (g\delta y + \dot{y} \delta \dot{y}) \, \dt = 0$$
 
-Since $dt$ is arbitrary, there must be $g\delta y + \dot{y} \delta \dot{y} = 0$
+Since $\dt$ is arbitrary, there must be 
+$$g\delta y + \dot{y} \delta \dot{y} = 0$$
 
-Assume the solution has the form of infinite power series: \
-$y(t) = a_0 + a_1 t + a_2 t^2 + a_3 t^3 + \cdots$ \
-$\dot{y}(t) = a_1 + 2a_2 t + 3a_3 t^2 + \cdots$
+We **assume the solution has the form** of infinite power series: 
+$$y(t) = a_0 + a_1 t + a_2 t^2 + a_3 t^3 + \cdots$$
+$$\dot{y}(t) = a_1 + 2a_2 t + 3a_3 t^2 + \cdots$$
 
 Then the variations are: \
-$\delta y(t) = \delta a_0 + \delta a_1 t + \delta a_2 t^2 + \cdots$ \
-$\delta \dot{y}(t) = \delta a_1 + 2 \delta a_2 t + 3\delta a_3 t^2 + \cdots$ \
+$$\delta y(t) = \delta a_0 + \delta a_1 t + \delta a_2 t^2 + \cdots$$
+$$\delta \dot{y}(t) = \delta a_1 + 2 \delta a_2 t + 3\delta a_3 t^2 + \cdots$$
 (Notice this is variations of functions, so no $\delta t$ appears.)
 
-Plug in 
+Plug in and collect coefficients in terms of $\delta a_i$, we have
 $$
 \begin{aligned}
 \left\{ (2a_2 + g) t + 3 a_3 t^2 + \cdots \right\} &\delta a_0 \\
@@ -341,15 +341,27 @@ $$
 $$
 
 Again since $t$ is arbitrary, all coefficients must vanish, thus
-$a_2 = -\frac{1}{2}g$,
-and $a_3 = a_4 = \dots = 0$
+$$a_2 = -\frac{1}{2}g$$
+and 
+$$a_3 = a_4 = \dots = 0$$
 
 So, the solution is
-$y(t) = a_0 + a_1 t - \frac{1}{2}g t^2$
+$$y(t) = a_0 + a_1 t - \frac{1}{2}g t^2$$
 
 >[!question] Can $a_0$ and $a_1$ be determined? How?
 >Left as a after-class practice. Answer is in the textbook.
 
+
+
+### Example 6.6:  a classical linear oscillator system 
+
+
+
+### Section Summary 
+
+Hamilton’s principle of varying acting provides a direct path to solve for motion of the system without first deriving Lagrange’s differential equations.
+
+Notice that including the boundary terms on the right side of Eq. (6.62) is vital, because otherwise the variations of dai in, for exam- 6.44 ple, Eqs. (6.65) and (6.70) would have to be constrained to force the boundary term in Eq. (6.62) to vanish. Solving this difficult problem is not necessary; we can simply include the boundary term when assuming power series (or any other functional representation with undetermined coefficients).
 
 
 
@@ -392,18 +404,14 @@ Substitute this back to the Hamilton's principle in Eq. (6.25)
 ![[#^hamiltons-principle-most-general]]
 and we have
 $$
-\int_{t_0}^{t_f} (\delta W + \delta T) \, dt = \left.\left( \sum_{j=1}^n \pp{T}{q_j} \delta q_j \right)\right|_{t_0}^{t_f} 
+\int_{t_0}^{t_f} (\delta W + \delta T) \, \dt = \left.\left( \sum_{j=1}^n \pp{T}{q_j} \delta q_j \right)\right|_{t_0}^{t_f} 
 \tag{6.44}
 $$
 Finally, the boundary terms (on RHS) in Eq. (6.44) turn out to be a more general form, whereas Eq. (6.25) applies only to the system of particles model.
 
 
 
-For dynamical systems with finite degrees of freedom, using Hamilton's law of
-varying action does not provide any further information. Hamilton's law has
-clear advantages when developing the equations of motion of an infinite degree
-of freedom dynamical system because it not only provides the equations of
-motion, but also the flexible domain boundary conditions.
+For dynamical systems with finite degrees of freedom, using Hamilton's law of varying action does not provide any further information. Hamilton's law has clear advantages when developing the equations of motion of an infinite degree of freedom dynamical system because it not only provides the equations of motion, but also the flexible domain boundary conditions.
 
 
 ## Example 6.4: variable cross-sectional axial rod
@@ -413,34 +421,34 @@ This rod is considered elastic, and neglecting all external forces and internal 
 As the elastic simplest constitutive model, for uniaxial stress, the strain energy per unit volume is $\frac{1}{2} E \varepsilon^2$, where $\varepsilon \equiv \pp{u}{x}$ is the strain and $E$ is Young's modulus.
 Solve for the field function $u(x,t)$ which describe the motion at time $t$ and position $x$.
 
-For a differential mass $dm = \rho(x) A(x) dx$, the differential kinetic energy is 
+For a differential mass $\dm = \rho(x) A(x) \dx$, the differential kinetic energy is 
 $$
-dT = \frac{1}{2} \rho(x) A(x) \left( \pp{u}{t} \right)^2 dx
+\dt = \frac{1}{2} \rho(x) A(x) \left( \pp{u}{t} \right)^2 \dx
 \tag{6.47}
 $$
 The differential potential energy due to strain is 
 $$
-dV = \frac{1}{2} E \, A(x) \varepsilon^2 dx \equiv \frac{1}{2} E \, A(x) \left( \frac{\partial u(x, t)}{\partial x} \right)^2 dx
+dV = \frac{1}{2} E \, A(x) \varepsilon^2 \dx \equiv \frac{1}{2} E \, A(x) \left( \frac{\partial u(x, t)}{\partial x} \right)^2 \dx
 \tag{6.49}
 $$
 
 For the entire rod, the total kinetic energy is
 $$
-T = \frac{1}{2} \int_0^L \rho(x) A(x) \left( \frac{\partial u(x, t)}{\partial t} \right)^2 dx
+T = \frac{1}{2} \int_0^L \rho(x) A(x) \left( \frac{\partial u(x, t)}{\partial t} \right)^2 \dx
 \tag{6.48}
 $$
 and the total potential energy is
 $$
-V = \frac{1}{2} \int_0^L E \, A(x) \left( \frac{\partial u(x, t)}{\partial x} \right)^2 dx
+V = \frac{1}{2} \int_0^L E \, A(x) \left( \frac{\partial u(x, t)}{\partial x} \right)^2 \dx
 \tag{6.50}
 $$
 
 Substitute into Hamilton's principle and we have:
 $$
 \begin{aligned}
-\delta \int_{t_0}^{t_f} (T - V) \, dt &= \int_{t_0}^{t_f} (\delta T - \delta V) \, dt \\
-&= \int_{t_0}^{t_f} \left[ \int_0^L \rho A \left( \frac{\partial u}{\partial t} \right) \delta \left( \frac{\partial u}{\partial t} \right) dx - \int_0^L EA(x) \left( \frac{\partial u}{\partial x} \right) \delta \left( \frac{\partial u}{\partial x} \right) dx \right] dt \\
-& =  \int_0^L \left[ \textcolor{red}{\int_{t_0}^{t_f} \rho A \left( \frac{\partial u}{\partial t} \right) \delta \left( \frac{\partial u}{\partial t} \right) dt } \right] dx    -    \int_{t_0}^{t_f} \left[ \textcolor{blue}{ \int_0^L EA(x) \left( \frac{\partial u}{\partial x} \right) \delta \left( \frac{\partial u}{\partial x} \right) dx } \right] dt
+\delta \int_{t_0}^{t_f} (T - V) \, \dt &= \int_{t_0}^{t_f} (\delta T - \delta V) \, \dt \\
+&= \int_{t_0}^{t_f} \left[ \int_0^L \rho A \left( \frac{\partial u}{\partial t} \right) \delta \left( \frac{\partial u}{\partial t} \right) \dx - \int_0^L EA(x) \left( \frac{\partial u}{\partial x} \right) \delta \left( \frac{\partial u}{\partial x} \right) \dx \right] \dt \\
+& =  \int_0^L \left[ \textcolor{red}{\int_{t_0}^{t_f} \rho A \left( \frac{\partial u}{\partial t} \right) \delta \left( \frac{\partial u}{\partial t} \right) \dt } \right] \dx    -    \int_{t_0}^{t_f} \left[ \textcolor{blue}{ \int_0^L EA(x) \left( \frac{\partial u}{\partial x} \right) \delta \left( \frac{\partial u}{\partial x} \right) \dx } \right] \dt
 \end{aligned}
 \tag{6.55}
 $$
@@ -449,13 +457,13 @@ Next, we are going to use integration by parts to unify terms involving $\frac{\
 
 With this observation, the two integrations by parts in Eq. (6.55) are
 $$
-\textcolor{red}{ \int_{t_0}^{t_f} \rho(x) A(x) \left( \frac{\partial u}{\partial t} \right) \delta \left( \frac{\partial u}{\partial t} \right) dt  }
-= \textcolor{green}{ \left[ \rho(x) A(x) \left( \frac{\partial u}{\partial t} \right) \delta u \right]_{t_0}^{t_f} }  - \int_{t_0}^{t_f} \rho(x) A(x) \left( \frac{\partial^2 u}{\partial t^2} \right) \delta u dt
+\textcolor{red}{ \int_{t_0}^{t_f} \rho(x) A(x) \left( \frac{\partial u}{\partial t} \right) \delta \left( \frac{\partial u}{\partial t} \right) \dt  }
+= \textcolor{green}{ \left[ \rho(x) A(x) \left( \frac{\partial u}{\partial t} \right) \delta u \right]_{t_0}^{t_f} }  - \int_{t_0}^{t_f} \rho(x) A(x) \left( \frac{\partial^2 u}{\partial t^2} \right) \delta u \dt
 $$
 and
 $$
-\textcolor{blue}{ \int_0^L E\,A(x) \left( \frac{\partial u}{\partial x} \right) \delta \left( \frac{\partial u}{\partial x} \right) dx }
-= \left[ E\,A(x) \left( \frac{\partial u}{\partial x} \delta u\right) \right]_{0}^{L} - \int_0^L \frac{\partial}{\partial x} \left( E\,A(x) \left( \frac{\partial u}{\partial x} \right) \right) \delta u dx
+\textcolor{blue}{ \int_0^L E\,A(x) \left( \frac{\partial u}{\partial x} \right) \delta \left( \frac{\partial u}{\partial x} \right) \dx }
+= \left[ E\,A(x) \left( \frac{\partial u}{\partial x} \delta u\right) \right]_{0}^{L} - \int_0^L \frac{\partial}{\partial x} \left( E\,A(x) \left( \frac{\partial u}{\partial x} \right) \right) \delta u \dx
 $$
 where we have used $\delta\pp{u}{t}=\pp{}{t} (\delta u)$ and $\delta\pp{u}{x}=\pp{}{x}(\delta u)$.
 
@@ -468,7 +476,7 @@ Regarding why we can also set variation at end point to be zero is because we kn
 
 At last, substituting everything back to Eq. (6.55) gives:
 $$
-\int_{t_0}^{t_f} \left\{ \int_0^L \left[ \frac{\partial}{\partial x} \left( E\, A(x) \frac{\partial u}{\partial x} \right) - \rho(x) A(x) \frac{\partial^2 u}{\partial t^2} \right] \delta u dx - \left[ EA(x) \frac{\partial u}{\partial x} \delta u(x, t) \right]_0^L \right\} dt = 0
+\int_{t_0}^{t_f} \left\{ \int_0^L \left[ \frac{\partial}{\partial x} \left( E\, A(x) \frac{\partial u}{\partial x} \right) - \rho(x) A(x) \frac{\partial^2 u}{\partial t^2} \right] \delta u \dx - \left[ EA(x) \frac{\partial u}{\partial x} \delta u(x, t) \right]_0^L \right\} \dt = 0
 \tag{6.58}
 $$
 and we can argue that since $\delta u(x,t)$ is arbitrary, the governing equation of motion is
