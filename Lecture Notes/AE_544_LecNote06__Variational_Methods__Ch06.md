@@ -1,6 +1,6 @@
 ---
 date created: 2025-03-03T09:52:52-05:00
-date modified: 2026-03-30T09:40:11-04:00
+date modified: 2026-04-03T00:10:21-04:00
 ---
 
 # AE_544_LecNote06\__Variational_Methods__Ch06
@@ -169,12 +169,12 @@ $$
 \calS = \int_{t_0}^{t_f} \calL \, \dt
 \tag{6.16}
 $$
-is an extremum for dynamical motions with zero generalized forces on the right side of Eq. (6.15), and for this class of systems we have the simplest version of Hamilton's variational principle
+is an extremum for dynamical motions with zero generalized forces on the right side of Eq. (6.15), and for this class of systems we have **the simplest version of Hamilton's variational principle**
 $$
 \delta \calS = 0.
 \tag{6.17}
 $$
-
+^hamiltons-principle-simplest-form
 
 
 
@@ -204,9 +204,9 @@ As a consequence of the fact that the general virtual displacements contain path
 
 ### Hamilton's Principle Derived from D'Alembert's Principle
 
-Let $\bmF_i$ include all virtually working forces, recall that the d'Alembert's principle is obtained by combining
+Let $\bmF_i$ include all virtually working forces, recall that the d'Alembert's principle is obtained by combining the virtual work of each particle in the system
 ![[AE_544_LecNote05__Lagrangian_Dynamics__Ch05#^5-10-virtual-work-definition]] 
-and
+and Newton's second law for each particle
 ![[AE_544_LecNote05__Lagrangian_Dynamics__Ch05#^5-19-dalemberts-principle-most-general-form]]
 such that we have
 $$
@@ -218,7 +218,7 @@ $$
 >![[AE_544_LecNote05__Lagrangian_Dynamics__Ch05#^summary-dalemberts-principle-different-forms]]
 
 
-Although d'Alembert's principle was derived for the most general case that $\delta\bmR_i$ are instantaneous virtual displacements, this condition also holds for the special case that $\delta\bmR_i(t)$ are path variations with $\tilde{\bmR}_i(t) = \bmR_i(t) + \delta\bmR_i(t)$ locating an infinite family of neighboring varied paths. 
+Although d'Alembert's principle was derived for the most general case that $\delta\bmR_i$ are instantaneous virtual displacements, this condition also holds for the *special case that $\delta\bmR_i(t)$ are path variations* with $\tilde{\bmR}_i(t) = \bmR_i(t) + \delta\bmR_i(t)$ locating an infinite family of neighboring varied paths. 
 
 
 
@@ -228,32 +228,38 @@ $$
 T = \frac{1}{2} \sum_{i=1}^N m_i \dot{\bmR}_i \cdot \dot{\bmR}_i
 \tag{6.19}
 $$
-and the total kinetic energy function evaluated at the same moment but on the differentially displaced varied motion $\tilde{\bmR}_i(t)$ is
+and the total kinetic energy function evaluated at the same moment but on the varied motion $\tilde{\bmR}_i(t)$ is
 $$
 \tilde{T} = \frac{1}{2} \sum_{i=1}^N m_i \dot{\tilde{\bmR}}_i \cdot \dot{\tilde{\bmR}}_i
 \tag{6.20}
 $$
 
-Thus, we have the path variation of kinetic energy as
+Thus, we have the **path variation of kinetic energy $\delta T$** as
 $$
 \begin{aligned}
 \delta T &= \tilde{T} - T \\
-&= \frac{1}{2} \sum_{i=1}^N m_i \dot{\bmR}_i \cdot \dot{\bmR}_i - \frac{1}{2} \sum_{i=1}^N m_i \dot{\tilde{\bmR}}_i \cdot \dot{\tilde{\bmR}}_i \\
-&= \frac{1}{2} \sum_{i=1}^N m_i \dot{\bmR}_i \cdot \dot{\bmR}_i - \frac{1}{2} \sum_{i=1}^N m_i (\dot{\bmR}_i + \delta\dot{\bmR}_i) \cdot (\dot{\bmR}_i + \delta\dot{\bmR}_i) \\
-&\approx\sum_{i=1}^N m_i \dot{\bmR}_i \cdot \delta\dot{\bmR}_i
+&= \frac{1}{2} \sum_{i=1}^N m_i \dot{\tilde{\bmR}}_i \cdot \dot{\tilde{\bmR}}_i   -   \frac{1}{2} \sum_{i=1}^N m_i \dot{\bmR}_i \cdot \dot{\bmR}_i \\
+&= \frac{1}{2} \sum_{i=1}^N m_i (\dot{\bmR}_i + \delta\dot{\bmR}_i) \cdot (\dot{\bmR}_i + \delta\dot{\bmR}_i)   -   \frac{1}{2} \sum_{i=1}^N m_i \dot{\bmR}_i \cdot \dot{\bmR}_i \\
+&\approx\sum_{i=1}^N m_i \dot{\bmR}_i \cdot \delta\dot{\bmR}_i   \qquad\qquad \text{(Truncated at the 1st order)}
 \end{aligned}
 \tag{6.21}
 $$
 
-We can get the following relationship by applying the chain rule of the time derivative to a special summation :
+We can get the following relationship by applying the chain rule of the time derivative to a spatial summation :
 $$
-\ddtN\left( \sum_{i=1}^{N} m_i \dot{\bm{R}}_i \cdot \delta \bm{R}_i \right) = \sum_{i=1}^{N} m_i \ddot{\bm{R}}_i \cdot \delta \bm{R}_i + \sum_{i=1}^{N} m_i \dot{\bm{R}}_i \cdot \delta \dot{\bm{R}}_i
+\begin{aligned}
+\ddtN\left( \sum_{i=1}^{N} m_i \dot{\bm{R}}_i \cdot \delta \bm{R}_i \right) 
+&= 
+\sum_{i=1}^{N} m_i \ddot{\bm{R}}_i \cdot \delta \bm{R}_i + \sum_{i=1}^{N} m_i \dot{\bm{R}}_i \cdot \delta \dot{\bm{R}}_i \\
+&=
+\sum_{i=1}^{N} \bmF_i \cdot \delta \bm{R}_i + \sum_{i=1}^{N} m_i \dot{\bm{R}}_i \cdot \delta \dot{\bm{R}}_i
+\end{aligned}
 \tag{6.22}
 $$
 Notice that we have switch the order of derivatives and variations to get the above expression.
-The <u>first term on RHS is the virtual work</u> $\delta W$, 
-and the <u>second term on RHS is the just defined variation of kinetic energy</u> $\delta T$.
 
+The <u>first term on RHS is the virtual work</u> $\delta W$ (see Eq. 5.10), 
+and the <u>second term on RHS is the just defined variation of kinetic energy</u> $\delta T$ (see Eq. 6.21).
 Therefore, what we get is actually
 $$
 \ddtN\left( \sum_{i=1}^{N} m_i \dot{\bm{R}}_i \cdot \delta \bm{R}_i \right) = \delta W + \delta T
@@ -268,10 +274,18 @@ $$
 $$
 ^hamiltons-principle-most-general
 
-It holds for the case of 1) arbitrary forces, 2) general constraints, and 3) general initial and final boundary conditions.
+It's the most general form because it holds for the case of 
+1) arbitrary forces, 
+2) general constraints, 
+3) general initial and final boundary conditions.
 
-
-If the virtually working forces are conservative, then $\delta W = - \delta V$, and if attention is <u>**restricted to fixed endpoint problems, $\delta\bmR_i(t_0) = \delta\bmR_i(t_f) = 0$**</u>, then the the above general form specializes to
+**Reduce to the simplest form of Hamilton's principle:** \
+![[#^hamiltons-principle-simplest-form]]
+If the <u>virtually working forces are conservative</u>, meaning
+$$\delta W = - \delta V$$
+and if attention is restricted to <u>fixed endpoint problems</u>, meaning
+$$\delta\bmR_i(t_0) = \delta\bmR_i(t_f) = 0$$ 
+then the the above general form specializes to
 $$
 \int_{t_0}^{t_f} (\delta T - \delta V )\, \dt 
 = \int_{t_0}^{t_f} \delta(T-V) \, \dt 
@@ -302,22 +316,33 @@ $\ddt \left(\pp{\calL}{\dot{x}}\right) - \pp{\calL}{{x}} = m \ddot{x} = 0     \q
 So, $\dot{x} = \dot{x}_0 = \text{constant}$, $y=y_0+\dot{y}_0 t - \frac{1}{2} g t^2$.
 
 **Hamilton's principle directly:** 
-Let's look at just vertical motion for simplicity.
+Let's look at just the vertical motion for simplicity:
 
 $$T=\frac{1}{2} m \dot{y}^2   \qquad \text{and} \qquad    V=mgy$$
 
-$$\delta T = m \dot{y} \delta \dot{y}\qquad \text{and} \qquad    \delta V = -\delta W=mg\delta y$$
+$$\delta T = m \dot{y} \delta \dot{y}\qquad \text{and} \qquad    \delta V = mg\delta y = -\delta W$$
 
 $$\pp{T}{\dot{y}} = m \dot{y}$$
 
 Recall the general format of Hamilton's principle
 ![[#^hamiltons-principle-most-general]]
 
-Since $\delta y(0) = 0$ and $\delta y(f) = 0$,
-$$\int_{t_0}^{t_f} (mg\delta y + m \dot{y} \delta \dot{y}) \, \dt = 0$$
+Since $\delta y(0) = 0$ and $\delta y(t_f) = 0$,
+$$\int_{t_0}^{t_f} (-mg\delta y + m \dot{y} \delta \dot{y}) \, \dt = 0$$
 Simplified to: 
-$$\int_{t_0}^{t_f} (g\delta y + \dot{y} \delta \dot{y}) \, \dt = 0$$
+$$\int_{t_0}^{t_f} (-g\delta y + \dot{y} \delta \dot{y}) \, \dt = 0$$
 
+> [!Info]- Equations of motion approach
+> Integral by parts to eliminate $\delta \dot{y}$:
+> $$
+> \int_{t_0}^{t_f} \dot{y} \delta \dot{y} \, \dt = \left. (\dot{y} \delta y) \right|_{t_0}^{t_f} - \int_{t_0}^{t_f} \ddot{y} \delta y \, \dt
+> $$
+> So after substituting back, we have
+> $$
+> \int_{t_0}^{t_f} (-g\delta y - \ddot{y} \delta y) \, \dt + \left. (\dot{y} \delta y) \right|_{t_0}^{t_f}  = 0
+> $$
+
+**Direct approach:** \
 Since $\dt$ is arbitrary, there must be 
 $$g\delta y + \dot{y} \delta \dot{y} = 0$$
 
@@ -328,7 +353,7 @@ $$\dot{y}(t) = a_1 + 2a_2 t + 3a_3 t^2 + \cdots$$
 Then the variations are: \
 $$\delta y(t) = \delta a_0 + \delta a_1 t + \delta a_2 t^2 + \cdots$$
 $$\delta \dot{y}(t) = \delta a_1 + 2 \delta a_2 t + 3\delta a_3 t^2 + \cdots$$
-(Notice this is variations of functions, so no $\delta t$ appears.)
+(Notice this is variations of functions, so no $\delta t$ appears on the RHS.)
 
 Plug in and collect coefficients in terms of $\delta a_i$, we have
 $$
@@ -353,15 +378,9 @@ $$y(t) = a_0 + a_1 t - \frac{1}{2}g t^2$$
 
 
 
-### Example 6.6:  a classical linear oscillator system 
+> [!check] Summary
+> Hamilton’s principle of varying acting provides a direct path to solve for motion of the system without first deriving Lagrange’s differential equations.
 
-
-
-### Section Summary 
-
-Hamilton’s principle of varying acting provides a direct path to solve for motion of the system without first deriving Lagrange’s differential equations.
-
-Notice that including the boundary terms on the right side of Eq. (6.62) is vital, because otherwise the variations of dai in, for exam- 6.44 ple, Eqs. (6.65) and (6.70) would have to be constrained to force the boundary term in Eq. (6.62) to vanish. Solving this difficult problem is not necessary; we can simply include the boundary term when assuming power series (or any other functional representation with undetermined coefficients).
 
 
 
@@ -371,9 +390,7 @@ We will mainly show two things:
 1. Hamilton's principle can provide natural boundary conditions "automatically" for distributed parameter systems. 
 2. Hamilton's principle can be used to derive very general versions of Lagrange's equations that are the partial differential equations governing families of distributed parameter systems. 
 
-Hamilton's law of varying action in Eq. (6.25) provides an approach to
-directly solve for the system motion, without first deriving a differential equa-
-tion.
+Hamilton's law of varying action in Eq. (6.25) provides an approach to directly solve for the system motion, without first deriving a differential equation.
 
 <u>Goal:</u> Before we can apply Hamilton's principle to a distributed parameter system, we need to first extend it to a continuous body instead of relying on a system of particles. 
 
@@ -404,7 +421,7 @@ Substitute this back to the Hamilton's principle in Eq. (6.25)
 ![[#^hamiltons-principle-most-general]]
 and we have
 $$
-\int_{t_0}^{t_f} (\delta W + \delta T) \, \dt = \left.\left( \sum_{j=1}^n \pp{T}{q_j} \delta q_j \right)\right|_{t_0}^{t_f} 
+\int_{t_0}^{t_f} (\delta W + \delta T) \, \dt = \left.\left( \sum_{j=1}^n \pp{T}{\dq_j} \delta q_j \right)\right|_{t_0}^{t_f} 
 \tag{6.44}
 $$
 Finally, the boundary terms (on RHS) in Eq. (6.44) turn out to be a more general form, whereas Eq. (6.25) applies only to the system of particles model.
@@ -414,32 +431,32 @@ Finally, the boundary terms (on RHS) in Eq. (6.44) turn out to be a more general
 For dynamical systems with finite degrees of freedom, using Hamilton's law of varying action does not provide any further information. Hamilton's law has clear advantages when developing the equations of motion of an infinite degree of freedom dynamical system because it not only provides the equations of motion, but also the flexible domain boundary conditions.
 
 
-## Example 6.4: variable cross-sectional axial rod
+### Example 6.4: variable cross-sectional axial rod
 
 ![[fig-6-4_elastic_rod.png|300]] \
 This rod is considered elastic, and neglecting all external forces and internal energy dissipation, this system is conservative.
-As the elastic simplest constitutive model, for uniaxial stress, the strain energy per unit volume is $\frac{1}{2} E \varepsilon^2$, where $\varepsilon \equiv \pp{u}{x}$ is the strain and $E$ is Young's modulus.
-Solve for the field function $u(x,t)$ which describe the motion at time $t$ and position $x$.
+As the elastic simplest constitutive model, for uniaxial stress, the strain energy per unit volume is $\frac{1}{2} E \varepsilon^2$, where $\varepsilon \equiv \pp{u}{x}$ is the strain and $E$ is Young's modulus (refer to solid mechanics).
+*Question:* Solve for the field function $u(x,t)$ which describe the motion at time $t$ and position $x$.
 
-For a differential mass $\dm = \rho(x) A(x) \dx$, the differential kinetic energy is 
+For a differential volume $A(x) \cdot \dx$ (the gray bar in the figure), its differential mass $\dm = \rho(x) A(x) \dx$, the differential kinetic energy is 
 $$
-\dt = \frac{1}{2} \rho(x) A(x) \left( \pp{u}{t} \right)^2 \dx
+{\rm d} T = \frac{1}{2} \rho(x) A(x) \left( \pp{u}{t} \right)^2 \dx
 \tag{6.47}
 $$
-The differential potential energy due to strain is 
+and it's differential potential energy due to strain is 
 $$
-dV = \frac{1}{2} E \, A(x) \varepsilon^2 \dx \equiv \frac{1}{2} E \, A(x) \left( \frac{\partial u(x, t)}{\partial x} \right)^2 \dx
+dV = \frac{1}{2} E \, A(x) \varepsilon^2 \dx \equiv \frac{1}{2} E \, A(x) \left( \pp{u(x,t)}{x} \right)^2 \dx
 \tag{6.49}
 $$
 
 For the entire rod, the total kinetic energy is
 $$
-T = \frac{1}{2} \int_0^L \rho(x) A(x) \left( \frac{\partial u(x, t)}{\partial t} \right)^2 \dx
+T = \frac{1}{2} \int_0^L \rho(x) A(x) \left( \pp{u(x,t)}{t} \right)^2 \dx
 \tag{6.48}
 $$
 and the total potential energy is
 $$
-V = \frac{1}{2} \int_0^L E \, A(x) \left( \frac{\partial u(x, t)}{\partial x} \right)^2 \dx
+V = \frac{1}{2} \int_0^L E \, A(x) \left( \pp{u(x,t)}{x} \right)^2 \dx
 \tag{6.50}
 $$
 
@@ -447,50 +464,60 @@ Substitute into Hamilton's principle and we have:
 $$
 \begin{aligned}
 \delta \int_{t_0}^{t_f} (T - V) \, \dt &= \int_{t_0}^{t_f} (\delta T - \delta V) \, \dt \\
-&= \int_{t_0}^{t_f} \left[ \int_0^L \rho A \left( \frac{\partial u}{\partial t} \right) \delta \left( \frac{\partial u}{\partial t} \right) \dx - \int_0^L EA(x) \left( \frac{\partial u}{\partial x} \right) \delta \left( \frac{\partial u}{\partial x} \right) \dx \right] \dt \\
-& =  \int_0^L \left[ \textcolor{red}{\int_{t_0}^{t_f} \rho A \left( \frac{\partial u}{\partial t} \right) \delta \left( \frac{\partial u}{\partial t} \right) \dt } \right] \dx    -    \int_{t_0}^{t_f} \left[ \textcolor{blue}{ \int_0^L EA(x) \left( \frac{\partial u}{\partial x} \right) \delta \left( \frac{\partial u}{\partial x} \right) \dx } \right] \dt
+&=  \int_{t_0}^{t_f} \left[ \int_0^L \rho A \left( \pp{u}{t} \right) \delta \left( \pp{u}{t} \right) \dx - \int_0^L EA(x) \left( \pp{u}{x} \right) \delta \left( \pp{u}{x} \right) \dx \right] \dt \\
+& =  \int_0^L \left[ \textcolor{red}{\int_{t_0}^{t_f} \rho A \left( \pp{u}{t} \right) \delta \left( \pp{u}{t} \right) \dt } \right] \dx    -    \int_{t_0}^{t_f} \left[ \textcolor{blue}{ \int_0^L EA(x) \left( \pp{u}{x} \right) \delta \left( \pp{u}{x} \right) \dx } \right] \dt
 \end{aligned}
 \tag{6.55}
 $$
 
-Next, we are going to use integration by parts to unify terms involving $\frac{\partial u(x, t)}{\partial t}$ and $\frac{\partial u(x, t)}{\partial x}$ to terms of $\delta u(x,t)$ only, so that we can then argue $\delta u$ to be arbitrary and get equations of motion.
+Next, we are going to use integration by parts to unify terms involving $\pp{u(x,t)}{t}$ and $\pp{u(x,t)}{x}$ to terms of $\delta u(x,t)$ only, so that we can then argue $\delta u$ to be arbitrary and get equations of motion.
 
 With this observation, the two integrations by parts in Eq. (6.55) are
 $$
-\textcolor{red}{ \int_{t_0}^{t_f} \rho(x) A(x) \left( \frac{\partial u}{\partial t} \right) \delta \left( \frac{\partial u}{\partial t} \right) \dt  }
-= \textcolor{green}{ \left[ \rho(x) A(x) \left( \frac{\partial u}{\partial t} \right) \delta u \right]_{t_0}^{t_f} }  - \int_{t_0}^{t_f} \rho(x) A(x) \left( \frac{\partial^2 u}{\partial t^2} \right) \delta u \dt
+\textcolor{red}{ \int_{t_0}^{t_f} \rho(x) A(x) \left( \pp{u}{t} \right) \delta \left( \pp{u}{t} \right) \dt  }
+= \textcolor{green}{ \left[ \rho(x) A(x) \left( \pp{u}{t} \right) \delta u \right]_{t_0}^{t_f} }  - \int_{t_0}^{t_f} \rho(x) A(x) \left( \frac{\partial^2 u}{\partial t^2} \right) \delta u \dt
 $$
+
+%% 
+$$
+\textcolor{red}{ \int_{t_0}^{t_f} \rho(x) A(x) \left( \pp{u}{t} \right) \delta \left( \pp{u}{t} \right) \dt } 
+= \textcolor{black}{ \int_{t_0}^{t_f} \rho(x) A(x) \left( \pp{u}{t} \right) \pp{}{t} \left( \delta u \right) \dt }
+= \textcolor{black}{ \int_{t_0}^{t_f} \rho(x) A(x) \left[ \pp{}{t} \left( \pp{u}{t} \cdot \delta u \right)   -  \left( \frac{\partial^2 u}{\partial t^2} \right) \delta u \right] \dt } 
+= \textcolor{green}{ \left[ \rho(x) A(x) \left( \pp{u}{t} \right) \delta u \right]_{t_0}^{t_f} } - \int_{t_0}^{t_f} \rho(x) A(x) \left( \frac{\partial^2 u}{\partial t^2} \right) \delta u \dt
+$$
+%%
+
 and
 $$
-\textcolor{blue}{ \int_0^L E\,A(x) \left( \frac{\partial u}{\partial x} \right) \delta \left( \frac{\partial u}{\partial x} \right) \dx }
-= \left[ E\,A(x) \left( \frac{\partial u}{\partial x} \delta u\right) \right]_{0}^{L} - \int_0^L \frac{\partial}{\partial x} \left( E\,A(x) \left( \frac{\partial u}{\partial x} \right) \right) \delta u \dx
+\textcolor{blue}{ \int_0^L E\,A(x) \left( \pp{u}{x} \right) \delta \left( \pp{u}{x} \right) \dx }
+= \left[ E\,A(x) \left( \pp{u}{x} \right) \delta u \right]_{0}^{L} - \int_0^L E \pp{}{x} \left[ A(x) \left( \pp{u}{x} \right) \right] \delta u \dx
 $$
 where we have used $\delta\pp{u}{t}=\pp{}{t} (\delta u)$ and $\delta\pp{u}{x}=\pp{}{x}(\delta u)$.
 
 The conditions $\delta u(x,t_0) = \delta u(x, t_f) = 0$ indicates that the terminal term of the first integrations by parts disappear, i.e.,
 $$
-\textcolor{green}{ \left[ \rho(x) A(x) \left( \frac{\partial u}{\partial t} \right) \delta u \right]_{t_0}^{t_f} } = 0
+\textcolor{green}{ \left[ \rho(x) A(x) \left( \pp{u}{t} \right) \delta u \right]_{t_0}^{t_f} } = 0
 $$
 These conditions reflect that we are solving a initial value problem where the initial condition should be given.
 Regarding why we can also set variation at end point to be zero is because we know that physically there will be only one true solution at the final moment and mathematically we can impose this condition to derive the equations of motion.
 
 At last, substituting everything back to Eq. (6.55) gives:
 $$
-\int_{t_0}^{t_f} \left\{ \int_0^L \left[ \frac{\partial}{\partial x} \left( E\, A(x) \frac{\partial u}{\partial x} \right) - \rho(x) A(x) \frac{\partial^2 u}{\partial t^2} \right] \delta u \dx - \left[ EA(x) \frac{\partial u}{\partial x} \delta u(x, t) \right]_0^L \right\} \dt = 0
+\int_{t_0}^{t_f} \left\{ \int_0^L \left[ \pp{}{x} \left( E\, A(x) \pp{u}{x} \right) - \rho(x) A(x) \frac{\partial^2 u}{\partial t^2} \right] \delta u \dx - \left[ EA(x) \pp{u}{x} \delta u(x, t) \right]_0^L \right\} \dt = 0
 \tag{6.58}
 $$
 and we can argue that since $\delta u(x,t)$ is arbitrary, the governing equation of motion is
 $$
-\rho(x) A(x) \frac{\partial^2 u}{\partial t^2} - \frac{\partial}{\partial x} \left( EA(x) \frac{\partial u}{\partial x} \right) = 0
+\rho(x) A(x) \frac{\partial^2 u}{\partial t^2} - \pp{}{x} \left( EA(x) \pp{u}{x} \right) = 0
 \tag{6.59}
 $$
-together with the boundary conditions
+together with the boundary transversality conditions
 $$
-\left. E\, A(0) \frac{\partial u(x,t)}{\partial x} \right|_{x=0} \delta u(0, t) = 0
+\left. E\, A(0) \pp{u(x,t)}{x} \right|_{x=0} \delta u(0, t) = 0
 \tag{6.60}
 $$
 $$
-\left. E\, A(L) \frac{\partial u(x,t)}{\partial x} \right|_{x=L} \delta u(L, t) = 0
+\left. E\, A(L) \pp{u(x,t)}{x} \right|_{x=L} \delta u(L, t) = 0
 \tag{6.61}
 $$
 
@@ -503,12 +530,29 @@ $$
 
 ## Hybrid Coordinate Systems
 
-We consider a family of hybrid coordinate systems to be regarded as <u>consisting of a collection of rigid and elastic bodies</u>.
+Here, the hybrid coordinate systems is regarded as <u>a collection of rigid and elastic bodies</u>, which requires discrete coordinates $q_j$ and continuous coordinates $\bmw(\bmx, t)$.
 
-It would be advantageous if analogous results existed for distributed parameter systems, i.e., simple differentiation of energy functions leads to the equations of motion, rather than more tedious integration by parts.
+**One observation** is that applying Hamilton's Principle for discrete coordinate system will lead to the Lagrange's equation
+![[AE_544_LecNote05__Lagrangian_Dynamics__Ch05#^Lagranges-equation-conservative-forces]]
+which only requires first order derivatives of kinetic and potential energy functions.
 
-Omitted here and are referred to the textbook and references therein.
-More intensive knowledge is required if you want to solve a flexible dynamics problem. 
+So **the motivation** is to find an analogy for a continuous system with distributed coordinates. 
+
+Details are omitted here and are referred to the textbook and references therein.
+
+The **result** is that for a system who Lagrangian function can be expressed as
+$$
+\calL = \calL(t, q_i, \dq_i, w_j, \dot{w}_j, w'_j, w''_j, \dot{w}'_j )
+$$
+where $q_j$ are the discrete coordinates, $w_j$ are the distributed parameter coordinate functions of time $t$ and spatial position $P$, overhead dots denote time differentiation, and primes denote spatial derivatives. 
+
+The final equations of motions are
+![[screenshot-sec-6.6-Lagrange_continous_system.png|600]]
+
+*Transversality conditions* also exist are omitted here.
+
+One thing that is worth to be mentioned is that, one critical step in the derivation is still the integral by parts, as shown by the screenshot below: \
+![[screenshot-sec-6.6-hybrid-coordinate-Lagrangian.png|600]]
 
 
 ## Summary
