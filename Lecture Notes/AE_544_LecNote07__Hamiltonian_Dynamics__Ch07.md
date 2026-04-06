@@ -1,6 +1,6 @@
 ---
 date created: 2025-03-03T09:54:12-05:00
-date modified: 2026-04-06T07:55:54-04:00
+date modified: 2026-04-06T09:35:04-04:00
 ---
 
 # AE_544_LecNote07\__Hamiltonian_Dynamics__Ch07
@@ -8,10 +8,10 @@ date modified: 2026-04-06T07:55:54-04:00
 
 We will introduce the canonical form of the equations of motion, and associated canonical
 coordinate transformations. 
-
-%% Leaning outcomes include:
-1. Hamiltonian is generally different from but closely related to the total energy.
-2.  %%
+Some leaning outcomes include:
+1. Hamiltonian function $\calH$ is generally different from but closely related to the total energy.
+2. Hamilton's canonical equations with introduction of generalized conjugate momenta.
+3. Canonical transformations of coordinates to simplify a Hamiltonian system.
 
 ## Introduce Hamiltonian Function $\calH$
 
@@ -125,26 +125,41 @@ Kinematics: \
 $\bm{R} = A \sin (\Omega t) \, \bm{\hat{n}}_1 + r\, \bm{\hat{e}}_r$, \
 $\dot{\bm{R}} = A \Omega \cos (\Omega t)\, \bm{\hat{n}}_1 + r \dot{\theta} \, \bm{\hat{e}}_\theta$
 
-$T = \tfrac{1}{2} m \dot{\bm{R}} \cdot \dot{\bm{R}} = \tfrac{1}{2} m \left[ (A \Omega \cos \Omega t)^2 + r^2 \dot{\theta}^2 + 2 {r} \dot{\theta} (A \Omega \cos \Omega t) \cos \theta \right]$
+So the kinetic energy is
+$$
+T = \tfrac{1}{2} m \dot{\bm{R}} \cdot \dot{\bm{R}} = \tfrac{1}{2} m \left[ (A \Omega \cos \Omega t)^2 + r^2 \dot{\theta}^2 + 2 {r} \dot{\theta} (A \Omega \cos \Omega t) \cos \theta \right]
+$$
 
-Therefore, we have the three parts of $T$ as: \
-$T_0 = \tfrac{1}{2} m A^2 \Omega^2 \cos^2 (\Omega t)$ \
-$T_1 = m A \Omega r \cos \theta \cos (\Omega t) \dot{\theta}$ \
-$T_2 = \tfrac{1}{2} m r^2 \dot{\theta}^2$
+Therefore, we have the three parts of $T$ as: 
+$$
+\begin{aligned}
+T_0 &= \tfrac{1}{2} m A^2 \Omega^2 \cos^2 (\Omega t) \\
+T_1 &= m A \Omega r \cos \theta \cos (\Omega t) \dot{\theta} \\
+T_2 &= \tfrac{1}{2} m r^2 \dot{\theta}^2
+\end{aligned}
+$$
 
-This is therefore not a natural system because $T_0$ and $T_1$ are non-zero.
+This is therefore not a natural system because $T_0$ and $T_1$ are generally non-zero.
 
 To verify it, we can calculate $\calH$ explicitly by its definition as
-$$
-V = mgr (1-\cos\theta)
-$$
 $$
 \calH = \pp{\calL}{\dot{\theta}} \dot{\theta} - \calL 
 = \frTwo m A^2 \Omega^2 \cos^2 \Omega t + mgr(1 - \cos\theta) + \frTwo m r^2 \dot{\theta}^2
 $$
 
+whereas the potential energy $V$ is 
+$$
+V = mgr (1-\cos\theta)
+$$
+and thus the total energy E is obtained as
+$$
+E = T + V = \tfrac{1}{2} m \dot{\bm{R}} \cdot \dot{\bm{R}} = \tfrac{1}{2} m \left[ (A \Omega \cos \Omega t)^2 + r^2 \dot{\theta}^2 + 2 {r} \dot{\theta} (A \Omega \cos \Omega t) \cos \theta \right] + mgr (1-\cos\theta)
+$$
 
-
+Comparing with $\calH$, the extra term in $E$ is
+$$
+E - \calH = m {r} \dot{\theta} (A \Omega \cos \Omega t) \cos \theta
+$$
 
 
 
@@ -184,7 +199,10 @@ Required to read Section 7.7 for more detailed and insightful discussions.
 
 
 
-## Alternative Momentum Description
+
+
+
+## Hamilton’s Canonical Equations (Canonical Form)
 
 If we defined the **<u>generalized momentum</u>** $p_i$ as
 $$
@@ -194,7 +212,9 @@ the Hamiltonian function $\calH$ can be rewritten as
 $$
 \mathcal{H} = \sum_{i=1}^{n} p_i \dq_i - \mathcal{L} = \bmp^T \dot{\bmq} - \mathcal{L}
 $$
-Note that here $\bmp$ and $\bmq$ are treated as coordinates of vectors (3x1 matrices) rather than abstract vectors.
+
+
+> [!warning] Note that here $\bmp$ and $\bmq$ are treated as coordinates of vectors ($n\times 1$ matrices) rather than abstract vectors.
 
 The Lagrangian $\calL$ has a quadratic dependence on $\dot{\bmq}$, which means we have the relationship
 $$
@@ -204,11 +224,6 @@ $$
 \dot{\bmq} = [B(t,\bmq)]^{-1} \cdot \bmp
 $$
 In other words, $\dot{\bmq}$ and $\bmp$ are alternative velocity (or momentum) descriptions of the system motion.
-
-
-
-
-## Hamilton’s Canonical Equations (Canonical Form)
 
 The Lagrangian function $\calL(\bmq, \dot{\bmq}, t)$ is always expressed as a function of generalized coordinate $q_i$ and generalized velocity $\dq_i$, but never the generalized momentum $p_i$.
 
@@ -267,7 +282,7 @@ $$
 Finally, the **<u>Hamilton’s canonical equations</u>** are given as
 $$
 \begin{aligned}
-\dq_j &= \ppqp{\calH}{p_j} \\
+\dq_j &= \phantom{-} \ppqp{\calH}{p_j} \\
 \dot{p}_j &= - \ppqp{\calH}{q_j} + Q_{{nc}_j}
 \end{aligned}
 \tag{7.65}
