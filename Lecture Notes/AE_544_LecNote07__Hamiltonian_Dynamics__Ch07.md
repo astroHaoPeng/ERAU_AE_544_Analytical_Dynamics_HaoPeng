@@ -1,7 +1,8 @@
 ---
 date created: 2025-03-03T09:54:12-05:00
-date modified: 2025-04-27T11:34:04-04:00
+date modified: 2026-04-06T07:55:54-04:00
 ---
+
 # AE_544_LecNote07\__Hamiltonian_Dynamics__Ch07
 ![[README#Disclaimers]]
 
@@ -12,112 +13,106 @@ coordinate transformations.
 1. Hamiltonian is generally different from but closely related to the total energy.
 2.  %%
 
-## Hamiltonian Function
+## Introduce Hamiltonian Function $\calH$
 
-The Hamiltonian function $\calH$ is defined as
+The Hamiltonian function $\calH$ is closely related to the Lagrangian function $\calL$ and is defined as
 $$
-\mathcal{H} \equiv \sum_{i=1}^{n} \frac{\partial \mathcal{L}}{\partial \dot{q}_i} \dot{q}_i - \mathcal{L} = \mathcal{H}(\bmq, \dot{\bmq}, t)
+\mathcal{H} \equiv \sum_{i=1}^{n} \frac{\partial \mathcal{L}}{\partial \dq_i} \dq_i - \mathcal{L} = \mathcal{H}(\bmq, \dot{\bmq}, t)
+\tag{7.1}
 $$
 
-Hamiltonian $\calH$ is closely related to the Lagrangian function $\calL$.
-
+For a lot of time, the Hamiltonian function $\calH$ is taught as a constant of the motion, but it is actually only a conclusion under certain conditions. 
+To find those conditions, we study the total time derivatives of $\calH$,
 $$
-\frac{d\calH}{dt} = \sum_{i=1}^{n} \left[ \frac{d}{dt} \left( \pp{\calL}{\dot{q}_i} \right) q_i + \textcolor{red}{ \pp{\calL}{\dot{q}_i} \ddot{q}_i } \right]  - \left[ \sum_{i=1}^{n} \pp{\calL}{q_i} \dot{q}_i + \sum_{i=1}^{n} \textcolor{red}{ \pp{\calL}{\dot{q}_i} \ddot{q}_i} + \pp{\calL}{t} \right] 
+\frac{d\calH}{dt} = \sum_{i=1}^{n} \left[ \frac{d}{dt} \left( \pp{\calL}{\dq_i} \right) \dq_i + \textcolor{red}{ \pp{\calL}{\dq_i} \ddot{q}_i } \right]  - \left[ \sum_{i=1}^{n} \pp{\calL}{q_i} \dq_i + \sum_{i=1}^{n} \textcolor{red}{ \pp{\calL}{\dq_i} \ddot{q}_i} + \pp{\calL}{t} \right] 
+\tag{7.6}
 $$
-Observing the cancellation of the two terms, and re-collecting, we have
+Observing the cancellation of the two terms (in red), and re-collecting, we have
 $$
-\frac{d\mathcal{H}}{dt} = {\sum_{i=1}^{n} \left\{ \frac{d}{dt} \left( \frac{\partial \mathcal{L}}{\partial \dot{q}_i} \right) - \frac{\partial \mathcal{L}}{\partial q_i} \right\}  \dot{q}_i } - \frac{\partial \mathcal{L}}{\partial t}
+\frac{d\mathcal{H}}{dt} = {\sum_{i=1}^{n} \left\{ \frac{d}{dt} \left( \frac{\partial \mathcal{L}}{\partial \dq_i} \right) - \frac{\partial \mathcal{L}}{\partial q_i} \right\}  \dq_i } - \frac{\partial \mathcal{L}}{\partial t}
 \tag{7.7}
 $$
+And the following two sufficient conditions will lead to the vanish of the remaining terms, and thus lead to that $\calH$ is a constant:
 1. The first term will vanish as Lagrange's equations for a <u>conservative or holonomic systems</u>. 
 2. The second term vanishes when the Lagrangian function $\calL$ does not explicitly depend on time, i.e., is <u>scleronomic</u>.
-
-If we defined the **<u>generalized momentum</u>** $p_i$ as
-$$
-p_i \equiv \frac{\partial \mathcal{L}}{\partial \dot{q}_i}
-$$
-the Hamiltonian function $\calH$ can be rewritten as
-$$
-\mathcal{H} = \sum_{i=1}^{n} p_i \dot{q}_i - \mathcal{L} = \bmp^T \dot{\bmq} - \mathcal{L}
-$$
-Note that here $\bmp$ and $\bmq$ are treated as ~~coordinates of vectors~~ 3x1 matrics rather than abstract vectors.
-
-The Lagrangian $\calL$ has a quadratic dependence on $\dot{\bmq}$, which means we have the relationship
-$$
-\bmp = \pp{\calL}{\dot{\bmq}} = [B(t,\bmq)] \cdot \dot{\bmq}
-$$
-$$
-\dot{\bmq} = [B(t,\bmq)]^{-1} \cdot \bmp
-$$
-In other words, $\dot{\bmq}$ and $\bmp$ are alternative velocity (or momentum) descriptions of the system motion.
-
 
 
 ## $\calH$ is Total Energy in Natural Systems
 
-The Hamiltonian function is frequently found to equal the total energy, but this is not universally true from the definition in Eq. (7.1)
+The Hamiltonian function is frequently found to equal the total energy, but this is not universally true from the definition in Eq. (7.1).
 
 Plug in $\calL(\bmq, \dot{\bmq}, t) = T(\bmq, \dot{\bmq}, t) - V(\bmq, t)$ into Eq. (7.1), we have
 $$
-\mathcal{H}(\bmq, \dot{\bmq}, t) = \sum_{i=1}^{n} \left( \pp{T(\bmq, \dot{\bmq}, t)}{\dot{q}_i} \right) \dot{q}_i - T(\bmq, \dot{\bmq}, t) + V(\bmq, t)
+\mathcal{H}(\bmq, \dot{\bmq}, t) = \sum_{i=1}^{n} \left( \pp{T(\bmq, \dot{\bmq}, t)}{\dq_i} \right) \dq_i - T(\bmq, \dot{\bmq}, t) + V(\bmq, t)
 \tag{7.8}
 $$
 
-%% 
+So, a sufficient condition for the Hamiltonian $\calH$ to equal the total energy $T+V$ is for the following condition to hold:
 $$
-\sum_{i=1}^{n} \left( \frac{\partial T}{\partial \dot{q}_i} \right) \dot{q}_i \equiv 2T
-$$ 
-%%
+\sum_{i=1}^{n} \left( \pp{T(\bmq, \dot{\bmq}, t)}{\dq_i} \right) \dq_i = 2 T
+\tag{7.9}
+$$
 
-The most general structure of kinetic energy is
+In the following, we study what this condition can be simplified to.
+
+The most general structure of kinetic energy function $T(\bmq, \dot{\bmq}, t)$ is
 $$
 T = T_0 + T_1 + T_2
 $$
 where
 $$
 \begin{aligned}
-& T_0 = T_0(t, q)  && \text{\textbf{no} dependence on } \dot{q} \\
-& T_1 = T_1(t, q, \dot{q}) = \sum_{i=1}^{n} b_i(t, q) \dot{q}_i  && \text{\textbf{linear} dependence on } \dot{q} \\
-& T_2 = T_2(t, q, \dot{q}) = \frac{1}{2} \sum_{i=1}^{n} \sum_{j=1}^{n} m_{ij}(t, \bmq) \,\dot{q}_i \dot{q}_j  && \text{\textbf{quadratic} dependence on } \dot{q}
+& T_0 = T_0(t, q)  && \text{\textbf{no} dependence on } \dq \\
+& T_1 = T_1(t, q, \dq) = \sum_{i=1}^{n} b_i(t, \bmq) \dq_i  && \text{\textbf{linear} dependence on } \dq \\
+& T_2 = T_2(t, q, \dq) = \frac{1}{2} \sum_{i=1}^{n} \sum_{j=1}^{n} m_{ij}(t, \bmq) \,\dq_i \dq_j  && \text{\textbf{quadratic} dependence on } \dq
 \end{aligned}
 $$
-Note that $m_{ij}$ doesn't have to be mass, for example it will be momentum of inertial for single pendulum, or can be entries of  matrix of inertia in case of rigid-body dynamics.
+where $b_i(t, \bmq)$ and $m_{ij}(t, \bmq)$ are coefficients not depending on $\dot{\bmq}$.
+
+> [!warning]- Note that $m_{ij}$ doesn't have to be mass.
+> For example, it will be momentum of inertial for single pendulum, or will be entries of  matrix of inertia in case of rigid-body dynamics.
 
 With this decomposition, we have
 $$
 \begin{aligned}
-\pp{T}{\dot{q}_i} &= \pp{T_0}{\dot{q}_i} + \pp{T_1}{\dot{q}_i} + \pp{T_2}{\dot{q}_i} \\
-&= 0 + b_i(t,\bmq) + \sum_{j=1}^{n} m_{ij}(t, \bmq) \, \dot{q}_i \dot{q}_j \textcolor{red}{\text{correct this}}
+\pp{T}{\dq_i} &= \pp{T_0}{\dq_i} + \pp{T_1}{\dq_i} + \pp{T_2}{\dq_i} \\
+&= 0 + b_i(t,\bmq) + \frTwo \sum_{j=1}^{n} \left( m_{ij}(t, \bmq) + m_{ji}(t, \bmq) \right) \, \dq_j
 \end{aligned}
 $$
 
-Pluging it into Eq. (7.8) gives
+Plugging it into Eq. (7.8) gives
 $$
 \begin{aligned}
-\mathcal{H}(\bmq, \dot{\bmq}, t) &= \sum_{i=1}^{n} \left( \pp{T(\bmq, \dot{\bmq}, t)}{\dot{q}_i} \right) \dot{q}_i - T(\bmq, \dot{\bmq}, t) + V(\bmq, t)  \\
-&= \sum_{i=1}^{n} \left( b_i(t,\bmq) + \sum_{j=1}^{n} m_{ij}(t, \bmq) \, \dot{q}_i \dot{q}_j \right) \dot{q}_i - T(\bmq, \dot{\bmq}, t) + V(\bmq, t)  \\
-&= \sum_{i=1}^{n} b_i(t,\bmq) \dot{q}_i + \sum_{i=1}^{n} \sum_{j=1}^{n} m_{ij}(t, \bmq) \,\dot{q}_i \dot{q}_j - T + V \\
+\mathcal{H}(\bmq, \dot{\bmq}, t) &= \sum_{i=1}^{n} \left( \pp{T(\bmq, \dot{\bmq}, t)}{\dq_i} \right) \dq_i - T(\bmq, \dot{\bmq}, t) + V(\bmq, t)  \\
+&= \sum_{i=1}^{n} \left( b_i(t,\bmq) + \frTwo \sum_{j=1}^{n} \left( m_{ij}(t, \bmq) + m_{ji}(t, \bmq) \right) \, \dq_j \right) \dq_i - T(\bmq, \dot{\bmq}, t) + V(\bmq, t)  \\
+&= \sum_{i=1}^{n} b_i(t,\bmq) \dq_i + \sum_{i=1}^{n} \sum_{j=1}^{n} m_{ij}(t, \bmq) \,\dq_i \dq_j - T + V \\
 &= T_1 + 2T_2 - (T_0 + T_1 + T_2) + V \\
 &= T_0 + T_2 + V
 \end{aligned}
 $$
 
-It is apparent from the above expression that $T_0 = T_1 = 0$ is a sufficient condition that guarantees the Hamiltonian $\calH$ equates to the total energy $T+V$.
-In other words,  the system kinetic energy is a symmetric quadratic form in the generalized coordinate's time derivates
+Recall that we want to find a sufficient condition such that 
 $$
-T = T_2 = \frac{1}{2} \sum_{i=1}^{n} \sum_{j=1}^{n} m_{ij}(t, \bmq) \,\dot{q}_i \dot{q}_j = \frac{1}{2} \dot{\bmq}^T \, [M] \, \dot{\bmq}
+\calH = T + V = T_0 + T_1 + T_2 + V
+$$
+
+It is apparent from the above expression that $T_0 = T_1 = 0$ is a sufficient condition that guarantees the Hamiltonian $\calH$ equates to the total energy $T+V$.
+In other words, <u>the system kinetic energy is a symmetric quadratic form</u> in the generalized coordinate's time derivates $\dot{\bmq}$,
+$$
+T = T_2 = \frac{1}{2} \sum_{i=1}^{n} \sum_{j=1}^{n} m_{ij}(t, \bmq) \,\dq_i \dq_j = \frac{1}{2} \dot{\bmq}^T \, [M] \, \dot{\bmq}
 \tag{7.17}
 $$
 
 Such a system is referred to as a **<u>natural system</u>**, which has a purely quadratic kinetic energy.
-For a natural system, $T_0$ usually comes from frame motion or motion constraints.
+
+For a non-natural system, $T_0$ usually comes from frame motion or motion constraints.
 
 
-### Example 7.1: Pendulum attached to moving cart is not a natural system.
+### Example 7.1: Forced pendulum attached to moving cart is not a natural system.
 
 ![[fig-7-1_cart_pendulum.png|400]] \
-An ideal pendulum is attached with the movable pivot (the cart is massless). 
-The pivot motion be any prescribed function of time
+An ideal pendulum (assuming the rod is massless) is attached with the movable pivot (assuming the cart is massless). 
+The pivot motion is a prescribed function of time
 $$
 \begin{aligned}
 x(t) &= A \sin (\Omega t) \\
@@ -137,8 +132,16 @@ $T_0 = \tfrac{1}{2} m A^2 \Omega^2 \cos^2 (\Omega t)$ \
 $T_1 = m A \Omega r \cos \theta \cos (\Omega t) \dot{\theta}$ \
 $T_2 = \tfrac{1}{2} m r^2 \dot{\theta}^2$
 
+This is therefore not a natural system because $T_0$ and $T_1$ are non-zero.
 
-
+To verify it, we can calculate $\calH$ explicitly by its definition as
+$$
+V = mgr (1-\cos\theta)
+$$
+$$
+\calH = \pp{\calL}{\dot{\theta}} \dot{\theta} - \calL 
+= \frTwo m A^2 \Omega^2 \cos^2 \Omega t + mgr(1 - \cos\theta) + \frTwo m r^2 \dot{\theta}^2
+$$
 
 
 
@@ -158,8 +161,8 @@ For a system of $N$ particles, the work-energy equation is
 $$
 \begin{aligned}
 T(t) - T(t_0) &= T - T_0 = \int_{t_0}^{t} \sum_{i=1}^{N} \bm{F}_i \cdot \dot{\bm{R}}_i \, dt \\
-&= - \int_{t_0}^{t} \sum_{i=1}^{N} \pp{V}{\bm{R}_i} \cdot \dot{\bm{R}}_i \, dt + \int_{t_0}^{t} \sum_{i=1}^{N} f_{\text{nc}_i} \cdot \dot{\bm{R}}_i \, dt \\
-&= -(V-V_0) + \int_{t_0}^{t} \sum_{i=1}^{N} f_{\text{nc}_i} \cdot \dot{\bm{R}}_i \, dt
+&= - \int_{t_0}^{t} \sum_{i=1}^{N} \pp{V}{\bm{R}_i} \cdot \dot{\bm{R}}_i \, dt + \int_{t_0}^{t} \sum_{i=1}^{N} \bmf_{\text{nc}_i} \cdot \dot{\bm{R}}_i \, dt \\
+&= -(V-V_0) + \int_{t_0}^{t} \sum_{i=1}^{N} \bmf_{\text{nc}_i} \cdot \dot{\bm{R}}_i \, dt
 \end{aligned}
 $$
 %%
@@ -171,20 +174,47 @@ $$
 $$
 or in the integral format:
 $$
-(T + V) \Big|_{t_0}^{t_f} - \mathcal{H} \Big|_{t_0}^{t_f} = \int_{t_0}^{t} \sum_{i=1}^{N} f_{nc_i} \cdot \frac{\partial R_i}{\partial \tau} d\tau + \int_{t_0}^{t} \frac{\partial \mathcal{L}}{\partial \tau} d\tau = \int_{t_0}^{t} \sum_{i=1}^{N} f_{nc_i} \cdot \dot{R_i} d\tau 
+(T + V) \Big|_{t_0}^{t_f} - \mathcal{H} \Big|_{t_0}^{t_f} = \int_{t_0}^{t} \sum_{i=1}^{N} \bmf_{nc_i} \cdot \frac{\partial R_i}{\partial \tau} d\tau + \int_{t_0}^{t} \frac{\partial \mathcal{L}}{\partial \tau} d\tau = \int_{t_0}^{t} \sum_{i=1}^{N} \bmf_{nc_i} \cdot \dot{R_i} d\tau 
 \tag{7.29}
 $$
 
 If the Lagrangian $\calL$ does not explicitly depend on time, then the Hamiltonian $\calH$ is identical to the total energy. 
 
+Required to read Section 7.7 for more detailed and insightful discussions. 
+
+
+
+## Alternative Momentum Description
+
+If we defined the **<u>generalized momentum</u>** $p_i$ as
+$$
+p_i \equiv \frac{\partial \mathcal{L}}{\partial \dq_i}
+$$
+the Hamiltonian function $\calH$ can be rewritten as
+$$
+\mathcal{H} = \sum_{i=1}^{n} p_i \dq_i - \mathcal{L} = \bmp^T \dot{\bmq} - \mathcal{L}
+$$
+Note that here $\bmp$ and $\bmq$ are treated as coordinates of vectors (3x1 matrices) rather than abstract vectors.
+
+The Lagrangian $\calL$ has a quadratic dependence on $\dot{\bmq}$, which means we have the relationship
+$$
+\bmp = \pp{\calL}{\dot{\bmq}} = [B(t,\bmq)] \cdot \dot{\bmq}
+$$
+$$
+\dot{\bmq} = [B(t,\bmq)]^{-1} \cdot \bmp
+$$
+In other words, $\dot{\bmq}$ and $\bmp$ are alternative velocity (or momentum) descriptions of the system motion.
+
+
+
 
 ## Hamilton’s Canonical Equations (Canonical Form)
 
-The Lagrangian function $\calL(\bmq, \dot{\bmq}, t)$ is always expressed as a function of generalized coordinate $q_i$ and generalized velocity $\dot{q}_i$, but never the generalized momentum $p_i$.
+The Lagrangian function $\calL(\bmq, \dot{\bmq}, t)$ is always expressed as a function of generalized coordinate $q_i$ and generalized velocity $\dq_i$, but never the generalized momentum $p_i$.
 
 Differently, Hamiltonian can be expressed in two formats:
 $$
-\mathcal{H} \equiv \sum_{j=1}^{n} \frac{\partial \mathcal{L}}{\partial \dot{q}_j} \dot{q}_j - \mathcal{L}(t, \bmq, \dot{\bmq}) \equiv F(\bmq, \dot{\bmq}, t)
+\mathcal{H} \equiv \sum_{j=1}^{n} \frac{\partial \mathcal{L}}{\partial \dq_j} \dq_j - \mathcal{L}(t, \bmq, \dot{\bmq}) \equiv F(\bmq, \dot{\bmq}, t)
 \tag{7.52}
 $$
 or
@@ -192,7 +222,7 @@ $$
 \mathcal{H} = \sum_{j=1}^{n} \bmp_j g_j(\bmq, \bmp, t) - \mathcal{L}(\bmq, \bmg(\bmq, \bmp, t), t) \equiv G(\bmq, \bmp, t)
 \tag{7.53}
 $$
-where $g_j(\bmq,\bmp,t)=\dot{q}_j$ and $f_j(\bmq,\dot{\bmq},t)=p_j$ are the two transformations. 
+where $g_j(\bmq,\bmp,t)=\dq_j$ and $f_j(\bmq,\dot{\bmq},t)=p_j$ are the two transformations. 
 
 This distinction is important because when we calculate partial derivatives, $\pp{\calH}{q_i}$ will have different results for the above two expressions $F(\bmq,\dot{\bmq},t)$ and $G(\bmq,\bmp,t)$.
 To prevent confusion when there is need to be specific, we introduce a notation for differentiation of an arbitrary function $\calF$
@@ -213,10 +243,10 @@ $$
 
 $$
 \begin{aligned}
-\ppqp{\mathcal{H}}{p_k} &= \qp{ \pp{}{p_k} \left( \sum_{j=1}^{n} p_j \dot{q}_j - \mathcal{L}(q, \dot{q}, t) \right) } \\
-&= \dot{q}_k + \sum_{j=1}^{n} p_j \ppqp{\dot{q}_j}{p_k} - \left\{ \sum_{j=1}^{n} \ppqq{\mathcal{L}}{q_j} \ccancelto{0}{\ppqp{q_j}{p_k}} + \sum_{j=1}^{n} \textcolor{green}{ \ppqq{\mathcal{L}}{\dot{q}_j} } \ppqp{\dot{q}_j}{p_k} \right\} \\
-&= \dot{q}_k + \sum_{j=1}^{n} p_j \ppqp{\dot{q}_j}{p_k} - \sum_{j=1}^{n} \textcolor{green}{ p_j } \ppqp{\dot{q}_j}{p_k} \\
-&= \dot{q}_k
+\ppqp{\mathcal{H}}{p_k} &= \qp{ \pp{}{p_k} \left( \sum_{j=1}^{n} p_j \dq_j - \mathcal{L}(q, \dq, t) \right) } \\
+&= \dq_k + \sum_{j=1}^{n} p_j \ppqp{\dq_j}{p_k} - \left\{ \sum_{j=1}^{n} \ppqq{\mathcal{L}}{q_j} \ccancelto{0}{\ppqp{q_j}{p_k}} + \sum_{j=1}^{n} \textcolor{green}{ \ppqq{\mathcal{L}}{\dq_j} } \ppqp{\dq_j}{p_k} \right\} \\
+&= \dq_k + \sum_{j=1}^{n} p_j \ppqp{\dq_j}{p_k} - \sum_{j=1}^{n} \textcolor{green}{ p_j } \ppqp{\dq_j}{p_k} \\
+&= \dq_k
 \end{aligned}
 \tag{7.61}
 $$
@@ -224,10 +254,10 @@ $$
 Using similar tricks, we get
 $$
 \begin{aligned}
-\ppqp{\calH}{q_k} &= \qp{\pp{}{q_k} \left( \sum_{j=1}^n p_j \dot{q}_j - \calL \right) } \\
-&= \sum_{j=1}^n \ccancelto{0}{ \ppqp{p_j}{q_k} } q_j + \sum_{j=1}^n p_j \ppqp{\dot{q}_j}{q_k}  - \ppqp{\calL}{q_k} \\
-&= \sum_{j=1}^n p_j \ppqp{\dot{q}_j}{q_k}  - \left( \sum_{j=1}^n \ppqq{\calL}{q_j}\ppqp{q_j}{q_k} + \sum_{j=1}^n \textcolor{green}{ \ppqq{\calL}{\dot{q}_j} } \ppqp{\dot{q}_j}{q_k} \right) \\
-&= \sum_{j=1}^n p_j \ppqp{\dot{q}_j}{q_k} - \ppqq{\calL}{q_k} - \sum_{j=1}^n \textcolor{green}{ p_j } \ppqp{\dot{q}_j}{q_k} \\
+\ppqp{\calH}{q_k} &= \qp{\pp{}{q_k} \left( \sum_{j=1}^n p_j \dq_j - \calL \right) } \\
+&= \sum_{j=1}^n \ccancelto{0}{ \ppqp{p_j}{q_k} } q_j + \sum_{j=1}^n p_j \ppqp{\dq_j}{q_k}  - \ppqp{\calL}{q_k} \\
+&= \sum_{j=1}^n p_j \ppqp{\dq_j}{q_k}  - \left( \sum_{j=1}^n \ppqq{\calL}{q_j}\ppqp{q_j}{q_k} + \sum_{j=1}^n \textcolor{green}{ \ppqq{\calL}{\dq_j} } \ppqp{\dq_j}{q_k} \right) \\
+&= \sum_{j=1}^n p_j \ppqp{\dq_j}{q_k} - \ppqq{\calL}{q_k} - \sum_{j=1}^n \textcolor{green}{ p_j } \ppqp{\dq_j}{q_k} \\
 &= - \ppqq{\calL}{q_k}
 \end{aligned}
 \tag{7.64}
@@ -237,7 +267,7 @@ $$
 Finally, the **<u>Hamilton’s canonical equations</u>** are given as
 $$
 \begin{aligned}
-\dot{q}_j &= \ppqp{\calH}{p_j} \\
+\dq_j &= \ppqp{\calH}{p_j} \\
 \dot{p}_j &= - \ppqp{\calH}{q_j} + Q_{{nc}_j}
 \end{aligned}
 \tag{7.65}
