@@ -265,7 +265,7 @@ To achieve this goal, the partial derivatives of $\calH(\bmq, \bmp, t)$ is studi
 $$
 \begin{aligned}
 \ppqp{\mathcal{H}}{p_k} &= \qp{ \pp{}{p_k} \left( \sum_{j=1}^{n} p_j \dq_j - \mathcal{L}(q, \dq, t) \right) } \\
-&= \dq_k + \sum_{j=1}^{n} p_j \ppqp{\dq_j}{p_k} - \left\{ \sum_{j=1}^{n} \ppqdq{\mathcal{L}}{q_j} \ccancelto{0}{\ppqp{q_j}{p_k}} + \sum_{j=1}^{n} \textcolor{green}{ \ppqdq{\mathcal{L}}{\dq_j} } \ppqp{\dq_j}{p_k}  + \ccancelto{0}{\ppqdq{\calL}{t}} \ppqp{t}{p_k}     \right\} \\
+&= \dq_k + \sum_{j=1}^{n} p_j \ppqp{\dq_j}{p_k} - \left\{ \sum_{j=1}^{n} \ppqdq{\mathcal{L}}{q_j} \ccancelto{0}{\ppqp{q_j}{p_k}} + \sum_{j=1}^{n} \textcolor{green}{ \ppqdq{\mathcal{L}}{\dq_j} } \ppqp{\dq_j}{p_k}  + {\ppqdq{\calL}{t}} \ccancelto{0}{\ppqp{t}{p_k}}     \right\} \\
 &= \dq_k + \sum_{j=1}^{n} p_j \ppqp{\dq_j}{p_k} - \sum_{j=1}^{n} \textcolor{green}{ p_j } \ppqp{\dq_j}{p_k} \\
 &= \dq_k
 \end{aligned}
@@ -277,7 +277,7 @@ $$
 \begin{aligned}
 \ppqp{\calH}{q_k} &= \qp{\pp{}{q_k} \left( \sum_{j=1}^n p_j \dq_j - \calL(q, \dq, t) \right) } \\
 &= \sum_{j=1}^n \ccancelto{0}{ \ppqp{p_j}{q_k} } q_j + \sum_{j=1}^n p_j \ppqp{\dq_j}{q_k}  - \ppqp{\calL}{q_k} \\
-&= \sum_{j=1}^n p_j \ppqp{\dq_j}{q_k}  - \left( \sum_{j=1}^n \ppqdq{\calL}{q_j}\ppqp{q_j}{q_k} + \sum_{j=1}^n \textcolor{green}{ \ppqdq{\calL}{\dq_j} } \ppqp{\dq_j}{q_k}    +    \ccancelto{0}{\ppqdq{\calL}{t}} \ppqp{t}{q_k}  \right) \\
+&= \sum_{j=1}^n p_j \ppqp{\dq_j}{q_k}  - \left( \sum_{j=1}^n \ppqdq{\calL}{q_j}\ppqp{q_j}{q_k} + \sum_{j=1}^n \textcolor{green}{ \ppqdq{\calL}{\dq_j} } \ppqp{\dq_j}{q_k}    +    {\ppqdq{\calL}{t}} \ccancelto{0}{\ppqp{t}{q_k}}  \right) \\
 &= \sum_{j=1}^n p_j \ppqp{\dq_j}{q_k} - \ppqdq{\calL}{q_k} - \sum_{j=1}^n \textcolor{green}{ p_j } \ppqp{\dq_j}{q_k} \\
 &= - \ppqdq{\calL}{q_k}
 \end{aligned}
