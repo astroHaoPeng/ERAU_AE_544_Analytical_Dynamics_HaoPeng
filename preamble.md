@@ -84,6 +84,7 @@
 \newcommand{\dz}{{\rm d}z}
 \newcommand{\ddt}[1][]{\frac{{\rm d} #1}{{\rm d}t}}
 \newcommand{\dq}{\dot{q}}
+\newcommand{\dp}{\dot{p}}
 
 % derivatives in different frame: d( )/dt in any frame
 \newcommand{\ddtDoNotUse}[1]{\frac{^{#1}\rm d \phantom{t}}{\phantom{^{#1}}{\rm d }t}}
@@ -108,7 +109,7 @@
 \newcommand{\pp}[2]{\frac{\partial #1}{\partial #2}}
 \newcommand{\qq}[1]{\left[ #1 \right]_{\bmq, \dot{\bmq}}}
 \newcommand{\qp}[1]{\left[ #1 \right]_{\bmq, \bmp}}
-\newcommand{\ppqq}[2]{\left[ \pp{#1}{#2} \right]_{\bmq,\dot{\bmq}}}
+\newcommand{\ppqdq}[2]{\left[ \pp{#1}{#2} \right]_{\bmq,\dot{\bmq}}}
 \newcommand{\ppqp}[2]{\left[ \pp{#1}{#2} \right]_{\bmq,\bmp}}
 
 % Lagrangian mechanics

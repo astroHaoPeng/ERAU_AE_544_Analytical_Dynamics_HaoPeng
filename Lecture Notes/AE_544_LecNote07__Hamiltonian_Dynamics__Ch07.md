@@ -1,6 +1,6 @@
 ---
 date created: 2025-03-03T09:54:12-05:00
-date modified: 2026-04-06T09:35:04-04:00
+date modified: 2026-04-08T09:44:48-04:00
 ---
 
 # AE_544_LecNote07\__Hamiltonian_Dynamics__Ch07
@@ -17,19 +17,19 @@ Some leaning outcomes include:
 
 The Hamiltonian function $\calH$ is closely related to the Lagrangian function $\calL$ and is defined as
 $$
-\mathcal{H} \equiv \sum_{i=1}^{n} \frac{\partial \mathcal{L}}{\partial \dq_i} \dq_i - \mathcal{L} = \mathcal{H}(\bmq, \dot{\bmq}, t)
+\mathcal{H} \equiv \sum_{i=1}^{n} \pp{\calL}{\dq_i} \dq_i - \mathcal{L} = \mathcal{H}(\bmq, \dot{\bmq}, t)
 \tag{7.1}
 $$
 
 For a lot of time, the Hamiltonian function $\calH$ is taught as a constant of the motion, but it is actually only a conclusion under certain conditions. 
 To find those conditions, we study the total time derivatives of $\calH$,
 $$
-\frac{d\calH}{dt} = \sum_{i=1}^{n} \left[ \frac{d}{dt} \left( \pp{\calL}{\dq_i} \right) \dq_i + \textcolor{red}{ \pp{\calL}{\dq_i} \ddot{q}_i } \right]  - \left[ \sum_{i=1}^{n} \pp{\calL}{q_i} \dq_i + \sum_{i=1}^{n} \textcolor{red}{ \pp{\calL}{\dq_i} \ddot{q}_i} + \pp{\calL}{t} \right] 
+\ddt[\calH] = \sum_{i=1}^{n} \left[ \ddt \left( \pp{\calL}{\dq_i} \right) \dq_i + \textcolor{red}{ \pp{\calL}{\dq_i} \ddot{q}_i } \right]  - \left[ \sum_{i=1}^{n} \pp{\calL}{q_i} \dq_i + \sum_{i=1}^{n} \textcolor{red}{ \pp{\calL}{\dq_i} \ddot{q}_i} + \pp{\calL}{t} \right] 
 \tag{7.6}
 $$
 Observing the cancellation of the two terms (in red), and re-collecting, we have
 $$
-\frac{d\mathcal{H}}{dt} = {\sum_{i=1}^{n} \left\{ \frac{d}{dt} \left( \frac{\partial \mathcal{L}}{\partial \dq_i} \right) - \frac{\partial \mathcal{L}}{\partial q_i} \right\}  \dq_i } - \frac{\partial \mathcal{L}}{\partial t}
+\ddt[\calH] = {\sum_{i=1}^{n} \left\{ \ddt \left( \pp{\calL}{\dq_i} \right) - \pp{\calL}{\dq_i} \right\}  \dq_i } - \pp{\calL}{t}
 \tag{7.7}
 $$
 And the following two sufficient conditions will lead to the vanish of the remaining terms, and thus lead to that $\calH$ is a constant:
@@ -87,7 +87,7 @@ $$
 &= \sum_{i=1}^{n} \left( b_i(t,\bmq) + \frTwo \sum_{j=1}^{n} \left( m_{ij}(t, \bmq) + m_{ji}(t, \bmq) \right) \, \dq_j \right) \dq_i - T(\bmq, \dot{\bmq}, t) + V(\bmq, t)  \\
 &= \sum_{i=1}^{n} b_i(t,\bmq) \dq_i + \sum_{i=1}^{n} \sum_{j=1}^{n} m_{ij}(t, \bmq) \,\dq_i \dq_j - T + V \\
 &= T_1 + 2T_2 - (T_0 + T_1 + T_2) + V \\
-&= T_0 + T_2 + V
+&= -T_0 + T_2 + V
 \end{aligned}
 $$
 
@@ -189,7 +189,7 @@ $$
 $$
 or in the integral format:
 $$
-(T + V) \Big|_{t_0}^{t_f} - \mathcal{H} \Big|_{t_0}^{t_f} = \int_{t_0}^{t} \sum_{i=1}^{N} \bmf_{nc_i} \cdot \frac{\partial R_i}{\partial \tau} d\tau + \int_{t_0}^{t} \frac{\partial \mathcal{L}}{\partial \tau} d\tau = \int_{t_0}^{t} \sum_{i=1}^{N} \bmf_{nc_i} \cdot \dot{R_i} d\tau 
+(T + V) \Big|_{t_0}^{t_f} - \mathcal{H} \Big|_{t_0}^{t_f} = \int_{t_0}^{t} \sum_{i=1}^{N} \bmf_{nc_i} \cdot \pp{R_i}{\tau} {\rm d}\tau + \int_{t_0}^{t} \pp{\calL}{\tau} {\rm d}\tau = \int_{t_0}^{t} \sum_{i=1}^{N} \bmf_{nc_i} \cdot \dot{R_i} {\rm d}\tau 
 \tag{7.29}
 $$
 
@@ -206,7 +206,7 @@ Required to read Section 7.7 for more detailed and insightful discussions.
 
 If we defined the **<u>generalized momentum</u>** $p_i$ as
 $$
-p_i \equiv \frac{\partial \mathcal{L}}{\partial \dq_i}
+p_i \equiv \pp{\calL}{\dq_i}
 $$
 the Hamiltonian function $\calH$ can be rewritten as
 $$
@@ -229,7 +229,7 @@ The Lagrangian function $\calL(\bmq, \dot{\bmq}, t)$ is always expressed as a fu
 
 Differently, Hamiltonian can be expressed in two formats:
 $$
-\mathcal{H} \equiv \sum_{j=1}^{n} \frac{\partial \mathcal{L}}{\partial \dq_j} \dq_j - \mathcal{L}(t, \bmq, \dot{\bmq}) \equiv F(\bmq, \dot{\bmq}, t)
+\mathcal{H} \equiv \sum_{j=1}^{n} \pp{\calL}{\dq_j} \dq_j - \mathcal{L}(t, \bmq, \dot{\bmq}) \equiv F(\bmq, \dot{\bmq}, t)
 \tag{7.52}
 $$
 or
@@ -242,7 +242,7 @@ where $g_j(\bmq,\bmp,t)=\dq_j$ and $f_j(\bmq,\dot{\bmq},t)=p_j$ are the two tran
 This distinction is important because when we calculate partial derivatives, $\pp{\calH}{q_i}$ will have different results for the above two expressions $F(\bmq,\dot{\bmq},t)$ and $G(\bmq,\bmp,t)$.
 To prevent confusion when there is need to be specific, we introduce a notation for differentiation of an arbitrary function $\calF$
 $$
-\ppqq{\calF}{q_j}   \qquad \text{when $(\bmq, \dot{\bmq},t)$ is used}
+\ppqdq{\calF}{q_j}   \qquad \text{when $(\bmq, \dot{\bmq},t)$ is used}
 \tag{7.56}
 $$
 $$
@@ -250,16 +250,22 @@ $$
 \tag{7.57}
 $$
 
-Lagrange's equations can be re-written using these new notations as
+Lagrange's equation
+![[AE_544_LecNote05__Lagrangian_Dynamics__Ch05#^Lagranges-equation-conservative-and-nonconservative-forces]]
+can be re-written using these new notations as
 $$
-\dot{p}_j = \ppqq{\calL}{q_j} + Q_{{nc}_j}
+\dot{p}_j = \ppqdq{\calL}{q_j} + Q_{{nc}_j}
 \tag{7.60}
 $$
 
+However, this is not the final format we want. 
+We are going to substitute $\calL$ with $\calH$ and convert all partial derivatives to be in terms of $(\bmq, \bmp)$.
+
+To achieve this goal, the partial derivatives of $\calH(\bmq, \bmp, t)$ is studied first:
 $$
 \begin{aligned}
 \ppqp{\mathcal{H}}{p_k} &= \qp{ \pp{}{p_k} \left( \sum_{j=1}^{n} p_j \dq_j - \mathcal{L}(q, \dq, t) \right) } \\
-&= \dq_k + \sum_{j=1}^{n} p_j \ppqp{\dq_j}{p_k} - \left\{ \sum_{j=1}^{n} \ppqq{\mathcal{L}}{q_j} \ccancelto{0}{\ppqp{q_j}{p_k}} + \sum_{j=1}^{n} \textcolor{green}{ \ppqq{\mathcal{L}}{\dq_j} } \ppqp{\dq_j}{p_k} \right\} \\
+&= \dq_k + \sum_{j=1}^{n} p_j \ppqp{\dq_j}{p_k} - \left\{ \sum_{j=1}^{n} \ppqdq{\mathcal{L}}{q_j} \ccancelto{0}{\ppqp{q_j}{p_k}} + \sum_{j=1}^{n} \textcolor{green}{ \ppqdq{\mathcal{L}}{\dq_j} } \ppqp{\dq_j}{p_k}  + \ccancelto{0}{\ppqdq{\calL}{t}} \ppqp{t}{p_k}     \right\} \\
 &= \dq_k + \sum_{j=1}^{n} p_j \ppqp{\dq_j}{p_k} - \sum_{j=1}^{n} \textcolor{green}{ p_j } \ppqp{\dq_j}{p_k} \\
 &= \dq_k
 \end{aligned}
@@ -269,17 +275,17 @@ $$
 Using similar tricks, we get
 $$
 \begin{aligned}
-\ppqp{\calH}{q_k} &= \qp{\pp{}{q_k} \left( \sum_{j=1}^n p_j \dq_j - \calL \right) } \\
+\ppqp{\calH}{q_k} &= \qp{\pp{}{q_k} \left( \sum_{j=1}^n p_j \dq_j - \calL(q, \dq, t) \right) } \\
 &= \sum_{j=1}^n \ccancelto{0}{ \ppqp{p_j}{q_k} } q_j + \sum_{j=1}^n p_j \ppqp{\dq_j}{q_k}  - \ppqp{\calL}{q_k} \\
-&= \sum_{j=1}^n p_j \ppqp{\dq_j}{q_k}  - \left( \sum_{j=1}^n \ppqq{\calL}{q_j}\ppqp{q_j}{q_k} + \sum_{j=1}^n \textcolor{green}{ \ppqq{\calL}{\dq_j} } \ppqp{\dq_j}{q_k} \right) \\
-&= \sum_{j=1}^n p_j \ppqp{\dq_j}{q_k} - \ppqq{\calL}{q_k} - \sum_{j=1}^n \textcolor{green}{ p_j } \ppqp{\dq_j}{q_k} \\
-&= - \ppqq{\calL}{q_k}
+&= \sum_{j=1}^n p_j \ppqp{\dq_j}{q_k}  - \left( \sum_{j=1}^n \ppqdq{\calL}{q_j}\ppqp{q_j}{q_k} + \sum_{j=1}^n \textcolor{green}{ \ppqdq{\calL}{\dq_j} } \ppqp{\dq_j}{q_k}    +    \ccancelto{0}{\ppqdq{\calL}{t}} \ppqp{t}{q_k}  \right) \\
+&= \sum_{j=1}^n p_j \ppqp{\dq_j}{q_k} - \ppqdq{\calL}{q_k} - \sum_{j=1}^n \textcolor{green}{ p_j } \ppqp{\dq_j}{q_k} \\
+&= - \ppqdq{\calL}{q_k}
 \end{aligned}
 \tag{7.64}
 $$
 
 
-Finally, the **<u>Hamilton’s canonical equations</u>** are given as
+Finally, what we get is the **<u>Hamilton’s canonical equations</u>** given as
 $$
 \begin{aligned}
 \dq_j &= \phantom{-} \ppqp{\calH}{p_j} \\
@@ -288,7 +294,15 @@ $$
 \tag{7.65}
 $$
 for $j=1,2,\dots,n$.
-The explicit notation on the independent set of coordinates used for the partial derivatives is dropped, with the implicit assumption that $(\bmq, \bmp, t)$ are chosen as the independent variables for partial derivatives.
+
+The explicit notation on the independent set of coordinates used for the partial derivatives is dropped, with the implicit assumption that $(\bmq, \bmp, t)$ are chosen as the independent variables for partial derivatives. Then, we will get the more common form as
+$$
+\begin{aligned}
+\dot{\bmq} &= \phantom{-} \pp{\calH}{\bmp} \\
+\dot{\bmp} &= - \pp{\calH}{\bmq} + \bmQ_{{nc}}
+\end{aligned}
+\tag{7.65}
+$$
 
 Introducing the canonical state vector
 $$
@@ -298,10 +312,10 @@ then the gradient vector is
 $$
 \pp{\calH}{\bmx} = \bmt{\pp{\calH}{\bmq} \\ \pp{\calH}{\bmp}}
 $$
-and we have the matrix form of Hamilton's equations as (~~verify if the negative sign is correct~~ Whether there is a negative sign or not depends on the definition if $[J]$. Here it is consistent.)
+and we have the matrix form of Hamilton's equations as
 $$
 \dot{\bmx} = - [J] \pp{\calH}{\bmx} + \bmt{\bm{0} \\ \bmQ_{nc}},
-\tag{7.66}
+\tag{7.68}
 $$
 where the skew-symmetric matrix $[J]$ is
 $$
@@ -317,9 +331,91 @@ and also has a special feature that
 $$
 [J] \cdot [J] = - [I_{2n}]
 $$
-The matrix $[J]$ belongs to a larger group of special matrix, the symplectic matrix.
+The matrix orthogonal and skew-symmetric $[J]$ belongs to a larger group of special matrix, the symplectic matrix.
 
 >[!info] $[J]$ is very much like an active rotation matrix for 90 degrees. 
+
+
+### Use problem statement in (Example 7.2) as an example
+
+![[fig-7-2_particle_constant_gravity_parabolic.png|400]]
+
+$$
+\calL(\bmq, \dot{\bmq}) = \frTwo \left(m\dot{x}^2 + m \dot{y}^2\right) + (- mgy)
+$$
+
+$$
+\calH(\bmq, \dot{\bmq}) = \frTwo \left(m\dot{x}^2 + m \dot{y}^2\right) - (- mgy)
+$$
+
+$$
+p_x = \pp{\calL}{\dot{x}} = m \dot{x}   \qquad    p_y = \pp{\calL}{\dot{y}} = m \dot{y}
+$$
+
+$$
+\dot{x} = \frac{p_x}{m}   \qquad   \dot{y} = \frac{p_y}{m}
+$$
+
+$$
+\calH(\bmq, \bmp) = \bmp\trans \bmq - \calL = \frac{1}{2m}(p_x^2 + p_y^2) + mgy
+$$
+
+$$
+\ppqdq{\calH}{\dot{x}} = m \dot{x}
+$$
+
+$$
+\ppqp{\calH}{\dot{x}} = 0
+$$
+
+
+## Poisson's Bracket
+
+For another smooth function of $\calF(\bmq, \bmp, t)$, we want to determine whether it is another constant of the motion.
+
+To find its total time derivative as
+$$
+\ddt[\calF] = \sum_{i=1}^n \left( \pp{\calF}{q_i} \dq_i + \pp{\calF}{p_i} \dp_i \right) + \pp{\calF}{t}
+\tag{7.72}
+$$
+
+Recall that we have the canonical equations for $\dot{\bmq}$ and $\dot{\bmp}$, plugging in them leads to
+$$
+\begin{aligned}
+\ddt[\calF] &= \sum_{i=1}^n \left( \pp{\calF}{q_i} \pp{\calH}{p_i} - \pp{\calF}{p_i} \pp{\calH}{q_i} \right) + \sum_{i=1}^n \pp{\calF}{p_i} Q_{{nc}_j} + \pp{\calF}{t}  \\
+&= (\calF, \calH) - \sum_{i=1}^n \pp{\calF}{p_i} Q_{{nc}_j} + \pp{\calF}{t}
+\end{aligned}
+\tag{7.74}
+$$
+where we have introduced/defined the **<u>Poisson's bracket</u>** as
+$$
+(\calF, \calH) = \sum_{i=1}^n \left( \pp{\calF}{q_i} \pp{\calH}{p_i} - \pp{\calF}{p_i} \pp{\calH}{q_i} \right)
+\tag{7.75}
+$$
+
+Now we can determine the sufficient condition under which $\calF(\bmq, \bmp, t)$ will be a constant of the motion is
+$$
+\begin{aligned}
+(\calF, \calH) &= 0   \qquad \text{Poisson's bracket is 0.}  \\
+\sum_{i=1}^n \pp{\calF}{p_i} Q_{{nc}_j} &= 0    \qquad \text{No non-conservative force.}\\
+\pp{\calF}{t} &= 0    \qquad \text{No explicit time-dependence.}
+\end{aligned}
+$$
+
+> [!info] Poisson's bracket evaluates how functions change with respect to phase space coordinates. %% Lagrange brackets evaluate how phase space coordinates change with respect to coordinates (or variables). %%
+
+Poisson's bracket is anti-commutative (or anti-symmetric), meaning that
+$$
+(\calF, \calH) = - (\calH, \calF)
+$$
+
+Other key properties of Poisson's bracket are
+- Identity: $(\calF, \calF) = 0$
+- Distributivity: $(\calF + \calG, \calH) = (\calF, \calH) + (\calG, \calH)$
+- Product rule: $(\calF \calG, \calH) = \calF \cdot (\calG, \calH) + \calG \cdot (\calF, \calH)$
+- Jacobi Identity: $(\calF, (\calG, \calH)) + (\calG, (\calH, \calF)) + (\calH, (\calF, \calG)) = 0$
+
+This observations will eventually lead to a deeper concept of *Poisson algebra*, which is fun but beyond our scope.
 
 
 ## Canonical Coordinate Transformations 
