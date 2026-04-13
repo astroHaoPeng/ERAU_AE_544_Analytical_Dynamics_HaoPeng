@@ -1,19 +1,24 @@
 ---
 date created: 2025-03-03T09:54:12-05:00
-date modified: 2025-04-21T09:54:34-04:00
+date modified: 2026-04-13T02:38:12-04:00
 ---
+
 # AE_544_LecNote08\__Nonlinear_Spacecraft_Control__Ch08
 ![[README#Disclaimers]]
 
 
 Naturally, any real system will not be modeled perfectly and unmodeled dynamics and external influences will cause the spacecraft to drift from the desired trajectory or final state, i.e., the inverse solution for the open loop contains modeling approximations.
 
-Designing spacecraft attitude control laws combines the skills of rigid body kinematics and kinetics, as well as control methodology. In fact, the proper choice of attitude coordinates can be crucial to the usability of the resulting control law. If large, arbitrary rotations are to be performed, clearly any set of the Euler angle family would be a poor choice because of their small nonsingular rotation range. Attitude control laws that make judicious use of various attitude coordinates will be presented.
+Designing spacecraft attitude control laws combines the skills of rigid body kinematics and kinetics, as well as control methodology. 
+In fact, the proper choice of attitude coordinates can be crucial to the usability of the resulting control law. 
+If large, arbitrary rotations are to be performed, clearly any set of the Euler angle family would be a poor choice because of their small nonsingular rotation range. 
+
+
+It is not intended as a complete study of nonlinear stability and control theory. 
+Students are assumed to be already familiar with basic linear control concepts, and of course also linear algebra.
 
 
 ## Stabilities of System
-
-![[fig-v4-8-1_different_stabilities.png|420]]
 
 A state vector point $\bmx_e$ is said to be an <u>equilibrium state</u> (or equilibrium point) of a dynamical system described by $\dot{\bmx} = \bmf(\bmx, t)$ at time $t_0$ if
 $$
@@ -23,6 +28,8 @@ $$
 This definition indicates that once the system reaches the state $\bmx_e$ , it will remain there for all time. 
 However, this definition does not imply the stability of the equilibrium point.
 
+
+![[fig-v4-8-1_different_stabilities.png|420]]
 
 Given $\delta>0$, a state vector $\bmx$ is said to be in the <u>neighborhood</u> $B_\delta(\bmx_r)$ of the reference state $\bmx_r$, i.e. $\bmx(t) \in B_\delta(\bmx_r)$, if
 $$
@@ -36,6 +43,7 @@ But it can generate to different norms in more complicated discussions.
 $$
 \bmx(t) \in B_\delta(\bmx_r(t)) \qquad \forall t>t_0
 $$
+This essentially means the motion won't diverge and there is a upper boundary for the deviation.
 
 **<u>Lyapunov Stability</u>**: The motion $\bmx(t)$ is said to be Lyapunov stable (or stable) relative to $\bmx_r(t)$ for each $\epsilon>0$ there exists a $\delta(\epsilon)$ > 0 such that
 $$
@@ -64,7 +72,7 @@ $$
 Of all the stability definitions presented, the concept of Lagrange stability is clearly the weakest, while exponential stability is the strongest statement. Unfortunately, proving exponential stability is also the most challenging.
 
 
-## Linearization by Truncating Taylor's Expansion
+## Lyapunov Indirect Method (Linearization by Truncating Taylor's Expansion)
 
 For a controlled system
 $$
@@ -72,8 +80,10 @@ $$
 $$
 with the reference motion $\bmx_r(t)$ and $\bmu_r(t)$, the dynamics of the difference $\delta\bmx=\bmx-\bmx_r$ can be expanded as
 $$
-\delta\dot{\bmx} = \dot{\bmx} - \dot{\bmx}_r 
-= \bmf(\bmx_r,\bmu_r, t) + \left[\pp{\bmf(\bmx_r,\bmu_r, t)}{\bmx}\right]\trans \delta \bmx + \left[\pp{\bmf(\bmx_r,\bmu_r, t)}{\bmu}\right]\trans \delta\bmu + \pp{\bmf(\bmx_r,\bmu_r, t)}{t} \delta t + O(\|(\bmx,\bmu,t))\|^2) - \bmf(\bmx_r,\bmu_r, t)
+\begin{aligned}
+\delta\dot{\bmx} &= \dot{\bmx} - \dot{\bmx}_r \\
+&= \bmf(\bmx_r,\bmu_r, t) + \left[\pp{\bmf(\bmx_r,\bmu_r, t)}{\bmx}\right]\trans \delta \bmx + \left[\pp{\bmf(\bmx_r,\bmu_r, t)}{\bmu}\right]\trans \delta\bmu + \pp{\bmf(\bmx_r,\bmu_r, t)}{t} \delta t + O(\|(\bmx,\bmu,t))\|^2) - \bmf(\bmx_r,\bmu_r, t)
+\end{aligned}
 $$
 where $\delta\bmu=\bmu-\bmu_r$.
 If we ignore the higher-order terms and set $\delta t = 0$, then we have the linearized system
@@ -90,19 +100,18 @@ which becomes a typical linear system.
 (3) <u>marginally stable</u>; then one cannot conclude anything about the stability of the nonlinear system without further analysis. (<u>nonlinear stability undertermined</u>)
 
 The theorem makes intuitive sense. 
-If the linearized system is either strictly stable or unstable, then one would expect that a neighborhood would exist where the nonlinear system would also be either stable or unstable. However, if the linearized system is only marginally stable, then the neglected second and higher order terms could render the nonlinear system either stable or unstable.
+If the linearized system is either strictly stable or unstable, then one would expect that a neighborhood would exist where the nonlinear system would also be either stable or unstable. 
+However, if the linearized system is only marginally stable, then the neglected second and higher order terms could render the nonlinear system either stable or unstable.
 
 
-## Lyapunov Function
+## Lyapunov Direct Method (Using a Lyapunov Function)
 
+Proving stability of nonlinear systems with the basic stability definitions and without resorting to local linear approximations can be quite tedious and difficult. 
+Lyapunov’s direct method provides a tool to make rigorous, analytical stability claims of nonlinear systems by <u>studying the behavior of a scalar, energy-like Lyapunov function</u>. 
 
-## Theorems (Criteria for Stabilities)
+A **major benefit** of this method is that this can be done without having to solve the nonlinear differential equations. 
 
-Proving stability of nonlinear systems with the basic stability definitions and without resorting to local linear approximations can be quite tedious and diffi- cult. Lyapunov’s direct method provides a tool to make rigorous, analytical stability claims of nonlinear systems by studying the behavior of a scalar, energy-like Lyapunov function. A major benefit of this method is that this can be done without having to solve the nonlinear differential equations. 
-
-
-
-
+### Lyapunov Function
 
 <u>Positive Definite (or Semidefinite) Function</u>: 
 A scalar continuous
@@ -135,6 +144,11 @@ $$
 \dot{V} = \left[\pp{V}{\bmx}\right]\trans \dot{\bmx} = \left[\pp{V}{\bmx}\right]\trans \bmf(\bmx)
 $$
 
+![[fig-8-2_Lyapunov_function_as_a_bowl.png|350]]
+
+
+### Lyapunov Theorems (Criteria for Stabilities)
+
 All the criteria below are sufficient conditions, meaning that one cannot conclude that the system is unstable if they are not fulfilled.
 
 **<u>Criterion of Lyapunov Stability</u>**: 
@@ -164,7 +178,8 @@ Lyapunov’s stability theory provides a very elegant method to guarantee stabil
 
 ~~A drawback to these Lyapunov methods is that~~ the process of finding appropriate Lyapunov functions is not always obvious.
 
-There are two common categories of elemental Lyapunov functions that measure velocity or functions that measure position state errors. Separate elemental Lyapunov functions can be linearly combined to provide the desired system Lyapunov function.
+There are two common categories of elemental Lyapunov functions that measure velocity or functions that measure position state errors. 
+Separate elemental Lyapunov functions can be linearly combined to provide the desired system Lyapunov function.
 
 
 ### Elemental Velocity–Based Lyapunov Functions (Hamiltonian $\calH$ used)

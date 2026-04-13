@@ -113,9 +113,9 @@
 \newcommand{\ppqp}[2]{\left[ \pp{#1}{#2} \right]_{\bmq,\bmp}}
 
 % Lagrangian mechanics
-\newcommand{\qOneToEnd}[1][n]{q_1,q_2,\dots,q_{#1}}
-\newcommand{\qDotOneToEnd}[1][n]{\dot{q}_1,\dot{q}_2,\dots,\dot{q}_{#1}}
-\newcommand{\oneTo}[1]{1,2,\dots,{#1}}
+\newcommand{\qOneToEnd}[1][n]{q_1,q_2,\cdots,q_{#1}}
+\newcommand{\qDotOneToEnd}[1][n]{\dot{q}_1,\dot{q}_2,\cdots,\dot{q}_{#1}}
+\newcommand{\oneTo}[1]{1,2,\cdots,{#1}}
 \newcommand{\frTwo}{\frac{1}{2}}
 \newcommand{\frFour}{\frac{1}{4}}
 
@@ -161,3 +161,13 @@
 % Showing frame for coordinates in bottom right corner.
 %   mainly used in Ch01
 \newcommand{\cood}[2]{\left( #1 \right)_{#2}}
+
+
+
+% Poisson brackets
+\newcommand{\poissonBracket}[2]{\left\{ #1, #2 \right\}}
+\newcommand{\poissonExpand}[3][i]{\sum_{#1=1}^{n} \left( \pp{#2}{q_#1} \pp{#3}{p_#1} - \pp{#2}{p_#1} \pp{#3}{q_#1} \right)}
+\newcommand{\lagrangeBracket}[2]{\left[ #1, #2 \right]}
+\newcommand{\lagrangeExpand}[3][i]{\sum_{#1=1}^{n} \left( \pp{f_#1}{#2} \pp{g_#1}{#3} - \pp{g_#1}{#2} \pp{f_#1}{#3} \right)}
+
+% Lagrange’s bracket 

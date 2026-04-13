@@ -18,5 +18,6 @@
     "downscalePercent": 70
   },
   "showInlineTitle": false,
-  "showLineNumber": false
+  "showLineNumber": false,
+  "autoConvertHtml": false
 }

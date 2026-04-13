@@ -1,6 +1,6 @@
 ---
 date created: 2025-03-03T09:54:12-05:00
-date modified: 2026-04-08T09:44:48-04:00
+date modified: 2026-04-10T12:19:56-04:00
 ---
 
 # AE_544_LecNote07\__Hamiltonian_Dynamics__Ch07
@@ -301,8 +301,9 @@ $$
 \dot{\bmq} &= \phantom{-} \pp{\calH}{\bmp} \\
 \dot{\bmp} &= - \pp{\calH}{\bmq} + \bmQ_{{nc}}
 \end{aligned}
-\tag{7.65}
+\tag{7.66}
 $$
+^hamiltonian-canonical-equations
 
 Introducing the canonical state vector
 $$
@@ -392,7 +393,13 @@ $$
 (\calF, \calH) = \sum_{i=1}^n \left( \pp{\calF}{q_i} \pp{\calH}{p_i} - \pp{\calF}{p_i} \pp{\calH}{q_i} \right)
 \tag{7.75}
 $$
-
+%% 
+or in the matrix format
+$$
+(\calF, \calH) \equiv \left[ \pp{\calF}{\bmq} \right]^{\trans} \left[ \pp{\calH}{\bmp} \right] - \left[  \pp{\calF}{\bmp} \right]^{\trans} \left[  \pp{\calH}{\bmq} \right]
+$$
+ %%
+ 
 Now we can determine the sufficient condition under which $\calF(\bmq, \bmp, t)$ will be a constant of the motion is
 $$
 \begin{aligned}
@@ -403,6 +410,12 @@ $$
 $$
 
 > [!info] Poisson's bracket evaluates how functions change with respect to phase space coordinates. %% Lagrange brackets evaluate how phase space coordinates change with respect to coordinates (or variables). %%
+
+Poisson's brackets reveal more algebraic structure of Hamiltonian dynamics. 
+This will be used frequently in courses link geometric mechanics. 
+
+>[!warning] Poisson brackets are more commonly written as $\{\calF, \calH\}$ in sources outside of our textbook. However, differences in notation conventions should not be seen as a barrier for understanding
+
 
 Poisson's bracket is anti-commutative (or anti-symmetric), meaning that
 $$
@@ -418,70 +431,109 @@ Other key properties of Poisson's bracket are
 This observations will eventually lead to a deeper concept of *Poisson algebra*, which is fun but beyond our scope.
 
 
+
+
 ## Canonical Coordinate Transformations 
 
-Suppose $(\bmq,\bmp)$ are a set of canonical variables associated with a Hamiltonian $\calH(\bmq,\bmp,t)$ and these variables satisfy a set of differential equations of the form of Eqs. (7.66), given a general smooth differentiable set of $2n$ transformation functions:
+The variables $(\bmq,\bmp)$ are referred to as **<u>canonical variables</u>** associated with the Hamiltonian $\calH(\bmq,\bmp,t)$. 
+They satisfy the following canonical form of equations of the motion:
+![[#^hamiltonian-canonical-equations]]
+
+We call a coordinate transformation canonical if the new variables $(\bmq^*, \bmp^*)$ and the associated smooth function $\calH^*(\bmq^*, \bmp^*, t)$ still satisfies the canonical form, where
 $$
 \begin{aligned}
-q_j = f_j(\bmq^*, \bmp^*, t) \\
-p_j = g_j(\bmq^*, \bmp^*, t) \\
+\dot{\bmq}^* &= \phantom{-} \pp{\calH^*}{\bmp^*} \\
+\dot{\bmp}^* &= - \pp{\calH^*}{\bmq^*} + \bmQ_{nc}^*
 \end{aligned}
-\tag{7.78}
 $$
-and an associated smooth function $\calH^*$.
-We will find the conditions to guarantee the same canonical structure.
+
+We will find the conditions to guarantee a transformation is canonical in the following.
 
 ### Lagrange bracket conditions (fundamental one)
 
-Take time derivatives of the above transformations:
-$$
-\ddt[q_j] = \pp{f_j}{t} + \sum_{i=1}^{n} \left( \pp{f_j}{q_i^*} \pp{q_i^*}{t} + \pp{f_j}{p_i^*} \pp{p_i^*}{t} \right) = \textcolor{red}{ \pp{\calH}{p_j} }
-$$
-
-$$
-\ddt[p_j] = \pp{g_j}{t} + \sum_{i=1}^{n} \left( \pp{g_j}{q_i^*} \pp{q_i^*}{t} + \pp{g_j}{p_i^*} \pp{p_i^*}{t} \right) = -\textcolor{green}{ \pp{\calH}{q_j} }
-$$
-where we have assumed a conservative system to get rid of $\bmQ$ for simplicity. It can be added back later without affecting the analysis here.
-
-For the partial derivative of any new coordinate $\alpha$ picked from $\bmq^*$ or $\bmp^*$
+Assume the transformation is given by a smooth differentiable set of $2n$ transformation functions $f_j$ and $g_j$ as:
 $$
 \begin{aligned}
-\pp{\calH}{\alpha} &= \sum_{j=1}^{n} \left(\textcolor{red}{ \pp{\calH}{p_j} } \pp{p_j}{\alpha} + \textcolor{green}{ \pp{\calH}{q_j} } \pp{q_j}{\alpha} \right)   \\
+q_j = f_j(\bmq^*, \bmp^*) \\
+p_j = g_j(\bmq^*, \bmp^*) \\
+\end{aligned}
+\qquad j = \oneTo{n}
+\tag{7.78}
+$$
+
+Take time derivatives of the above transformations:
+$$
+\begin{align}
+\ddt[q_j] &= \pp{f_j}{t} + \sum_{i=1}^{n} \left( \pp{f_j}{q_i^*} \ddt[q_i^*] + \pp{f_j}{p_i^*} \ddt[p_i^*] \right) = \textcolor{red}{ \pp{\calH}{p_j} } \\ \\
+\ddt[p_j] &= \pp{g_j}{t} + \sum_{i=1}^{n} \left( \pp{g_j}{q_i^*} \ddt[q_i^*] + \pp{g_j}{p_i^*} \ddt[p_i^*] \right) = -\textcolor{green}{ \pp{\calH}{q_j} }
+\end{align}
+\tag{7.86}
+$$
+
+where we have assumed a conservative system to get rid of $\bmQ_{nc}$ for simplicity. It can be added back without affecting the analysis here.
+
+For the partial derivative of a new coordinate $\alpha$ picked from $q_1^*, q_2^*, \cdots, q_n^*$ and $p_1^*, p_2^*, \cdots, p_n^*$
+$$
+\begin{aligned}
+\pp{\calH^*(\bmq^*, \bmp^*, t)}{\alpha} &= \sum_{j=1}^{n} \left(\textcolor{red}{ \pp{\calH(\bmq,\bmp,t)}{p_j} } \pp{p_j}{\alpha} + \textcolor{green}{ \pp{\calH(\bmq,\bmp,t)}{q_j} } \pp{q_j}{\alpha} \right)   \\
 &= \sum_{j=1}^{n} \left( \textcolor{red}{ \pp{\calH}{p_j} } \pp{g_j}{\alpha} + \textcolor{green}{ \pp{\calH}{q_j} } \pp{f_j}{\alpha} \right)   \\
-&= \sum_{j=1}^{n} \left( \textcolor{red}{ \pp{f_j}{t} } \pp{g_j}{\alpha} - \textcolor{green}{ \pp{g_j}{t} } \pp{f_j}{\alpha} \right) \\
-&\phantom{=\,}+ \sum_{i=1}^{n} \sum_{j=1}^{n} \left( \textcolor{red}{ \pp{f_j}{q_i^*} \pp{q_i^*}{t} } \pp{g_j}{\alpha} - \textcolor{green}{ \pp{g_j}{q_i^*} \pp{q_i^*}{t} } \pp{f_j}{\alpha} \right)  \\
-&\phantom{=\,}+ \sum_{i=1}^{n} \sum_{j=1}^{n} \left( \textcolor{red}{ \pp{f_j}{p_i^*} \pp{p_i^*}{t} } \pp{g_j}{\alpha} - \textcolor{green}{ \pp{g_j}{p_i^*}\pp{p_i^*}{t} } \pp{f_j}{\alpha} \right)  \\
-&= [\alpha, \beta] + \sum_{i=1}^n [q_i^*, \alpha] \ddt[q_i^*] + \sum_{i=1}^n [p_i^*, \alpha] \ddt[p_i^*]
+\end{aligned}
+$$
+
+Substitute the relationship in Eq. (7.86) and we have
+$$
+\begin{aligned}
+\pp{\calH^*(\bmq^*, \bmp^*, t)}{\alpha} &= \sum_{j=1}^{n} \left( \textcolor{red}{ \pp{f_j}{t} } \pp{g_j}{\alpha} - \textcolor{green}{ \pp{g_j}{t} } \pp{f_j}{\alpha} \right) \\
+&\phantom{=\,}+ \textcolor{brown}{ \sum_{i=1}^{n} } \sum_{j=1}^{n} \left( \textcolor{red}{ \pp{f_j}{q_i^*} } \pp{g_j}{\alpha} - \textcolor{green}{ \pp{g_j}{q_i^*}  } \pp{f_j}{\alpha} \right) \textcolor{brown}{ \ddt[q_i^*] }  \\
+&\phantom{=\,}+ \textcolor{brown}{ \sum_{i=1}^{n} } \sum_{j=1}^{n} \left( \textcolor{red}{ \pp{f_j}{p_i^*} } \pp{g_j}{\alpha} - \textcolor{green}{ \pp{g_j}{p_i^*} } \pp{f_j}{\alpha} \right) \textcolor{brown}{ \ddt[p_i^*] }  \\
+&= \lagrangeBracket{t}{\alpha} + \sum_{i=1}^n \lagrangeBracket{q_i^*}{\alpha} \ddt[q_i^*] + \sum_{i=1}^n \lagrangeBracket{p_i^*}{\alpha} \ddt[p_i^*]
 \end{aligned}
 \tag{7.87 and 7.89}
 $$
-where we have used the definition of **Lagrange's bracket** notation given by
+
+where we have used the **Lagrange's bracket** operator defined as
 $$
-% [\alpha, \beta] = \sum_{j=1}^{n} \left( \pp{f_j}{\alpha} \pp{g_j}{\beta} -  \pp{g_j}{\alpha} \pp{f_j}{\beta} \right)  %% The symbol \alpha is confusing.
-[*, \alpha] = \sum_{j=1}^{n} \left( \pp{f_j}{*} \pp{g_j}{\alpha} -  \pp{g_j}{*} \pp{f_j}{\alpha} \right)
+\lagrangeBracket{*}{\alpha} = \lagrangeExpand[j]{*}{\alpha}
 \tag{7.88 altered}
 $$
+It's clear that $\lagrangeBracket{*}{\alpha} = - \lagrangeBracket{\alpha}{*}$.
 
-So, sufficient conditions to guarantee a canonical transformation are the following skew-symmetric conditions on Lagrange’s brackets ($k \neq m$):
+Now we can observe the equation
 $$
-\begin{aligned}[]
-[t,\alpha] &= 0 \\
+\pp{\calH^*(\bmq^*, \bmp^*, t)}{\alpha} = \lagrangeBracket{t}{\alpha} + \sum_{i=1}^n \lagrangeBracket{q_i^*}{\alpha} \ddt[q_i^*] + \sum_{i=1}^n \lagrangeBracket{p_i^*}{\alpha} \ddt[p_i^*]
+\tag{7.89}
+$$
+to find the sufficient conditions to guarantee a canonical transformation,
+$$
+\begin{aligned}
+\dot{q}_j^* &= \phantom{-} \pp{\calH^*}{p_j^*} = \lagrangeBracket{t}{p_j^*} + \sum_{i=1}^n \lagrangeBracket{q_i^*}{p_j^*} \ddt[q_i^*] + \sum_{i=1}^n \lagrangeBracket{p_i^*}{p_j^*} \ddt[p_i^*] \\
+\dot{p_j}^* &= - \pp{\calH^*}{q_j^*} = \lagrangeBracket{t}{q_j^*} + \sum_{i=1}^n \lagrangeBracket{q_i^*}{q_j^*} \ddt[q_i^*] + \sum_{i=1}^n \lagrangeBracket{p_i^*}{q_j^*} \ddt[p_i^*]
+\end{aligned}
+$$
+
+So, the following skew-symmetric conditions on Lagrange’s brackets must be satisfied:
+$$
+\begin{aligned}
+\lagrangeBracket{t}{q_k^*} &= 0 \\
+\lagrangeBracket{t}{p_k^*} &= 0 \\
 [q_k^*,q_m^*] &= 0 \\
 [p_k^*,p_m^*] &= 0 \\
 [q_k^*,p_m^*] &= 0 \\
 [q_k^*,p_k^*] &= +\,1 \\
 [p_k^*,q_k^*] &= -\,1 \\
 \end{aligned}
+\qquad\text{for } k, m = \oneTo{n} \text{ and }k \neq m
 \tag{7.90}
 $$
 
-The canonical transformation sufficiency conditions of Eqs. (7.90) and (7.91) hold for the case of general forces, with the generalized forces transformed using Eq. (7.93) below:
+The generalized forces $\bmQ_{nc}$ can be added back, and the process is referred to the section 7.6 in the textbook.
+%% The canonical transformation sufficiency conditions of Eqs. (7.90) and (7.91) hold for the case of general forces, with the generalized forces transformed using Eq. (7.93) below:
 $$
 \begin{aligned}
 \calQ_{q_j}^* &= \sum_{k=1}^{n} \left( \pp{q_k}{p_j^*} \calQ_{q_k} - \pp{f_k}{p_j^*} \calQ_{p_k} \right) \\
 \calQ_{p_j}^* &= \sum_{k=1}^{n} \left( \pp{q_k}{q_j^*} \calQ_{q_k} - \pp{f_k}{q_j^*} \calQ_{p_k} \right)
 \end{aligned}
-$$
+$$ %%
 
 
 
@@ -499,7 +551,7 @@ p_j &= p_j(q_1^*, \ldots, q_n^*; \, p_1^*, \ldots, p_n^*)
 \tag{7.94}
 $$
 
-<u>Theorem 7.1</u>: The transformation of Eq. (7.94) leads to $q^*_j$ and $p^*_j$ that satisfy canonical differential equations if the following perfect differential condition is true:
+<u>Theorem 7.1 (Perfect Differential Criterion)</u>: The transformation of Eq. (7.94) leads to $q^*_j$ and $p^*_j$ that satisfy canonical differential equations if the following perfect differential condition is true:
 $$
 \sum_{j=1}^{n} \left( q_j^* \, \mathrm{d}p_j^* - q_j \, \mathrm{d}p_j \right) - \mathrm{d} \calW = 0
 \tag{7.95}
@@ -514,44 +566,103 @@ $\frac{\partial^2 \calW}{\partial q^*_k \partial p^*_l}$,
 $\frac{\partial^2 \calW}{\partial p^*_k \partial p^*_l}$,
 which will be then used to formulas desired Lagrange brackets.
 
-Specifically, by plugging in the time derivative differentiating of the smooth transformation function $p_i$
+Specifically, by plugging in the total derivative differentiating of the smooth transformation function $p_i$
 $$
 \mathrm{d}p_j = \sum_{k=1}^{n} \left( \pp{p_j}{q_k^*} \, \mathrm{d}q_k^* + \pp{p_j}{p_k^*} \, \mathrm{d}p_k^* \right)
 $$
-into the time derivative the smooth function $\calW$
+(but not $\mathrm{d}q_j$) into the total derivative $\mathrm{d}\calW$
 $$
-\mathrm{d}\calW = \sum_{k=1}^{n} \left( \pp{\calW}{q_k^*} \, \mathrm{d}q_k^* + \pp{\calW}{p_k^*} \, \mathrm{d}p_k^* \right),
+\mathrm{d}\calW = \sum_{k=1}^{n} \left( \pp{\calW}{q_k^*} \, \mathrm{d}q_k^* + \pp{\calW}{p_k^*} \, \mathrm{d}p_k^* \right)
 $$
-we obtain the equation after collecting terms in regard of $dq^*_k$ and $dp^*_k$
+we obtain the equation after collecting terms in regard of $\mathrm{d}q^*_k$ and $\mathrm{d}p^*_k$
 $$
-\sum_{k=1}^{n} \left( \pp{W}{q_k^*} \mathrm{d}q_k^* + \pp{W}{p_k^*} \mathrm{d}p_k^* \right) 
-= \sum_{k=1}^{n} \left( q_k^* - \sum_{j=1}^{n} q_j \pp{p_j}{p_k^*} \right) \mathrm{d}p_k^* - \sum_{k=1}^{n} \sum_{j=1}^{n} q_j \pp{p_j}{q_k^*} \mathrm{d}q_k^*.
-$$
-
-Equating the coefficients and we get the expressions for first-order partial derivatives as:
-$$
-\pp{W}{q_k^*} = -\sum_{j=1}^{n} q_j \pp{p_j}{q_k^*}
-$$
-$$
-\pp{\calW}{p_k^*} = \left( q_k^* - \sum_{j=1}^{n} q_j \pp{p_j}{p_k^*} \right)
+\sum_{k=1}^{n} \left( \pp{\calW}{q_k^*} \mathrm{d}q_k^* + \pp{\calW}{p_k^*} \mathrm{d}p_k^* \right) 
+= \sum_{k=1}^{n} \left( q_k^* - \sum_{j=1}^{n} q_j \pp{p_j}{p_k^*} \right) \mathrm{d}p_k^* - \sum_{k=1}^{n} \sum_{j=1}^{n} q_j \pp{p_j}{q_k^*} \mathrm{d}q_k^*
 $$
 
-From the above two equations, we can get two different expressions for the second order partial differentiations $\frac{\partial^2 W}{\partial q_k^* \partial q_l^*}$.
-Then substracting them lead to the desired Lagrange brackets.
+Equate the corresponding coefficients and we get the expressions for first-order partial derivatives as:
+$$
+\begin{aligned}
+\pp{\calW}{q_k^*} &= -\sum_{j=1}^{n} q_j \pp{p_j}{q_k^*} \\
+\pp{\calW}{p_k^*} &= \left( q_k^* - \sum_{j=1}^{n} q_j \pp{p_j}{p_k^*} \right)
+\end{aligned}
+\tag{7.98}
+$$
 
 The last step is to verify Lagrange bracket conditions in Eq. (7.90) one by one.
 
-> **<u>Example 7.6</u>**: An orthogonal transformation is canonical. \
-> Consider the orthogonal transformation
-> $$
-> \bmq = [A] \bmq^*   \qquad \bmp=[A] \bmp^*
-> $$
-> where $[A]$ is an orthogonal matrix.
-> 
-> It can be easily verified that 
-> $\bmq^{*T} d\bmp^* - \bmq\trans d\bmp = \bmq^{*T} d\bmp^* - ([A] \bmq^*)\trans [A] \bmp^*$ \
-> $= \bmq^{*T} d\bmp^* - \bmq^{*T} \cancelto{I_n}{[A]\trans [A]} \bmp^* = 0 = d\calW$ \
-> where $\calW=0$ is a smooth differentiable function.
+From the two equations in Eq. (7.98), we can get two different expressions for any second order partial differentiations 
+$$
+\begin{align}
+\frac{\partial^2 \calW}{\partial \alpha \partial \beta} &= \pp{}{\alpha}\left( \pp{\calW}{\beta} \right) = \cdots \\
+\frac{\partial^2 \calW}{\partial \alpha \partial \beta} &= \pp{}{\beta}\left( \pp{\calW}{\alpha} \right) = \cdots
+\end{align}
+$$
+Then subtracting them lead to all the desired Lagrange brackets.
+
+
+
+
+#### Example 7.6: An orthogonal transformation is canonical.
+
+Consider the orthogonal transformation
+$$
+\bmq = [A] \bmq^*   \qquad \bmp=[A] \bmp^*
+$$
+where $[A]$ is an orthogonal matrix with $[A]\trans = [A]^{-1}$.
+
+It can be easily verified that 
+$$
+\begin{aligned}
+\bmq^{*T} d\bmp^* - \bmq\trans d\bmp
+&= \bmq^{*T} d\bmp^* - ([A] \bmq^*)\trans [A] \bmp^*  \\
+&= \bmq^{*T} d\bmp^* - \bmq^{*T} \cancelto{I_n}{[A]\trans [A]} \bmp^*  \\
+&= 0
+\end{aligned}
+$$
+So, if we pick $\calW = 0$, $\mathrm{d}\calW = 0$, the Perfect Differential Criterion is satisfied.
+
+#### Example 7.7: A transformation with a non-constant $\calW$
+
+Prove the following transformation is canonical:
+$$
+\begin{aligned}
+q_j &= \sqrt{ 2 q_j^* } \cos p_j^*  \\
+p_j &= \sqrt{ 2 q_j^* } \sin p_j^*
+\end{aligned}
+\tag{7.108}
+$$
+
+We first find the total derivative
+%% $$
+\mathrm{d} q_j = \frac{1}{\sqrt{ 2 q_j^* }} \mathrm{d}q_j^* \cos p_j^* - \sqrt{ 2 q_j^* } \sin p_j^* \cdot \mathrm{d}p_j^*
+$$ %%
+$$
+\mathrm{d} p_j = \frac{1}{\sqrt{ 2 q_j^* }} \mathrm{d}q_j^* \sin p_j^* + \sqrt{ 2 q_j^* } \cos p_j^* \cdot \mathrm{d}p_j^*
+$$
+
+Then, calculate the product 
+$$
+\begin{aligned}
+q_j \cdot \mathrm{d}p_j &= \left( \sqrt{ 2 q_j^* } \cos p_j^* \right) \cdot \left( \frac{1}{\sqrt{ 2 q_j^* }} \mathrm{d}q_j^* \sin p_j^* + \sqrt{ 2 q_j^* } \cos p_j^* \cdot \mathrm{d}p_j^* \right) \\
+&= \mathrm{d}q_j^* \sin p_j^8 \cos p_j^* + 2 q_j^*\cos^2p_j^* \cdot \mathrm{d}p_j^* \\
+&= q_j^* \cdot \mathrm{d} p_j^* - q_j^* \cdot \mathrm{d} p_j^* + \mathrm{d}q_j^* \sin p_j^8 \cos p_j^* + 2 q_j^*\cos^2p_j^* \cdot \mathrm{d}p_j^*  \\
+&= q_j^* \cdot \mathrm{d} p_j^* + \mathrm{d}q_j^* \sin p_j^* \cos p_j^* + \left(2 \cos^2p_j^* - 1\right) q_j^* \cdot \mathrm{d}p_j^*  \\
+&= q_j^* \cdot \mathrm{d} p_j^* + \frTwo \sin(2p_j^*) \mathrm{d}q_j^* +  \cos(2p_j^*) \cdot \mathrm{d}p_j^* \cdot q_j^*  \\
+&= q_j^* \cdot \mathrm{d} p_j^* + \mathrm{d}\left( \frTwo \sin(2p_j^*) q_j^* \right)
+\end{aligned}
+$$
+
+It is apparent now that the total derivative has emerged.
+
+So, if we choose 
+$$
+\calW = - \frTwo \sum_{j=1}^n \sin(2p_j^*) q_j^*
+$$
+the perfection differential condition is satisfied as
+$$
+\bmq^* \cdot \mathrm{d}\bmp^* - \bmq \cdot \mathrm{d} \bmp - \mathrm{d} \calW = 0
+$$
 
 
 
@@ -580,10 +691,11 @@ $$
 $$
 and its Jacobian matrix $[M]$ is
 $$
-[M] = \left[ \pp{\bmG}{\bmx} \right] \equiv \left[ \pp{\bmX}{\bmx} \right].
+[M] = \left[ \pp{\bmG}{\bmx} \right] \equiv \left[ \pp{\bmX}{\bmx} \right] 
+= \bmt{M_{11} & M_{12} \\ M_{21} & M_{22}}
 $$
 
-The conditions for a canonical transformation is the symplectic requirement for the Jacobian matrix $[M]$:
+The conditions for a canonical transformation is the **symplectic requirement for the Jacobian matrix $[M]$**:
 $$
 [M] [J] [M]\trans = [J]
 $$
@@ -596,64 +708,30 @@ $$
 After expanding $[M]$ in elements, we will find the LHS contains all the Lagrange brackets.
 $$
 [M][J][M]^{\trans} =
+\bmt{M_{11}M_{12}^T-M_{12}M_{11}^T & M_{11}M_{22}^T-M_{12}M_{21}^T \\
+M_{21}M_{12}^T-M_{22}M_{11}^T & M_{21}M_{22}^T-M_{22}M_{21}^T}
+= 
 \begin{bmatrix}
 [q_i^*, q_j^*] & [q_i^*, p_j^*] \\
-[p_k^*, q_j^*] & [p_k^*, p_j^*]
+[p_k^*, q_j^*] & [p_i^*, p_j^*]
 \end{bmatrix}
-= [J]
 $$
 
-Applying the Lagrange bracket conditions and it becomes the symplectic matrix $[J]$.
+Applying the Lagrange bracket conditions and it becomes the symplectic matrix $[J]$. (Refer to section 7.8 for detailed expansions of $[M]$.)
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-## Poisson’s Brackets
-
-Consider the time variation of a general smooth function $\calF(\bmq, \bmp, t)$, we define the **Poisson's brackets** of $\calF$ and $\calH$ as
-$$
-(\calF, \calH) \equiv \sum_{i=1}^{n} \left( \pp{\calF}{q_i} \pp{\calH}{p_i} - \pp{\calF}{p_i} \pp{\calH}{q_i} \right)
-$$
-or in the matrix format
-$$
-(\calF, \calH) \equiv \left[ \pp{\calF}{\bmq} \right]^{\trans} \left[ \pp{\calH}{\bmp} \right] - \left[  \pp{\calF}{\bmp} \right]^{\trans} \left[  \pp{\calH}{\bmq} \right]
-$$
-
-The derivative of $\calF$ is
-$$
-\begin{aligned}
-\ddt[\calF] &=  \left[\pp{\calF}{\bmq}\right]\trans \bm{\dot{\bmq}} + \left[\pp{\calF}{\bmp}\right]\trans \bm{\dot{\bmp}} + \pp{\calF}{t} \\
-&= \left[\pp{\calF}{\bmq}\right]\trans \left[\pp{\calH}{\bmp}\right] - \left[\pp{\calF}{\bmp}\right]\trans \left[\pp{\calH}{\bmq}\right] + \left[\pp{\calF}{\bmp}\right]\trans \bmQ_{nc} + \pp{\calF}{t} \\
-&= (\calF,\calH) + \left[\pp{\calF}{\bmp}\right]\trans \bmQ_{nc} + \pp{\calF}{t}
-\end{aligned}
-\tag{7.73 and 7.74}
-$$
-
-Poisson's brackets reveal more algebraic structure of Hamiltonian dynamics. 
-This will be used frequently in courses link geometric mechanics. 
-
->[!info] Poisson brackets are more commonly written as $\{\calF, \calH\}$ in sources outside of our textbook. However, differences in notation conventions should not be seen as a barrier to understanding.
 
 
 
 ## Summary
 
-This chapter is just a brief introduction to basics of Hamiltonian canonical forms and transformations. The richer content about Hamiltonian systems and dynamical system theories to analyzing the system behavior are beyond the scope of this course.
+This chapter is just a brief introduction to basics of Hamiltonian dynamics in canonical forms and canonical transformations that keeps the symplectic structure. 
+The richer content about Hamiltonian systems and dynamical system theories to analyzing the system behavior are beyond the scope of this course.
 
-- Hamiltonian $\calH$ is not total energy generally.
 - Hamiltonian $\calH$ is not constant generally.
-
-- has units of energy
-- is frequently a constant of the motion, even for a large class of nonconservative systems
-- is sometimes but not always, equal to the total energy of the system.
+- Hamiltonian $\calH$ has the unit of energy but is not total energy generally.
+- But Hamiltonian $\calH$ has many nice features for a natural system.
+- Canonical form is skew-symmetric.
+- Three sufficient conditions are developed to validate whether a transformation is canonical.
