@@ -1,6 +1,6 @@
 ---
 date created: 2025-03-03T09:54:12-05:00
-date modified: 2026-04-13T02:38:12-04:00
+date modified: 2026-04-15T09:31:49-04:00
 ---
 
 # AE_544_LecNote08\__Nonlinear_Spacecraft_Control__Ch08
@@ -29,7 +29,7 @@ This definition indicates that once the system reaches the state $\bmx_e$ , it w
 However, this definition does not imply the stability of the equilibrium point.
 
 
-![[fig-v4-8-1_different_stabilities.png|420]]
+![[fig-v4-8-1_different_stabilities.png|600]]
 
 Given $\delta>0$, a state vector $\bmx$ is said to be in the <u>neighborhood</u> $B_\delta(\bmx_r)$ of the reference state $\bmx_r$, i.e. $\bmx(t) \in B_\delta(\bmx_r)$, if
 $$
@@ -113,18 +113,18 @@ A **major benefit** of this method is that this can be done without having to so
 
 ### Lyapunov Function
 
-<u>Positive Definite (or Semidefinite) Function</u>: 
+<u>Positive Definite (or Semidefinite) **Function**</u>: 
 A scalar continuous
-function $V(\bmx)$ is said to be locally positive definite (or semidefinite) about $\bmx_r$ if 
+function $F(\bmx)$ is said to be locally positive definite (or semidefinite) about $\bmx_r$ if 
 $$
-\bmx = \bmx_r  \Longrightarrow V(\bmx) = 0
+\bmx = \bmx_r  \Longrightarrow F(\bmx) = 0
 $$
 and there exists a $\delta>0$ such that
 $$
-\forall \bmx \in B_\delta(\bmx_r) \Longrightarrow V(\bmx) > 0 \quad (\text{or } \ge 0)
+\forall \bmx \in B_\delta(\bmx_r) \Longrightarrow F(\bmx) > 0 \quad (\text{or } \ge 0)
 $$
 
-<u>Positive Definite (or Semidefinite) Matrix</u>: 
+<u>Positive Definite (or Semidefinite) **Matrix**</u>: 
 A matrix $[K]$ is said to be positive definite (or semidefinite) if ro arbitrary state vector $\bmx$, it guarantees
 $$
 \bmx\trans \, [K] \, \bmx > 0 \quad (\text{or } \ge 0)
@@ -145,6 +145,11 @@ $$
 $$
 
 ![[fig-8-2_Lyapunov_function_as_a_bowl.png|350]]
+
+As illustrated in Fig. 8.2, the Lyapunov function is illustrated as a "bowl shaped" function over the state plane $(x_1, x_2)$. If the projection of the motion $\bmx(t)$ onto the Lyapunov function
+$V(\bmx)$ always has a nonpositive slope, then $V$ cannot grow larger, and the corresponding dynamical system is stable about the origin. 
+
+Another important fact is that, the Lyapunov function is not unique if existing.
 
 
 ### Lyapunov Theorems (Criteria for Stabilities)
@@ -184,37 +189,39 @@ Separate elemental Lyapunov functions can be linearly combined to provide the de
 
 ### Elemental Velocity–Based Lyapunov Functions (Hamiltonian $\calH$ used)
 
-The reference velocity vector $\bmq_r(t)$ is generally non-zero. 
+For this type of problem, the control of the final velocity is of more interests.
+
+A reference velocity vector $\bmq_r(t)$ is generally non-zero. 
 The Lyapunov function $V$ is defined in terms of the velocity state error vector $\delta\bmq$
 $$
 \delta \dot{\bmq} = \dot{\bmq} - \dot{\bmq}_r
 $$
 as the kinetic-energy-like function expressed as
 $$
-V(\dot{\bm{q}}) = \tfrac{1}{2} \, \delta \dot{\bm{q}}{\trans} [M(\bm{q})] \, \delta \dot{\bm{q}}
+V(\dot{\bm{q}}) = \frac{1}{2} \, \delta \dot{\bm{q}}{\trans} [M(\bm{q})] \, \delta \dot{\bm{q}}
 \tag{8.26}
 $$
 where, in general, the mass matrix $[M(\bmq)]$ is positive definite and symmetric.
 
 The derivative of Lyapunov function $V$ is
 $$
-\dot{V} = \delta \dot{\bm{q}}{\trans} \left( [M] \, \delta \ddot{\bm{q}} + \tfrac{1}{2} [\dot{M}] \, \delta \dot{\bm{q}} \right)
+\dot{V} = \delta \dot{\bm{q}}{\trans} \left( [M] \, \delta \ddot{\bm{q}} + \frac{1}{2} [\dot{M}] \, \delta \dot{\bm{q}} \right)
 \tag{8.27}
 $$
 
 The standard Lagrange equations of motion for a natural unconstrained system are given in the matrix format as
 $$
-[M(\bm{q})] \ddot{\bm{q}} = -[\dot{M}(\bm{q}, \dot{\bm{q}})] \dot{\bm{q}} + \tfrac{1}{2} \textcolor{red}{ \dot{\bm{q}}{\trans} [M_q(\bm{q})] \dot{\bm{q}} } + \bm{Q}
+[M(\bm{q})] \ddot{\bm{q}} = -[\dot{M}(\bm{q}, \dot{\bm{q}})] \dot{\bm{q}} + \frac{1}{2} \textcolor{red}{ \dot{\bm{q}}{\trans} [M_q(\bm{q})] \dot{\bm{q}} } + \bm{Q}
 \tag{8.19}
 $$
-with 
+with $[M_q(\bmq)]$ as the Jacobian matrix and the product given as
 $$
 \textcolor{red}{ \dot{\bm{q}}{\trans} [M_q(\bm{q})] \dot{\bm{q}} } 
 =
 \begin{pmatrix}
-\dot{\bm{q}}{\trans} \left[ \pp{M}{q_1} \right] \dot{\bm{q}} \\
+\dot{\bm{q}}{\trans} \left[ \pp{M}{q_1} \right] \dot{q}_1 \\
 \vdots \\
-\dot{\bm{q}}{\trans} \left[ \pp{M}{q_N} \right] \dot{\bm{q}}
+\dot{\bm{q}}{\trans} \left[ \pp{M}{q_N} \right] \dot{q}_n
 \end{pmatrix}
 \tag{8.20}
 $$
@@ -222,22 +229,26 @@ $$
 Substituting into $\dot{V}$ and we have
 $$
 \begin{aligned}
-\dot{V} &= \delta \dot{\bm{q}}{\trans} \left( [M] \, \delta \ddot{\bm{q}} + \tfrac{1}{2} [\dot{M}] \, \delta \dot{\bm{q}} \right) \\
-&= \delta\dot{\bm{q}}{\trans} \left( \textcolor{blue}{ [M] \, \ddot{\bm{q}} } - [M] \, \ddot{\bmq}_r + \tfrac{1}{2} [\dot{M}] \,  (\dot{\bm{q}} - \dot{\bm{q}}_r) \right) \\
-&= \delta\dot{\bm{q}}{\trans} \left( \textcolor{blue}{ -[\dot{M}] \dot{\bm{q}} + \tfrac{1}{2} \dot{\bm{q}}{\trans} [M_q] \dot{\bm{q}} + \bm{Q} } - [M] \ddot{\bmq}_r + \tfrac{1}{2} [\dot{M}] \,  (\dot{\bm{q}} - \dot{\bm{q}}_r) \right) \\
-&= \delta\dot{\bm{q}}{\trans} \left( - \tfrac{1}{2} [\dot{M}] \,  (\dot{\bm{q}} + \dot{\bm{q}}_r) + \tfrac{1}{2} \dot{\bm{q}}{\trans} [M_q] \dot{\bm{q}} + \bm{Q} - [M] \ddot{\bmq}_r  \right)
+\dot{V} &= \delta \dot{\bm{q}}{\trans} \left( [M] \, \delta \ddot{\bm{q}} + \frac{1}{2} [\dot{M}] \, \delta \dot{\bm{q}} \right) \\
+&= \delta\dot{\bm{q}}{\trans} \left( \textcolor{blue}{ [M] \, \ddot{\bm{q}} } - [M] \, \ddot{\bmq}_r + \frac{1}{2} [\dot{M}] \,  (\dot{\bm{q}} - \dot{\bm{q}}_r) \right) \\
+&= \delta\dot{\bm{q}}{\trans} \left( \textcolor{blue}{ -[\dot{M}] \dot{\bm{q}} + \frac{1}{2} \dot{\bm{q}}{\trans} [M_q] \dot{\bm{q}} + \bm{Q} } - [M] \ddot{\bmq}_r + \frac{1}{2} [\dot{M}] \,  (\dot{\bm{q}} - \dot{\bm{q}}_r) \right) \\
+&= \delta\dot{\bm{q}}{\trans} \left( - \frac{1}{2} [\dot{M}] \,  (\dot{\bm{q}} + \dot{\bm{q}}_r) + \frac{1}{2} \dot{\bm{q}}{\trans} [M_q] \dot{\bm{q}} + \bm{Q} - [M] \ddot{\bmq}_r  \right)
 \end{aligned}
 \tag{8.28}
 $$
-When tracking a time varying reference state, the elemental velocity-measure
-Lyapunov function rates no longer simplify to the classical power form of the
-work-energy equation in Eq. (8.25).
 
+Notice that here $\ddot{\bmq}_r$ is kept because it requires evaluations on the reference trajectory at $\bmq_r$ instead of the current true state $\bmq$, which can be explained as
+$$
+[M(\bm{q}_r)] \ddot{\bm{q}}_r = -[\dot{M}(\bm{q}_r, \dot{\bm{q}}_r)] \dot{\bm{q}}_r + \frac{1}{2} \dot{\bm{q}}_r{\trans} [M_q(\bm{q}_r)] \dot{\bm{q}}_r
+$$
 
-> Notice that here $\ddot{\bmq}_r$ is kept because it requires evaluations at $\bmq_r$ instead of $\bmq$, which is
+>[!note]- Simplification for a stationary reference.
+> When tracking a time-invariant reference state, the elemental velocity-measure Lyapunov function rates will simplify to a classical power form of the work-energy equation
 > $$
-> [M(\bm{q}_r)] \ddot{\bm{q}}_r = -[\dot{M}(\bm{q}_r, \dot{\bm{q}}_r)] \dot{\bm{q}}_r + \tfrac{1}{2} \dot{\bm{q}}_r{\trans} [M_q(\bm{q}_r)] \dot{\bm{q}_r}
+> \dot{V} = \delta \dot{\bmq}\trans \cdot \bmQ
+> \tag{similar to 8.25}
 > $$
+> where all the other terms got cancelled out.
 
 
 Because most mechanical systems are natural systems, the Hamiltonian specializes for this case to the total system energy. This motivates the alternative use of the Hamiltonian as a more general Lyapunov function candidate, which is
@@ -263,7 +274,7 @@ After setting the Lyapunov function $V$ equal to $\calH$ and using the canonical
 $$
 \begin{aligned}
 \dot{\bmq} &= \pp{\calH}{\bmp} \\
-\dot{\bmp} &= \pp{\calH}{\bmq} + \bmQ
+\dot{\bmp} &= - \pp{\calH}{\bmq} + \bmQ
 \end{aligned}
 $$
 and the relationship (notice: recall the difference between these two partial derivatives on LHS and RHS)
@@ -273,7 +284,7 @@ $$
 the Lyapunov time rate $\dot{V}$ can be written as
 $$
 \dot{V} = 
-\left(- \pp{\calL}{\bmq}+\bmQ\right)\trans \dot{\bm{q}} + \bm{p}\trans \ddot{\bm{q}} 
+\left( \pp{\calL}{\bmq}+\bmQ\right)\trans \dot{\bm{q}} + \bm{p}\trans \ddot{\bm{q}} 
 - \pp{\calL}{t} 
 - \left(\pp{\calL}{\bm{q}}\right)\trans \dot{\bm{q}} 
 - \bmp\trans \ddot{\bm{q}} = \bmQ^T \dot{\bmq} - \pp{\calL}{t}
@@ -289,13 +300,14 @@ Two benefits of using Hamiltonian as Lyapunov functions:
 1. $V$ is not explicitly required because $\dot{V} = \dot{\calH}$ is available directly in Eq. (8.44). 
 2. A stabilizing control vector $\bmQ$ for the regulator control problem will remain stabilizing even in the presence of model errors. This is a direct consequence of the $V$ expression being independent of the system dynamics (depends only on forces, moments, and velocities of the points to which forces are applied).
 
->[!info] The second point will be verified in the Programming Project 02.
 
+%% >[!info] The second point will be verified in the Programming Project 02. %%
+%% (No PP2 in Spring 2026) %%
 
 ### Elemental Position–Based Lyapunov Functions
 
 This section provides elemental position-based Lyapunov functions that allow us to control the position of a body.
-Thought $\bmq$ is of interest, $\dot{\bmq}$ is still treated as the control variable.
+Although $\bmq$ is of interest, $\dot{\bmq}$ is still treated as the control variable.
 
 For a Lyapunov function
 $$
@@ -321,7 +333,19 @@ $$
 
 When extended to rigid-body control, the choice of attitude representation matters a lot and usually it depends on the application.
 
+However, for any cases, there is a hidden caveat.
+For example, for attitude control, this steering law is implemented by the built-in control loop in a servo motor, meaning that it will follow the desired $\dot{\bmq}$. 
+Every system will exhibit certain limits as to how fast it is able to move and accelerate. With that, the steering law gain $[K]$ must be carefully chosen such that all the required $\dot{\bmq}$ do not exceed these hardware limits. 
+Otherwise, the steering law stability are no longer guaranteed and requires further analysis.
+
 
 ## Summary
 
-The energy-like function Hamiltonian $\calH$ can be used as a starting point to generate a Lyapunov function for the design of a continuous control law.
+The study of control and stability is vast and here we just reviewed some essential concepts that is related to the Hamiltonian $\calH$ and can be applied to both linear and nonlinear systems. 
+
+More specifically:
+1. Different stabilities are introduced to quantify practical problems.
+2. Lyapunov Direct and Indirect methods differ, not rigorously, in terms of whether the system needs to resolved or not. 
+3. Lyapunov function $V$ provides an intuitive way to study the stability of a system.
+4. With a feedback control loop, $V$ involved the control $\bmQ$ or $\bmu$, such that a control law can be designed to change an unstable system to a stable one.
+    - The energy-like function Hamiltonian $\calH$ can be used as a starting point to generate a Lyapunov function for the design of a continuous control law.
